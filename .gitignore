@@ -1,0 +1,3 @@
+client/bin-debug/*
+client/bin-release/*
+client/.wing/*
