@@ -520,7 +520,7 @@
 
   /***** constants *****/
 
-  var constants = {};
+  var constants = Protobuf.constants = {};
 
   constants.TYPES = {
     uInt32 : 0,
@@ -552,7 +552,7 @@
 
   /***** Codec *****/
 
-  var Codec = {};
+  var Codec = Protobuf.codec = {};
 
   var buffer = new ArrayBuffer(8);
   var float32Array = new Float32Array(buffer);
@@ -949,7 +949,7 @@
     MsgDecoder.offset = 0;
 
     if(!!protos){
-      return decodeMsg({}, protos, buffer.length);
+      return decodeMsg({}, protos, MsgDecoder.buffer.length);
     }
 
     return null;
@@ -1064,7 +1064,7 @@
     var b;
 
     do{
-      b = buffer[pos];
+      b = MsgDecoder.buffer[pos];
       bytes.push(b);
       pos++;
     }while(b >= 128);
@@ -1426,9 +1426,12 @@
         server : protos.server || {},
         client : protos.client || {}
       };
+      /*
       if(!!this.protobuf){
         this.protobuf.init({encoderProtos: protos.client, decoderProtos: protos.server});
       }
+      */
+      Protobuf.init({encoderProtos: protos.client, decoderProtos: protos.server});
     }
   };
 

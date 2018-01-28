@@ -457,7 +457,7 @@
     };
     /**** end of Protobuf *****/
     /***** constants *****/
-    var constants = {};
+    var constants = Protobuf.constants = {};
     constants.TYPES = {
         uInt32: 0,
         sInt32: 0,
@@ -481,7 +481,7 @@
     };
     /***** end of util *****/
     /***** Codec *****/
-    var Codec = {};
+    var Codec = Protobuf.codec = {};
     var buffer = new ArrayBuffer(8);
     var float32Array = new Float32Array(buffer);
     var float64Array = new Float64Array(buffer);
@@ -809,7 +809,7 @@
         MsgDecoder.buffer = buf;
         MsgDecoder.offset = 0;
         if (!!protos) {
-            return decodeMsg({}, protos, buffer.length);
+            return decodeMsg({}, protos, MsgDecoder.buffer.length);
         }
         return null;
     };
@@ -908,7 +908,7 @@
         flag = flag || false;
         var b;
         do {
-            b = buffer[pos];
+            b = MsgDecoder.buffer[pos];
             bytes.push(b);
             pos++;
         } while (b >= 128);
@@ -1207,9 +1207,12 @@
                 server: protos.server || {},
                 client: protos.client || {}
             };
-            if (!!this.protobuf) {
-                this.protobuf.init({ encoderProtos: protos.client, decoderProtos: protos.server });
+            /*
+            if(!!this.protobuf){
+              this.protobuf.init({encoderProtos: protos.client, decoderProtos: protos.server});
             }
+            */
+            Protobuf.init({ encoderProtos: protos.client, decoderProtos: protos.server });
         }
     };
     /***** end of Pomelo *****/
