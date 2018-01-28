@@ -31,6 +31,8 @@ class GameApp {
         */
 
         this._init = true;
+
+        g_gameData.init();
     }
 
     public update(interval: number): void

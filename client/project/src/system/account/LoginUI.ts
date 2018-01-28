@@ -37,7 +37,7 @@ class LoginUI extends eui.Component{
     private requestLogin(username: string, password: string): void {
          console.log("requestLogin", username, password); 
 
-         PhpUtil.post(window["PLAT_URL"] + "login", {username: username, password: password}, 
+         PhpUtil.post(window["SERVER_CNF"]["PLAT_URL"] + "login", {username: username, password: password}, 
             (data) => {
                 console.log("testPhp data:", data);
 
@@ -53,6 +53,13 @@ class LoginUI extends eui.Component{
 
                 egret.localStorage.setItem("username", username);
                 egret.localStorage.setItem("password", password);
+
+                g_gameData.plat_data.uid = data.uid;
+                g_gameData.plat_data.token = data.token;
+
+                LoginLogic.getInstance().authEntry(data.uid, data.token, function() {
+
+                });
             },
             (event) => {
                 console.log("testPhp error event:", event);
