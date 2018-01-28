@@ -1,3 +1,7 @@
+declare class loginUISkin extends eui.Skin{
+}
+declare class registerUISkin extends eui.Skin{
+}
 declare module skins{
 	class ButtonSkin extends eui.Skin{
 	}

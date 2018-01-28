@@ -12,11 +12,26 @@
 		"libs/modules/PomeloClient/PomeloClient.js"
 	],
 	"game": [
-		"bin-debug/AssetAdapter.js",
+		"bin-debug/scene/Scene.js",
+		"bin-debug/layer/ui/PanelUILayer.js",
+		"bin-debug/GameEvents.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
+		"bin-debug/layer/loading/LoadingLayer.js",
+		"bin-debug/layer/loading/StartLoadingLayer.js",
+		"bin-debug/layer/loading/StartLoadingUI.js",
+		"bin-debug/GameApp.js",
+		"bin-debug/scene/AccountScene.js",
+		"bin-debug/scene/LoadingScene.js",
+		"bin-debug/scene/MainScene.js",
+		"bin-debug/AssetAdapter.js",
+		"bin-debug/scene/SceneCnst.js",
+		"bin-debug/scene/StartScene.js",
+		"bin-debug/scene/SceneMgr.js",
+		"bin-debug/system/account/LoginUI.js",
+		"bin-debug/system/account/RegisterUI.js",
 		"bin-debug/utils/PhpUtil.js"
 	]
 }
