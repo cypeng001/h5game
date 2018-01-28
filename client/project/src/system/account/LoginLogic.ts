@@ -37,6 +37,8 @@ class LoginLogic extends egret.EventDispatcher {
     }
 
     private entry(host: string, port: number, token: string, callback: Function): void {
+        var self = this;
+
         NetMgr.getInstance().connect(host, port, function(): void {
             NetMgr.getInstance().request('connector.entryHandler.entry', {token: token}, (data) => {
                 console.log("connector.entryHandler.entry cb data:", data);
@@ -58,7 +60,31 @@ class LoginLogic extends egret.EventDispatcher {
                     return;
                 }
 
+                self.afterLogin(data);
+
             });
+        });
+    }
+
+    private afterLogin(data: any): void {
+        var userData = data.user;
+        var playerData = data.player;
+
+        console.log("afterLogin userData:", userData);
+        console.log("afterLogin playerData:", playerData);
+
+        var areaId = playerData.areaId;
+        //var areas = {1: {map: {id: 'jiangnanyewai.png', width: 3200, height: 2400}, id: 1}};
+
+        if (!!userData) {
+            g_gameData.uid = userData.id;
+        }
+        g_gameData.playerId = playerData.id;
+        g_gameData.areaId = areaId;
+        g_gameData.player = playerData;
+
+        SceneMsgHandler.getInstance().reqLoadAreaResource(function(data) {
+            SceneMsgHandler.getInstance().reqEnterScene(null);
         });
     }
 }

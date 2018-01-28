@@ -1,4 +1,7 @@
 class NetMgr extends egret.EventDispatcher {
+    public static IO_ERROR: string = "io-error";
+    public static CLOSE: string = "close";
+
     private static _instance: NetMgr = null;
     public static getInstance(): NetMgr {
         if(!NetMgr._instance) {
@@ -13,6 +16,15 @@ class NetMgr extends egret.EventDispatcher {
         super();
 
         this._pomelo = new Pomelo();
+
+        var self = this;
+        this._pomelo.on('io-error', function(e:any):void {
+            self.dispatchEventWith(NetMgr.IO_ERROR);
+        });
+
+        this._pomelo.on('close', function(e:any):void {
+            self.dispatchEventWith(NetMgr.CLOSE);
+        });
     }
 
     public connect(host: string, port: number, callback: Function): void {
@@ -25,10 +37,16 @@ class NetMgr extends egret.EventDispatcher {
         this._pomelo.disconnect();
     }
 
-    public request(route: string, msg: any, callback: Function) {
+    public request(route: string, msg: any, callback: (response: any) => void) {
         this._pomelo.request(route, msg, function(response: any): void {
             callback(response);
         });
+    }
+
+    public on(route:string, callback: (response:any)=>void): void {
+        this._pomelo.on(route, function(response: any): void {
+            callback(response);
+        })
     }
 
 }

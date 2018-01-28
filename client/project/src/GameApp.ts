@@ -29,10 +29,15 @@ class GameApp {
         ProtocolRegister.init();
         NetModRepRegister.init();
         */
-
+        if(this._init) {
+            console.error("GameApp already initialize");
+            return;
+        }
         this._init = true;
 
         g_gameData.init();
+
+        this.initMsgHandler();
     }
 
     public update(interval: number): void
@@ -56,7 +61,7 @@ class GameApp {
             case SceneType.ST_MainScene:
             {
                 var groupList = [
-                    "art"
+                    "main"
                 ];
                 var fileList = [];
                 //ResUtility.getMapRes(fileList, g_gameData.role_data.map_id);
@@ -138,4 +143,10 @@ class GameApp {
         scene.listenNetworkMsg(protocol);
     }
     */
+
+    private initMsgHandler(): void {
+        LoginMsgHandler.getInstance().init();
+        SceneMsgHandler.getInstance().init();
+        GameMsgHandler.getInstance().init();
+    }
 }

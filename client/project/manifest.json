@@ -13,7 +13,7 @@
 	],
 	"game": [
 		"bin-debug/scene/Scene.js",
-		"bin-debug/layer/loading/StartLoadingUI.js",
+		"bin-debug/network/NetMgr.js",
 		"bin-debug/GameEvents.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
@@ -25,9 +25,9 @@
 		"bin-debug/data/ServerData.js",
 		"bin-debug/layer/loading/LoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingLayer.js",
-		"bin-debug/GameApp.js",
+		"bin-debug/layer/loading/StartLoadingUI.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
-		"bin-debug/network/NetMgr.js",
+		"bin-debug/GameApp.js",
 		"bin-debug/scene/AccountScene.js",
 		"bin-debug/scene/LoadingScene.js",
 		"bin-debug/scene/MainScene.js",
@@ -36,8 +36,12 @@
 		"bin-debug/scene/StartScene.js",
 		"bin-debug/scene/SceneMgr.js",
 		"bin-debug/system/account/LoginLogic.js",
+		"bin-debug/system/account/LoginMsgHandler.js",
 		"bin-debug/system/account/LoginUI.js",
 		"bin-debug/system/account/RegisterUI.js",
+		"bin-debug/system/game/GameMsgHandler.js",
+		"bin-debug/system/scene/SceneMsgHandler.js",
+		"bin-debug/utils/BaseUtil.js",
 		"bin-debug/utils/PhpUtil.js"
 	]
 }
