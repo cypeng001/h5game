@@ -13,7 +13,7 @@
 	],
 	"game": [
 		"bin-debug/scene/Scene.js",
-		"bin-debug/utils/ResUtility.js",
+		"bin-debug/network/NetMgr.js",
 		"bin-debug/GameEvents.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
@@ -29,8 +29,8 @@
 		"bin-debug/layer/map/MapCnst.js",
 		"bin-debug/layer/map/MapLayer.js",
 		"bin-debug/layer/map/MapTileLayer.js",
-		"bin-debug/GameApp.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
+		"bin-debug/GameApp.js",
 		"bin-debug/scene/AccountScene.js",
 		"bin-debug/scene/LoadingScene.js",
 		"bin-debug/scene/MainScene.js",
@@ -47,6 +47,6 @@
 		"bin-debug/utils/BaseUtil.js",
 		"bin-debug/utils/ConfigMgr.js",
 		"bin-debug/utils/PhpUtil.js",
-		"bin-debug/network/NetMgr.js"
+		"bin-debug/utils/ResUtility.js"
 	]
 }
