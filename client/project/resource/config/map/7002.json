@@ -1,0 +1,21 @@
+{
+    "map_id": 7002,
+    "map_res": 7002,
+    "map_name": "测试地图",
+    "map_width": 2700,
+    "map_height": 1500,
+    "map_tile_width": 85,
+    "map_tile_height": 47,
+    "tile_size": 512,
+    "tile_scale_factor": 1,
+    "map_res_format": 1,
+    "bg1_flag": false,
+    "npc_list": [
+    ],
+    "monster_list": [
+    ],
+    "collection_list": [
+    ],
+    "transport_list": [
+    ]
+}

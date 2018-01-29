@@ -37,10 +37,14 @@ class NetMgr extends egret.EventDispatcher {
         this._pomelo.disconnect();
     }
 
-    public request(route: string, msg: any, callback: (response: any) => void) {
+    public request(route: string, msg: any, callback: (response: any) => void): void {
         this._pomelo.request(route, msg, function(response: any): void {
             callback(response);
         });
+    }
+
+    public notify(route: string, msg: any): void {
+        this._pomelo.notify(route, msg);
     }
 
     public on(route:string, callback: (response:any)=>void): void {

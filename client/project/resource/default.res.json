@@ -7,6 +7,14 @@
 		{
 			"keys": "account_bg_jpg",
 			"name": "account"
+		},
+		{
+			"keys": "config_data_city_json,config_map_7002_json",
+			"name": "config"
+		},
+		{
+			"keys": "account_bg_jpg",
+			"name": "main"
 		}
 	],
 	"resources": [
@@ -134,6 +142,16 @@
 			"name": "account_bg_jpg",
 			"type": "image",
 			"url": "account/bg.jpg"
+		},
+		{
+			"url": "config/data/city.json",
+			"type": "json",
+			"name": "config_data_city_json"
+		},
+		{
+			"url": "config/map/7002.json",
+			"type": "json",
+			"name": "config_map_7002_json"
 		}
 	]
 }

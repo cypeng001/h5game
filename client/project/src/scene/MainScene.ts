@@ -3,8 +3,8 @@ class MainScene extends Scene
 {
     /*
     private _mainUI: MainUI;
-    private _mapLayer: MapLayer;
     */
+    private _mapLayer: MapLayer;
 
     public constructor()
     {
@@ -21,13 +21,14 @@ class MainScene extends Scene
     {
         super.onEnter();
 
-        /*
         //地图层
         this._mapLayer = new MapLayer();
         this.addChild(this._mapLayer);
 
-        this._mapLayer.loadMap(g_gameData.role_data.map_id);
-        this._mapLayer.initPlayer(g_gameData.role_data);
+        this._mapLayer.loadMap(7002);
+        //this._mapLayer.initPlayer(g_gameData.role_data);
+
+        /*
 
         //主界面层
         this._mainUI = new MainUI();
@@ -49,6 +50,7 @@ class MainScene extends Scene
             }
             this._mainUI = null;
         }
+        */
 
         if(this._mapLayer)
         {
@@ -58,7 +60,6 @@ class MainScene extends Scene
             }
             this._mapLayer = null;
         }
-        */
     }
 
     //override
@@ -69,10 +70,10 @@ class MainScene extends Scene
         {
             this._mainUI.update(interval);
         }
+        */
         if(this._mapLayer)
         {
             this._mapLayer.update(interval);
         }
-        */
     }
 }

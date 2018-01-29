@@ -36,6 +36,8 @@ class GameApp {
         this._init = true;
 
         g_gameData.init();
+        
+        ConfigMgr.getInstance().init();
 
         this.initMsgHandler();
     }

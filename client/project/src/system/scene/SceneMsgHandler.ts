@@ -22,6 +22,8 @@ class SceneMsgHandler {
         NetMgr.getInstance().request('area.playerHandler.enterScene', null, function(data: any): void {
             g_gameData.sceneData = data;
 
+            GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
+
             BaseUtil.callFunc(callback, data);
         });
     }
