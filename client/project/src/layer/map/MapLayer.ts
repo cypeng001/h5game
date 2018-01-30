@@ -15,6 +15,7 @@ class MapLayer extends egret.DisplayObjectContainer {
 
     protected _player: Player = null;
     protected _monsters: Array<Monster> = [];
+    protected _npcs: Array<Npc> = [];
 
     constructor() {
         super();
@@ -43,6 +44,7 @@ class MapLayer extends egret.DisplayObjectContainer {
 
         this.createPlayer();
         this.createMonster();
+        this.createNpc();
     }
 
     public update(interval: number): void {
@@ -52,6 +54,11 @@ class MapLayer extends egret.DisplayObjectContainer {
         for(var k in this._monsters) {
             var monster = this._monsters[k];
             monster.update(interval);
+        }
+
+        for(var k in this._npcs) {
+            var npc = this._npcs[k];
+            npc.update(interval);
         }
 
         this._mapTileLayer.update(interval);
@@ -96,5 +103,15 @@ class MapLayer extends egret.DisplayObjectContainer {
         this.addChild(monster);
 
         this._monsters.push(monster);
+    }
+
+    public createNpc(): void {
+        var npc = new Npc();
+        npc.x = 300;
+        npc.y = 300;
+        npc.init({});
+        this.addChild(npc);
+
+        this._npcs.push(npc);
     }
 }
