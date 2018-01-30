@@ -15,9 +15,10 @@ class MapLayer extends egret.DisplayObjectContainer {
     protected _tile_height: number = 0;
 
     protected _curPlayer: Player = null;
-    protected _aoiPlayers: Array<Player> = [];
-    protected _monsters: Array<Monster> = [];
-    protected _npcs: Array<Npc> = [];
+
+    protected _aoiPlayers: any = {};
+    protected _monsters: any = {};
+    protected _npcs: any = {};
 
     constructor() {
         super();
@@ -26,6 +27,8 @@ class MapLayer extends egret.DisplayObjectContainer {
         this.addEventListener(egret.TouchEvent.TOUCH_CANCEL, this.onTouchCancel, this);
         this.addEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
         this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
+
+        this.initMsgHandler();
     }
 
     public loadMap(mapId: number, mapData: any): void {
@@ -118,34 +121,238 @@ class MapLayer extends egret.DisplayObjectContainer {
 
     protected initCurPlayer(data: any): void {
         var player = this._createPlayer(data);
+        player.mainPlayer = true;
         this._curPlayer = player;
     }
 
     public createAoiPlayer(data: any): Player {
+        if(this._aoiPlayers[data.entityId]) {
+            console.warn("createAoiPlayer player already exist", JSON.stringify(data));
+            return;
+        }
+
         var player = this._createPlayer(data);
-        this._aoiPlayers.push(player);
+        this._aoiPlayers[data.entityId] = player;
         return player;
     }
 
+    public removeAoiPlayer(entityId: number): void {
+        var player = this.getAoiPlayer(entityId);
+        if(!player) {
+            return;
+        }
+
+        player.release();
+
+        if(player.parent) {
+            player.parent.removeChild(player);
+        }
+
+        delete this._aoiPlayers[entityId];
+    }
+
+    public getAoiPlayer(entityId: number): Player {
+        return this._aoiPlayers[entityId];
+    }
+
     public createMonster(data: any): Monster {
+        if(this._monsters[data.entityId]) {
+            console.warn("createMonster monster already exist", JSON.stringify(data));
+            return;
+        }
+
         var monster = new Monster();
         monster.init(data);
         this._entityLayer.addChild(monster);
 
-        this._monsters.push(monster);
+        this._monsters[data.entityId] = monster;
 
         return monster;
     }
 
+    public removeMonster(entityId: number): void {
+        var monster = this.getMonster(entityId);
+        if(!monster) {
+            return;
+        }
+
+        monster.release();
+
+        if(monster.parent) {
+            monster.parent.removeChild(monster);
+        }
+
+        delete this._monsters[entityId];
+    }
+
+    public getMonster(entityId: number): Player {
+        return this._monsters[entityId];
+    }
+
     public createNpc(data: any): Npc {
+        if(this._npcs[data.entityId]) {
+            console.warn("createNpc npc already exist", JSON.stringify(data));
+            return;
+        }
+
         var npc = new Npc();
-        npc.x = 300;
-        npc.y = 300;
         npc.init(data);
         this._entityLayer.addChild(npc);
 
-        this._npcs.push(npc);
+        this._npcs[data.entityId] = npc;
 
         return npc;
+    }
+
+    public removeNpc(entityId: number): void {
+        var npc = this.getNpc(entityId);
+        if(!npc) {
+            return;
+        }
+
+        npc.release();
+
+        if(npc.parent) {
+            npc.parent.removeChild(npc);
+        }
+
+        delete this._npcs[entityId];
+    }
+
+    public getNpc(entityId: number): Player {
+        return this._npcs[entityId];
+    }
+
+
+    public getEntity(entityId: number): Entity {
+        if(this._curPlayer.entityId == entityId) {
+            return this._curPlayer;
+        }
+
+        var entity: Entity = null;
+
+        entity = this._aoiPlayers[entityId];
+        if(entity) {
+            return entity;
+        }
+
+        entity = this._monsters[entityId];
+        if(entity) {
+            return entity;
+        }
+
+        entity = this._npcs[entityId];
+        if(entity) {
+            return entity;
+        }
+
+        return null;
+    }
+
+    public addEntity(data: any): Entity {
+        var entity: Entity = null;
+        switch(data.type) {
+            case "player": {
+                entity = new Player();
+                entity.init(data);
+                break;
+            }
+                
+            case "npc": {
+                entity = new Npc();
+                entity.init(data);
+                break;
+            }
+            case "mob": {
+                entity = new Monster();
+                entity.init(data);
+                break;
+            }
+        }
+        return entity;
+    }
+
+    public removeEntity(entityId: number): void {
+        var entity = this.getEntity(entityId);
+        if(!entity) {
+            return;
+        }
+
+        if(entity.entityType == EntityType.ET_PLAYER) {
+            this.removeAoiPlayer(entityId);
+        }
+        else if(entity.entityType == EntityType.ET_MONSTER) {
+            this.removeMonster(entityId);
+        }
+        else if(entity.entityType == EntityType.ET_NPC) {
+            this.removeNpc(entityId);
+        }
+    }
+
+    public getActor(entityId: number): Actor {
+        var entity: Entity = this.getEntity(entityId);
+        if(!entity) {
+            return null;
+        }
+
+        if(!(entity.entityType == EntityType.ET_PLAYER 
+            || entity.entityType == EntityType.ET_MONSTER 
+            || entity.entityType == EntityType.ET_NPC)) {
+            return null;
+        }
+
+        return <Actor>entity;
+    }
+
+    protected MsgHandler_onAddEntities(data: any): void {
+        if(data.mob) {
+            for(var k in data.mob) {
+                var mobData = data.mob[k];
+                this.createMonster(mobData);
+            }
+        }
+
+        if(data.npc) {
+            for(var k in data.npc) {
+                var npcData = data.npc[k];
+                this.createNpc(npcData);
+            }
+        }
+    }
+
+    protected MsgHandler_onRemoveEntities(data: any): void {
+        if(data.entities) {
+            for(var k in data.entities) {
+                var entityId = data.entities[k];
+                this.removeEntity(entityId);
+            }
+        }
+    }
+
+    protected MsgHandler_onMove(data: any): void {
+        var path = data.path;
+        var actor = this.getActor(data.entityId);
+        if(!actor) {
+            return;
+        }
+
+        /*
+        actor.x = path[0].x;
+        actor.y = path[0].y;
+        */
+        actor.moveTo(path[1].x, path[1].y);
+    }
+
+    protected initMsgHandler(): void {
+        var self = this;
+        NetMgr.getInstance().on('onAddEntities', function(data: any) {
+            self.MsgHandler_onAddEntities(data);
+        });
+        NetMgr.getInstance().on('onRemoveEntities', function(data: any) {
+            self.MsgHandler_onRemoveEntities(data);
+        });
+        NetMgr.getInstance().on('onMove', function(data: any) {
+            self.MsgHandler_onMove(data);
+        });
     }
 }

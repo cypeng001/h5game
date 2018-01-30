@@ -27,4 +27,10 @@ class SceneMsgHandler {
             BaseUtil.callFunc(callback, data);
         });
     }
+
+    public reqMove(path: any, callback: Function): void {
+        NetMgr.getInstance().request('area.playerHandler.move', {path: path}, function(data: any) {
+            BaseUtil.callFunc(callback, data);
+        });
+    }
 }

@@ -3,17 +3,21 @@ class Monster extends Actor {
         super();
     }
 
+    public get entityType(): number {
+        return EntityType.ET_MONSTER;
+    }
+
     public init(data: any): void {
         super.init(data);
 
-        this._aoiId = data.entityId;
+        this._entityId = data.entityId;
         this._name = "mon10001";
         this._hp = data.hp;
         this._maxHp = data.maxHp;
-        this._speed = data.walkSpeed * ENTITY_POS_SCALE;
+        this._speed = data.walkSpeed;
 
-        this.x = data.x * ENTITY_POS_SCALE;
-        this.y = data.y * ENTITY_POS_SCALE;
+        this.x = data.x;
+        this.y = data.y;
 
         this.initSprite();
         this.initNameLabel();

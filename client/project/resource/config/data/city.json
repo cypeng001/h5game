@@ -1,6 +1,23 @@
 {
+    "4":  {
+        "id":  4,
+        "name":  "测试地图",
+        "res_id":  4,
+        "type":  9,
+        "born_x":  14,
+        "born_y":  4,
+        "width":  5745,
+        "height":  3572,
+        "widthBG1":  0,
+        "heightBG1":  0,
+        "world_maplvl":  1,
+        "music_id":  1,
+        "is_safe_scene":  1,
+        "compress_tile_scale":  1,
+        "download_lv":  52
+    },
     "7002":  {
-        "id":  9002,
+        "id":  7002,
         "name":  "测试地图",
         "res_id":  7002,
         "type":  9,

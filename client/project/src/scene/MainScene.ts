@@ -25,7 +25,7 @@ class MainScene extends Scene
         this._mapLayer = new MapLayer();
         this.addChild(this._mapLayer);
 
-        var mapId = 7002;
+        var mapId = 4;
         var map_cnf = ConfigMgr.getInstance().getMapConfig(mapId);
         var city_cnf = ConfigMgr.getInstance().getConfig("city")[mapId];
 

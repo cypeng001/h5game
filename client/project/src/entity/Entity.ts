@@ -2,7 +2,7 @@ class Entity extends egret.DisplayObjectContainer {
     protected static _AUTO_LOCAL_ID: number = 1;
     protected static _AUTO_LOCAL_MAX_ID: number = 100000;
     protected _localId: number = 0;
-    protected _aoiId: number = 0;
+    protected _entityId: number = 0;
 
     protected _data: any = null;
 
@@ -19,8 +19,8 @@ class Entity extends egret.DisplayObjectContainer {
         return this._localId;
     }
 
-    public get aoiId(): number {
-        return this._aoiId;
+    public get entityId(): number {
+        return this._entityId;
     }
 
     public get entityType(): number {

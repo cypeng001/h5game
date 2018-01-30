@@ -1,5 +1,7 @@
 enum EntityType {
     ET_PLAYER       = 1,
+    ET_MONSTER      = 2,
+    ET_NPC          = 3,
 };
 
 enum ActorActionState {
@@ -17,5 +19,3 @@ enum ActorDir {
     AD_WESTSOUTH        = 3,
     AD_WESTNORTH        = 4,
 };
-
-var ENTITY_POS_SCALE    = 0.5;

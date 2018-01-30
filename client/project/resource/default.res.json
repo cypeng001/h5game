@@ -9,7 +9,7 @@
 			"name": "account"
 		},
 		{
-			"keys": "config_data_city_json,config_map_7002_json",
+			"keys": "config_data_city_json,config_map_4_json,config_map_7002_json",
 			"name": "config"
 		},
 		{
@@ -151,6 +151,11 @@
 			"url": "config/data/city.json",
 			"type": "json",
 			"name": "config_data_city_json"
+		},
+		{
+			"url": "config/map/4.json",
+			"type": "json",
+			"name": "config_map_4_json"
 		},
 		{
 			"url": "config/map/7002.json",

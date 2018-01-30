@@ -3,14 +3,18 @@ class Npc extends Actor {
         super();
     }
 
+    public get entityType(): number {
+        return EntityType.ET_NPC;
+    }
+
     public init(data: any): void {
         super.init(data);
 
-        this._aoiId = data.entityId;
+        this._entityId = data.entityId;
         this._name = "npc10001";
 
-        this.x = data.x * ENTITY_POS_SCALE;
-        this.y = data.y * ENTITY_POS_SCALE;
+        this.x = data.x;
+        this.y = data.y;
 
         this.initSprite();
 
