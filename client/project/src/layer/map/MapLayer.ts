@@ -14,6 +14,7 @@ class MapLayer extends egret.DisplayObjectContainer {
     protected _tile_height: number = 0;
 
     protected _player: Player = null;
+    protected _monsters: Array<Monster> = [];
 
     constructor() {
         super();
@@ -40,14 +41,18 @@ class MapLayer extends egret.DisplayObjectContainer {
         this.addChild(this._mapTileLayer);
         this._mapTileLayer.loadMap(mapId, mapData);
 
-        this._player = new Player();
-        this._player.init({});
-        this.addChild(this._player);
+        this.createPlayer();
+        this.createMonster();
     }
 
     public update(interval: number): void {
         this._player.update(interval);
         this.updateCamera(this._player.x, this._player.y);
+
+        for(var k in this._monsters) {
+            var monster = this._monsters[k];
+            monster.update(interval);
+        }
 
         this._mapTileLayer.update(interval);
     }
@@ -61,17 +66,35 @@ class MapLayer extends egret.DisplayObjectContainer {
                 -(this._height - MapLayer.DEF_LOGIC_HEIGHT));
     }
 
-    protected onTouchBegin(event):void {
+    protected onTouchBegin(event): void {
     }
 
-    protected onTouchCancel(event):void {
+    protected onTouchCancel(event): void {
     }
 
-    protected onTouchEnd(event):void {
+    protected onTouchEnd(event): void {
         var localPt = this.globalToLocal(event.stageX, event.stageY);
         this._player.moveTo(localPt.x, localPt.y);
     }
 
-    protected onTouchMove(event):void {
+    protected onTouchMove(event): void {
+    }
+
+    public createPlayer(): void {
+        this._player = new Player();
+        this._player.x = 100;
+        this._player.y = 100;
+        this._player.init({});
+        this.addChild(this._player);
+    }
+
+    public createMonster(): void {
+        var monster = new Monster();
+        monster.x = 200;
+        monster.y = 200;
+        monster.init({});
+        this.addChild(monster);
+
+        this._monsters.push(monster);
     }
 }

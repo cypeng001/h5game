@@ -13,8 +13,8 @@
 	],
 	"game": [
 		"bin-debug/entity/Entity.js",
-		"bin-debug/entity/Actor.js",
 		"bin-debug/scene/Scene.js",
+		"bin-debug/entity/Actor.js",
 		"bin-debug/layer/map/MapTileLayer.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
@@ -27,13 +27,14 @@
 		"bin-debug/GameEvents.js",
 		"bin-debug/entity/EntityCnst.js",
 		"bin-debug/entity/EntityUtil.js",
+		"bin-debug/entity/Monster.js",
 		"bin-debug/entity/Player.js",
 		"bin-debug/layer/loading/LoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingUI.js",
 		"bin-debug/layer/map/MapCnst.js",
 		"bin-debug/layer/map/MapLayer.js",
-		"bin-debug/GameApp.js",
+		"bin-debug/utils/VectorUtil.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/network/NetMgr.js",
 		"bin-debug/scene/AccountScene.js",
@@ -54,6 +55,6 @@
 		"bin-debug/utils/MathUtil.js",
 		"bin-debug/utils/PhpUtil.js",
 		"bin-debug/utils/ResUtility.js",
-		"bin-debug/utils/VectorUtil.js"
+		"bin-debug/GameApp.js"
 	]
 }
