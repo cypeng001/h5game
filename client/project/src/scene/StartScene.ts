@@ -3,7 +3,7 @@ class StartScene extends Scene
 {
     private _loadingBg: egret.Bitmap;
     private _startLoadingLayer: StartLoadingLayer;
-    private _loadGroupList: string[] = ["account", "config"];
+    private _loadGroupList: string[] = ["account", "config", "movieclip"];
     private _loadGroupCount: number = 0;
 
     public constructor()

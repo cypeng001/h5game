@@ -29,6 +29,10 @@ class MapLayer extends egret.DisplayObjectContainer{
         this._mapTileLayer = new MapTileLayer();
         this.addChild(this._mapTileLayer);
         this._mapTileLayer.loadMap(mapID);
+
+        var player = new Player();
+        player.init({});
+        this.addChild(player);
     }
 
     public update(interval: number): void
