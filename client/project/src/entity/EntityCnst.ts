@@ -7,6 +7,8 @@ enum ActorActionState {
     AAS_STANDBACK        = 2,
     AAS_RUNFRONT         = 3,
     AAS_RUNBACK          = 4,
+    AAS_ATTACKFRONT      = 5,
+    AAS_ATTACKBACK       = 6,
 };
 
 enum ActorDir {

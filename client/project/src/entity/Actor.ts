@@ -90,6 +90,17 @@ class Actor extends Entity {
         this.setActionState(actionState);
     }
 
+    public attackAct(): void {
+        var actionState = 0;
+        if(this._dir == ActorDir.AD_EASTSOUTH || this._dir == ActorDir.AD_WESTSOUTH) {
+            actionState = ActorActionState.AAS_ATTACKFRONT;
+        }
+        else {
+            actionState = ActorActionState.AAS_ATTACKBACK;
+        }
+        this.setActionState(actionState);
+    }
+
     public moveTo(x: number, y: number): void {
         if(this.x == x && this.y == y) {
             this.stopMove();
