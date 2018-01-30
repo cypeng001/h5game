@@ -1,9 +1,7 @@
 //主场景类
 class MainScene extends Scene
 {
-    /*
     private _mainUI: MainUI;
-    */
     private _mapLayer: MapLayer;
 
     public constructor()
@@ -21,7 +19,6 @@ class MainScene extends Scene
     {
         super.onEnter();
 
-        //地图层
         this._mapLayer = new MapLayer();
         this.addChild(this._mapLayer);
 
@@ -32,12 +29,8 @@ class MainScene extends Scene
         this._mapLayer.loadMap(mapId, {map_cnf: map_cnf, city_cnf});
         this._mapLayer.initEntities(g_gameData.sceneData);
 
-        /*
-
-        //主界面层
         this._mainUI = new MainUI();
         this.addChild(this._mainUI);
-        */
     }
 
     //override
@@ -45,7 +38,6 @@ class MainScene extends Scene
     {
         super.onExit();
 
-        /*
         if(this._mainUI)
         {
             if(this._mainUI.parent)
@@ -54,7 +46,6 @@ class MainScene extends Scene
             }
             this._mainUI = null;
         }
-        */
 
         if(this._mapLayer)
         {
@@ -69,12 +60,11 @@ class MainScene extends Scene
     //override
     public update(interval: number): void
     {
-        /*
         if(this._mainUI)
         {
             this._mainUI.update(interval);
         }
-        */
+
         if(this._mapLayer)
         {
             this._mapLayer.update(interval);

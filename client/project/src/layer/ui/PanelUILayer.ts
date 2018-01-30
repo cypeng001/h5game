@@ -1,4 +1,3 @@
-//UI面板基类
 class PanelUILayer extends eui.Component{
     private _objID: number = -1;
     private _panelID: number = -1;
@@ -28,20 +27,12 @@ class PanelUILayer extends eui.Component{
 
     public onEnter(): void
     {
-        //监听分辨率变化
-        this.stage.addEventListener( egret.Event.RESIZE, this.ListenResizeEvent, this );
-
         PanelUILayer._s_objID = PanelUILayer._s_objID + 1;
         if(PanelUILayer._s_objID > PanelUILayer._s_maxObjID)
         {
             PanelUILayer._s_objID = 1;
         }
         this._objID = PanelUILayer._s_objID;
-    }
-
-    public ListenResizeEvent():void {
-        //子类重写
-        console.log("PanelUILayer.ResizeEvent>>>>>>>")
     }
 
     public onExit(): void
