@@ -1,13 +1,13 @@
 class MainUI extends PanelUILayer {
     constructor() {
         super();
-        this.addEventListener(eui.UIEvent.COMPLETE, this.onUIComp, this);
+        this.addEventListener(eui.UIEvent.COMPLETE, this.onUIComplete, this);
         this.skinName = "resource/custom_skins/mainUISkin.exml";
     }
 
-    private onUIComp():void {
+    private onUIComplete():void {
         this.roleBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onRoleBtnTab, this);
-        this.equipmentBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onEquipmentBtnTab, this);
+        this.equipBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onEquipBtnTab, this);
         this.petBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPetBtnTab, this);
         this.socialBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSocialBtnTab, this);
     }
@@ -24,10 +24,12 @@ class MainUI extends PanelUILayer {
 
     protected onRoleBtnTab(): void {
         console.log("onRoleBtnTab");
+
+        UILayerMgr.getInstance().loadUILayer(UILayerID.UIID_ROLE);
     }
 
-    protected onEquipmentBtnTab(): void {
-        console.log("onEquipmentBtnTab");
+    protected onEquipBtnTab(): void {
+        console.log("onEquipBtnTab");
     }
 
     protected onPetBtnTab(): void {
@@ -39,7 +41,7 @@ class MainUI extends PanelUILayer {
     }
 
 	private roleBtn: eui.Button;
-    private equipmentBtn: eui.Button;
+    private equipBtn: eui.Button;
     private petBtn: eui.Button;
     private socialBtn: eui.Button;
 	
