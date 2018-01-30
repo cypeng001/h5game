@@ -19,3 +19,13 @@ enum ActorDir {
     AD_WESTSOUTH        = 3,
     AD_WESTNORTH        = 4,
 };
+
+enum AttackResult {
+    SUCCESS             = 1,
+    KILLED              = 2,
+    MISS                = 3,
+    NOT_IN_RANGE        = 4,
+    NO_ENOUGH_MP        = 5,
+    NOT_COOLDOWN        = 6,
+    ATTACKER_CONFUSED   = 7,
+};

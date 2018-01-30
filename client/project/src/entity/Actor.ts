@@ -25,12 +25,28 @@ class Actor extends Entity {
         super();
     }
 
+    public set hp(val: number) {
+        this._hp = val;
+    }
+
+    public get hp(): number {
+        return this._hp;
+    }
+
+    public set mp(val: number) {
+        this._mp = val;
+    }
+
+    public get mp(): number {
+        return this._mp;
+    }
+
     protected getName(): string {
         return this._name;
     }
 
-    public init(data: any): void {
-        super.init(data);
+    public init(data: any, mapLayer: MapLayer): void {
+        super.init(data, mapLayer);
     }
 
     public release(): void {
@@ -71,7 +87,7 @@ class Actor extends Entity {
         this._hpBar.maximum = this._maxHp;
         this._hpBar.value = this._hp;
         this._hpBar.anchorOffsetX = this._hpBar.width / 2;
-        this._hpBar.y = -150;
+        this._hpBar.y = -170;
         this.addChild(this._hpBar);
     }
 
@@ -89,7 +105,7 @@ class Actor extends Entity {
         this._mpBar.maximum = this._maxMp;
         this._mpBar.value = this._mp;
         this._mpBar.anchorOffsetX = this._mpBar.width / 2;
-        this._mpBar.y = -170;
+        this._mpBar.y = -150;
         this.addChild(this._mpBar);
     }
 
@@ -199,16 +215,16 @@ class Actor extends Entity {
         this._sprite.scaleX = flipX ? -this._spriteScale : this._spriteScale;
     }
 
-    protected adjustDir(target_pos_x: number, target_pos_y: number): void {
-        var x_distance = target_pos_x - this.x
-	    var y_distance = target_pos_y - this.y
+    public adjustDir(tarX: number, tarY: number): void {
+        var distX = tarX - this.x
+	    var distY = tarY - this.y
 
-        if(x_distance == 0 && y_distance == 0) {
+        if(distX == 0 && distY == 0) {
             return;
         }
 
-        if(x_distance > 0) {
-            if(y_distance < 0) {
+        if(distX > 0) {
+            if(distY < 0) {
                 this._dir = ActorDir.AD_EASTNORTH;
             }
             else {
@@ -218,7 +234,7 @@ class Actor extends Entity {
             this.setFlipX(false);
         }
         else {
-            if(y_distance < 0) {
+            if(distY < 0) {
                 this._dir = ActorDir.AD_WESTNORTH;
             }
             else {
@@ -226,6 +242,19 @@ class Actor extends Entity {
             }
 
             this.setFlipX(true);
+        }
+    }
+
+    public execSkill(skillId: number, data: any): void {
+        this.attackAct();
+
+        var resultData = data.result;
+        if(resultData.result == AttackResult.SUCCESS) {
+            this._mapLayer.createNum(this.x, this.y, 0, resultData.damage);
+
+            var defActor = this._mapLayer.getActor(data.target);
+            defActor.hp -= resultData.damage;
+            defActor.refreshHpBar();
         }
     }
 }

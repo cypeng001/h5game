@@ -7,8 +7,8 @@ class Monster extends Actor {
         return EntityType.ET_MONSTER;
     }
 
-    public init(data: any): void {
-        super.init(data);
+    public init(data: any, mapLayer: MapLayer): void {
+        super.init(data, mapLayer);
 
         this._entityId = data.entityId;
         this._name = "mon10001";

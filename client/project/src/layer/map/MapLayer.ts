@@ -4,6 +4,7 @@ class MapLayer extends egret.DisplayObjectContainer {
 
     protected _entityLayer: egret.DisplayObjectContainer = null;
     protected _mapTileLayer: MapTileLayer = null;
+    protected _numLayer: egret.DisplayObjectContainer = null;
 
     protected _map_cnf: any = null;
     protected _city_cnf: any = null;
@@ -49,6 +50,9 @@ class MapLayer extends egret.DisplayObjectContainer {
 
         this._entityLayer = new egret.DisplayObjectContainer();
         this.addChild(this._entityLayer);
+
+        this._numLayer = new egret.DisplayObjectContainer();
+        this.addChild(this._numLayer);
     }
 
     public initEntities(data: any): void {
@@ -113,7 +117,7 @@ class MapLayer extends egret.DisplayObjectContainer {
 
     protected _createPlayer(data: any): Player {
         var player = new Player();
-        player.init(data);
+        player.init(data, this);
         this._entityLayer.addChild(player);
 
         return player;
@@ -162,7 +166,7 @@ class MapLayer extends egret.DisplayObjectContainer {
         }
 
         var monster = new Monster();
-        monster.init(data);
+        monster.init(data, this);
         this._entityLayer.addChild(monster);
 
         this._monsters[data.entityId] = monster;
@@ -196,7 +200,7 @@ class MapLayer extends egret.DisplayObjectContainer {
         }
 
         var npc = new Npc();
-        npc.init(data);
+        npc.init(data, this);
         this._entityLayer.addChild(npc);
 
         this._npcs[data.entityId] = npc;
@@ -249,29 +253,6 @@ class MapLayer extends egret.DisplayObjectContainer {
         return null;
     }
 
-    public addEntity(data: any): Entity {
-        var entity: Entity = null;
-        switch(data.type) {
-            case "player": {
-                entity = new Player();
-                entity.init(data);
-                break;
-            }
-                
-            case "npc": {
-                entity = new Npc();
-                entity.init(data);
-                break;
-            }
-            case "mob": {
-                entity = new Monster();
-                entity.init(data);
-                break;
-            }
-        }
-        return entity;
-    }
-
     public removeEntity(entityId: number): void {
         var entity = this.getEntity(entityId);
         if(!entity) {
@@ -302,6 +283,24 @@ class MapLayer extends egret.DisplayObjectContainer {
         }
 
         return <Actor>entity;
+    }
+
+    public createNum(x: number, y: number, status: number, value: number): void {
+        var container = new egret.DisplayObjectContainer;
+		container.x = x;
+		container.y = y;
+        this._numLayer.addChild(container);
+
+        var label = new eui.Label;
+        label.size = 30;
+		label.stroke = 1;
+		label.strokeColor = 0x333333;
+        label.text = value.toString();
+        label.width = 100;
+        label.anchorOffsetX = label.width / 2;
+        container.addChild(label);
+
+        egret.Tween.get(container).to({y: y - 20}, 500);
     }
 
     protected MsgHandler_onAddEntities(data: any): void {
@@ -336,11 +335,20 @@ class MapLayer extends egret.DisplayObjectContainer {
             return;
         }
 
-        /*
-        actor.x = path[0].x;
-        actor.y = path[0].y;
-        */
         actor.moveTo(path[1].x, path[1].y);
+    }
+
+    protected MsgHandler_onAttack(data: any): void {
+        var skillId = data.skillId;
+        var atkActor = this.getActor(data.attacker);
+        var defActor = this.getActor(data.target);
+        if(!atkActor || !defActor) {
+            return;
+        }
+
+        atkActor.stopMove();
+        atkActor.adjustDir(defActor.x, defActor.y);
+        atkActor.execSkill(skillId, data);
     }
 
     protected initMsgHandler(): void {
@@ -353,6 +361,9 @@ class MapLayer extends egret.DisplayObjectContainer {
         });
         NetMgr.getInstance().on('onMove', function(data: any) {
             self.MsgHandler_onMove(data);
+        });
+        NetMgr.getInstance().on('onAttack', function(data: any) {
+            self.MsgHandler_onAttack(data);
         });
     }
 }
