@@ -10,8 +10,8 @@ enum ActorActionState {
 };
 
 enum ActorDir {
-    AD_SOUNDEAST        = 1,
-    AD_SOUNDWEST        = 2,
-    AD_NORTHEAST        = 3,
-    AD_NORTHWEST        = 4,
+    AD_EASTSOUTH        = 1,
+    AD_EASTNORTH        = 2,
+    AD_WESTSOUTH        = 3,
+    AD_WESTNORTH        = 4,
 };

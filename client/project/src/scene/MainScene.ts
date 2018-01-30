@@ -25,7 +25,11 @@ class MainScene extends Scene
         this._mapLayer = new MapLayer();
         this.addChild(this._mapLayer);
 
-        this._mapLayer.loadMap(7002);
+        var mapId = 7002;
+        var map_cnf = ConfigMgr.getInstance().getMapConfig(mapId);
+        var city_cnf = ConfigMgr.getInstance().getConfig("city")[mapId];
+
+        this._mapLayer.loadMap(mapId, {map_cnf: map_cnf, city_cnf});
         //this._mapLayer.initPlayer(g_gameData.role_data);
 
         /*

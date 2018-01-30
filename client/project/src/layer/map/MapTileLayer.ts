@@ -15,10 +15,10 @@ class MapTileLayer extends egret.DisplayObjectContainer{
     {
     }
 
-    public loadMap(mapID: number): void
+    public loadMap(mapID: number, mapData: any): void
     {     
-        var map_cnf = ConfigMgr.getInstance().getMapConfig(mapID);
-        var city_cnf = ConfigMgr.getInstance().getConfig("city")[mapID];
+        var map_cnf = mapData.map_cnf;
+        var city_cnf = mapData.city_cnf;
 
         this.map_id = mapID;
         this.map_cnf = map_cnf;
