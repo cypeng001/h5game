@@ -2,6 +2,7 @@ class MapLayer extends egret.DisplayObjectContainer {
     protected static DEF_LOGIC_WIDTH: number = 640;
     protected static DEF_LOGIC_HEIGHT: number = 1136;
 
+    protected _entityLayer: egret.DisplayObjectContainer = null;
     protected _mapTileLayer: MapTileLayer = null;
 
     protected _map_cnf: any = null;
@@ -13,7 +14,8 @@ class MapLayer extends egret.DisplayObjectContainer {
     protected _tile_width: number = 0;
     protected _tile_height: number = 0;
 
-    protected _player: Player = null;
+    protected _curPlayer: Player = null;
+    protected _aoiPlayers: Array<Player> = [];
     protected _monsters: Array<Monster> = [];
     protected _npcs: Array<Npc> = [];
 
@@ -42,14 +44,31 @@ class MapLayer extends egret.DisplayObjectContainer {
         this.addChild(this._mapTileLayer);
         this._mapTileLayer.loadMap(mapId, mapData);
 
-        this.createPlayer();
-        this.createMonster();
-        this.createNpc();
+        this._entityLayer = new egret.DisplayObjectContainer();
+        this.addChild(this._entityLayer);
+    }
+
+    public initEntities(data: any): void {
+        this.initCurPlayer(data.curPlayer);
+
+        for(var k in data.entities.mob) {
+            var mobData = data.entities.mob[k];
+            this.createMonster(mobData);
+        }
+
+        for(var k in data.entities.npc) {
+            var npcData = data.entities.npc[k];
+            this.createNpc(npcData);
+        }
     }
 
     public update(interval: number): void {
-        this._player.update(interval);
-        this.updateCamera(this._player.x, this._player.y);
+        this._curPlayer.update(interval);
+
+        for(var k in this._aoiPlayers) {
+            var player = this._aoiPlayers[k];
+            player.update(interval);
+        }
 
         for(var k in this._monsters) {
             var monster = this._monsters[k];
@@ -60,6 +79,8 @@ class MapLayer extends egret.DisplayObjectContainer {
             var npc = this._npcs[k];
             npc.update(interval);
         }
+
+        this.updateCamera(this._curPlayer.x, this._curPlayer.y);
 
         this._mapTileLayer.update(interval);
     }
@@ -81,37 +102,50 @@ class MapLayer extends egret.DisplayObjectContainer {
 
     protected onTouchEnd(event): void {
         var localPt = this.globalToLocal(event.stageX, event.stageY);
-        this._player.moveTo(localPt.x, localPt.y);
+        this._curPlayer.moveTo(localPt.x, localPt.y);
     }
 
     protected onTouchMove(event): void {
     }
 
-    public createPlayer(): void {
-        this._player = new Player();
-        this._player.x = 100;
-        this._player.y = 100;
-        this._player.init({});
-        this.addChild(this._player);
+    protected _createPlayer(data: any): Player {
+        var player = new Player();
+        player.init(data);
+        this._entityLayer.addChild(player);
+
+        return player;
     }
 
-    public createMonster(): void {
+    protected initCurPlayer(data: any): void {
+        var player = this._createPlayer(data);
+        this._curPlayer = player;
+    }
+
+    public createAoiPlayer(data: any): Player {
+        var player = this._createPlayer(data);
+        this._aoiPlayers.push(player);
+        return player;
+    }
+
+    public createMonster(data: any): Monster {
         var monster = new Monster();
-        monster.x = 200;
-        monster.y = 200;
-        monster.init({});
-        this.addChild(monster);
+        monster.init(data);
+        this._entityLayer.addChild(monster);
 
         this._monsters.push(monster);
+
+        return monster;
     }
 
-    public createNpc(): void {
+    public createNpc(data: any): Npc {
         var npc = new Npc();
         npc.x = 300;
         npc.y = 300;
-        npc.init({});
-        this.addChild(npc);
+        npc.init(data);
+        this._entityLayer.addChild(npc);
 
         this._npcs.push(npc);
+
+        return npc;
     }
 }

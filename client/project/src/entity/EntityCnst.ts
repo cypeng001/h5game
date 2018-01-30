@@ -17,3 +17,5 @@ enum ActorDir {
     AD_WESTSOUTH        = 3,
     AD_WESTNORTH        = 4,
 };
+
+var ENTITY_POS_SCALE    = 0.5;

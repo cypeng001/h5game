@@ -30,7 +30,7 @@ class MainScene extends Scene
         var city_cnf = ConfigMgr.getInstance().getConfig("city")[mapId];
 
         this._mapLayer.loadMap(mapId, {map_cnf: map_cnf, city_cnf});
-        //this._mapLayer.initPlayer(g_gameData.role_data);
+        this._mapLayer.initEntities(g_gameData.sceneData);
 
         /*
 

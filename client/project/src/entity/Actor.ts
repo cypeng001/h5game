@@ -12,12 +12,21 @@ class Actor extends Entity {
     protected _speed: number = 200;
     protected _spriteScale: number = 1;
 
+    protected _name: string;
+    protected _hp: number = 0;
+    protected _maxHp: number = 1;
+    protected _mp: number = 0;
+    protected _maxMp: number = 1;
+
+    protected _hpBar: eui.ProgressBar;
+    protected _mpBar: eui.ProgressBar;
+
     constructor() {
         super();
     }
 
     protected getName(): string {
-        return "actor";
+        return this._name;
     }
 
     public init(data: any): void {
@@ -47,12 +56,47 @@ class Actor extends Entity {
 		this._nameLabel.size = 13;
 		this._nameLabel.stroke = 1;
 		this._nameLabel.strokeColor = 0x333333;
-		this._nameLabel.anchorOffsetY = 60;
 		this._nameLabel.anchorOffsetX = this._nameLabel.width / 2;
 		this._nameLabel.verticalAlign = "bottom";
-		this._nameLabel.scaleX = this._nameLabel.scaleY = 0.8;
+        this._nameLabel.y = -130;
 
 		this.addChild(this._nameLabel);
+    }
+
+    protected initHpBar(): void {
+        this._hpBar = new eui.ProgressBar();
+        this._hpBar.width = 60;
+        this._hpBar.height = 10;
+        this._hpBar.minimum = 0;
+        this._hpBar.maximum = this._maxHp;
+        this._hpBar.value = this._hp;
+        this._hpBar.anchorOffsetX = this._hpBar.width / 2;
+        this._hpBar.y = -150;
+        this.addChild(this._hpBar);
+    }
+
+    protected refreshHpBar(): void {
+        this._hpBar.minimum = 0;
+        this._hpBar.maximum = this._maxHp;
+        this._hpBar.value = this._hp;
+    }
+
+    protected initMpBar(): void {
+        this._mpBar = new eui.ProgressBar();
+        this._mpBar.width = 60;
+        this._mpBar.height = 10;
+        this._mpBar.minimum = 0;
+        this._mpBar.maximum = this._maxMp;
+        this._mpBar.value = this._mp;
+        this._mpBar.anchorOffsetX = this._mpBar.width / 2;
+        this._mpBar.y = -170;
+        this.addChild(this._mpBar);
+    }
+
+    protected refreshMpBar(): void {
+        this._mpBar.minimum = 0;
+        this._mpBar.maximum = this._maxMp;
+        this._mpBar.value = this._mp;
     }
 
     public setDir(dir: number): void {
