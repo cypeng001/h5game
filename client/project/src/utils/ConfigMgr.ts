@@ -18,25 +18,27 @@ class ConfigMgr {
 
     public init(): void
     {
+        var zip = new JSZip(RES.getRes("config_zip"));
+
         for(var i in this._preloadConfigFiles)
         {
             var configName = this._preloadConfigFiles[i];
-            var resName = "config_data_" + configName + "_json";
-            var config = RES.getRes(resName); 
+            var config = JSON.parse(zip.file("data/" + configName + ".json").asText());
             this.registerConfig(configName, config);
         }
+        
+        this.initMapCnf(zip);
 
-        this.initMapCnf();
+        RES.destroyRes("config_zip");
     }
 
-    private initMapCnf(): void
+    private initMapCnf(zip: JSZip): void
     {
         var city_cnfs = ConfigMgr.getInstance().getConfig("city");
         for (var map_id in city_cnfs)
         {
             var configName = "map_" + map_id;
-            var resName = "config_map_" + map_id + "_json";
-            var config = RES.getRes(resName); 
+            var config = JSON.parse(zip.file("map/" + map_id + ".json").asText());
             this.registerConfig(configName, config);
         }
     }

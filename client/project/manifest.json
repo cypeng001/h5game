@@ -13,9 +13,9 @@
 	],
 	"game": [
 		"bin-debug/entity/Entity.js",
-		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/entity/Actor.js",
 		"bin-debug/scene/Scene.js",
+		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",

@@ -9,7 +9,7 @@
 			"name": "account"
 		},
 		{
-			"keys": "config_data_city_json,config_map_4_json,config_map_7002_json",
+			"keys": "config_zip",
 			"name": "config"
 		},
 		{
@@ -205,6 +205,11 @@
 			"url": "ui/common1.json",
 			"type": "sheet",
 			"name": "ui_common1"
+		},
+		{
+			"url": "config.zip",
+			"type": "bin",
+			"name": "config_zip"
 		}
 	]
 }
