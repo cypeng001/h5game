@@ -13,9 +13,9 @@
 	],
 	"game": [
 		"bin-debug/entity/Entity.js",
+		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/entity/Actor.js",
 		"bin-debug/scene/Scene.js",
-		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
@@ -36,7 +36,7 @@
 		"bin-debug/layer/map/MapCnst.js",
 		"bin-debug/layer/map/MapLayer.js",
 		"bin-debug/layer/map/MapTileLayer.js",
-		"bin-debug/utils/VectorUtil.js",
+		"bin-debug/GameApp.js",
 		"bin-debug/mgr/UILayerID.js",
 		"bin-debug/mgr/UILayerMgr.js",
 		"bin-debug/network/NetMgr.js",
@@ -60,6 +60,6 @@
 		"bin-debug/utils/MathUtil.js",
 		"bin-debug/utils/PhpUtil.js",
 		"bin-debug/utils/ResUtility.js",
-		"bin-debug/GameApp.js"
+		"bin-debug/utils/VectorUtil.js"
 	]
 }

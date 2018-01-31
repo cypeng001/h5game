@@ -1,6 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <e:Skin class="roleUISkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Button id="btnClose" verticalCenter="-469" horizontalCenter="182" label="close">
+	<e:Image width="462" height="361" x="83" y="99" anchorOffsetX="0" anchorOffsetY="0" source="ui_common1#Dikuangling" scale9Grid="81,37,47,10"/>
+	<e:Button id="btnClose" verticalCenter="-453" horizontalCenter="182.5" label="">
+		<e:skinName>
+		<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="ui_common1#Anniu1"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+		</e:Skin>
+		</e:skinName>
 	</e:Button>
 	
 	
