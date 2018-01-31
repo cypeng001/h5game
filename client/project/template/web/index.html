@@ -36,6 +36,12 @@
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
 <script>
+	var SERVER_CNF = {
+           PLAT_URL: "http://localhost:3001/",
+           GATE_HOST: "127.0.0.1",
+           GATE_PORT: 3014,
+    };
+
     var loadScript = function (list, callback) {
         var loaded = 0;
         var loadNext = function () {
