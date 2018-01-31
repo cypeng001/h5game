@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="mainUISkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Button id="roleBtn" label="角色" x="27" y="1057" anchorOffsetX="0" width="111" anchorOffsetY="0" height="66"/>
-	<e:Button id="equipBtn" label="装备" x="187" y="1057" anchorOffsetX="0" width="111" anchorOffsetY="0" height="66"/>
-	<e:Button id="petBtn" label="宠物" x="347" y="1057" anchorOffsetX="0" width="111" anchorOffsetY="0" height="66"/>
-	<e:Button id="socialBtn" label="社交" x="507" y="1057" anchorOffsetX="0" width="111" anchorOffsetY="0" height="66"/>
-	<e:Image id="roleImg" width="95" height="99" x="11" y="12" anchorOffsetX="0" anchorOffsetY="0"/>
-	<e:ProgressBar id="hpBar" width="148" height="26" x="120" y="48.5" anchorOffsetY="0" anchorOffsetX="0"/>
-	<e:ProgressBar id="mpBar" width="148" height="26" x="120" y="85" anchorOffsetY="0" anchorOffsetX="0"/>
+	<e:Group id="leftTopGrp" width="307" height="134" x="3.5" y="12" anchorOffsetX="0" anchorOffsetY="0">
+		<e:Image width="293" height="71" x="14" y="31.5" anchorOffsetX="0" anchorOffsetY="0" source="ui_main1#Renwutouxiangkuang"/>
+		<e:Image id="roleImg" width="120" height="88" x="-12" y="7" anchorOffsetX="0" anchorOffsetY="0" source="resource/headicon/1001.png"/>
+		<e:ProgressBar id="hpBar" width="154" height="15" x="120.5" y="56.5" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:ProgressBar id="mpBar" width="154" height="15" x="120.5" y="79" anchorOffsetX="0" anchorOffsetY="0"/>
+	</e:Group>
+	<e:Group id="bottomGrp" height="123" anchorOffsetX="0" left="0" right="0" bottom="0" anchorOffsetY="0">
+		<e:Image anchorOffsetX="0" anchorOffsetY="0" source="ui_common1#Heidibang1" left="0" right="0" top="0" bottom="0"/>
+		<e:Button id="roleBtn" label="" x="24" width="100" height="100" y="12">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="ui_main1#Renwutubiao1"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="petBtn" label="" x="188.67" width="100" height="100" y="12">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="ui_main1#Lingchongtubiao"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="mountBtn" label="" x="353.33" width="100" height="100" y="12">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="ui_main1#Zuoqitubiao"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+		<e:Button id="socialBtn" label="" x="518" width="100" height="100" y="12">
+			<e:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="ui_main1#Shejiao"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+				</e:Skin>
+			</e:skinName>
+		</e:Button>
+	</e:Group>
 </e:Skin>

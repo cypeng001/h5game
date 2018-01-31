@@ -7,9 +7,11 @@ class MainUI extends PanelUILayer {
 
     private onUIComplete():void {
         this.roleBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onRoleBtnTab, this);
-        this.equipBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onEquipBtnTab, this);
+        this.mountBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onMountBtnTab, this);
         this.petBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPetBtnTab, this);
         this.socialBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSocialBtnTab, this);
+
+        
     }
 
     public onEnter(): void
@@ -28,8 +30,10 @@ class MainUI extends PanelUILayer {
         UILayerMgr.getInstance().loadUILayer(UILayerID.UIID_ROLE);
     }
 
-    protected onEquipBtnTab(): void {
-        console.log("onEquipBtnTab");
+    protected onMountBtnTab(): void {
+        console.log("onMountBtnTab");
+
+        this.roleImg.source = "ui_main1#Lingchongtubiao";
     }
 
     protected onPetBtnTab(): void {
@@ -41,8 +45,9 @@ class MainUI extends PanelUILayer {
     }
 
 	private roleBtn: eui.Button;
-    private equipBtn: eui.Button;
+    private mountBtn: eui.Button;
     private petBtn: eui.Button;
     private socialBtn: eui.Button;
+    private roleImg: eui.Image;
 	
 }

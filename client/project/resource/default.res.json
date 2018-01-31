@@ -19,6 +19,10 @@
 		{
 			"keys": "movieclip_player_10001_json,movieclip_player_10001_png,movieclip_monster_10001_json,movieclip_monster_10001_png,movieclip_npc_10001_json,movieclip_npc_10001_png",
 			"name": "movieclip"
+		},
+		{
+			"keys": "ui_main1,ui_common1",
+			"name": "ui"
 		}
 	],
 	"resources": [
@@ -191,6 +195,16 @@
 			"url": "movieclip/npc_10001.png",
 			"type": "image",
 			"name": "movieclip_npc_10001_png"
+		},
+		{
+			"url": "ui/main1.json",
+			"type": "sheet",
+			"name": "ui_main1"
+		},
+		{
+			"url": "ui/common1.json",
+			"type": "sheet",
+			"name": "ui_common1"
 		}
 	]
 }
