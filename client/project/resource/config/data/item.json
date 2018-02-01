@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "item1",
+        "desc": "desc1",
+        "iconId": 1
+    },
+    "2": {
+        "name": "item2",
+        "desc": "desc2",
+        "iconId": 2
+    },
+    "3": {
+        "name": "item3",
+        "desc": "desc3",
+        "iconId": 3
+    },
+    "4": {
+        "name": "item4",
+        "desc": "desc4",
+        "iconId": 4
+    }
+}
