@@ -19,10 +19,6 @@
 		{
 			"keys": "movieclip_player_10001_json,movieclip_player_10001_png,movieclip_monster_10001_json,movieclip_monster_10001_png,movieclip_npc_10001_json,movieclip_npc_10001_png",
 			"name": "movieclip"
-		},
-		{
-			"keys": "ui_main1,ui_common1",
-			"name": "ui"
 		}
 	],
 	"resources": [
@@ -150,21 +146,6 @@
 			"name": "account_bg_jpg",
 			"type": "image",
 			"url": "account/bg.jpg"
-		},
-		{
-			"url": "config/data/city.json",
-			"type": "json",
-			"name": "config_data_city_json"
-		},
-		{
-			"url": "config/map/4.json",
-			"type": "json",
-			"name": "config_map_4_json"
-		},
-		{
-			"url": "config/map/7002.json",
-			"type": "json",
-			"name": "config_map_7002_json"
 		},
 		{
 			"url": "movieclip/player_10001.json",
