@@ -12,11 +12,12 @@ def zipConfig():
     f = zipfile.ZipFile(ZIP_PATH, 'w', zipfile.ZIP_DEFLATED)
 
     for dirpath, dirnames, filenames in os.walk(ROOT_DIR):  
-        for filename in filenames: 
-            filepath = dirpath + '/' + filename
-            filepath = filepath.replace('\\', '/')
-            arcname = filepath[len(ROOT_DIR) + 1: len(filepath)]
-            f.write(filepath, arcname)
+        for filename in filenames:
+            if filename[-5:len(filename)] == '.json':
+                filepath = dirpath + '/' + filename
+                filepath = filepath.replace('\\', '/')
+                arcname = filepath[len(ROOT_DIR) + 1: len(filepath)]
+                f.write(filepath, arcname)
 
     f.close()
 
@@ -26,7 +27,7 @@ def exportManifest(dir):
     manifest = []
     for dirpath, dirnames, filenames in os.walk(dir):  
         for filename in filenames: 
-            if filename != 'manifest.json':
+            if filename[-5:len(filename)] == '.json' and filename != 'manifest.json':
                 manifest.append(filename[0:len(filename)-5])
 
     fo.write('[' + CR_STR)
