@@ -40,7 +40,7 @@ def exportManifest(dir):
 
     fo.write('{' + CR_STR)
     for k in range(len(manifest)):
-        fo.write(TAB_STR + '["' + manifest[k][0] + '"] : "' + manifest[k][1] + '"')
+        fo.write(TAB_STR + '"' + manifest[k][0] + '" : "' + manifest[k][1] + '"')
         if k < len(manifest) - 1:
             fo.write(',')
         fo.write(CR_STR)
