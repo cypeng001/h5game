@@ -38,6 +38,7 @@ class GameApp {
         g_gameData.init();
         
         ConfigMgr.getInstance().init();
+        MCCnfMgr.getInstance().init();
 
         this.initMsgHandler();
     }
