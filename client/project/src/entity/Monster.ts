@@ -31,7 +31,7 @@ class Monster extends Actor {
     }
 
     protected initSprite(): void {
-        this._sprite = MCFtry.getInstance().createMC("monster_10001");
+        this._sprite = MCFtry.getInstance().create("monster_10001");
         this.addChild(this._sprite);
     }
 }

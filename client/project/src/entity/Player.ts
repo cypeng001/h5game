@@ -36,7 +36,7 @@ class Player extends Actor {
     }
 
     protected initSprite(): void {
-        this._sprite = MCFtry.getInstance().createMC("player_10001");
+        this._sprite = MCFtry.getInstance().create("player_10001");
         this.addChild(this._sprite);
     }
 

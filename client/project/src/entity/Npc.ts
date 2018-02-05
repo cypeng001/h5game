@@ -26,7 +26,7 @@ class Npc extends Actor {
     }
 
     protected initSprite(): void {
-        this._sprite = MCFtry.getInstance().createMC("npc_10001");
+        this._sprite = MCFtry.getInstance().create("npc_10001");
         this.addChild(this._sprite);
     }
 }
