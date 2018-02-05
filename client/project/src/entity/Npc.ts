@@ -26,10 +26,7 @@ class Npc extends Actor {
     }
 
     protected initSprite(): void {
-        var data = RES.getRes("movieclip_npc_10001_json");
-        var txtr = RES.getRes("movieclip_npc_10001_png");
-        var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data, txtr);
-        this._sprite = new egret.MovieClip( mcFactory.generateMovieClipData("npc_10001"));
+        this._sprite = MCFtry.getInstance().createMC("npc_10001");
         this.addChild(this._sprite);
     }
 }

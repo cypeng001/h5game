@@ -6,6 +6,7 @@ enum MCST {
 
 enum MCPST {
     UNINIT      = 1,
-    LOADING     = 2,
-    LOADED      = 3,
+    UNLOAD      = 2,
+    LOADING     = 3,
+    LOADED      = 4,
 }

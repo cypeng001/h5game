@@ -26,32 +26,36 @@ class MCCnfMgr {
     }
 
     private initMCCnf(zip: JSZip): void {
-        for(var configName in this._manifest) {
-            var config = JSON.parse(zip.file(configName + ".json").asText());
-            this.regMCCnf(configName, config);
+        for(var key in this._manifest) {
+            var config = JSON.parse(zip.file(key + ".json").asText());
+            this.regMCCnf(key, config);
         }
     }
 
-    public regMCCnf(configName: string, config: any): Boolean {
+    public regMCCnf(key: string, config: any): Boolean {
         if(!config) {
             return false;
         }
 
-        if(this._configMap[configName]) {
-            console.log("MCCnfMgr_regMCCnf config already exist", configName);
+        if(this._configMap[key]) {
+            console.log("MCCnfMgr_regMCCnf config already exist", key);
             return false;
         }
 
-        this._configMap[configName] = config;
+        this._configMap[key] = config;
 
         return true;
     }
 
-    public getMCCnf(configName: string): any {
-        var config = this._configMap[configName];
+    public getMCCnf(key: string): any {
+        var config = this._configMap[key];
         if(!config) {
-            console.log("MCCnfMgr_getMCCnf invalid configName", configName);
+            console.log("MCCnfMgr_getMCCnf invalid key", key);
         }
         return config;
+    }
+
+    public getHash(key: string): string {
+        return this._manifest[key];
     }
 }

@@ -17,7 +17,7 @@
 			"name": "main"
 		},
 		{
-			"keys": "movieclip_player_10001_json,movieclip_player_10001_png,movieclip_monster_10001_json,movieclip_monster_10001_png,movieclip_npc_10001_json,movieclip_npc_10001_png,movieclip_zip",
+			"keys": "movieclip_zip",
 			"name": "movieclip"
 		}
 	],
@@ -146,26 +146,6 @@
 			"name": "account_bg_jpg",
 			"type": "image",
 			"url": "account/bg.jpg"
-		},
-		{
-			"url": "movieclip/player_10001.json",
-			"type": "json",
-			"name": "movieclip_player_10001_json"
-		},
-		{
-			"url": "movieclip/player_10001.png",
-			"type": "image",
-			"name": "movieclip_player_10001_png"
-		},
-		{
-			"url": "movieclip/monster_10001.json",
-			"type": "json",
-			"name": "movieclip_monster_10001_json"
-		},
-		{
-			"url": "movieclip/monster_10001.png",
-			"type": "image",
-			"name": "movieclip_monster_10001_png"
 		},
 		{
 			"url": "movieclip/npc_10001.json",

@@ -1,5 +1,5 @@
-class MovieClipAdv extends egret.MovieClip {
-    public mcst: MCST = MCST.LOAD; //todo:
+class MCAdv extends egret.MovieClip {
+    public mcst: MCST = MCST.LOAD;
 
     constructor(movieClipData?: egret.MovieClipData) {
         super(movieClipData);
