@@ -20,6 +20,9 @@ class MapLayer extends egret.DisplayObjectContainer {
     protected _aoiPlayers: any = {};
     protected _monsters: any = {};
     protected _npcs: any = {};
+    protected _lastRefreshPt: [number, number] = [0, 0];
+
+    protected _mapAreas = egret.createMap<MapArea>();
 
     constructor() {
         super();
@@ -53,6 +56,74 @@ class MapLayer extends egret.DisplayObjectContainer {
 
         this._numLayer = new egret.DisplayObjectContainer();
         this.addChild(this._numLayer);
+
+        this.initMapArea();
+    }
+
+    private initMapArea(): void {
+        var col = Math.ceil(this._width / MapArea.DEF_SIZE);
+	    var row = Math.ceil(this._height / MapArea.DEF_SIZE);
+
+        for(var j = 1; j <= row; ++j) {
+            for(var i = 1; i <= col; ++i) {
+                var mapArea = new MapArea(this);
+                mapArea.x = (i - 1) * MapArea.DEF_SIZE;
+                mapArea.y = (j - 1) * MapArea.DEF_SIZE;
+                this._mapAreas[(j - 1) * col + i] = mapArea;
+            }
+        }
+
+        var self = this;
+        this._mapTileLayer.forEachMapTile((mapTile: MapTile, index: number, array: MapTile[]) => {
+            self.addMapTileToMapArea(mapTile);
+        });
+    }
+
+    protected addMapTileToMapArea(mapTile: MapTile) {
+        var mapArea = this.getMapAreaByPos(mapTile.x, mapTile.y);
+        mapArea.addMapTile(mapTile);
+    }
+
+    protected getMapAreaByPos(pos_x: number, pos_y: number): MapArea {
+        var i = Math.floor(pos_x / MapArea.DEF_SIZE) + 1;
+	    var j = Math.floor(pos_y / MapArea.DEF_SIZE) + 1;
+	    var col = Math.ceil(this._width / MapArea.DEF_SIZE);
+	    var index = (j - 1) * col + i;
+	    return this._mapAreas[index];
+    }
+
+    protected refreshMapArea(): void {
+        var x = -this.x + MapLayer.DEF_LOGIC_WIDTH / 2;
+        var y = -this.y + MapLayer.DEF_LOGIC_HEIGHT / 2
+
+        var dx = MapLayer.DEF_LOGIC_WIDTH * 0.25;
+        var dy = MapLayer.DEF_LOGIC_HEIGHT * 0.25;
+
+        if(Math.abs(this._lastRefreshPt[0] - x) < dx 
+            && Math.abs(this._lastRefreshPt[1] - y) < dy) {
+            return;
+        }
+        this._lastRefreshPt[0] = x;
+        this._lastRefreshPt[1] = y;
+
+        var sw = MapLayer.DEF_LOGIC_WIDTH + dx * 2;
+        var sh = MapLayer.DEF_LOGIC_HEIGHT + dy * 2;
+        var sx = x - MapLayer.DEF_LOGIC_WIDTH / 2 - dx;
+        var sy = y - MapLayer.DEF_LOGIC_HEIGHT / 2 - dy;
+        for(var i in this._mapAreas) {
+            var mapArea = this._mapAreas[i];
+            if(mapArea.isInScreen(sx, sy, sw, sh)) {
+                mapArea.refresh(sx, sy, sw, sh);
+                mapArea.state = MapAreaState.MAS_IN_SCREEN;
+            }
+            else {
+                var lastState = mapArea.state;
+                if(lastState != MapAreaState.MAS_OUT_SCREEN) {
+                    mapArea.unload();
+                    mapArea.state = MapAreaState.MAS_OUT_SCREEN;
+                }
+            }
+        }
     }
 
     public initEntities(data: any): void {
@@ -99,6 +170,8 @@ class MapLayer extends egret.DisplayObjectContainer {
         this.y = Math.max(
                 Math.min(0, -(cameraY - MapLayer.DEF_LOGIC_HEIGHT / 2)), 
                 -(this._height - MapLayer.DEF_LOGIC_HEIGHT));
+
+        this.refreshMapArea();
     }
 
     protected onTouchBegin(event): void {
