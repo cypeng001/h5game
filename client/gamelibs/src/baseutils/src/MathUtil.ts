@@ -1,4 +1,7 @@
-class MathUtil {
+namespace h5game
+{
+
+export class MathUtil {
 	public static randInRange(min: number, max: number): number {
 		var range = max - min;   
 		var rand = Math.random();   
@@ -54,5 +57,7 @@ class MathUtil {
 		}
 		return [rx, ry];
 	}
+
+}
 
 }

@@ -1,4 +1,7 @@
-class VectorUtil {
+namespace h5game
+{
+
+export class VectorUtil {
 	public static calcLength(x: number, y: number): number {
 		return Math.sqrt(x * x + y * y);
 	}
@@ -79,4 +82,6 @@ class VectorUtil {
 	public static calcDegree(x: number, y: number): number {
 		return VectorUtil.radian2Degree(VectorUtil.calcRadian(x, y));
 	}
+}
+
 }

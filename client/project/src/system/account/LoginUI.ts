@@ -37,7 +37,7 @@ class LoginUI extends eui.Component{
     private requestLogin(username: string, password: string): void {
          console.log("requestLogin", username, password); 
 
-         PhpUtil.post(window["SERVER_CNF"]["PLAT_URL"] + "login", {username: username, password: password}, 
+         h5game.PhpUtil.post(window["SERVER_CNF"]["PLAT_URL"] + "login", {username: username, password: password}, 
             (data) => {
                 console.log("testPhp data:", data);
 

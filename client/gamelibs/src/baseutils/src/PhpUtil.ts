@@ -1,4 +1,7 @@
-class PhpUtil {
+namespace h5game
+{
+
+export class PhpUtil {
     private static param_count(param: Object): number
     {
         var count = 0;
@@ -49,4 +52,6 @@ class PhpUtil {
         request.addEventListener(egret.Event.COMPLETE, onPostResult, null);
         request.addEventListener(egret.IOErrorEvent.IO_ERROR, onPostFail, null);
     }
+}
+
 }

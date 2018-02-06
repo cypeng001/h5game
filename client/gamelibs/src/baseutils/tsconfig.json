@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "outFile": "../../bin/baseutils/baseutils.js",
+        "declaration": true,
+        "noImplicitAny": false,
+        "stripInternal": true,
+        "allowUnreachableCode": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": false,
+        "sourceMap": false,
+        "newLine": "LF"
+	},
+	"files": [
+        "libs/egret.d.ts",
+        "src/BaseUtil.ts",
+        "src/MathUtil.ts",
+        "src/PhpUtil.ts",
+        "src/RectUtil.ts",
+        "src/VectorUtil.ts"
+	]
+}

@@ -14,7 +14,7 @@ class SceneMsgHandler {
         NetMgr.getInstance().request('area.resourceHandler.loadAreaResource', {}, function(data: any): void {
             g_gameData.areaData = data;
 
-            BaseUtil.callFunc(callback, data);
+            h5game.BaseUtil.callFunc(callback, data);
         });
     }
 
@@ -24,13 +24,13 @@ class SceneMsgHandler {
 
             GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
 
-            BaseUtil.callFunc(callback, data);
+            h5game.BaseUtil.callFunc(callback, data);
         });
     }
 
     public reqMove(path: any, callback: Function): void {
         NetMgr.getInstance().request('area.playerHandler.move', {path: path}, function(data: any) {
-            BaseUtil.callFunc(callback, data);
+            h5game.BaseUtil.callFunc(callback, data);
         });
     }
 }

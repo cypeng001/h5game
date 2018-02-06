@@ -171,7 +171,7 @@ class Actor extends Entity {
         this._moveTarPos[0] = x;
         this._moveTarPos[1] = y;
         
-        var dir = VectorUtil.calcDir(this.x, this.y, x, y);
+        var dir = h5game.VectorUtil.calcDir(this.x, this.y, x, y);
         this._moveSpeed[0] = dir[0] * this._speed;
         this._moveSpeed[1] = dir[1] * this._speed;
 
@@ -201,7 +201,7 @@ class Actor extends Entity {
         this.x += this._moveSpeed[0] * interval;
         this.y += this._moveSpeed[1] * interval;
 
-        var dist = VectorUtil.calcLength(this._moveTarPos[0] - this.x, this._moveTarPos[1] - this.y);
+        var dist = h5game.VectorUtil.calcLength(this._moveTarPos[0] - this.x, this._moveTarPos[1] - this.y);
         if(dist < this._speed * interval) {
             this.x = this._moveTarPos[0];
             this.y = this._moveTarPos[1];

@@ -48,6 +48,10 @@
         {
             "name": "cnf",
             "path": "../gamelibs/bin/cnf"
+        },
+        {
+            "name": "baseutils",
+            "path": "../gamelibs/bin/baseutils"
         }
     ]
 }
