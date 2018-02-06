@@ -1,4 +1,7 @@
-class RESAux {
+namespace h5game
+{
+
+export class RESAux {
     public static releaseUnusedRes(): void {
         var codes = egret.BitmapData.$getUnusedList();
         var codeset = {};
@@ -36,4 +39,6 @@ class RESAux {
             RES.destroyRes(keys[k]);
         }
     }
+}
+
 }

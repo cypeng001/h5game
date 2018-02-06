@@ -52,6 +52,10 @@
         {
             "name": "baseutils",
             "path": "../gamelibs/bin/baseutils"
+        },
+        {
+            "name": "resaux",
+            "path": "../gamelibs/bin/resaux"
         }
     ]
 }
