@@ -2,16 +2,6 @@ namespace h5game
 {
     
 export class MCCnfMgr {
-    private static _instance: MCCnfMgr = null;
-    
-    public static getInstance(): MCCnfMgr {
-        if(!this._instance)
-        {
-            this._instance = new MCCnfMgr();
-        }
-        return this._instance;
-    }
-
     private _configMap: Object = {};
 
     private _manifest: any = null;

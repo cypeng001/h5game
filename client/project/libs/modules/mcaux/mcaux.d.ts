@@ -8,8 +8,6 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class MCCnfMgr {
-        private static _instance;
-        static getInstance(): MCCnfMgr;
         private _configMap;
         private _manifest;
         init(): void;
@@ -45,9 +43,10 @@ declare namespace h5game {
         private static DEF_AUTO_RECYCLE_INTERVAL;
         private _state;
         private _mcDataFtry;
+        private _mcCnfMgr;
         private static getAssets(source, callback);
-        private static getImagePath(key);
-        constructor(name: string);
+        private getImagePath(key);
+        constructor(name: string, mcCnfMgr: MCCnfMgr);
         protected createObj(key: string): any;
         private reload(texture);
         create(key: string): any;
@@ -57,8 +56,9 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class MCFtry extends h5game.ObjFtry {
-        private static _instance;
-        static getInstance(): MCFtry;
+        private _init;
+        private _mcCnfMgr;
+        init(): void;
         createPool(key: string): any;
     }
 }

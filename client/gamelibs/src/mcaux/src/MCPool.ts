@@ -7,6 +7,7 @@ export class MCPool extends h5game.ObjPool {
 
     private _state: MCPST = MCPST.UNINIT;
     private _mcDataFtry: MCDataFtryAdv = null;
+    private _mcCnfMgr: MCCnfMgr = null;
 
     private static getAssets(source: string, callback: Function) {
         var adapter = egret.getImplementation("eui.IAssetAdapter");
@@ -15,17 +16,18 @@ export class MCPool extends h5game.ObjPool {
         }, this);
     }
 
-    private static getImagePath(key: string): string {
+    private getImagePath(key: string): string {
         var imagePath = RES.config.resourceRoot + "movieclip/" + key + ".png";
-        var hash = MCCnfMgr.getInstance().getHash(key);
+        var hash = this._mcCnfMgr.getHash(key);
         if(hash && hash.length > 0) {
             imagePath += ("?v=" + hash);
         }
         return imagePath;
     }
 
-    constructor(name: string) {
+    constructor(name: string, mcCnfMgr: MCCnfMgr) {
         super(name);
+        this._mcCnfMgr = mcCnfMgr;
         this._autoRecycleInterval = MCPool.DEF_AUTO_RECYCLE_INTERVAL;
         this._state = MCPST.UNLOAD;
     }
@@ -49,7 +51,7 @@ export class MCPool extends h5game.ObjPool {
         this._lastActiveTick = egret.getTimer();
 
         if(!this._mcDataFtry) {
-            this._mcDataFtry = new MCDataFtryAdv(MCCnfMgr.getInstance().getMCCnf(key));
+            this._mcDataFtry = new MCDataFtryAdv(this._mcCnfMgr.getMCCnf(key));
         }
 
         if(this._state == MCPST.UNLOAD) {
@@ -57,7 +59,7 @@ export class MCPool extends h5game.ObjPool {
 
             var self = this;
 
-            var imagePath = MCPool.getImagePath(key);
+            var imagePath = this.getImagePath(key);
             MCPool.getAssets(imagePath, (texture) => {
                 self._state = MCPST.LOADED;
 
@@ -73,8 +75,11 @@ export class MCPool extends h5game.ObjPool {
     public release(): void {
         super.release();
 
-        var imagePath = MCPool.getImagePath(this._name);
+        var imagePath = this.getImagePath(this._name);
         RES.destroyRes(imagePath);
+
+        this._mcDataFtry = null;
+        this._mcCnfMgr = null;
     }
 
     public canRelease(): boolean {

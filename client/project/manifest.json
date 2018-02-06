@@ -19,9 +19,9 @@
 	],
 	"game": [
 		"bin-debug/entity/Entity.js",
+		"bin-debug/entity/Actor.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/scene/Scene.js",
-		"bin-debug/entity/Actor.js",
 		"bin-debug/layer/map/MapCnst.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
@@ -42,7 +42,7 @@
 		"bin-debug/layer/loading/StartLoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingUI.js",
 		"bin-debug/layer/map/MapArea.js",
-		"bin-debug/system/scene/SceneMsgHandler.js",
+		"bin-debug/GameApp.js",
 		"bin-debug/layer/map/MapLayer.js",
 		"bin-debug/layer/map/MapTile.js",
 		"bin-debug/layer/map/MapTileLayer.js",
@@ -65,6 +65,6 @@
 		"bin-debug/system/game/GameMsgHandler.js",
 		"bin-debug/system/main/MainUI.js",
 		"bin-debug/system/role/RoleUI.js",
-		"bin-debug/GameApp.js"
+		"bin-debug/system/scene/SceneMsgHandler.js"
 	]
 }

@@ -42,12 +42,6 @@ var h5game;
             this._configMap = {};
             this._manifest = null;
         }
-        MCCnfMgr.getInstance = function () {
-            if (!this._instance) {
-                this._instance = new MCCnfMgr();
-            }
-            return this._instance;
-        };
         MCCnfMgr.prototype.init = function () {
             var zip = new JSZip(RES.getRes("movieclip_zip"));
             this.initManifest(zip);
@@ -85,7 +79,6 @@ var h5game;
         MCCnfMgr.prototype.getHash = function (key) {
             return this._manifest[key];
         };
-        MCCnfMgr._instance = null;
         return MCCnfMgr;
     }());
     h5game.MCCnfMgr = MCCnfMgr;
@@ -134,10 +127,12 @@ var h5game;
 (function (h5game) {
     var MCPool = (function (_super) {
         __extends(MCPool, _super);
-        function MCPool(name) {
+        function MCPool(name, mcCnfMgr) {
             var _this = _super.call(this, name) || this;
             _this._state = h5game.MCPST.UNINIT;
             _this._mcDataFtry = null;
+            _this._mcCnfMgr = null;
+            _this._mcCnfMgr = mcCnfMgr;
             _this._autoRecycleInterval = MCPool.DEF_AUTO_RECYCLE_INTERVAL;
             _this._state = h5game.MCPST.UNLOAD;
             return _this;
@@ -148,9 +143,9 @@ var h5game;
                 callback(content);
             }, this);
         };
-        MCPool.getImagePath = function (key) {
+        MCPool.prototype.getImagePath = function (key) {
             var imagePath = RES.config.resourceRoot + "movieclip/" + key + ".png";
-            var hash = h5game.MCCnfMgr.getInstance().getHash(key);
+            var hash = this._mcCnfMgr.getHash(key);
             if (hash && hash.length > 0) {
                 imagePath += ("?v=" + hash);
             }
@@ -171,12 +166,12 @@ var h5game;
         MCPool.prototype.create = function (key) {
             this._lastActiveTick = egret.getTimer();
             if (!this._mcDataFtry) {
-                this._mcDataFtry = new h5game.MCDataFtryAdv(h5game.MCCnfMgr.getInstance().getMCCnf(key));
+                this._mcDataFtry = new h5game.MCDataFtryAdv(this._mcCnfMgr.getMCCnf(key));
             }
             if (this._state == h5game.MCPST.UNLOAD) {
                 this._state = h5game.MCPST.LOADING;
                 var self = this;
-                var imagePath = MCPool.getImagePath(key);
+                var imagePath = this.getImagePath(key);
                 MCPool.getAssets(imagePath, function (texture) {
                     self._state = h5game.MCPST.LOADED;
                     egret.callLater(function () {
@@ -188,8 +183,10 @@ var h5game;
         };
         MCPool.prototype.release = function () {
             _super.prototype.release.call(this);
-            var imagePath = MCPool.getImagePath(this._name);
+            var imagePath = this.getImagePath(this._name);
             RES.destroyRes(imagePath);
+            this._mcDataFtry = null;
+            this._mcCnfMgr = null;
         };
         MCPool.prototype.canRelease = function () {
             return this._actPool.length == 0
@@ -207,18 +204,23 @@ var h5game;
     var MCFtry = (function (_super) {
         __extends(MCFtry, _super);
         function MCFtry() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this._init = false;
+            _this._mcCnfMgr = null;
+            return _this;
         }
-        MCFtry.getInstance = function () {
-            if (!this._instance) {
-                this._instance = new MCFtry();
+        MCFtry.prototype.init = function () {
+            if (this._init) {
+                console.warn("MCFtry already init");
+                return;
             }
-            return this._instance;
+            this._init = true;
+            this._mcCnfMgr = new h5game.MCCnfMgr;
+            this._mcCnfMgr.init();
         };
         MCFtry.prototype.createPool = function (key) {
-            return new h5game.MCPool(key);
+            return new h5game.MCPool(key, this._mcCnfMgr);
         };
-        MCFtry._instance = null;
         return MCFtry;
     }(h5game.ObjFtry));
     h5game.MCFtry = MCFtry;

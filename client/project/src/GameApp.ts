@@ -28,7 +28,7 @@ class GameApp {
         g_gameData.init();
         
         GameProxy.getCnfMgr().init();
-        h5game.MCCnfMgr.getInstance().init();
+        GameProxy.getMCFtry().init();
 
         this.initMsgHandler();
     }
