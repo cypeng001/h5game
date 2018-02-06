@@ -41,4 +41,11 @@ class Entity extends egret.DisplayObjectContainer {
     protected update(interval: number): void {
         
     }
+
+    //override
+    protected $setY(value: number): boolean {
+        var ret = super.$setY(value);
+        this.zorder = value;
+        return ret;
+    }
 }

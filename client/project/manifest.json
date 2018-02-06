@@ -13,10 +13,10 @@
 	],
 	"game": [
 		"bin-debug/entity/Entity.js",
-		"bin-debug/pool/ObjFtry.js",
-		"bin-debug/scene/Scene.js",
 		"bin-debug/entity/Actor.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
+		"bin-debug/pool/ObjFtry.js",
+		"bin-debug/scene/Scene.js",
 		"bin-debug/mcaux/MCCnst.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/data/GameData.js",
