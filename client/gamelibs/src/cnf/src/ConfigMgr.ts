@@ -1,4 +1,7 @@
-class ConfigMgr {
+namespace h5game
+{
+
+export class ConfigMgr {
     private static _instance: ConfigMgr = null;
     
     public static getInstance(): ConfigMgr {
@@ -69,4 +72,6 @@ class ConfigMgr {
         var configName = "map_" + mapID;
         return this.getConfig(configName);
     }
+}
+
 }

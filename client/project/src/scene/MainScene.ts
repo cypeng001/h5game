@@ -23,8 +23,8 @@ class MainScene extends Scene
         this.addChild(this._mapLayer);
 
         var mapId = 4;
-        var map_cnf = ConfigMgr.getInstance().getMapConfig(mapId);
-        var city_cnf = ConfigMgr.getInstance().getConfig("city")[mapId];
+        var map_cnf = h5game.ConfigMgr.getInstance().getMapConfig(mapId);
+        var city_cnf = h5game.ConfigMgr.getInstance().getConfig("city")[mapId];
 
         this._mapLayer.loadMap(mapId, {map_cnf: map_cnf, city_cnf});
         this._mapLayer.initEntities(g_gameData.sceneData);

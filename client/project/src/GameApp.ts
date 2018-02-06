@@ -19,16 +19,6 @@ class GameApp {
 
     public init(): void
     {
-        /*
-        g_gameData.init();
-        ConfigMgr.getInstance().init();
-        ProtocolDecoder.getInstance().init();
-        ProtocolDecoder.getInstance().initProtocolHandler(this, this.onProtocolRecv);
-        NetHandler.getInstance().addEventListener(NetEvent.CONNECT, this.onConnect, this);
-        NetHandler.getInstance().addEventListener(NetEvent.DISCONNECT, this.onDisconnect, this);
-        ProtocolRegister.init();
-        NetModRepRegister.init();
-        */
         if(this._init) {
             console.error("GameApp already initialize");
             return;
@@ -37,7 +27,7 @@ class GameApp {
 
         g_gameData.init();
         
-        ConfigMgr.getInstance().init();
+        h5game.ConfigMgr.getInstance().init();
         MCCnfMgr.getInstance().init();
 
         this.initMsgHandler();
