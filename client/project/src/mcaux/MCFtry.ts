@@ -1,4 +1,4 @@
-class MCPool extends ObjPool {
+class MCPool extends h5game.ObjPool {
     private static DEF_RELEASE_TIME: number = 60000;
     private static DEF_AUTO_RECYCLE_INTERVAL: number = 5000;
 
@@ -80,7 +80,7 @@ class MCPool extends ObjPool {
     }
 }
 
-class MCFtry extends ObjFtry {
+class MCFtry extends h5game.ObjFtry {
     private static _instance: MCFtry = null;
     
     public static getInstance(): MCFtry {
