@@ -250,9 +250,9 @@ class Actor extends Entity {
 
         var resultData = data.result;
         if(resultData.result == AttackResult.SUCCESS) {
-            this._mapLayer.createNum(this.x, this.y, 0, resultData.damage);
+            this._mapLayer.notify(IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
 
-            var defActor = this._mapLayer.getActor(data.target);
+            var defActor = this._mapLayer.query(IMapCmdQ.IMCQ_GetActor, data.target);
             defActor.hp -= resultData.damage;
             defActor.refreshHpBar();
         }

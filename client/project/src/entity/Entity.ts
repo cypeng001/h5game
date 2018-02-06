@@ -3,7 +3,7 @@ class Entity extends egret.DisplayObjectContainer {
     protected static _AUTO_LOCAL_MAX_ID: number = 100000;
     protected _localId: number = 0;
     protected _entityId: number = 0;
-    protected _mapLayer: MapLayer;
+    protected _mapLayer: IMapLayer;
 
     protected _data: any = null;
 
@@ -28,7 +28,7 @@ class Entity extends egret.DisplayObjectContainer {
         return 0;
     }
 
-    public init(data: any, mapLayer: MapLayer): void {
+    public init(data: any, mapLayer: IMapLayer): void {
         this._data = data;
         this._mapLayer = mapLayer;
     }

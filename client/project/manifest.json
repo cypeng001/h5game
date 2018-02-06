@@ -32,6 +32,7 @@
 		"bin-debug/GameEvents.js",
 		"bin-debug/entity/EntityCnst.js",
 		"bin-debug/entity/EntityUtil.js",
+		"bin-debug/entity/IMapLayer.js",
 		"bin-debug/entity/Monster.js",
 		"bin-debug/entity/Npc.js",
 		"bin-debug/entity/Player.js",

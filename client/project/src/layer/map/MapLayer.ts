@@ -439,4 +439,23 @@ class MapLayer extends egret.DisplayObjectContainer {
             self.MsgHandler_onAttack(data);
         });
     }
+
+    public notify(cmd: IMapCmdN, params: any): void {
+        switch(cmd) {
+            case IMapCmdN.IMCN_CreateNum:
+            {
+                this.createNum.apply(this, params);
+            }
+            break;
+        }
+    }
+    
+    public query(cmd: IMapCmdQ, params: any): any {
+        switch(cmd) {
+            case IMapCmdQ.IMCQ_GetActor:
+            {
+                return this.getActor(params);
+            }
+        }
+    }
 }
