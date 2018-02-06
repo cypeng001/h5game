@@ -58,7 +58,7 @@ class MCPool extends ObjPool {
             MCPool.getAssets(imagePath, (texture) => {
                 self._state = MCPST.LOADED;
 
-                egret.$callAsync(() => {
+                egret.callLater(() => {
                     self.reload(texture);
                 }, self);
             });   
