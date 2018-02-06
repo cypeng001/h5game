@@ -45,7 +45,7 @@ class Actor extends Entity {
         return this._name;
     }
 
-    public init(data: any, mapLayer: MapLayer): void {
+    public init(data: any, mapLayer: IMapLayer): void {
         super.init(data, mapLayer);
     }
 
