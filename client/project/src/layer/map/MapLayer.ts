@@ -440,9 +440,9 @@ class MapLayer extends egret.DisplayObjectContainer {
         });
     }
 
-    public notify(cmd: IMapCmdN, params: any): void {
+    public notify(cmd: h5game.IMapCmdN, params: any): void {
         switch(cmd) {
-            case IMapCmdN.IMCN_CreateNum:
+            case h5game.IMapCmdN.IMCN_CreateNum:
             {
                 this.createNum.apply(this, params);
             }
@@ -450,9 +450,9 @@ class MapLayer extends egret.DisplayObjectContainer {
         }
     }
     
-    public query(cmd: IMapCmdQ, params: any): any {
+    public query(cmd: h5game.IMapCmdQ, params: any): any {
         switch(cmd) {
-            case IMapCmdQ.IMCQ_GetActor:
+            case h5game.IMapCmdQ.IMCQ_GetActor:
             {
                 return this.getActor(params);
             }

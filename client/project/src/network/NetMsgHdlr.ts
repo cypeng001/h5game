@@ -1,7 +1,7 @@
-class NetMsgHdlr implements INetMsgHdlr {
-    requestMsg(id: INetMsgIdR, msg: any, callback: (response: any) => void): void {
+class NetMsgHdlr implements h5game.INetMsgHdlr {
+    requestMsg(id: h5game.INetMsgIdR, msg: any, callback: (response: any) => void): void {
         switch(id) {
-            case INetMsgIdR.INMIR_MOVE:
+            case h5game.INetMsgIdR.INMIR_MOVE:
             {
                 SceneMsgHandler.getInstance().reqMove(msg, callback);
                 break;
@@ -9,11 +9,11 @@ class NetMsgHdlr implements INetMsgHdlr {
         }
     }
 
-    notifyMsg(id: INetMsgIdN, msg: any): void {
+    notifyMsg(id: h5game.INetMsgIdN, msg: any): void {
 
     }
 
-    onMsg(id: INetMsgIdO, callback: (response:any)=>void): void {
+    onMsg(id: h5game.INetMsgIdO, callback: (response:any)=>void): void {
 
     }
 }

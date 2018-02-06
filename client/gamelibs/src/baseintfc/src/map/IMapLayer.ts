@@ -1,12 +1,17 @@
-enum IMapCmdN {
+namespace h5game
+{
+
+export enum IMapCmdN {
     IMCN_CreateNum = 1,
 };
 
-enum IMapCmdQ {
+export enum IMapCmdQ {
     IMCQ_GetActor = 1,
 };
 
-interface IMapLayer {
+export interface IMapLayer {
     notify(cmd: IMapCmdN, params: any): void;
     query(cmd: IMapCmdQ, params: any): any;
 };
+
+}

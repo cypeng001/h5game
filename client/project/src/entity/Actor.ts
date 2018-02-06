@@ -45,7 +45,7 @@ class Actor extends Entity {
         return this._name;
     }
 
-    public init(data: any, mapLayer: IMapLayer): void {
+    public init(data: any, mapLayer: h5game.IMapLayer): void {
         super.init(data, mapLayer);
     }
 
@@ -250,9 +250,9 @@ class Actor extends Entity {
 
         var resultData = data.result;
         if(resultData.result == AttackResult.SUCCESS) {
-            this._mapLayer.notify(IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
+            this._mapLayer.notify(h5game.IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
 
-            var defActor = this._mapLayer.query(IMapCmdQ.IMCQ_GetActor, data.target);
+            var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, data.target);
             defActor.hp -= resultData.damage;
             defActor.refreshHpBar();
         }

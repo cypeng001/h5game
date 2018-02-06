@@ -9,7 +9,7 @@ class Player extends Actor {
         return EntityType.ET_PLAYER;
     }
 
-    public init(data: any, mapLayer: IMapLayer): void {
+    public init(data: any, mapLayer: h5game.IMapLayer): void {
         super.init(data, mapLayer);
 
         this._entityId = data.entityId;
@@ -52,7 +52,7 @@ class Player extends Actor {
         super.moveTo(x, y);
 
         if(this.mainPlayer) {
-            EntityProxy.getNetMsgHdlr().requestMsg(INetMsgIdR.INMIR_MOVE, 
+            EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgIdR.INMIR_MOVE, 
                 [{x: this.x, y: this.y}, {x: x, y: y}], 
                 null);
         }

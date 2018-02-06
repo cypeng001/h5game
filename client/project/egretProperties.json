@@ -64,6 +64,10 @@
         {
             "name": "mcaux",
             "path": "../gamelibs/bin/mcaux"
+        },
+        {
+            "name": "baseintfc",
+            "path": "../gamelibs/bin/baseintfc"
         }
     ]
 }

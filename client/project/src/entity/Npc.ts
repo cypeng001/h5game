@@ -7,7 +7,7 @@ class Npc extends Actor {
         return EntityType.ET_NPC;
     }
 
-    public init(data: any, mapLayer: IMapLayer): void {
+    public init(data: any, mapLayer: h5game.IMapLayer): void {
         super.init(data, mapLayer);
 
         this._entityId = data.entityId;

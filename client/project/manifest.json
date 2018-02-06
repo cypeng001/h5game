@@ -14,19 +14,17 @@
 		"libs/modules/baseutils/baseutils.js",
 		"libs/modules/resaux/resaux.js",
 		"libs/modules/base/base.js",
-		"libs/modules/mcaux/mcaux.js"
+		"libs/modules/mcaux/mcaux.js",
+		"libs/modules/baseintfc/baseintfc.js"
 	],
 	"game": [
 		"bin-debug/entity/Entity.js",
+		"bin-debug/scene/Scene.js",
 		"bin-debug/entity/Actor.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
-		"bin-debug/scene/Scene.js",
-		"bin-debug/layer/map/MapArea.js",
+		"bin-debug/layer/map/MapCnst.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
-		"bin-debug/baseintfc/map/IMapLayer.js",
-		"bin-debug/baseintfc/mc/IMCFtry.js",
-		"bin-debug/baseintfc/network/INetMsgHdlr.js",
 		"bin-debug/data/GameData.js",
 		"bin-debug/data/PlatData.js",
 		"bin-debug/data/RoleData.js",
@@ -42,8 +40,8 @@
 		"bin-debug/layer/loading/LoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingUI.js",
-		"bin-debug/system/scene/SceneMsgHandler.js",
-		"bin-debug/layer/map/MapCnst.js",
+		"bin-debug/layer/map/MapArea.js",
+		"bin-debug/GameApp.js",
 		"bin-debug/layer/map/MapLayer.js",
 		"bin-debug/layer/map/MapTile.js",
 		"bin-debug/layer/map/MapTileLayer.js",
@@ -66,6 +64,6 @@
 		"bin-debug/system/game/GameMsgHandler.js",
 		"bin-debug/system/main/MainUI.js",
 		"bin-debug/system/role/RoleUI.js",
-		"bin-debug/GameApp.js"
+		"bin-debug/system/scene/SceneMsgHandler.js"
 	]
 }

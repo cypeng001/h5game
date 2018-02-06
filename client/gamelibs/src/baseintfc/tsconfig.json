@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "outFile": "../../bin/baseintfc/baseintfc.js",
+        "declaration": true,
+        "noImplicitAny": false,
+        "stripInternal": true,
+        "allowUnreachableCode": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": false,
+        "sourceMap": false,
+        "newLine": "LF"
+	},
+	"files": [
+        "libs/egret.d.ts",
+        "src/map/IMapLayer.ts",
+        "src/mc/IMCFtry.ts",
+        "src/network/INetMsgHdlr.ts"
+	]
+}

@@ -1,9 +1,9 @@
 class EntityProxy {
-    public static getMCFtry(): IMCFtry {
+    public static getMCFtry(): h5game.IMCFtry {
         return egret.getImplementation("IMCFtry");
     }
 
-    public static getNetMsgHdlr(): INetMsgHdlr {
+    public static getNetMsgHdlr(): h5game.INetMsgHdlr {
         return egret.getImplementation("INetMsgHdlr");
     }
 }
