@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "outFile": "../../bin/cnf/cnf.js",
+        "declaration": true,
+        "noImplicitAny": false,
+        "stripInternal": true,
+        "allowUnreachableCode": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": false,
+        "sourceMap": false,
+        "newLine": "LF"
+	},
+	"files": [
+        "libs/egret.d.ts",
+        "libs/jszip.d.ts",
+        "libs/assetsmanager.d.ts",
+        "src/ConfigMgr.ts"
+	]
+}
