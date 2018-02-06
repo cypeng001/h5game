@@ -9,7 +9,7 @@ class Player extends Actor {
         return EntityType.ET_PLAYER;
     }
 
-    public init(data: any, mapLayer: MapLayer): void {
+    public init(data: any, mapLayer: IMapLayer): void {
         super.init(data, mapLayer);
 
         this._entityId = data.entityId;
