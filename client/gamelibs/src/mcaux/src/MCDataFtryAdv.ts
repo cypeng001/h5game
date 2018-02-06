@@ -1,4 +1,7 @@
-class MCDataFtryAdv extends egret.MovieClipDataFactory {
+namespace h5game
+{
+
+export class MCDataFtryAdv extends egret.MovieClipDataFactory {
     constructor(movieClipDataSet?: any, texture?: egret.Texture) {
         super(movieClipDataSet, texture);
     }
@@ -13,4 +16,6 @@ class MCDataFtryAdv extends egret.MovieClipDataFactory {
             }
         }
     }
+}
+
 }

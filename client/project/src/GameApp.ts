@@ -28,7 +28,7 @@ class GameApp {
         g_gameData.init();
         
         h5game.ConfigMgr.getInstance().init();
-        MCCnfMgr.getInstance().init();
+        h5game.MCCnfMgr.getInstance().init();
 
         this.initMsgHandler();
     }

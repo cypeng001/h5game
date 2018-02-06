@@ -13,14 +13,15 @@
 		"libs/modules/cnf/cnf.js",
 		"libs/modules/baseutils/baseutils.js",
 		"libs/modules/resaux/resaux.js",
-		"libs/modules/base/base.js"
+		"libs/modules/base/base.js",
+		"libs/modules/mcaux/mcaux.js"
 	],
 	"game": [
 		"bin-debug/entity/Entity.js",
-		"bin-debug/entity/Actor.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/scene/Scene.js",
-		"bin-debug/layer/map/MapTileLayer.js",
+		"bin-debug/entity/Actor.js",
+		"bin-debug/layer/map/MapCnst.js",
 		"bin-debug/Platform.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/data/GameData.js",
@@ -38,16 +39,11 @@
 		"bin-debug/layer/loading/StartLoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingUI.js",
 		"bin-debug/layer/map/MapArea.js",
-		"bin-debug/layer/map/MapCnst.js",
+		"bin-debug/system/scene/SceneMsgHandler.js",
 		"bin-debug/layer/map/MapLayer.js",
 		"bin-debug/layer/map/MapTile.js",
-		"bin-debug/GameApp.js",
+		"bin-debug/layer/map/MapTileLayer.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/mcaux/MCAdv.js",
-		"bin-debug/mcaux/MCCngMgr.js",
-		"bin-debug/mcaux/MCCnst.js",
-		"bin-debug/mcaux/MCDataFtryAdv.js",
-		"bin-debug/mcaux/MCFtry.js",
 		"bin-debug/mgr/UILayerID.js",
 		"bin-debug/mgr/UILayerMgr.js",
 		"bin-debug/network/NetMgr.js",
@@ -65,6 +61,6 @@
 		"bin-debug/system/game/GameMsgHandler.js",
 		"bin-debug/system/main/MainUI.js",
 		"bin-debug/system/role/RoleUI.js",
-		"bin-debug/system/scene/SceneMsgHandler.js"
+		"bin-debug/GameApp.js"
 	]
 }

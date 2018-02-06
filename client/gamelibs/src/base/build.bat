@@ -1,1 +1,1 @@
-egret build cnf
+egret build base

@@ -1,4 +1,7 @@
-class MCCnfMgr {
+namespace h5game
+{
+    
+export class MCCnfMgr {
     private static _instance: MCCnfMgr = null;
     
     public static getInstance(): MCCnfMgr {
@@ -58,4 +61,6 @@ class MCCnfMgr {
     public getHash(key: string): string {
         return this._manifest[key];
     }
+}
+
 }

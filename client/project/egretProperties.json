@@ -60,6 +60,10 @@
         {
             "name": "base",
             "path": "../gamelibs/bin/base"
+        },
+        {
+            "name": "mcaux",
+            "path": "../gamelibs/bin/mcaux"
         }
     ]
 }

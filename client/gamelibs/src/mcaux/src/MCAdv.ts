@@ -1,4 +1,7 @@
-class MCAdv extends egret.MovieClip {
+namespace h5game
+{
+    
+export class MCAdv extends egret.MovieClip {
     public mcst: MCST = MCST.LOAD;
 
     constructor(movieClipData?: egret.MovieClipData) {
@@ -18,4 +21,6 @@ class MCAdv extends egret.MovieClip {
         }
         super.gotoAndStop(frame);
     }
+}
+
 }

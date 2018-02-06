@@ -1,4 +1,7 @@
-class MCPool extends h5game.ObjPool {
+namespace h5game
+{
+
+export class MCPool extends h5game.ObjPool {
     private static DEF_RELEASE_TIME: number = 60000;
     private static DEF_AUTO_RECYCLE_INTERVAL: number = 5000;
 
@@ -80,18 +83,4 @@ class MCPool extends h5game.ObjPool {
     }
 }
 
-class MCFtry extends h5game.ObjFtry {
-    private static _instance: MCFtry = null;
-    
-    public static getInstance(): MCFtry {
-        if(!this._instance)
-        {
-            this._instance = new MCFtry();
-        }
-        return this._instance;
-    }
-
-    public createPool(key: string): any {
-        return new MCPool(key);
-    }
 }

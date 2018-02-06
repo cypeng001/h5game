@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "outFile": "../../bin/mcaux/mcaux.js",
+        "declaration": true,
+        "noImplicitAny": false,
+        "stripInternal": true,
+        "allowUnreachableCode": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": false,
+        "sourceMap": false,
+        "newLine": "LF"
+	},
+	"files": [
+        "libs/egret.d.ts",
+        "libs/assetsmanager.d.ts",
+        "libs/game.d.ts",
+        "libs/base.d.ts",
+        "libs/jszip.d.ts",
+        "src/MCAdv.ts",
+        "src/MCCngMgr.ts",
+        "src/MCCnst.ts",
+        "src/MCDataFtryAdv.ts",
+        "src/MCPool.ts",
+        "src/MCFtry.ts"
+	]
+}

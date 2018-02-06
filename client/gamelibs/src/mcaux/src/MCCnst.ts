@@ -1,12 +1,17 @@
-enum MCST {
+namespace h5game
+{
+
+export enum MCST {
     UNINIT       = 1,
     LOAD         = 2,
     UNLOAD       = 3,
 };
 
-enum MCPST {
+export enum MCPST {
     UNINIT      = 1,
     UNLOAD      = 2,
     LOADING     = 3,
     LOADED      = 4,
+};
+
 }
