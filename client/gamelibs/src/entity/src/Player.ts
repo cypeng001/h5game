@@ -1,4 +1,7 @@
-class Player extends Actor {
+namespace h5game
+{
+
+export class Player extends Actor {
     protected _mainPlayer: boolean = false;
 
     constructor() {
@@ -57,4 +60,6 @@ class Player extends Actor {
                 null);
         }
     }
+}
+
 }

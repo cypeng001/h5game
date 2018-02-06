@@ -1,4 +1,7 @@
-class Npc extends Actor {
+namespace h5game
+{
+
+export class Npc extends Actor {
     constructor() {
         super();
     }
@@ -29,4 +32,6 @@ class Npc extends Actor {
         this._sprite = EntityProxy.getMCFtry().create("npc_10001");
         this.addChild(this._sprite);
     }
+}
+
 }

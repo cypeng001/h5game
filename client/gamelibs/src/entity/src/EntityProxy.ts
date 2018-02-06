@@ -1,4 +1,7 @@
-class EntityProxy {
+namespace h5game
+{
+
+export class EntityProxy {
     public static getMCFtry(): h5game.IMCFtry {
         return egret.getImplementation("IMCFtry");
     }
@@ -6,4 +9,6 @@ class EntityProxy {
     public static getNetMsgHdlr(): h5game.INetMsgHdlr {
         return egret.getImplementation("INetMsgHdlr");
     }
+}
+
 }

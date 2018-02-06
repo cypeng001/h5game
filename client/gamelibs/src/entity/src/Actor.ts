@@ -1,4 +1,7 @@
-class Actor extends Entity {
+namespace h5game
+{
+
+export class Actor extends Entity {
     protected _actionState: number = 0;
     protected _dir: number = ActorActionState.AAS_STANDFRONT;
 
@@ -257,4 +260,6 @@ class Actor extends Entity {
             defActor.refreshHpBar();
         }
     }
+}
+
 }

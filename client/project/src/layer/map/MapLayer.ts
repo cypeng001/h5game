@@ -15,11 +15,11 @@ class MapLayer extends egret.DisplayObjectContainer {
     protected _tile_width: number = 0;
     protected _tile_height: number = 0;
 
-    protected _curPlayer: Player = null;
+    protected _curPlayer: h5game.Player = null;
 
-    protected _aoiPlayers: {[key: number]: Player} = {};
-    protected _monsters: {[key: number]: Monster} = {};
-    protected _npcs: {[key: number]: Npc} = {};
+    protected _aoiPlayers: {[key: number]: h5game.Player} = {};
+    protected _monsters: {[key: number]: h5game.Monster} = {};
+    protected _npcs: {[key: number]: h5game.Npc} = {};
     protected _lastRefreshPt: [number, number] = [0, 0];
 
     protected _mapAreas: {[key: number]: MapArea} = {};
@@ -188,8 +188,8 @@ class MapLayer extends egret.DisplayObjectContainer {
     protected onTouchMove(event): void {
     }
 
-    protected _createPlayer(data: any): Player {
-        var player = new Player();
+    protected _createPlayer(data: any): h5game.Player {
+        var player = new h5game.Player();
         player.init(data, this);
         this._entityLayer.addChild(player);
 
@@ -202,7 +202,7 @@ class MapLayer extends egret.DisplayObjectContainer {
         this._curPlayer = player;
     }
 
-    public createAoiPlayer(data: any): Player {
+    public createAoiPlayer(data: any): h5game.Player {
         if(this._aoiPlayers[data.entityId]) {
             console.warn("createAoiPlayer player already exist", JSON.stringify(data));
             return;
@@ -228,17 +228,17 @@ class MapLayer extends egret.DisplayObjectContainer {
         delete this._aoiPlayers[entityId];
     }
 
-    public getAoiPlayer(entityId: number): Player {
+    public getAoiPlayer(entityId: number): h5game.Player {
         return this._aoiPlayers[entityId];
     }
 
-    public createMonster(data: any): Monster {
+    public createMonster(data: any): h5game.Monster {
         if(this._monsters[data.entityId]) {
             console.warn("createMonster monster already exist", JSON.stringify(data));
             return;
         }
 
-        var monster = new Monster();
+        var monster = new h5game.Monster();
         monster.init(data, this);
         this._entityLayer.addChild(monster);
 
@@ -262,17 +262,17 @@ class MapLayer extends egret.DisplayObjectContainer {
         delete this._monsters[entityId];
     }
 
-    public getMonster(entityId: number): Monster {
+    public getMonster(entityId: number): h5game.Monster {
         return this._monsters[entityId];
     }
 
-    public createNpc(data: any): Npc {
+    public createNpc(data: any): h5game.Npc {
         if(this._npcs[data.entityId]) {
             console.warn("createNpc npc already exist", JSON.stringify(data));
             return;
         }
 
-        var npc = new Npc();
+        var npc = new h5game.Npc();
         npc.init(data, this);
         this._entityLayer.addChild(npc);
 
@@ -296,17 +296,17 @@ class MapLayer extends egret.DisplayObjectContainer {
         delete this._npcs[entityId];
     }
 
-    public getNpc(entityId: number): Npc {
+    public getNpc(entityId: number): h5game.Npc {
         return this._npcs[entityId];
     }
 
 
-    public getEntity(entityId: number): Entity {
+    public getEntity(entityId: number): h5game.Entity {
         if(this._curPlayer.entityId == entityId) {
             return this._curPlayer;
         }
 
-        var entity: Entity = null;
+        var entity: h5game.Entity = null;
 
         entity = this._aoiPlayers[entityId];
         if(entity) {
@@ -332,30 +332,30 @@ class MapLayer extends egret.DisplayObjectContainer {
             return;
         }
 
-        if(entity.entityType == EntityType.ET_PLAYER) {
+        if(entity.entityType == h5game.EntityType.ET_PLAYER) {
             this.removeAoiPlayer(entityId);
         }
-        else if(entity.entityType == EntityType.ET_MONSTER) {
+        else if(entity.entityType == h5game.EntityType.ET_MONSTER) {
             this.removeMonster(entityId);
         }
-        else if(entity.entityType == EntityType.ET_NPC) {
+        else if(entity.entityType == h5game.EntityType.ET_NPC) {
             this.removeNpc(entityId);
         }
     }
 
-    public getActor(entityId: number): Actor {
-        var entity: Entity = this.getEntity(entityId);
+    public getActor(entityId: number): h5game.Actor {
+        var entity: h5game.Entity = this.getEntity(entityId);
         if(!entity) {
             return null;
         }
 
-        if(!(entity.entityType == EntityType.ET_PLAYER 
-            || entity.entityType == EntityType.ET_MONSTER 
-            || entity.entityType == EntityType.ET_NPC)) {
+        if(!(entity.entityType == h5game.EntityType.ET_PLAYER 
+            || entity.entityType == h5game.EntityType.ET_MONSTER 
+            || entity.entityType == h5game.EntityType.ET_NPC)) {
             return null;
         }
 
-        return <Actor>entity;
+        return <h5game.Actor>entity;
     }
 
     public createNum(x: number, y: number, status: number, value: number): void {

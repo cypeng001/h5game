@@ -1,4 +1,7 @@
-class Monster extends Actor {
+namespace h5game
+{
+
+export class Monster extends Actor {
     constructor() {
         super();
     }
@@ -34,4 +37,6 @@ class Monster extends Actor {
         this._sprite = EntityProxy.getMCFtry().create("monster_10001");
         this.addChild(this._sprite);
     }
+}
+
 }

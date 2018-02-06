@@ -1,4 +1,7 @@
-class EntityUtil {
+namespace h5game
+{
+
+export class EntityUtil {
     public static actionState2Str(actionState: number): string {
         if(actionState == ActorActionState.AAS_STANDFRONT) {
             return "standfront";
@@ -21,4 +24,6 @@ class EntityUtil {
 
         return "standfront";
     }
+}
+
 }

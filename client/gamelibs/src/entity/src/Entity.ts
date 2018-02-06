@@ -1,4 +1,7 @@
-class Entity extends egret.DisplayObjectContainer {
+namespace h5game
+{
+
+export class Entity extends egret.DisplayObjectContainer {
     protected static _AUTO_LOCAL_ID: number = 1;
     protected static _AUTO_LOCAL_MAX_ID: number = 100000;
     protected _localId: number = 0;
@@ -48,4 +51,6 @@ class Entity extends egret.DisplayObjectContainer {
         this.zorder = value;
         return ret;
     }
+}
+
 }

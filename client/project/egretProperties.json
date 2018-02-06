@@ -68,6 +68,10 @@
         {
             "name": "baseintfc",
             "path": "../gamelibs/bin/baseintfc"
+        },
+        {
+            "name": "entity",
+            "path": "../gamelibs/bin/entity"
         }
     ]
 }

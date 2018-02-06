@@ -1,10 +1,13 @@
-enum EntityType {
+namespace h5game
+{
+
+export enum EntityType {
     ET_PLAYER       = 1,
     ET_MONSTER      = 2,
     ET_NPC          = 3,
 };
 
-enum ActorActionState {
+export enum ActorActionState {
     AAS_STANDFRONT       = 1,
     AAS_STANDBACK        = 2,
     AAS_RUNFRONT         = 3,
@@ -13,14 +16,14 @@ enum ActorActionState {
     AAS_ATTACKBACK       = 6,
 };
 
-enum ActorDir {
+export enum ActorDir {
     AD_EASTSOUTH        = 1,
     AD_EASTNORTH        = 2,
     AD_WESTSOUTH        = 3,
     AD_WESTNORTH        = 4,
 };
 
-enum AttackResult {
+export enum AttackResult {
     SUCCESS             = 1,
     KILLED              = 2,
     MISS                = 3,
@@ -29,3 +32,5 @@ enum AttackResult {
     NOT_COOLDOWN        = 6,
     ATTACKER_CONFUSED   = 7,
 };
+
+}
