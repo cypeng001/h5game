@@ -31,7 +31,7 @@ class Monster extends Actor {
     }
 
     protected initSprite(): void {
-        this._sprite = h5game.MCFtry.getInstance().create("monster_10001");
+        this._sprite = EntityProxy.getMCFtry().create("monster_10001");
         this.addChild(this._sprite);
     }
 }

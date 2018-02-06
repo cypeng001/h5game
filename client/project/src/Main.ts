@@ -54,6 +54,7 @@ class Main extends eui.UILayer {
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
 
+        egret.registerImplementation("IMCFtry", h5game.MCFtry.getInstance());
 
         this.runGame().catch(e => {
             console.log(e);
