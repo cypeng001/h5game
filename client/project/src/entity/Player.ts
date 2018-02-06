@@ -52,7 +52,9 @@ class Player extends Actor {
         super.moveTo(x, y);
 
         if(this.mainPlayer) {
-            SceneMsgHandler.getInstance().reqMove([{x: this.x, y: this.y}, {x: x, y: y}], null);
+            EntityProxy.getNetMsgHdlr().requestMsg(INetMsgIdR.INMIR_MOVE, 
+                [{x: this.x, y: this.y}, {x: x, y: y}], 
+                null);
         }
     }
 }
