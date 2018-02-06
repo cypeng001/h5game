@@ -5,7 +5,7 @@ class MapArea {
     public state: MapAreaState = MapAreaState.MAS_OUT_SCREEN;
 
     private _mapLayer: MapLayer = null;
-    private _mapTiles: Array<MapTile> = [];
+    private _mapTiles: MapTile[] = [];
 
     public constructor(_mapLayer: MapLayer) {
         this._mapLayer = _mapLayer;

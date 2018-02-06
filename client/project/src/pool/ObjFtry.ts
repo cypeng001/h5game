@@ -1,7 +1,7 @@
 class ObjPool {
     protected _name: string;
-    protected _actPool: Array<MCAdv> = [];
-    protected _inactPool: Array<MCAdv> = [];
+    protected _actPool = [];
+    protected _inactPool = [];
     protected _lastActiveTick: number = 0;
     protected _lastRecycleTick: number = 0;
     protected _autoRecycleInterval: number = 60000;

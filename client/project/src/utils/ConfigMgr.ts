@@ -11,7 +11,7 @@ class ConfigMgr {
 
     private _configMap: Object = {};
 
-    private _baseConfigFiles: Array<string> = null;
+    private _baseConfigFiles: string[] = null;
 
     public init(): void {
         var zip = new JSZip(RES.getRes("config_zip"));

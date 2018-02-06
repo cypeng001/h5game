@@ -17,12 +17,12 @@ class MapLayer extends egret.DisplayObjectContainer {
 
     protected _curPlayer: Player = null;
 
-    protected _aoiPlayers: any = {};
-    protected _monsters: any = {};
-    protected _npcs: any = {};
+    protected _aoiPlayers: {[key: number]: Player} = {};
+    protected _monsters: {[key: number]: Monster} = {};
+    protected _npcs: {[key: number]: Npc} = {};
     protected _lastRefreshPt: [number, number] = [0, 0];
 
-    protected _mapAreas = egret.createMap<MapArea>();
+    protected _mapAreas: {[key: number]: MapArea} = {};
 
     constructor() {
         super();
@@ -262,7 +262,7 @@ class MapLayer extends egret.DisplayObjectContainer {
         delete this._monsters[entityId];
     }
 
-    public getMonster(entityId: number): Player {
+    public getMonster(entityId: number): Monster {
         return this._monsters[entityId];
     }
 
@@ -296,7 +296,7 @@ class MapLayer extends egret.DisplayObjectContainer {
         delete this._npcs[entityId];
     }
 
-    public getNpc(entityId: number): Player {
+    public getNpc(entityId: number): Npc {
         return this._npcs[entityId];
     }
 
