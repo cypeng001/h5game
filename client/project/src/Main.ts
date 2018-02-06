@@ -56,6 +56,7 @@ class Main extends eui.UILayer {
 
         egret.registerImplementation("IMCFtry", new h5game.MCFtry);
         egret.registerImplementation("INetMsgHdlr", new NetMsgHdlr);
+        egret.registerImplementation("ICnfMgr", new h5game.CnfMgr);
 
         this.runGame().catch(e => {
             console.log(e);

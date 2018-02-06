@@ -31,3 +31,7 @@ var h5game;
         INetMsgIdO[INetMsgIdO["INMIO_NONE"] = 1] = "INMIO_NONE";
     })(INetMsgIdO = h5game.INetMsgIdO || (h5game.INetMsgIdO = {}));
 })(h5game || (h5game = {}));
+var h5game;
+(function (h5game) {
+    ;
+})(h5game || (h5game = {}));

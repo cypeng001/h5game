@@ -1,17 +1,7 @@
 namespace h5game
 {
 
-export class ConfigMgr {
-    private static _instance: ConfigMgr = null;
-    
-    public static getInstance(): ConfigMgr {
-        if(!this._instance)
-        {
-            this._instance = new ConfigMgr();
-        }
-        return this._instance;
-    }
-
+export class CnfMgr {
     private _configMap: Object = {};
 
     private _baseConfigFiles: string[] = null;
@@ -37,7 +27,7 @@ export class ConfigMgr {
     }
 
     private initMapCnf(zip: JSZip): void {
-        var city_cnfs = ConfigMgr.getInstance().getConfig("city");
+        var city_cnfs = this.getConfig("city");
         for (var map_id in city_cnfs) {
             var configName = "map_" + map_id;
             var config = JSON.parse(zip.file("map/" + map_id + ".json").asText());
@@ -45,13 +35,13 @@ export class ConfigMgr {
         }
     }
 
-    public registerConfig(configName: string, config: any): Boolean {
+    private registerConfig(configName: string, config: any): Boolean {
         if(!config) {
             return false;
         }
 
         if(this._configMap[configName]) {
-            console.log("ConfigMgr_registerConfig config already exist", configName);
+            console.log("CnfMgr_registerConfig config already exist", configName);
             return false;
         }
 
@@ -63,7 +53,7 @@ export class ConfigMgr {
     public getConfig(configName: string): any {
         var config = this._configMap[configName];
         if(!config) {
-            console.log("ConfigMgr_getConfig invalid configName", configName);
+            console.log("CnfMgr_getConfig invalid configName", configName);
         }
         return config;
     }

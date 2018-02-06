@@ -35,3 +35,10 @@ declare namespace h5game {
         onMsg(id: INetMsgIdO, callback: (response: any) => void): void;
     }
 }
+declare namespace h5game {
+    interface ICnfMgr {
+        init(): void;
+        getConfig(configName: string): any;
+        getMapConfig(mapID: number): any;
+    }
+}

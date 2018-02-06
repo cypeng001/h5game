@@ -15,6 +15,6 @@
         "libs/egret.d.ts",
         "libs/jszip.d.ts",
         "libs/assetsmanager.d.ts",
-        "src/ConfigMgr.ts"
+        "src/CnfMgr.ts"
 	]
 }
