@@ -1,4 +1,7 @@
-class MapArea {
+namespace h5game
+{
+
+export class MapArea {
     public static DEF_SIZE: number = 1024;
     public x: number = 0;
     public y: number = 0;
@@ -49,4 +52,6 @@ class MapArea {
             mapTile.unload();
         }
     }
+}
+
 }

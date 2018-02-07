@@ -1,4 +1,7 @@
-class MapTile {
+namespace h5game
+{
+
+export class MapTile {
     public source: string = "";
     public image: eui.Image;
 
@@ -21,4 +24,6 @@ class MapTile {
     public unload(): void {
         this.image.source = "";
     }
+}
+
 }

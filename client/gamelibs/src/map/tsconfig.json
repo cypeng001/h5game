@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "outFile": "../../bin/map/map.js",
+        "declaration": true,
+        "noImplicitAny": false,
+        "stripInternal": true,
+        "allowUnreachableCode": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": false,
+        "sourceMap": false,
+        "newLine": "LF"
+	},
+	"files": [
+        "libs/egret.d.ts",
+        "libs/game.d.ts",
+        "libs/eui.d.ts",
+        "libs/tween.d.ts",
+        "libs/baseintfc.d.ts",
+        "libs/baseutils.d.ts",
+        "libs/entity.d.ts",
+        "src/MapArea.ts",
+        "src/MapCnst.ts",
+        "src/MapLayer.ts",
+        "src/MapProxy.ts",
+        "src/MapTile.ts",
+        "src/MapTileLayer.ts"
+	]
+}

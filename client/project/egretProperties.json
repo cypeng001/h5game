@@ -72,6 +72,10 @@
         {
             "name": "entity",
             "path": "../gamelibs/bin/entity"
+        },
+        {
+            "name": "map",
+            "path": "../gamelibs/bin/map"
         }
     ]
 }

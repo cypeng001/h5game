@@ -2,7 +2,7 @@
 class MainScene extends Scene
 {
     private _mainUI: MainUI;
-    private _mapLayer: MapLayer;
+    private _mapLayer: h5game.MapLayer;
 
     public constructor()
     {
@@ -19,7 +19,7 @@ class MainScene extends Scene
     {
         super.onEnter();
 
-        this._mapLayer = new MapLayer();
+        this._mapLayer = new h5game.MapLayer();
         this.addChild(this._mapLayer);
 
         var mapId = 4;

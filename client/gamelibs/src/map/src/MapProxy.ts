@@ -1,4 +1,7 @@
-class MapProxy {
+namespace h5game
+{
+
+export class MapProxy {
     public static getMCFtry(): h5game.IMCFtry {
         return egret.getImplementation("IMCFtry");
     }
@@ -6,4 +9,6 @@ class MapProxy {
     public static getNetMsgHdlr(): h5game.INetMsgHdlr {
         return egret.getImplementation("INetMsgHdlr");
     }
+}
+
 }

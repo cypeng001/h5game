@@ -1,4 +1,7 @@
-class MapTileLayer extends egret.DisplayObjectContainer {
+namespace h5game
+{
+
+export class MapTileLayer extends egret.DisplayObjectContainer {
     public static DEF_TILE_SIZE = 512;
 
     private map_id: number = 0;
@@ -65,4 +68,6 @@ class MapTileLayer extends egret.DisplayObjectContainer {
     public forEachMapTile(cb: (value: MapTile, index: number, array: MapTile[]) => void): void {
         this._mapTiles.forEach(cb);
     }
+}
+
 }
