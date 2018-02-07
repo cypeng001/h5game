@@ -92,9 +92,9 @@ var h5game;
             _this.initMsgHandler();
             return _this;
         }
-        MapLayer.prototype.loadMap = function (mapId, mapData) {
-            var map_cnf = mapData.map_cnf;
-            var city_cnf = mapData.city_cnf;
+        MapLayer.prototype.loadMap = function (mapId) {
+            var city_cnf = h5game.MapProxy.getCnfMgr().getConfig("city")[mapId];
+            var map_cnf = h5game.MapProxy.getCnfMgr().getMapConfig(mapId);
             this._map_id = mapId;
             this._map_cnf = map_cnf;
             this._city_cnf = city_cnf;
@@ -104,7 +104,7 @@ var h5game;
             this._tile_height = map_cnf.map_tile_height;
             this._mapTileLayer = new h5game.MapTileLayer();
             this.addChild(this._mapTileLayer);
-            this._mapTileLayer.loadMap(mapId, mapData);
+            this._mapTileLayer.loadMap(mapId);
             this._entityLayer = new egret.DisplayObjectContainer();
             this.addChild(this._entityLayer);
             this._numLayer = new egret.DisplayObjectContainer();
@@ -441,6 +441,9 @@ var h5game;
     var MapProxy = (function () {
         function MapProxy() {
         }
+        MapProxy.getCnfMgr = function () {
+            return egret.getImplementation("ICnfMgr");
+        };
         MapProxy.getMCFtry = function () {
             return egret.getImplementation("IMCFtry");
         };
@@ -510,10 +513,10 @@ var h5game;
         };
         MapTileLayer.prototype.update = function (interval) {
         };
-        MapTileLayer.prototype.loadMap = function (mapID, mapData) {
-            var map_cnf = mapData.map_cnf;
-            var city_cnf = mapData.city_cnf;
-            this.map_id = mapID;
+        MapTileLayer.prototype.loadMap = function (mapId) {
+            var city_cnf = h5game.MapProxy.getCnfMgr().getConfig("city")[mapId];
+            var map_cnf = h5game.MapProxy.getCnfMgr().getMapConfig(mapId);
+            this.map_id = mapId;
             this.map_cnf = map_cnf;
             this.city_cnf = city_cnf;
             this._widht = city_cnf.width;

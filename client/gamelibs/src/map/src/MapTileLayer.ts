@@ -23,11 +23,11 @@ export class MapTileLayer extends egret.DisplayObjectContainer {
     public update(interval: number): void {
     }
 
-    public loadMap(mapID: number, mapData: any): void {     
-        var map_cnf = mapData.map_cnf;
-        var city_cnf = mapData.city_cnf;
+    public loadMap(mapId: number): void {     
+        var city_cnf = MapProxy.getCnfMgr().getConfig("city")[mapId];
+        var map_cnf = MapProxy.getCnfMgr().getMapConfig(mapId);
 
-        this.map_id = mapID;
+        this.map_id = mapId;
         this.map_cnf = map_cnf;
         this.city_cnf = city_cnf;
 

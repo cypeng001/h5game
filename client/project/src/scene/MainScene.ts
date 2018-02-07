@@ -23,10 +23,8 @@ class MainScene extends Scene
         this.addChild(this._mapLayer);
 
         var mapId = 4;
-        var map_cnf = GameProxy.getCnfMgr().getMapConfig(mapId);
-        var city_cnf = GameProxy.getCnfMgr().getConfig("city")[mapId];
 
-        this._mapLayer.loadMap(mapId, {map_cnf: map_cnf, city_cnf});
+        this._mapLayer.loadMap(mapId);
         this._mapLayer.initEntities(g_gameData.sceneData);
 
         this._mainUI = new MainUI();

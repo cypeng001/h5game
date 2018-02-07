@@ -49,7 +49,7 @@ declare namespace h5game {
             [key: number]: MapArea;
         };
         constructor();
-        loadMap(mapId: number, mapData: any): void;
+        loadMap(mapId: number): void;
         private initMapArea();
         protected addMapTileToMapArea(mapTile: MapTile): void;
         protected getMapAreaByPos(pos_x: number, pos_y: number): MapArea;
@@ -87,6 +87,7 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class MapProxy {
+        static getCnfMgr(): h5game.ICnfMgr;
         static getMCFtry(): h5game.IMCFtry;
         static getNetMsgHdlr(): h5game.INetMsgHdlr;
     }
@@ -115,7 +116,7 @@ declare namespace h5game {
         private static getImagePath(mapId, x, y);
         constructor();
         update(interval: number): void;
-        loadMap(mapID: number, mapData: any): void;
+        loadMap(mapId: number): void;
         createMapTile(): void;
         forEachMapTile(cb: (value: MapTile, index: number, array: MapTile[]) => void): void;
     }

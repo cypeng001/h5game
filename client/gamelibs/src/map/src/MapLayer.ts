@@ -38,9 +38,9 @@ export class MapLayer extends egret.DisplayObjectContainer {
         this.initMsgHandler();
     }
 
-    public loadMap(mapId: number, mapData: any): void {
-        var map_cnf = mapData.map_cnf;
-        var city_cnf = mapData.city_cnf;
+    public loadMap(mapId: number): void {
+        var city_cnf = MapProxy.getCnfMgr().getConfig("city")[mapId];
+        var map_cnf = MapProxy.getCnfMgr().getMapConfig(mapId);
 
         this._map_id = mapId;
         this._map_cnf = map_cnf;
@@ -52,7 +52,7 @@ export class MapLayer extends egret.DisplayObjectContainer {
 
         this._mapTileLayer = new MapTileLayer();
         this.addChild(this._mapTileLayer);
-        this._mapTileLayer.loadMap(mapId, mapData);
+        this._mapTileLayer.loadMap(mapId);
 
         this._entityLayer = new egret.DisplayObjectContainer();
         this.addChild(this._entityLayer);
