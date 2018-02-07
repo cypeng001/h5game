@@ -4,13 +4,13 @@ declare namespace h5game {
         protected static _AUTO_LOCAL_MAX_ID: number;
         protected _localId: number;
         protected _entityId: number;
-        protected _mapLayer: h5game.IMapLayer;
+        protected _mapLayer: IMapLayer;
         protected _data: any;
         constructor();
         readonly localId: number;
         readonly entityId: number;
         readonly entityType: number;
-        init(data: any, mapLayer: h5game.IMapLayer): void;
+        init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected update(interval: number): void;
         protected $setY(value: number): boolean;
@@ -38,7 +38,7 @@ declare namespace h5game {
         hp: number;
         mp: number;
         protected getName(): string;
-        init(data: any, mapLayer: h5game.IMapLayer): void;
+        init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         update(interval: number): void;
         protected initSprite(): void;
@@ -93,8 +93,8 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class EntityProxy {
-        static getMCFtry(): h5game.IMCFtry;
-        static getNetMsgHdlr(): h5game.INetMsgHdlr;
+        static getMCFtry(): IMCFtry;
+        static getNetMsgHdlr(): INetMsgHdlr;
     }
 }
 declare namespace h5game {
@@ -106,7 +106,7 @@ declare namespace h5game {
     class Monster extends Actor {
         constructor();
         readonly entityType: number;
-        init(data: any, mapLayer: h5game.IMapLayer): void;
+        init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
     }
@@ -115,7 +115,7 @@ declare namespace h5game {
     class Npc extends Actor {
         constructor();
         readonly entityType: number;
-        init(data: any, mapLayer: h5game.IMapLayer): void;
+        init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
     }
@@ -125,7 +125,7 @@ declare namespace h5game {
         protected _mainPlayer: boolean;
         constructor();
         readonly entityType: number;
-        init(data: any, mapLayer: h5game.IMapLayer): void;
+        init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
         mainPlayer: boolean;

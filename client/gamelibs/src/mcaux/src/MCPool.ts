@@ -1,7 +1,7 @@
 namespace h5game
 {
 
-export class MCPool extends h5game.ObjPool {
+export class MCPool extends ObjPool {
     private static DEF_RELEASE_TIME: number = 60000;
     private static DEF_AUTO_RECYCLE_INTERVAL: number = 5000;
 

@@ -1,7 +1,7 @@
 namespace h5game
 {
 
-export class MCFtry extends h5game.ObjFtry {
+export class MCFtry extends ObjFtry {
     private _init: boolean = false;
     private _mcCnfMgr: MCCnfMgr = null;
 

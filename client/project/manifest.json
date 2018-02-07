@@ -37,7 +37,7 @@
 		"bin-debug/layer/loading/StartLoadingUI.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/mgr/UILayerID.js",
-		"bin-debug/GameApp.js",
+		"bin-debug/system/scene/SceneMsgHandler.js",
 		"bin-debug/network/NetMgr.js",
 		"bin-debug/network/NetMsgHdlr.js",
 		"bin-debug/scene/AccountScene.js",
@@ -54,6 +54,6 @@
 		"bin-debug/system/game/GameMsgHandler.js",
 		"bin-debug/system/main/MainUI.js",
 		"bin-debug/system/role/RoleUI.js",
-		"bin-debug/system/scene/SceneMsgHandler.js"
+		"bin-debug/GameApp.js"
 	]
 }

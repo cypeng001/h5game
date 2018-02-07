@@ -34,15 +34,15 @@ declare namespace h5game {
         protected _height: number;
         protected _tile_width: number;
         protected _tile_height: number;
-        protected _curPlayer: h5game.Player;
+        protected _curPlayer: Player;
         protected _aoiPlayers: {
-            [key: number]: h5game.Player;
+            [key: number]: Player;
         };
         protected _monsters: {
-            [key: number]: h5game.Monster;
+            [key: number]: Monster;
         };
         protected _npcs: {
-            [key: number]: h5game.Npc;
+            [key: number]: Npc;
         };
         protected _lastRefreshPt: [number, number];
         protected _mapAreas: {
@@ -61,35 +61,35 @@ declare namespace h5game {
         protected onTouchCancel(event: any): void;
         protected onTouchEnd(event: any): void;
         protected onTouchMove(event: any): void;
-        protected _createPlayer(data: any): h5game.Player;
+        protected _createPlayer(data: any): Player;
         protected initCurPlayer(data: any): void;
-        createAoiPlayer(data: any): h5game.Player;
+        createAoiPlayer(data: any): Player;
         removeAoiPlayer(entityId: number): void;
-        getAoiPlayer(entityId: number): h5game.Player;
-        createMonster(data: any): h5game.Monster;
+        getAoiPlayer(entityId: number): Player;
+        createMonster(data: any): Monster;
         removeMonster(entityId: number): void;
-        getMonster(entityId: number): h5game.Monster;
-        createNpc(data: any): h5game.Npc;
+        getMonster(entityId: number): Monster;
+        createNpc(data: any): Npc;
         removeNpc(entityId: number): void;
-        getNpc(entityId: number): h5game.Npc;
-        getEntity(entityId: number): h5game.Entity;
+        getNpc(entityId: number): Npc;
+        getEntity(entityId: number): Entity;
         removeEntity(entityId: number): void;
-        getActor(entityId: number): h5game.Actor;
+        getActor(entityId: number): Actor;
         createNum(x: number, y: number, status: number, value: number): void;
         protected MsgHandler_onAddEntities(data: any): void;
         protected MsgHandler_onRemoveEntities(data: any): void;
         protected MsgHandler_onMove(data: any): void;
         protected MsgHandler_onAttack(data: any): void;
         protected initMsgHandler(): void;
-        notify(cmd: h5game.IMapCmdN, params: any): void;
-        query(cmd: h5game.IMapCmdQ, params: any): any;
+        notify(cmd: IMapCmdN, params: any): void;
+        query(cmd: IMapCmdQ, params: any): any;
     }
 }
 declare namespace h5game {
     class MapProxy {
-        static getCnfMgr(): h5game.ICnfMgr;
-        static getMCFtry(): h5game.IMCFtry;
-        static getNetMsgHdlr(): h5game.INetMsgHdlr;
+        static getCnfMgr(): ICnfMgr;
+        static getMCFtry(): IMCFtry;
+        static getNetMsgHdlr(): INetMsgHdlr;
     }
 }
 declare namespace h5game {

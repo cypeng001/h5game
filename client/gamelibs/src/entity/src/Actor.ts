@@ -48,7 +48,7 @@ export class Actor extends Entity {
         return this._name;
     }
 
-    public init(data: any, mapLayer: h5game.IMapLayer): void {
+    public init(data: any, mapLayer: IMapLayer): void {
         super.init(data, mapLayer);
     }
 
@@ -174,7 +174,7 @@ export class Actor extends Entity {
         this._moveTarPos[0] = x;
         this._moveTarPos[1] = y;
         
-        var dir = h5game.VectorUtil.calcDir(this.x, this.y, x, y);
+        var dir = VectorUtil.calcDir(this.x, this.y, x, y);
         this._moveSpeed[0] = dir[0] * this._speed;
         this._moveSpeed[1] = dir[1] * this._speed;
 
@@ -204,7 +204,7 @@ export class Actor extends Entity {
         this.x += this._moveSpeed[0] * interval;
         this.y += this._moveSpeed[1] * interval;
 
-        var dist = h5game.VectorUtil.calcLength(this._moveTarPos[0] - this.x, this._moveTarPos[1] - this.y);
+        var dist = VectorUtil.calcLength(this._moveTarPos[0] - this.x, this._moveTarPos[1] - this.y);
         if(dist < this._speed * interval) {
             this.x = this._moveTarPos[0];
             this.y = this._moveTarPos[1];
@@ -253,9 +253,9 @@ export class Actor extends Entity {
 
         var resultData = data.result;
         if(resultData.result == AttackResult.SUCCESS) {
-            this._mapLayer.notify(h5game.IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
+            this._mapLayer.notify(IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
 
-            var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, data.target);
+            var defActor = this._mapLayer.query(IMapCmdQ.IMCQ_GetActor, data.target);
             defActor.hp -= resultData.damage;
             defActor.refreshHpBar();
         }

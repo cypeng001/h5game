@@ -38,7 +38,7 @@ declare namespace h5game {
     }
 }
 declare namespace h5game {
-    class MCPool extends h5game.ObjPool {
+    class MCPool extends ObjPool {
         private static DEF_RELEASE_TIME;
         private static DEF_AUTO_RECYCLE_INTERVAL;
         private _state;
@@ -55,7 +55,7 @@ declare namespace h5game {
     }
 }
 declare namespace h5game {
-    class MCFtry extends h5game.ObjFtry {
+    class MCFtry extends ObjFtry {
         private _init;
         private _mcCnfMgr;
         init(): void;

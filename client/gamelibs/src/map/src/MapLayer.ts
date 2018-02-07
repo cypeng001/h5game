@@ -18,11 +18,11 @@ export class MapLayer extends egret.DisplayObjectContainer {
     protected _tile_width: number = 0;
     protected _tile_height: number = 0;
 
-    protected _curPlayer: h5game.Player = null;
+    protected _curPlayer: Player = null;
 
-    protected _aoiPlayers: {[key: number]: h5game.Player} = {};
-    protected _monsters: {[key: number]: h5game.Monster} = {};
-    protected _npcs: {[key: number]: h5game.Npc} = {};
+    protected _aoiPlayers: {[key: number]: Player} = {};
+    protected _monsters: {[key: number]: Monster} = {};
+    protected _npcs: {[key: number]: Npc} = {};
     protected _lastRefreshPt: [number, number] = [0, 0];
 
     protected _mapAreas: {[key: number]: MapArea} = {};
@@ -191,8 +191,8 @@ export class MapLayer extends egret.DisplayObjectContainer {
     protected onTouchMove(event): void {
     }
 
-    protected _createPlayer(data: any): h5game.Player {
-        var player = new h5game.Player();
+    protected _createPlayer(data: any): Player {
+        var player = new Player();
         player.init(data, this);
         this._entityLayer.addChild(player);
 
@@ -205,7 +205,7 @@ export class MapLayer extends egret.DisplayObjectContainer {
         this._curPlayer = player;
     }
 
-    public createAoiPlayer(data: any): h5game.Player {
+    public createAoiPlayer(data: any): Player {
         if(this._aoiPlayers[data.entityId]) {
             console.warn("createAoiPlayer player already exist", JSON.stringify(data));
             return;
@@ -231,17 +231,17 @@ export class MapLayer extends egret.DisplayObjectContainer {
         delete this._aoiPlayers[entityId];
     }
 
-    public getAoiPlayer(entityId: number): h5game.Player {
+    public getAoiPlayer(entityId: number): Player {
         return this._aoiPlayers[entityId];
     }
 
-    public createMonster(data: any): h5game.Monster {
+    public createMonster(data: any): Monster {
         if(this._monsters[data.entityId]) {
             console.warn("createMonster monster already exist", JSON.stringify(data));
             return;
         }
 
-        var monster = new h5game.Monster();
+        var monster = new Monster();
         monster.init(data, this);
         this._entityLayer.addChild(monster);
 
@@ -265,17 +265,17 @@ export class MapLayer extends egret.DisplayObjectContainer {
         delete this._monsters[entityId];
     }
 
-    public getMonster(entityId: number): h5game.Monster {
+    public getMonster(entityId: number): Monster {
         return this._monsters[entityId];
     }
 
-    public createNpc(data: any): h5game.Npc {
+    public createNpc(data: any): Npc {
         if(this._npcs[data.entityId]) {
             console.warn("createNpc npc already exist", JSON.stringify(data));
             return;
         }
 
-        var npc = new h5game.Npc();
+        var npc = new Npc();
         npc.init(data, this);
         this._entityLayer.addChild(npc);
 
@@ -299,17 +299,17 @@ export class MapLayer extends egret.DisplayObjectContainer {
         delete this._npcs[entityId];
     }
 
-    public getNpc(entityId: number): h5game.Npc {
+    public getNpc(entityId: number): Npc {
         return this._npcs[entityId];
     }
 
 
-    public getEntity(entityId: number): h5game.Entity {
+    public getEntity(entityId: number): Entity {
         if(this._curPlayer.entityId == entityId) {
             return this._curPlayer;
         }
 
-        var entity: h5game.Entity = null;
+        var entity: Entity = null;
 
         entity = this._aoiPlayers[entityId];
         if(entity) {
@@ -335,30 +335,30 @@ export class MapLayer extends egret.DisplayObjectContainer {
             return;
         }
 
-        if(entity.entityType == h5game.EntityType.ET_PLAYER) {
+        if(entity.entityType == EntityType.ET_PLAYER) {
             this.removeAoiPlayer(entityId);
         }
-        else if(entity.entityType == h5game.EntityType.ET_MONSTER) {
+        else if(entity.entityType == EntityType.ET_MONSTER) {
             this.removeMonster(entityId);
         }
-        else if(entity.entityType == h5game.EntityType.ET_NPC) {
+        else if(entity.entityType == EntityType.ET_NPC) {
             this.removeNpc(entityId);
         }
     }
 
-    public getActor(entityId: number): h5game.Actor {
-        var entity: h5game.Entity = this.getEntity(entityId);
+    public getActor(entityId: number): Actor {
+        var entity: Entity = this.getEntity(entityId);
         if(!entity) {
             return null;
         }
 
-        if(!(entity.entityType == h5game.EntityType.ET_PLAYER 
-            || entity.entityType == h5game.EntityType.ET_MONSTER 
-            || entity.entityType == h5game.EntityType.ET_NPC)) {
+        if(!(entity.entityType == EntityType.ET_PLAYER 
+            || entity.entityType == EntityType.ET_MONSTER 
+            || entity.entityType == EntityType.ET_NPC)) {
             return null;
         }
 
-        return <h5game.Actor>entity;
+        return <Actor>entity;
     }
 
     public createNum(x: number, y: number, status: number, value: number): void {
@@ -430,23 +430,23 @@ export class MapLayer extends egret.DisplayObjectContainer {
     protected initMsgHandler(): void {
         var self = this;
 
-        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onAddEntities, function(data: any) {
+        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onAddEntities, function(data: any) {
             self.MsgHandler_onAddEntities(data);
         });
-        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onRemoveEntities, function(data: any) {
+        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onRemoveEntities, function(data: any) {
             self.MsgHandler_onRemoveEntities(data);
         });
-        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onMove, function(data: any) {
+        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onMove, function(data: any) {
             self.MsgHandler_onMove(data);
         });
-        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onAttack, function(data: any) {
+        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onAttack, function(data: any) {
             self.MsgHandler_onAttack(data);
         });
     }
 
-    public notify(cmd: h5game.IMapCmdN, params: any): void {
+    public notify(cmd: IMapCmdN, params: any): void {
         switch(cmd) {
-            case h5game.IMapCmdN.IMCN_CreateNum:
+            case IMapCmdN.IMCN_CreateNum:
             {
                 this.createNum.apply(this, params);
             }
@@ -454,9 +454,9 @@ export class MapLayer extends egret.DisplayObjectContainer {
         }
     }
     
-    public query(cmd: h5game.IMapCmdQ, params: any): any {
+    public query(cmd: IMapCmdQ, params: any): any {
         switch(cmd) {
-            case h5game.IMapCmdQ.IMCQ_GetActor:
+            case IMapCmdQ.IMCQ_GetActor:
             {
                 return this.getActor(params);
             }

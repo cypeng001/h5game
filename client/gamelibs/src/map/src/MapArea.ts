@@ -19,7 +19,7 @@ export class MapArea {
     }
 
     public isInScreen(x: number, y: number, w: number, h: number): boolean {
-        return h5game.RectUtil.isIntersect(
+        return RectUtil.isIntersect(
             this.x, this.y, this.x + MapArea.DEF_SIZE, this.y + MapArea.DEF_SIZE,
             x, y, x + w, y + h
             );
@@ -29,7 +29,7 @@ export class MapArea {
         var k;
         for(k in this._mapTiles) {
             var mapTile = this._mapTiles[k];
-            if(h5game.RectUtil.isIntersect(x, y, 
+            if(RectUtil.isIntersect(x, y, 
                 x + w, y + h, 
                 mapTile.x, mapTile.y, 
                 mapTile.x + MapTileLayer.DEF_TILE_SIZE, mapTile.y + MapTileLayer.DEF_TILE_SIZE)) {
