@@ -426,16 +426,17 @@ class MapLayer extends egret.DisplayObjectContainer {
 
     protected initMsgHandler(): void {
         var self = this;
-        NetMgr.getInstance().on('onAddEntities', function(data: any) {
+
+        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onAddEntities, function(data: any) {
             self.MsgHandler_onAddEntities(data);
         });
-        NetMgr.getInstance().on('onRemoveEntities', function(data: any) {
+        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onRemoveEntities, function(data: any) {
             self.MsgHandler_onRemoveEntities(data);
         });
-        NetMgr.getInstance().on('onMove', function(data: any) {
+        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onMove, function(data: any) {
             self.MsgHandler_onMove(data);
         });
-        NetMgr.getInstance().on('onAttack', function(data: any) {
+        MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onAttack, function(data: any) {
             self.MsgHandler_onAttack(data);
         });
     }
