@@ -502,7 +502,7 @@ var h5game;
         Player.prototype.moveTo = function (x, y) {
             _super.prototype.moveTo.call(this, x, y);
             if (this.mainPlayer) {
-                h5game.EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgIdR.INMIR_MOVE, [{ x: this.x, y: this.y }, { x: x, y: y }], null);
+                h5game.EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_MOVE, [{ x: this.x, y: this.y }, { x: x, y: y }], null);
             }
         };
         return Player;

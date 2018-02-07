@@ -18,18 +18,21 @@ var h5game;
 })(h5game || (h5game = {}));
 var h5game;
 (function (h5game) {
-    var INetMsgIdR;
-    (function (INetMsgIdR) {
-        INetMsgIdR[INetMsgIdR["INMIR_MOVE"] = 1] = "INMIR_MOVE";
-    })(INetMsgIdR = h5game.INetMsgIdR || (h5game.INetMsgIdR = {}));
-    var INetMsgIdN;
-    (function (INetMsgIdN) {
-        INetMsgIdN[INetMsgIdN["INMIN_NONE"] = 1] = "INMIN_NONE";
-    })(INetMsgIdN = h5game.INetMsgIdN || (h5game.INetMsgIdN = {}));
-    var INetMsgIdO;
-    (function (INetMsgIdO) {
-        INetMsgIdO[INetMsgIdO["INMIO_NONE"] = 1] = "INMIO_NONE";
-    })(INetMsgIdO = h5game.INetMsgIdO || (h5game.INetMsgIdO = {}));
+    var INetMsgReq;
+    (function (INetMsgReq) {
+        INetMsgReq[INetMsgReq["INMR_MOVE"] = 1] = "INMR_MOVE";
+    })(INetMsgReq = h5game.INetMsgReq || (h5game.INetMsgReq = {}));
+    var INetMsgNtf;
+    (function (INetMsgNtf) {
+        INetMsgNtf[INetMsgNtf["INMN_NONE"] = 1] = "INMN_NONE";
+    })(INetMsgNtf = h5game.INetMsgNtf || (h5game.INetMsgNtf = {}));
+    var INetMsgOn;
+    (function (INetMsgOn) {
+        INetMsgOn[INetMsgOn["INMO_onAddEntities"] = 1] = "INMO_onAddEntities";
+        INetMsgOn[INetMsgOn["INMO_onRemoveEntities"] = 2] = "INMO_onRemoveEntities";
+        INetMsgOn[INetMsgOn["INMO_onMove"] = 3] = "INMO_onMove";
+        INetMsgOn[INetMsgOn["INMO_onAttack"] = 4] = "INMO_onAttack";
+    })(INetMsgOn = h5game.INetMsgOn || (h5game.INetMsgOn = {}));
 })(h5game || (h5game = {}));
 var h5game;
 (function (h5game) {

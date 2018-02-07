@@ -55,7 +55,7 @@ export class Player extends Actor {
         super.moveTo(x, y);
 
         if(this.mainPlayer) {
-            EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgIdR.INMIR_MOVE, 
+            EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_MOVE, 
                 [{x: this.x, y: this.y}, {x: x, y: y}], 
                 null);
         }

@@ -21,19 +21,24 @@ declare namespace h5game {
     }
 }
 declare namespace h5game {
-    enum INetMsgIdR {
-        INMIR_MOVE = 1,
+    enum INetMsgReq {
+        INMR_MOVE = 1,
     }
-    enum INetMsgIdN {
-        INMIN_NONE = 1,
+    enum INetMsgNtf {
+        INMN_NONE = 1,
     }
-    enum INetMsgIdO {
-        INMIO_NONE = 1,
+    enum INetMsgOn {
+        INMO_onAddEntities = 1,
+        INMO_onRemoveEntities = 2,
+        INMO_onMove = 3,
+        INMO_onAttack = 4,
     }
+}
+declare namespace h5game {
     interface INetMsgHdlr {
-        requestMsg(id: INetMsgIdR, msg: any, callback: (response: any) => void): void;
-        notifyMsg(id: INetMsgIdN, msg: any): void;
-        onMsg(id: INetMsgIdO, callback: (response: any) => void): void;
+        requestMsg(id: INetMsgReq, msg: any, callback: (response: any) => void): void;
+        notifyMsg(id: INetMsgNtf, msg: any): void;
+        onMsg(id: INetMsgOn, callback: (response: any) => void): void;
     }
 }
 declare namespace h5game {

@@ -1,0 +1,1 @@
+xcopy ..\..\bin\baseintfc\baseintfc.d.ts ..\entity\libs\baseintfc.d.ts /Y

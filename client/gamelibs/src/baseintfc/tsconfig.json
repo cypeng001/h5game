@@ -15,6 +15,7 @@
         "libs/egret.d.ts",
         "src/map/IMapLayer.ts",
         "src/mc/IMCFtry.ts",
+        "src/network/INetMsg.ts",
         "src/network/INetMsgHdlr.ts",
         "src/cnf/ICnfMgr.ts"
 	]

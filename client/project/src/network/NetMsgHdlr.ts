@@ -1,7 +1,7 @@
 class NetMsgHdlr implements h5game.INetMsgHdlr {
-    requestMsg(id: h5game.INetMsgIdR, msg: any, callback: (response: any) => void): void {
+    requestMsg(id: h5game.INetMsgReq, msg: any, callback: (response: any) => void): void {
         switch(id) {
-            case h5game.INetMsgIdR.INMIR_MOVE:
+            case h5game.INetMsgReq.INMR_MOVE:
             {
                 SceneMsgHandler.getInstance().reqMove(msg, callback);
                 break;
@@ -9,11 +9,32 @@ class NetMsgHdlr implements h5game.INetMsgHdlr {
         }
     }
 
-    notifyMsg(id: h5game.INetMsgIdN, msg: any): void {
+    notifyMsg(id: h5game.INetMsgNtf, msg: any): void {
 
     }
 
-    onMsg(id: h5game.INetMsgIdO, callback: (response:any)=>void): void {
-
+    onMsg(id: h5game.INetMsgOn, callback: (response:any)=>void): void {
+        switch(id) {
+            case h5game.INetMsgOn.INMO_onAddEntities:
+            {
+                NetMgr.getInstance().on("onAddEntities", callback);
+                break;
+            }
+            case h5game.INetMsgOn.INMO_onRemoveEntities:
+            {
+                NetMgr.getInstance().on("nRemoveEntities", callback);
+                break;
+            }
+            case h5game.INetMsgOn.INMO_onAttack:
+            {
+                NetMgr.getInstance().on("onAttack", callback);
+                break;
+            }
+            case h5game.INetMsgOn.INMO_onMove:
+            {
+                NetMgr.getInstance().on("onMove", callback);
+                break;
+            }
+        }
     }
 }
