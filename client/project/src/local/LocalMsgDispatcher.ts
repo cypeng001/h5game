@@ -63,6 +63,8 @@ class LocalMsgDispatcher implements h5game.ILocalMsgDispatcher {
             return;
         }
 
+        cblist = cblist.slice(0);   //copy callback list
+        
         for(var k in cblist) {
             cblist[k](msg);
         }
