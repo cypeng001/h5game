@@ -30,7 +30,8 @@ class PlayerMsgHdlr {
 
     private static reqEnterScene(msg: any, callback: Function): void {
         NetMgr.getInstance().request("area.playerHandler.enterScene", msg, function(response: any): void {
-            g_gameData.sceneData = response;
+            var gameData = h5game.IntfcProxy.getGameData();
+            gameData.sceneData = response;
             
             h5game.BaseUtil.callFunc(callback, response);
         });

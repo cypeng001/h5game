@@ -7,7 +7,8 @@ class LoginLogic {
 
     private static connectToGateSrv(host: string, port: number): void {
         NetMgr.getInstance().connect(host, port, () => {
-            LoginLogic.queryEntry(g_gameData.platData.uid);
+            var gameData = h5game.IntfcProxy.getGameData();
+            LoginLogic.queryEntry(gameData.platData.uid);
         });
     }
 
@@ -32,7 +33,8 @@ class LoginLogic {
 
     private static connectToGameSrv(host: string, port: number): void {
         NetMgr.getInstance().connect(host, port, function(): void {
-            LoginLogic.entry(g_gameData.platData.token);
+            var gameData = h5game.IntfcProxy.getGameData();
+            LoginLogic.entry(gameData.platData.token);
         });
     }
 

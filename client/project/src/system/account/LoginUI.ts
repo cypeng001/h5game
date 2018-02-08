@@ -54,8 +54,9 @@ class LoginUI extends eui.Component{
                 egret.localStorage.setItem("username", username);
                 egret.localStorage.setItem("password", password);
 
-                g_gameData.platData.uid = data.uid;
-                g_gameData.platData.token = data.token;
+                var gameData = h5game.IntfcProxy.getGameData();
+                gameData.platData.uid = data.uid;
+                gameData.platData.token = data.token;
 
                 LoginLogic.authEntry();
             },

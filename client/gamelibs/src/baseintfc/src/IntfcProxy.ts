@@ -33,6 +33,14 @@ export class IntfcProxy {
     public static getLocalMsgDispatcher(): ILocalMsgDispatcher {
         return egret.getImplementation("ILocalMsgDispatcher");
     }
+
+    public static regGameData(impl: any): void {
+        egret.registerImplementation("IGameData", impl);
+    }
+
+    public static getGameData(): any {
+        return egret.getImplementation("IGameData");
+    }
 }
 
 }

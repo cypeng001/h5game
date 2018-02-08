@@ -18,20 +18,13 @@ class EntryMsgHdlr {
     private static reqEntry(msg: any, callback: Function): void {
         NetMgr.getInstance().request("connector.entryHandler.entry", msg, function(response: any): void {
             if(response.code == 200) {
-                var userData = response.user;
+                var gameData = h5game.IntfcProxy.getGameData();
                 var playerData = response.player;
-
-                if (!!userData) {
-                    g_gameData.uid = userData.id;
-                }
-                g_gameData.playerId = playerData.id;
-                g_gameData.areaId = playerData.areaId;
-                g_gameData.player = playerData;
+                gameData.playerData = playerData;
             }
 
             h5game.BaseUtil.callFunc(callback, response);
         });
     }
-
 
 }

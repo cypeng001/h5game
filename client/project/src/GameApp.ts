@@ -1,6 +1,5 @@
 class GameApp {
     private static _instance: GameApp = null;
-    private _init: boolean = false;
     
     public static getInstance(): GameApp
     {
@@ -11,7 +10,7 @@ class GameApp {
         return this._instance;
     }
 
-    //private _protocol_listeners = {};
+    private _init: boolean = false;
 
     public constructor() {
 
@@ -24,8 +23,6 @@ class GameApp {
             return;
         }
         this._init = true;
-
-        g_gameData.init();
         
         h5game.IntfcProxy.getCnfMgr().init();
         h5game.IntfcProxy.getMCFtry().init();
@@ -39,16 +36,12 @@ class GameApp {
         {
             return;
         }
-        /*
-        ProtocolDecoder.getInstance().update(interval);
-        */
+
         SceneMgr.getInstance().update(interval);
     }
 
     public loadScene(scene_type: number, scene_data: any)
     {
-        //console.log("GameApp_loadScene", scene_type);
-
         switch(scene_type)
         {
             case SceneType.ST_MainScene:
@@ -57,7 +50,6 @@ class GameApp {
                     "main"
                 ];
                 var fileList = [];
-                //ResUtility.getMapRes(fileList, g_gameData.role_data.map_id);
                 SceneMgr.getInstance().loadScene(scene_type, scene_data, groupList, fileList);
                 break;
             }

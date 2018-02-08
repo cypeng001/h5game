@@ -24,7 +24,8 @@ class ResourceMsgHdlr {
 
     private static reqLoadAreaResource(msg: any, callback: Function): void {
         NetMgr.getInstance().request("area.resourceHandler.loadAreaResource", msg, function(response: any): void {
-            g_gameData.areaData = response;
+            var gameData = h5game.IntfcProxy.getGameData();
+            gameData.areaData = response;
             
             h5game.BaseUtil.callFunc(callback, response);
         });

@@ -25,7 +25,9 @@ class MainScene extends Scene
         var mapId = 4;
 
         this._mapLayer.loadMap(mapId);
-        this._mapLayer.initEntities(g_gameData.sceneData);
+
+        var gameData = h5game.IntfcProxy.getGameData();
+        this._mapLayer.initEntities(gameData.sceneData);
 
         this._mainUI = new MainUI();
         this.addChild(this._mainUI);

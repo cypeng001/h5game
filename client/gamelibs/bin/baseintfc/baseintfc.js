@@ -143,6 +143,12 @@ var h5game;
         IntfcProxy.getLocalMsgDispatcher = function () {
             return egret.getImplementation("ILocalMsgDispatcher");
         };
+        IntfcProxy.regGameData = function (impl) {
+            egret.registerImplementation("IGameData", impl);
+        };
+        IntfcProxy.getGameData = function () {
+            return egret.getImplementation("IGameData");
+        };
         return IntfcProxy;
     }());
     h5game.IntfcProxy = IntfcProxy;

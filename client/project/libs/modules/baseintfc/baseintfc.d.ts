@@ -130,5 +130,7 @@ declare namespace h5game {
         static getNetMsgHdlr(): INetMsgHdlr;
         static regLocalMsgDispatcher(impl: ILocalMsgDispatcher): void;
         static getLocalMsgDispatcher(): ILocalMsgDispatcher;
+        static regGameData(impl: any): void;
+        static getGameData(): any;
     }
 }

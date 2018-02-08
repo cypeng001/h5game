@@ -19,6 +19,9 @@ class MainUI extends PanelUILayer {
         this.socialBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSocialBtnTab, this);
 
         this.regLocalMsgHdlrs();
+
+        var gameData = h5game.IntfcProxy.getGameData();
+        this.refreshHpBar(gameData.playerData.hp, gameData.playerData.maxHp);
     }
 
     public onEnter(): void
