@@ -1,100 +1,97 @@
-class LoginLogic extends egret.EventDispatcher {
-    private static _instance: LoginLogic = null;
-    public static getInstance(): LoginLogic {
-        if(!LoginLogic._instance) {
-            LoginLogic._instance = new LoginLogic();
-        }
-        return LoginLogic._instance;
+class LoginLogic {
+    private static uid: string;
+    private static token: string;
+    private static gate_host: string;
+    private static gate_port: number;
+    private static game_host: string;
+    private static game_port: number;
+
+    public static authEntry(uid: string, token: string): void {
+        LoginLogic.uid = uid;
+        LoginLogic.token = token;
+
+        LoginLogic.gate_host = window["SERVER_CNF"]["GATE_HOST"];
+        LoginLogic.gate_port = window["SERVER_CNF"]["GATE_PORT"];
+        LoginLogic.connectToGateSrv(LoginLogic.gate_host, LoginLogic.gate_port);
     }
 
-    constructor() {
-        super();
-    }
-
-    public authEntry(uid: string, token: string, callback: Function) {
-        var self = this;
-        self.queryEntry(uid, function(host, port) {
-            self.entry(host, port, token, callback);
+    private static connectToGateSrv(host: string, port: number): void {
+        NetMgr.getInstance().connect(host, port, () => {
+            LoginLogic.queryEntry(LoginLogic.uid);
         });
     }
 
-    private queryEntry(uid: string, callback: Function) {
-        var self = this;
-	
-        NetMgr.getInstance().connect(window["SERVER_CNF"]["GATE_HOST"], window["SERVER_CNF"]["GATE_PORT"], function(): void {
-            //NetMgr.getInstance().request('gate.gateHandler.queryEntry', { uid: uid}, (data) => {
-            h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_queryEntry, { uid: uid}, (data) => {
-                NetMgr.getInstance().disconnect();
+    private static queryEntry(uid: string): void {
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_queryEntry, 
+            {uid: uid}, 
+            (data) => {
+            
+            NetMgr.getInstance().disconnect();
 
-                if(data.code === 2001) {
-                    alert('Servers error!');
-                    return;
-                }
+            if(data.code === 2001) {
+                alert('Servers error!');
+                return;
+            }
 
-                callback(data.host, data.port);
-            }); 
-        });
+            LoginLogic.game_host = data.host;
+            LoginLogic.game_port = data.port;
+
+            LoginLogic.connectToGameSrv(LoginLogic.game_host, LoginLogic.game_port);
+        }); 
 
     }
 
-    private entry(host: string, port: number, token: string, callback: Function): void {
-        var self = this;
-
+    private static connectToGameSrv(host: string, port: number): void {
         NetMgr.getInstance().connect(host, port, function(): void {
-            //NetMgr.getInstance().request('connector.entryHandler.entry', {token: token}, (data) => {
-            h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_entry, {token: token}, (data) => {
-                console.log("connector.entryHandler.entry cb data:", data);
-                var player = data.player;
-                if (callback) {
-                    callback(data.code);
-                }
-
-                if (data.code == 1001) {
-                    alert('Login fail!');
-                    return;
-                } else if (data.code == 1003) {
-                    alert('Username not exists!');
-                    return;
-                }
-
-                if (data.code != 200) {
-                    alert('Login Fail!');
-                    return;
-                }
-
-                self.afterLogin(data);
-
-            });
+            LoginLogic.entry(LoginLogic.token);
         });
     }
 
-    private afterLogin(data: any): void {
-        var userData = data.user;
-        var playerData = data.player;
+    private static entry(token: string): void {
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_entry, 
+            {token: token}, 
+            (data) => {
 
-        console.log("afterLogin userData:", userData);
-        console.log("afterLogin playerData:", playerData);
+            var player = data.player;
 
-        var areaId = playerData.areaId;
-        //var areas = {1: {map: {id: 'jiangnanyewai.png', width: 3200, height: 2400}, id: 1}};
+            if (data.code == 1001) {
+                alert('Login fail!');
+                return;
+            } else if (data.code == 1003) {
+                alert('Username not exists!');
+                return;
+            }
 
-        if (!!userData) {
-            g_gameData.uid = userData.id;
-        }
-        g_gameData.playerId = playerData.id;
-        g_gameData.areaId = areaId;
-        g_gameData.player = playerData;
+            if (data.code != 200) {
+                alert('Login Fail!');
+                return;
+            }
 
-        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_loadAreaResource, null, () => {
-            h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_enterScene, null, () => {
-                GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
-            });
+            var userData = data.user;
+            var playerData = data.player;
+
+            var areaId = playerData.areaId;
+
+            if (!!userData) {
+                g_gameData.uid = userData.id;
+            }
+            g_gameData.playerId = playerData.id;
+            g_gameData.areaId = areaId;
+            g_gameData.player = playerData;
+
+            LoginLogic.loadAreaResource();
         });
+    }
 
-        /*
-        SceneMsgHdlr.reqLoadAreaResource(function(data) {
-            SceneMsgHdlr.reqEnterScene(null);
+    private static loadAreaResource(): void {
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_loadAreaResource, null, (response: any) => {
+            LoginLogic.enterScene();
         });
-        */
+    }
+
+    private static enterScene(): void {
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_enterScene, null, (response: any) => {
+            GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
+        });
     }
 }

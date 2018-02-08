@@ -57,9 +57,7 @@ class LoginUI extends eui.Component{
                 g_gameData.plat_data.uid = data.uid;
                 g_gameData.plat_data.token = data.token;
 
-                LoginLogic.getInstance().authEntry(data.uid, data.token, function() {
-
-                });
+                LoginLogic.authEntry(data.uid, data.token);
             },
             (event) => {
                 console.log("testPhp error event:", event);
