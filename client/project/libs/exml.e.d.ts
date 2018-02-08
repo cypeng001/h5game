@@ -58,3 +58,7 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
+declare module skins{
+	class mainProgressBarSkin1 extends eui.Skin{
+	}
+}

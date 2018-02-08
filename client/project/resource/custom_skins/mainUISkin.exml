@@ -3,7 +3,7 @@
 	<e:Group id="leftTopGrp" width="307" height="134" x="3.5" y="12" anchorOffsetX="0" anchorOffsetY="0">
 		<e:Image width="293" height="71" x="14" y="31.5" anchorOffsetX="0" anchorOffsetY="0" source="ui_main1#Renwutouxiangkuang"/>
 		<e:Image id="roleImg" width="120" height="88" x="-12" y="7" anchorOffsetX="0" anchorOffsetY="0" source="resource/headicon/1001.png"/>
-		<e:ProgressBar id="hpBar" width="154" height="15" x="120.5" y="56.5" anchorOffsetX="0" anchorOffsetY="0"/>
+		<e:ProgressBar id="hpBar" width="185" height="13" x="113.5" y="56.5" anchorOffsetX="0" anchorOffsetY="0" skinName="skins.mainProgressBarSkin1"/>
 	</e:Group>
 	<e:Group id="bottomGrp" height="123" anchorOffsetX="0" left="0" right="0" bottom="0" anchorOffsetY="0">
 		<e:Image anchorOffsetX="0" anchorOffsetY="0" source="ui_common1#Heidibang1" left="0" right="0" top="0" bottom="0"/>

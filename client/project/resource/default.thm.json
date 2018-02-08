@@ -18,6 +18,7 @@
 	"exmls": [
 		"resource/eui_skins/ButtonSkin.exml",
 		"resource/custom_skins/loginUISkin.exml",
+		"resource/custom_skins/progressbar/mainProgressBarSkin1.exml",
 		"resource/custom_skins/mainUISkin.exml",
 		"resource/custom_skins/registerUISkin.exml",
 		"resource/custom_skins/roleUISkin.exml",
