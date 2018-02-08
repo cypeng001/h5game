@@ -354,7 +354,13 @@ var h5game;
             label.width = 100;
             label.anchorOffsetX = label.width / 2;
             container.addChild(label);
-            egret.Tween.get(container).to({ y: y - 20 }, 500);
+            egret.Tween.get(container).to({ y: y - 20 }, 500).
+                wait(500).
+                call(function () {
+                if (container.parent) {
+                    container.parent.removeChild(container);
+                }
+            });
         };
         MapLayer.prototype.MsgHandler_onAddEntities = function (data) {
             if (data.mob) {

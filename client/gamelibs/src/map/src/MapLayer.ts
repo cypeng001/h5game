@@ -376,7 +376,13 @@ export class MapLayer extends egret.DisplayObjectContainer {
         label.anchorOffsetX = label.width / 2;
         container.addChild(label);
 
-        egret.Tween.get(container).to({y: y - 20}, 500);
+        egret.Tween.get(container).to({y: y - 20}, 500).
+            wait(500).
+            call(function() {
+                if(container.parent) {
+                    container.parent.removeChild(container);
+                }
+            });
     }
 
     protected MsgHandler_onAddEntities(data: any): void {
