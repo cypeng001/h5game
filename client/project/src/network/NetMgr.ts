@@ -19,10 +19,12 @@ class NetMgr extends egret.EventDispatcher {
 
         var self = this;
         this._pomelo.on('io-error', function(e:any):void {
+            console.error("NetMgr io-error");
             self.dispatchEventWith(NetMgr.IO_ERROR);
         });
 
         this._pomelo.on('close', function(e:any):void {
+            console.log("NetMgr close");
             self.dispatchEventWith(NetMgr.CLOSE);
         });
     }

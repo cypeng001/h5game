@@ -83,6 +83,7 @@ class GameApp {
     }
 
     private initMsgHandler(): void {
+        LoginMsgHdlr.init();
         AreaMsgHdlr.init();
         EntryMsgHdlr.init();
         GateMsgHdlr.init();
