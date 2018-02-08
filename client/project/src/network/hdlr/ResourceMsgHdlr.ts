@@ -6,8 +6,8 @@ class ResourceMsgHdlr {
     }
 
     private static regReqHdlr(): void {
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_loadResource, ResourceMsgHdlr.reqLoadResource);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_loadAreaResource, ResourceMsgHdlr.reqLoadAreaResource);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_loadResource, ResourceMsgHdlr.reqLoadResource);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_loadAreaResource, ResourceMsgHdlr.reqLoadAreaResource);
     }
 
     private static regNtfHdlr(): void {

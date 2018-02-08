@@ -6,7 +6,7 @@ class EntryMsgHdlr {
     }
 
     private static regReqHdlr(): void {
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_entry, EntryMsgHdlr.reqEntry);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_entry, EntryMsgHdlr.reqEntry);
     }
 
     private static regNtfHdlr(): void {

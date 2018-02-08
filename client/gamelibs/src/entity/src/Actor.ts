@@ -286,7 +286,7 @@ export class Actor extends Entity {
             defActor.refreshHpBar();
 
             if(defActor.mainPlayer) {
-                EntityProxy.getLocalMsgDispatcher().dispatchMsg(ILocalMsg.ILM_Player_ChangeHp, {hp: defActor.hp, maxHp: defActor.maxHp});
+                IntfcProxy.getLocalMsgDispatcher().dispatchMsg(ILocalMsg.ILM_Player_ChangeHp, {hp: defActor.hp, maxHp: defActor.maxHp});
             }
         }
     }

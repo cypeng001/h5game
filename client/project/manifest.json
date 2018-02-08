@@ -23,7 +23,6 @@
 		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/scene/Scene.js",
 		"bin-debug/network/NetMsgHdlr.js",
-		"bin-debug/GameProxy.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
@@ -40,7 +39,7 @@
 		"bin-debug/mgr/UILayerID.js",
 		"bin-debug/mgr/UILayerMgr.js",
 		"bin-debug/network/NetMgr.js",
-		"bin-debug/system/role/RoleUI.js",
+		"bin-debug/GameApp.js",
 		"bin-debug/network/hdlr/AreaMsgHdlr.js",
 		"bin-debug/network/hdlr/EntryMsgHdlr.js",
 		"bin-debug/network/hdlr/FightMsgHdlr.js",
@@ -59,6 +58,6 @@
 		"bin-debug/system/account/LoginUI.js",
 		"bin-debug/system/account/RegisterUI.js",
 		"bin-debug/system/main/MainUI.js",
-		"bin-debug/GameApp.js"
+		"bin-debug/system/role/RoleUI.js"
 	]
 }

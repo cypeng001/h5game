@@ -19,6 +19,7 @@
         "src/network/INetMsgHdlr.ts",
         "src/local/ILocalMsg.ts",
         "src/local/ILocalMsgDispatcher.ts",
-        "src/cnf/ICnfMgr.ts"
+        "src/cnf/ICnfMgr.ts",
+        "src/IntfcProxy.ts"
 	]
 }

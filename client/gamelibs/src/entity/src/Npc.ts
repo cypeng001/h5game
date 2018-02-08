@@ -29,7 +29,7 @@ export class Npc extends Actor {
     }
 
     protected initSprite(): void {
-        this._sprite = EntityProxy.getMCFtry().create("npc_10001");
+        this._sprite = IntfcProxy.getMCFtry().create("npc_10001");
         this.addChild(this._sprite);
     }
 }

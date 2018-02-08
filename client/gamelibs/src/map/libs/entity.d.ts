@@ -37,7 +37,9 @@ declare namespace h5game {
         protected _mainPlayer: boolean;
         constructor();
         hp: number;
+        maxHp: number;
         mp: number;
+        maxMp: number;
         protected getName(): string;
         mainPlayer: boolean;
         init(data: any, mapLayer: IMapLayer): void;
@@ -91,13 +93,6 @@ declare namespace h5game {
         NO_ENOUGH_MP = 5,
         NOT_COOLDOWN = 6,
         ATTACKER_CONFUSED = 7,
-    }
-}
-declare namespace h5game {
-    class EntityProxy {
-        static getMCFtry(): IMCFtry;
-        static getNetMsgHdlr(): INetMsgHdlr;
-        static getLocalMsgDispatcher(): ILocalMsgDispatcher;
     }
 }
 declare namespace h5game {

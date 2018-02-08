@@ -6,19 +6,19 @@ class PlayerMsgHdlr {
     }
 
     private static regReqHdlr(): void {
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_enterScene, PlayerMsgHdlr.reqEnterScene);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_changeArea, PlayerMsgHdlr.reqChangeArea);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_move, PlayerMsgHdlr.reqMove);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_dropItem, PlayerMsgHdlr.reqDropItem);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_useItem, PlayerMsgHdlr.reqUseItem);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_pickItem, PlayerMsgHdlr.reqPickItem);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_learnSkill, PlayerMsgHdlr.reqLearnSkill);
-        GameProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_upgradeSkill, PlayerMsgHdlr.reqUpgradeSkill);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_enterScene, PlayerMsgHdlr.reqEnterScene);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_changeArea, PlayerMsgHdlr.reqChangeArea);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_move, PlayerMsgHdlr.reqMove);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_dropItem, PlayerMsgHdlr.reqDropItem);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_useItem, PlayerMsgHdlr.reqUseItem);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_pickItem, PlayerMsgHdlr.reqPickItem);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_learnSkill, PlayerMsgHdlr.reqLearnSkill);
+        h5game.IntfcProxy.getNetMsgHdlr().regReqHdlr(h5game.INetMsgReq.INMR_upgradeSkill, PlayerMsgHdlr.reqUpgradeSkill);
     }
 
     private static regNtfHdlr(): void {
-        GameProxy.getNetMsgHdlr().regNtfHdlr(h5game.INetMsgNtf.INMN_changeView, PlayerMsgHdlr.notifyChangeView);
-        GameProxy.getNetMsgHdlr().regNtfHdlr(h5game.INetMsgNtf.INMN_npcTalk, PlayerMsgHdlr.notifyNpcTalk);
+        h5game.IntfcProxy.getNetMsgHdlr().regNtfHdlr(h5game.INetMsgNtf.INMN_changeView, PlayerMsgHdlr.notifyChangeView);
+        h5game.IntfcProxy.getNetMsgHdlr().regNtfHdlr(h5game.INetMsgNtf.INMN_npcTalk, PlayerMsgHdlr.notifyNpcTalk);
     }
 
     private static regOnHdlr(): void {
@@ -87,18 +87,18 @@ class PlayerMsgHdlr {
     }
 
     private static onPlayerDialog(response: any): void {
-        GameProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onPlayerDialog, response);
+        h5game.IntfcProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onPlayerDialog, response);
     }
 
     private static onNPCTalk(response: any): void {
-        GameProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onNPCTalk, response);
+        h5game.IntfcProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onNPCTalk, response);
     }
 
     private static onUpgrade(response: any): void {
-        GameProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onUpgrade, response);
+        h5game.IntfcProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onUpgrade, response);
     }
 
     private static onPathCheckout(response: any): void {
-        GameProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onPathCheckout, response);
+        h5game.IntfcProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onPathCheckout, response);
     }
 }

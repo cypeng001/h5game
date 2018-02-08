@@ -96,13 +96,6 @@ declare namespace h5game {
     }
 }
 declare namespace h5game {
-    class EntityProxy {
-        static getMCFtry(): IMCFtry;
-        static getNetMsgHdlr(): INetMsgHdlr;
-        static getLocalMsgDispatcher(): ILocalMsgDispatcher;
-    }
-}
-declare namespace h5game {
     class EntityUtil {
         static actionState2Str(actionState: number): string;
     }

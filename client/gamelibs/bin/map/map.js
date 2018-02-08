@@ -93,8 +93,8 @@ var h5game;
             return _this;
         }
         MapLayer.prototype.loadMap = function (mapId) {
-            var city_cnf = h5game.MapProxy.getCnfMgr().getConfig("city")[mapId];
-            var map_cnf = h5game.MapProxy.getCnfMgr().getMapConfig(mapId);
+            var city_cnf = h5game.IntfcProxy.getCnfMgr().getConfig("city")[mapId];
+            var map_cnf = h5game.IntfcProxy.getCnfMgr().getMapConfig(mapId);
             this._map_id = mapId;
             this._map_cnf = map_cnf;
             this._city_cnf = city_cnf;
@@ -399,16 +399,16 @@ var h5game;
         };
         MapLayer.prototype.initMsgHandler = function () {
             var self = this;
-            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAddEntities, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAddEntities, function (data) {
                 self.MsgHandler_onAddEntities(data);
             });
-            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onRemoveEntities, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onRemoveEntities, function (data) {
                 self.MsgHandler_onRemoveEntities(data);
             });
-            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onMove, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onMove, function (data) {
                 self.MsgHandler_onMove(data);
             });
-            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAttack, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAttack, function (data) {
                 self.MsgHandler_onAttack(data);
             });
         };
@@ -435,25 +435,6 @@ var h5game;
     }(egret.DisplayObjectContainer));
     h5game.MapLayer = MapLayer;
     __reflect(MapLayer.prototype, "h5game.MapLayer");
-})(h5game || (h5game = {}));
-var h5game;
-(function (h5game) {
-    var MapProxy = (function () {
-        function MapProxy() {
-        }
-        MapProxy.getCnfMgr = function () {
-            return egret.getImplementation("ICnfMgr");
-        };
-        MapProxy.getMCFtry = function () {
-            return egret.getImplementation("IMCFtry");
-        };
-        MapProxy.getNetMsgHdlr = function () {
-            return egret.getImplementation("INetMsgHdlr");
-        };
-        return MapProxy;
-    }());
-    h5game.MapProxy = MapProxy;
-    __reflect(MapProxy.prototype, "h5game.MapProxy");
 })(h5game || (h5game = {}));
 var h5game;
 (function (h5game) {
@@ -514,8 +495,8 @@ var h5game;
         MapTileLayer.prototype.update = function (interval) {
         };
         MapTileLayer.prototype.loadMap = function (mapId) {
-            var city_cnf = h5game.MapProxy.getCnfMgr().getConfig("city")[mapId];
-            var map_cnf = h5game.MapProxy.getCnfMgr().getMapConfig(mapId);
+            var city_cnf = h5game.IntfcProxy.getCnfMgr().getConfig("city")[mapId];
+            var map_cnf = h5game.IntfcProxy.getCnfMgr().getMapConfig(mapId);
             this.map_id = mapId;
             this.map_cnf = map_cnf;
             this.city_cnf = city_cnf;

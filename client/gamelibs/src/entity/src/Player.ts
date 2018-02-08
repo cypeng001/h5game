@@ -37,7 +37,7 @@ export class Player extends Actor {
     }
 
     protected initSprite(): void {
-        this._sprite = EntityProxy.getMCFtry().create("player_10001");
+        this._sprite = IntfcProxy.getMCFtry().create("player_10001");
         this.addChild(this._sprite);
     }
 
@@ -45,7 +45,7 @@ export class Player extends Actor {
         super.moveTo(x, y);
 
         if(this.mainPlayer) {
-            EntityProxy.getNetMsgHdlr().requestMsg(INetMsgReq.INMR_move, 
+            IntfcProxy.getNetMsgHdlr().requestMsg(INetMsgReq.INMR_move, 
                 [{x: this.x, y: this.y}, {x: x, y: y}], 
                 null);
         }

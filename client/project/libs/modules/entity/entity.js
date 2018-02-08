@@ -313,7 +313,7 @@ var h5game;
                 defActor.hp -= resultData.damage;
                 defActor.refreshHpBar();
                 if (defActor.mainPlayer) {
-                    h5game.EntityProxy.getLocalMsgDispatcher().dispatchMsg(h5game.ILocalMsg.ILM_Player_ChangeHp, { hp: defActor.hp, maxHp: defActor.maxHp });
+                    h5game.IntfcProxy.getLocalMsgDispatcher().dispatchMsg(h5game.ILocalMsg.ILM_Player_ChangeHp, { hp: defActor.hp, maxHp: defActor.maxHp });
                 }
             }
         };
@@ -360,25 +360,6 @@ var h5game;
         AttackResult[AttackResult["ATTACKER_CONFUSED"] = 7] = "ATTACKER_CONFUSED";
     })(AttackResult = h5game.AttackResult || (h5game.AttackResult = {}));
     ;
-})(h5game || (h5game = {}));
-var h5game;
-(function (h5game) {
-    var EntityProxy = (function () {
-        function EntityProxy() {
-        }
-        EntityProxy.getMCFtry = function () {
-            return egret.getImplementation("IMCFtry");
-        };
-        EntityProxy.getNetMsgHdlr = function () {
-            return egret.getImplementation("INetMsgHdlr");
-        };
-        EntityProxy.getLocalMsgDispatcher = function () {
-            return egret.getImplementation("ILocalMsgDispatcher");
-        };
-        return EntityProxy;
-    }());
-    h5game.EntityProxy = EntityProxy;
-    __reflect(EntityProxy.prototype, "h5game.EntityProxy");
 })(h5game || (h5game = {}));
 var h5game;
 (function (h5game) {
@@ -443,7 +424,7 @@ var h5game;
             _super.prototype.release.call(this);
         };
         Monster.prototype.initSprite = function () {
-            this._sprite = h5game.EntityProxy.getMCFtry().create("monster_10001");
+            this._sprite = h5game.IntfcProxy.getMCFtry().create("monster_10001");
             this.addChild(this._sprite);
         };
         return Monster;
@@ -478,7 +459,7 @@ var h5game;
             _super.prototype.release.call(this);
         };
         Npc.prototype.initSprite = function () {
-            this._sprite = h5game.EntityProxy.getMCFtry().create("npc_10001");
+            this._sprite = h5game.IntfcProxy.getMCFtry().create("npc_10001");
             this.addChild(this._sprite);
         };
         return Npc;
@@ -521,13 +502,13 @@ var h5game;
             _super.prototype.release.call(this);
         };
         Player.prototype.initSprite = function () {
-            this._sprite = h5game.EntityProxy.getMCFtry().create("player_10001");
+            this._sprite = h5game.IntfcProxy.getMCFtry().create("player_10001");
             this.addChild(this._sprite);
         };
         Player.prototype.moveTo = function (x, y) {
             _super.prototype.moveTo.call(this, x, y);
             if (this.mainPlayer) {
-                h5game.EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_move, [{ x: this.x, y: this.y }, { x: x, y: y }], null);
+                h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_move, [{ x: this.x, y: this.y }, { x: x, y: y }], null);
             }
         };
         return Player;

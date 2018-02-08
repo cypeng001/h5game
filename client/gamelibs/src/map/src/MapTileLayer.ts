@@ -24,8 +24,8 @@ export class MapTileLayer extends egret.DisplayObjectContainer {
     }
 
     public loadMap(mapId: number): void {     
-        var city_cnf = MapProxy.getCnfMgr().getConfig("city")[mapId];
-        var map_cnf = MapProxy.getCnfMgr().getMapConfig(mapId);
+        var city_cnf = IntfcProxy.getCnfMgr().getConfig("city")[mapId];
+        var map_cnf = IntfcProxy.getCnfMgr().getMapConfig(mapId);
 
         this.map_id = mapId;
         this.map_cnf = map_cnf;

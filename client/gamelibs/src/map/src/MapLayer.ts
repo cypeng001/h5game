@@ -39,8 +39,8 @@ export class MapLayer extends egret.DisplayObjectContainer {
     }
 
     public loadMap(mapId: number): void {
-        var city_cnf = MapProxy.getCnfMgr().getConfig("city")[mapId];
-        var map_cnf = MapProxy.getCnfMgr().getMapConfig(mapId);
+        var city_cnf = IntfcProxy.getCnfMgr().getConfig("city")[mapId];
+        var map_cnf = IntfcProxy.getCnfMgr().getMapConfig(mapId);
 
         this._map_id = mapId;
         this._map_cnf = map_cnf;
@@ -430,16 +430,16 @@ export class MapLayer extends egret.DisplayObjectContainer {
     protected initMsgHandler(): void {
         var self = this;
 
-        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAddEntities, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAddEntities, function(data: any) {
             self.MsgHandler_onAddEntities(data);
         });
-        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onRemoveEntities, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onRemoveEntities, function(data: any) {
             self.MsgHandler_onRemoveEntities(data);
         });
-        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onMove, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onMove, function(data: any) {
             self.MsgHandler_onMove(data);
         });
-        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAttack, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAttack, function(data: any) {
             self.MsgHandler_onAttack(data);
         });
     }

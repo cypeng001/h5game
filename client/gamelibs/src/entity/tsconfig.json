@@ -20,7 +20,6 @@
         "src/Actor.ts",
         "src/Entity.ts",
         "src/EntityCnst.ts",
-        "src/EntityProxy.ts",
         "src/EntityUtil.ts",
         "src/Monster.ts",
         "src/Npc.ts",

@@ -86,13 +86,6 @@ declare namespace h5game {
     }
 }
 declare namespace h5game {
-    class MapProxy {
-        static getCnfMgr(): ICnfMgr;
-        static getMCFtry(): IMCFtry;
-        static getNetMsgHdlr(): INetMsgHdlr;
-    }
-}
-declare namespace h5game {
     class MapTile {
         source: string;
         image: eui.Image;

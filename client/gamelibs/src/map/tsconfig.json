@@ -22,7 +22,6 @@
         "src/MapArea.ts",
         "src/MapCnst.ts",
         "src/MapLayer.ts",
-        "src/MapProxy.ts",
         "src/MapTile.ts",
         "src/MapTileLayer.ts"
 	]

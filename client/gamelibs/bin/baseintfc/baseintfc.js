@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var h5game;
 (function (h5game) {
     var IMapCmdN;
@@ -110,4 +113,38 @@ var h5game;
 var h5game;
 (function (h5game) {
     ;
+})(h5game || (h5game = {}));
+var h5game;
+(function (h5game) {
+    var IntfcProxy = (function () {
+        function IntfcProxy() {
+        }
+        IntfcProxy.regCnfMgr = function (impl) {
+            egret.registerImplementation("ICnfMgr", impl);
+        };
+        IntfcProxy.getCnfMgr = function () {
+            return egret.getImplementation("ICnfMgr");
+        };
+        IntfcProxy.regMCFtry = function (impl) {
+            egret.registerImplementation("IMCFtry", impl);
+        };
+        IntfcProxy.getMCFtry = function () {
+            return egret.getImplementation("IMCFtry");
+        };
+        IntfcProxy.regNetMsgHdlr = function (impl) {
+            egret.registerImplementation("INetMsgHdlr", impl);
+        };
+        IntfcProxy.getNetMsgHdlr = function () {
+            return egret.getImplementation("INetMsgHdlr");
+        };
+        IntfcProxy.regLocalMsgDispatcher = function (impl) {
+            egret.registerImplementation("ILocalMsgDispatcher", impl);
+        };
+        IntfcProxy.getLocalMsgDispatcher = function () {
+            return egret.getImplementation("ILocalMsgDispatcher");
+        };
+        return IntfcProxy;
+    }());
+    h5game.IntfcProxy = IntfcProxy;
+    __reflect(IntfcProxy.prototype, "h5game.IntfcProxy");
 })(h5game || (h5game = {}));

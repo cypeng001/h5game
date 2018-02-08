@@ -54,14 +54,18 @@ class Main extends eui.UILayer {
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
 
-        egret.registerImplementation("IMCFtry", new h5game.MCFtry);
-        egret.registerImplementation("INetMsgHdlr", new NetMsgHdlr);
-        egret.registerImplementation("ILocalMsgDispatcher", new LocalMsgDispatcher);
-        egret.registerImplementation("ICnfMgr", new h5game.CnfMgr);
+        this.initProxy();
 
         this.runGame().catch(e => {
             console.log(e);
         })
+    }
+
+    private initProxy(): void {
+        h5game.IntfcProxy.regCnfMgr(new h5game.CnfMgr);
+        h5game.IntfcProxy.regMCFtry(new h5game.MCFtry);
+        h5game.IntfcProxy.regLocalMsgDispatcher(new LocalMsgDispatcher);
+        h5game.IntfcProxy.regNetMsgHdlr(new NetMsgHdlr);
     }
 
     private async runGame() {

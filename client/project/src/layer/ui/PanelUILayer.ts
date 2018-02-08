@@ -80,7 +80,7 @@ class PanelUILayer extends eui.Component{
 
         cblist.push(callback);
 
-        return GameProxy.getLocalMsgDispatcher().addMsgListener(id, callback);
+        return h5game.IntfcProxy.getLocalMsgDispatcher().addMsgListener(id, callback);
     }
 
     protected removeLocalMsgListener(id: h5game.ILocalMsg, callback: h5game.ILocalMsgCallback): boolean {
@@ -96,7 +96,7 @@ class PanelUILayer extends eui.Component{
             }
         }
 
-        return GameProxy.getLocalMsgDispatcher().removeMsgListener(id, callback);
+        return h5game.IntfcProxy.getLocalMsgDispatcher().removeMsgListener(id, callback);
     }
 
     protected hasLocalMsgListener(id: h5game.ILocalMsg, callback: h5game.ILocalMsgCallback): boolean {

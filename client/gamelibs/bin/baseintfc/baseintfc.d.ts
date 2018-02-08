@@ -120,3 +120,15 @@ declare namespace h5game {
         getMapConfig(mapID: number): any;
     }
 }
+declare namespace h5game {
+    class IntfcProxy {
+        static regCnfMgr(impl: ICnfMgr): void;
+        static getCnfMgr(): ICnfMgr;
+        static regMCFtry(impl: IMCFtry): void;
+        static getMCFtry(): IMCFtry;
+        static regNetMsgHdlr(impl: INetMsgHdlr): void;
+        static getNetMsgHdlr(): INetMsgHdlr;
+        static regLocalMsgDispatcher(impl: ILocalMsgDispatcher): void;
+        static getLocalMsgDispatcher(): ILocalMsgDispatcher;
+    }
+}
