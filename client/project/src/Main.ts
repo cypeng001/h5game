@@ -56,6 +56,8 @@ class Main extends eui.UILayer {
 
         this.initProxy();
 
+        GlobalConfig.init();
+
         this.runGame().catch(e => {
             console.log(e);
         })

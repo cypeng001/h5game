@@ -1,8 +1,6 @@
 class LoginLogic {
     private static uid: string;
     private static token: string;
-    private static gate_host: string;
-    private static gate_port: number;
     private static game_host: string;
     private static game_port: number;
 
@@ -10,9 +8,7 @@ class LoginLogic {
         LoginLogic.uid = uid;
         LoginLogic.token = token;
 
-        LoginLogic.gate_host = window["SERVER_CNF"]["GATE_HOST"];
-        LoginLogic.gate_port = window["SERVER_CNF"]["GATE_PORT"];
-        LoginLogic.connectToGateSrv(LoginLogic.gate_host, LoginLogic.gate_port);
+        LoginLogic.connectToGateSrv(GlobalConfig.GATE_HOST, GlobalConfig.GATE_PORT);
     }
 
     private static connectToGateSrv(host: string, port: number): void {
