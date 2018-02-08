@@ -16,7 +16,7 @@ class FightMsgHdlr {
     }
 
     private static onAttack(response: any): void {
-        h5game.IntfcProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_onAttack, response);
+        h5game.IntfcProxy.getNetMsgHdlr().dispatchMsg(h5game.INetMsgOn.INMO_FIGHT_onAttack, response);
     }
 
 

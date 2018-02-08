@@ -13,7 +13,7 @@ class LoginLogic {
     }
 
     private static queryEntry(uid: number): void {
-        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_queryEntry, 
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_GATE_queryEntry, 
             {uid: uid}, 
             (response) => {
             
@@ -39,7 +39,7 @@ class LoginLogic {
     }
 
     private static entry(token: string): void {
-        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_entry, 
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_ENTRY_entry, 
             {token: token}, 
             (response) => {
 
@@ -70,7 +70,7 @@ class LoginLogic {
     */
 
     private static enterScene(): void {
-        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_enterScene, null, (response: any) => {
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_PLAYER_enterScene, null, (response: any) => {
             GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
         });
     }
