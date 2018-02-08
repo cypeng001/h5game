@@ -1,89 +1,71 @@
 class LoginLogic {
-    private static uid: string;
-    private static token: string;
-    private static game_host: string;
-    private static game_port: number;
-
-    public static authEntry(uid: string, token: string): void {
-        LoginLogic.uid = uid;
-        LoginLogic.token = token;
-
-        LoginLogic.connectToGateSrv(GlobalConfig.GATE_HOST, GlobalConfig.GATE_PORT);
+    public static authEntry(): void {
+        var host = GlobalConfig.GATE_HOST;
+        var port = GlobalConfig.GATE_PORT;
+        LoginLogic.connectToGateSrv(host, port);
     }
 
     private static connectToGateSrv(host: string, port: number): void {
         NetMgr.getInstance().connect(host, port, () => {
-            LoginLogic.queryEntry(LoginLogic.uid);
+            LoginLogic.queryEntry(g_gameData.platData.uid);
         });
     }
 
-    private static queryEntry(uid: string): void {
+    private static queryEntry(uid: number): void {
         h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_queryEntry, 
             {uid: uid}, 
-            (data) => {
+            (response) => {
             
             NetMgr.getInstance().disconnect();
 
-            if(data.code === 2001) {
+            if(response.code === 2001) {
                 alert('Servers error!');
                 return;
             }
 
-            LoginLogic.game_host = data.host;
-            LoginLogic.game_port = data.port;
-
-            LoginLogic.connectToGameSrv(LoginLogic.game_host, LoginLogic.game_port);
+            var host = response.host;
+            var port = response.port;
+            LoginLogic.connectToGameSrv(host, port);
         }); 
 
     }
 
     private static connectToGameSrv(host: string, port: number): void {
         NetMgr.getInstance().connect(host, port, function(): void {
-            LoginLogic.entry(LoginLogic.token);
+            LoginLogic.entry(g_gameData.platData.token);
         });
     }
 
     private static entry(token: string): void {
         h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_entry, 
             {token: token}, 
-            (data) => {
+            (response) => {
 
-            var player = data.player;
-
-            if (data.code == 1001) {
+            if (response.code == 1001) {
                 alert('Login fail!');
                 return;
-            } else if (data.code == 1003) {
+            } else if (response.code == 1003) {
                 alert('Username not exists!');
                 return;
             }
 
-            if (data.code != 200) {
+            if (response.code != 200) {
                 alert('Login Fail!');
                 return;
             }
 
-            var userData = data.user;
-            var playerData = data.player;
-
-            var areaId = playerData.areaId;
-
-            if (!!userData) {
-                g_gameData.uid = userData.id;
-            }
-            g_gameData.playerId = playerData.id;
-            g_gameData.areaId = areaId;
-            g_gameData.player = playerData;
-
-            LoginLogic.loadAreaResource();
+            //LoginLogic.loadAreaResource();
+            LoginLogic.enterScene();
         });
     }
 
+    /*
     private static loadAreaResource(): void {
         h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_loadAreaResource, null, (response: any) => {
             LoginLogic.enterScene();
         });
     }
+    */
 
     private static enterScene(): void {
         h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_enterScene, null, (response: any) => {

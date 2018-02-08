@@ -54,10 +54,10 @@ class LoginUI extends eui.Component{
                 egret.localStorage.setItem("username", username);
                 egret.localStorage.setItem("password", password);
 
-                g_gameData.plat_data.uid = data.uid;
-                g_gameData.plat_data.token = data.token;
+                g_gameData.platData.uid = data.uid;
+                g_gameData.platData.token = data.token;
 
-                LoginLogic.authEntry(data.uid, data.token);
+                LoginLogic.authEntry();
             },
             (event) => {
                 console.log("testPhp error event:", event);

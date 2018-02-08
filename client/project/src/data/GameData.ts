@@ -1,8 +1,8 @@
 class GameData {
+    public platData: PlatData = null;
+    public serverData: ServerData = null;
     public role_data: RoleData = null;
-    public server_data: ServerData = null;
-    public plat_data: PlatData = null;
-
+    
     public uid: number = 0;
     public playerId: number = 0;
     public areaId: number = 0;
@@ -15,9 +15,9 @@ class GameData {
 
     public init(): void
     {
+        this.serverData = new ServerData();
+        this.platData = new PlatData();
         this.role_data = new RoleData();
-        this.server_data = new ServerData();
-        this.plat_data = new PlatData();
     }
 }
 
