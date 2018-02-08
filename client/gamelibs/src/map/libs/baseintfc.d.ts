@@ -22,23 +22,80 @@ declare namespace h5game {
 }
 declare namespace h5game {
     enum INetMsgReq {
-        INMR_MOVE = 1,
+        INMR_queryEntry = 100001,
+        INMR_timeSync = 100002,
+        INMR_entry = 100003,
+        INMR_createPlayer = 100004,
+        INMR_enterScene = 100005,
+        INMR_changeArea = 100006,
+        INMR_move = 100007,
+        INMR_dropItem = 100008,
+        INMR_useItem = 100009,
+        INMR_pickItem = 100010,
+        INMR_learnSkill = 100011,
+        INMR_upgradeSkill = 100012,
+        INMR_attack = 100013,
+        INMR_getNewTask = 100014,
+        INMR_startTask = 100015,
+        INMR_handoverTask = 100016,
+        INMR_equip = 100017,
+        INMR_unEquip = 100018,
+        INMR_loadResource = 100019,
+        INMR_loadAreaResource = 100020,
     }
     enum INetMsgNtf {
-        INMN_NONE = 1,
+        INMN_applyJoinTeamReply = 200001,
+        INMN_inviteJoinTeamReply = 200002,
+        INMN_kickOut = 200003,
+        INMN_applyJoinTeam = 200004,
+        INMN_inviteJoinTeam = 200005,
+        INMN_createTeam = 200006,
+        INMN_leaveTeam = 200007,
+        INMN_disbandTeam = 200008,
+        INMN_changeView = 200009,
+        INMN_npcTalk = 200010,
+        INMN_useSkill = 200011,
     }
     enum INetMsgOn {
-        INMO_onAddEntities = 1,
-        INMO_onRemoveEntities = 2,
-        INMO_onMove = 3,
-        INMO_onAttack = 4,
+        INMO_onAddEntities = 300001,
+        INMO_onRemoveEntities = 300002,
+        INMO_onMove = 300003,
+        INMO_onChangeArea = 300004,
+        INMO_onPickItem = 300005,
+        INMO_onRemoveItem = 300006,
+        INMO_onDropItems = 300007,
+        INMO_onAttack = 300008,
+        INMO_onPlayerDialog = 300009,
+        INMO_onNPCTalk = 300010,
+        INMO_onUpgrade = 300011,
+        INMO_onPathCheckout = 300012,
+        INMO_onUpdateTaskData = 300013,
+        INMO_onTaskCompleted = 300014,
+        INMO_onCheckoutTask = 300015,
+        INMO_onApplyJoinTeam = 300016,
+        INMO_onInviteJoinTeam = 300017,
+        INMO_onTeammateLeaveTeam = 300018,
+        INMO_onDisbandTeam = 300019,
+        INMO_onUpdateTeam = 300020,
+        INMO_onTeamCaptainStatusChange = 300021,
+        INMO_onTeamMemberStatusChange = 300022,
+        INMO_onDragMember2gameCopy = 300023,
     }
 }
 declare namespace h5game {
+    type INetMsgCallback = (response: any) => void;
+    type INetMsgReqHdlr = (msg: any, callback: INetMsgCallback) => void;
+    type INetMsgNtfHdlr = (msg: any) => void;
     interface INetMsgHdlr {
-        requestMsg(id: INetMsgReq, msg: any, callback: (response: any) => void): void;
+        regReqHdlr(id: INetMsgReq, INetMsgReqHdlr: any): void;
+        regNtfHdlr(id: INetMsgNtf, INetMsgNtfHdlr: any): void;
+        requestMsg(id: INetMsgReq, msg: any, callback: INetMsgCallback): void;
         notifyMsg(id: INetMsgNtf, msg: any): void;
-        onMsg(id: INetMsgOn, callback: (response: any) => void): void;
+        addMsgHdlr(id: INetMsgReq | INetMsgOn, callback: INetMsgCallback): boolean;
+        removeMsgHdlr(id: INetMsgReq | INetMsgOn, callback: INetMsgCallback): boolean;
+        hasMsgHdlr(id: INetMsgReq | INetMsgOn, callback: INetMsgCallback): boolean;
+        clearMsgHdlr(id: INetMsgReq | INetMsgOn): void;
+        dispatchMsg(id: INetMsgReq | INetMsgOn, response: any): void;
     }
 }
 declare namespace h5game {

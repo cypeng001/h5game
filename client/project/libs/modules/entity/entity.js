@@ -278,7 +278,7 @@ var h5game;
             var resultData = data.result;
             if (resultData.result == h5game.AttackResult.SUCCESS) {
                 this._mapLayer.notify(h5game.IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
-                var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, data.target);
+                var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, [data.target]);
                 defActor.hp -= resultData.damage;
                 defActor.refreshHpBar();
             }

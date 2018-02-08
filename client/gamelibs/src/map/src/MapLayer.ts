@@ -430,16 +430,16 @@ export class MapLayer extends egret.DisplayObjectContainer {
     protected initMsgHandler(): void {
         var self = this;
 
-        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onAddEntities, function(data: any) {
+        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAddEntities, function(data: any) {
             self.MsgHandler_onAddEntities(data);
         });
-        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onRemoveEntities, function(data: any) {
+        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onRemoveEntities, function(data: any) {
             self.MsgHandler_onRemoveEntities(data);
         });
-        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onMove, function(data: any) {
+        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onMove, function(data: any) {
             self.MsgHandler_onMove(data);
         });
-        MapProxy.getNetMsgHdlr().onMsg(INetMsgOn.INMO_onAttack, function(data: any) {
+        MapProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAttack, function(data: any) {
             self.MsgHandler_onAttack(data);
         });
     }
@@ -458,7 +458,7 @@ export class MapLayer extends egret.DisplayObjectContainer {
         switch(cmd) {
             case IMapCmdQ.IMCQ_GetActor:
             {
-                return this.getActor(params);
+                return this.getActor.apply(this, params);
             }
         }
     }

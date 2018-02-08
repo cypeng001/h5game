@@ -55,7 +55,7 @@ export class Player extends Actor {
         super.moveTo(x, y);
 
         if(this.mainPlayer) {
-            EntityProxy.getNetMsgHdlr().requestMsg(INetMsgReq.INMR_MOVE, 
+            EntityProxy.getNetMsgHdlr().requestMsg(INetMsgReq.INMR_move, 
                 [{x: this.x, y: this.y}, {x: x, y: y}], 
                 null);
         }

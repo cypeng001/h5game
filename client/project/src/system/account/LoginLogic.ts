@@ -22,7 +22,8 @@ class LoginLogic extends egret.EventDispatcher {
         var self = this;
 	
         NetMgr.getInstance().connect(window["SERVER_CNF"]["GATE_HOST"], window["SERVER_CNF"]["GATE_PORT"], function(): void {
-            NetMgr.getInstance().request('gate.gateHandler.queryEntry', { uid: uid}, (data) => {
+            //NetMgr.getInstance().request('gate.gateHandler.queryEntry', { uid: uid}, (data) => {
+            GameProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_queryEntry, { uid: uid}, (data) => {
                 NetMgr.getInstance().disconnect();
 
                 if(data.code === 2001) {
@@ -40,7 +41,8 @@ class LoginLogic extends egret.EventDispatcher {
         var self = this;
 
         NetMgr.getInstance().connect(host, port, function(): void {
-            NetMgr.getInstance().request('connector.entryHandler.entry', {token: token}, (data) => {
+            //NetMgr.getInstance().request('connector.entryHandler.entry', {token: token}, (data) => {
+            GameProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_entry, {token: token}, (data) => {
                 console.log("connector.entryHandler.entry cb data:", data);
                 var player = data.player;
                 if (callback) {
@@ -83,8 +85,16 @@ class LoginLogic extends egret.EventDispatcher {
         g_gameData.areaId = areaId;
         g_gameData.player = playerData;
 
-        SceneMsgHandler.getInstance().reqLoadAreaResource(function(data) {
-            SceneMsgHandler.getInstance().reqEnterScene(null);
+        GameProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_loadAreaResource, null, () => {
+            GameProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_enterScene, null, () => {
+                GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
+            });
         });
+
+        /*
+        SceneMsgHdlr.reqLoadAreaResource(function(data) {
+            SceneMsgHdlr.reqEnterScene(null);
+        });
+        */
     }
 }

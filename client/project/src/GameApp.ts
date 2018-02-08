@@ -76,70 +76,19 @@ class GameApp {
 
     private onConnect(): void
     {
-        //NetModLogin.reqHandShake();
     }
 
     private onDisconnect(): void
     {
     }
 
-    /*
-    private onProtocolRecv(protocol: ProtocolBase): void
-    {
-        this.notifyResponser(protocol);
-        this.notifyProtocolListener(protocol);
-        this.notifyProtocolToScene(protocol);
-    }
-
-    private notifyResponser(protocol: ProtocolBase): void
-    {
-        NetModResponser.getInstance().notifyResponser(protocol);
-    }
-
-    public addProtocolListener(protocol_id: number, callback: Function, obj: Object): void
-    {
-        if(!callback)
-        {
-            return;
-        }
-
-        var listeners = this._protocol_listeners[protocol_id];
-        if(!listeners)
-        {
-            listeners = this._protocol_listeners[protocol_id] = [];
-        }
-        var listener = {
-            callback: callback,
-            obj: obj
-        };
-        listeners.push(listener);
-    }
-
-    private notifyProtocolListener(protocol: ProtocolBase): void
-    {
-        var protocol_id = protocol.getProtocolID();
-        var listeners = this._protocol_listeners[protocol_id];
-        if(listeners)
-        {
-            delete this._protocol_listeners[protocol_id];
-            for(var i = 0; i < listeners.length; ++i)
-            {
-                var listener = listeners[i];
-                listener.callback.call(listener.obj, protocol);
-            }
-        }
-    }
-
-    private notifyProtocolToScene(protocol: ProtocolBase): void
-    {
-        var scene = SceneMgr.getInstance().getRunningScene();
-        scene.listenNetworkMsg(protocol);
-    }
-    */
-
     private initMsgHandler(): void {
-        LoginMsgHandler.getInstance().init();
-        SceneMsgHandler.getInstance().init();
-        GameMsgHandler.getInstance().init();
+        AreaMsgHdlr.init();
+        EntryMsgHdlr.init();
+        GateMsgHdlr.init();
+        PlayerMsgHdlr.init();
+        ResourceMsgHdlr.init();
+        TeamMsgHdlr.init();
+        FightMsgHdlr.init();
     }
 }

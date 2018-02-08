@@ -399,16 +399,16 @@ var h5game;
         };
         MapLayer.prototype.initMsgHandler = function () {
             var self = this;
-            h5game.MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onAddEntities, function (data) {
+            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAddEntities, function (data) {
                 self.MsgHandler_onAddEntities(data);
             });
-            h5game.MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onRemoveEntities, function (data) {
+            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onRemoveEntities, function (data) {
                 self.MsgHandler_onRemoveEntities(data);
             });
-            h5game.MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onMove, function (data) {
+            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onMove, function (data) {
                 self.MsgHandler_onMove(data);
             });
-            h5game.MapProxy.getNetMsgHdlr().onMsg(h5game.INetMsgOn.INMO_onAttack, function (data) {
+            h5game.MapProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAttack, function (data) {
                 self.MsgHandler_onAttack(data);
             });
         };
@@ -425,7 +425,7 @@ var h5game;
             switch (cmd) {
                 case h5game.IMapCmdQ.IMCQ_GetActor:
                     {
-                        return this.getActor(params);
+                        return this.getActor.apply(this, params);
                     }
             }
         };
