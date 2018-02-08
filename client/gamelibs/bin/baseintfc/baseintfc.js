@@ -101,5 +101,13 @@ var h5game;
 })(h5game || (h5game = {}));
 var h5game;
 (function (h5game) {
+    var ILocalMsg;
+    (function (ILocalMsg) {
+        //Player
+        ILocalMsg[ILocalMsg["ILM_Player_ChangeHp"] = 100001] = "ILM_Player_ChangeHp";
+    })(ILocalMsg = h5game.ILocalMsg || (h5game.ILocalMsg = {}));
+})(h5game || (h5game = {}));
+var h5game;
+(function (h5game) {
     ;
 })(h5game || (h5game = {}));

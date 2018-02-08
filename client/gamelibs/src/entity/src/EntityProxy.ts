@@ -9,6 +9,10 @@ export class EntityProxy {
     public static getNetMsgHdlr(): INetMsgHdlr {
         return egret.getImplementation("INetMsgHdlr");
     }
+
+    public static getLocalMsgDispatcher(): ILocalMsgDispatcher {
+        return egret.getImplementation("ILocalMsgDispatcher");
+    }
 }
 
 }

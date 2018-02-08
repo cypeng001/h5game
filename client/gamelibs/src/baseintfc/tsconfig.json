@@ -17,6 +17,8 @@
         "src/mc/IMCFtry.ts",
         "src/network/INetMsg.ts",
         "src/network/INetMsgHdlr.ts",
+        "src/local/ILocalMsg.ts",
+        "src/local/ILocalMsgDispatcher.ts",
         "src/cnf/ICnfMgr.ts"
 	]
 }

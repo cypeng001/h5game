@@ -99,6 +99,21 @@ declare namespace h5game {
     }
 }
 declare namespace h5game {
+    enum ILocalMsg {
+        ILM_Player_ChangeHp = 100001,
+    }
+}
+declare namespace h5game {
+    type ILocalMsgCallback = (msg: any) => void;
+    interface ILocalMsgDispatcher {
+        addMsgListener(id: ILocalMsg, callback: ILocalMsgCallback): boolean;
+        removeMsgListener(id: ILocalMsg, callback: ILocalMsgCallback): boolean;
+        hasMsgListener(id: ILocalMsg, callback: ILocalMsgCallback): boolean;
+        clearMsgListener(id: ILocalMsg): void;
+        dispatchMsg(id: ILocalMsg, msg: any): void;
+    }
+}
+declare namespace h5game {
     interface ICnfMgr {
         init(): void;
         getConfig(configName: string): any;

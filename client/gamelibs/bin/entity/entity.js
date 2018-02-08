@@ -84,6 +84,7 @@ var h5game;
             _this._maxHp = 1;
             _this._mp = 0;
             _this._maxMp = 1;
+            _this._mainPlayer = false;
             return _this;
         }
         Object.defineProperty(Actor.prototype, "hp", {
@@ -92,6 +93,16 @@ var h5game;
             },
             set: function (val) {
                 this._hp = val;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Actor.prototype, "maxHp", {
+            get: function () {
+                return this._maxHp;
+            },
+            set: function (val) {
+                this._maxHp = val;
             },
             enumerable: true,
             configurable: true
@@ -106,9 +117,29 @@ var h5game;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Actor.prototype, "maxMp", {
+            get: function () {
+                return this._maxMp;
+            },
+            set: function (val) {
+                this._maxMp = val;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Actor.prototype.getName = function () {
             return this._name;
         };
+        Object.defineProperty(Actor.prototype, "mainPlayer", {
+            get: function () {
+                return this._mainPlayer;
+            },
+            set: function (val) {
+                this._mainPlayer = val;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Actor.prototype.init = function (data, mapLayer) {
             _super.prototype.init.call(this, data, mapLayer);
         };
@@ -281,6 +312,9 @@ var h5game;
                 var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, [data.target]);
                 defActor.hp -= resultData.damage;
                 defActor.refreshHpBar();
+                if (defActor.mainPlayer) {
+                    h5game.EntityProxy.getLocalMsgDispatcher().dispatchMsg(h5game.ILocalMsg.ILM_Player_ChangeHp, { hp: defActor.hp, maxHp: defActor.maxHp });
+                }
             }
         };
         return Actor;
@@ -337,6 +371,9 @@ var h5game;
         };
         EntityProxy.getNetMsgHdlr = function () {
             return egret.getImplementation("INetMsgHdlr");
+        };
+        EntityProxy.getLocalMsgDispatcher = function () {
+            return egret.getImplementation("ILocalMsgDispatcher");
         };
         return EntityProxy;
     }());
@@ -454,9 +491,7 @@ var h5game;
     var Player = (function (_super) {
         __extends(Player, _super);
         function Player() {
-            var _this = _super.call(this) || this;
-            _this._mainPlayer = false;
-            return _this;
+            return _super.call(this) || this;
         }
         Object.defineProperty(Player.prototype, "entityType", {
             get: function () {
@@ -489,20 +524,10 @@ var h5game;
             this._sprite = h5game.EntityProxy.getMCFtry().create("player_10001");
             this.addChild(this._sprite);
         };
-        Object.defineProperty(Player.prototype, "mainPlayer", {
-            get: function () {
-                return this._mainPlayer;
-            },
-            set: function (val) {
-                this._mainPlayer = val;
-            },
-            enumerable: true,
-            configurable: true
-        });
         Player.prototype.moveTo = function (x, y) {
             _super.prototype.moveTo.call(this, x, y);
             if (this.mainPlayer) {
-                h5game.EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_MOVE, [{ x: this.x, y: this.y }, { x: x, y: y }], null);
+                h5game.EntityProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_move, [{ x: this.x, y: this.y }, { x: x, y: y }], null);
             }
         };
         return Player;

@@ -24,6 +24,8 @@ export class Actor extends Entity {
     protected _hpBar: eui.ProgressBar;
     protected _mpBar: eui.ProgressBar;
 
+    protected _mainPlayer: boolean = false;
+
     constructor() {
         super();
     }
@@ -36,6 +38,14 @@ export class Actor extends Entity {
         return this._hp;
     }
 
+    public set maxHp(val: number) {
+        this._maxHp = val;
+    }
+
+    public get maxHp(): number {
+        return this._maxHp;
+    }
+
     public set mp(val: number) {
         this._mp = val;
     }
@@ -44,8 +54,24 @@ export class Actor extends Entity {
         return this._mp;
     }
 
+    public set maxMp(val: number) {
+        this._maxMp = val;
+    }
+
+    public get maxMp(): number {
+        return this._maxMp;
+    }
+
     protected getName(): string {
         return this._name;
+    }
+
+    public set mainPlayer(val: boolean) {
+        this._mainPlayer = val;
+    }
+
+    public get mainPlayer(): boolean {
+        return this._mainPlayer;
     }
 
     public init(data: any, mapLayer: IMapLayer): void {
@@ -258,6 +284,10 @@ export class Actor extends Entity {
             var defActor = this._mapLayer.query(IMapCmdQ.IMCQ_GetActor, [data.target]);
             defActor.hp -= resultData.damage;
             defActor.refreshHpBar();
+
+            if(defActor.mainPlayer) {
+                EntityProxy.getLocalMsgDispatcher().dispatchMsg(ILocalMsg.ILM_Player_ChangeHp, {hp: defActor.hp, maxHp: defActor.maxHp});
+            }
         }
     }
 }

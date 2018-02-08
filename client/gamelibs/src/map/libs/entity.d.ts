@@ -34,10 +34,12 @@ declare namespace h5game {
         protected _maxMp: number;
         protected _hpBar: eui.ProgressBar;
         protected _mpBar: eui.ProgressBar;
+        protected _mainPlayer: boolean;
         constructor();
         hp: number;
         mp: number;
         protected getName(): string;
+        mainPlayer: boolean;
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         update(interval: number): void;
@@ -95,6 +97,7 @@ declare namespace h5game {
     class EntityProxy {
         static getMCFtry(): IMCFtry;
         static getNetMsgHdlr(): INetMsgHdlr;
+        static getLocalMsgDispatcher(): ILocalMsgDispatcher;
     }
 }
 declare namespace h5game {
@@ -122,13 +125,11 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class Player extends Actor {
-        protected _mainPlayer: boolean;
         constructor();
         readonly entityType: number;
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
-        mainPlayer: boolean;
         moveTo(x: number, y: number): void;
     }
 }

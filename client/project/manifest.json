@@ -36,6 +36,7 @@
 		"bin-debug/layer/loading/StartLoadingLayer.js",
 		"bin-debug/layer/loading/StartLoadingUI.js",
 		"bin-debug/AssetAdapter.js",
+		"bin-debug/local/LocalMsgDispatcher.js",
 		"bin-debug/mgr/UILayerID.js",
 		"bin-debug/mgr/UILayerMgr.js",
 		"bin-debug/network/NetMgr.js",

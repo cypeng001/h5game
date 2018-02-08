@@ -10,4 +10,8 @@ class GameProxy {
     public static getNetMsgHdlr(): h5game.INetMsgHdlr {
         return egret.getImplementation("INetMsgHdlr");
     }
+
+    public static getLocalMsgDispatcher(): h5game.ILocalMsgDispatcher {
+        return egret.getImplementation("ILocalMsgDispatcher");
+    }
 }

@@ -1,4 +1,11 @@
 class MainUI extends PanelUILayer {
+    private roleBtn: eui.Button;
+    private mountBtn: eui.Button;
+    private petBtn: eui.Button;
+    private socialBtn: eui.Button;
+    private roleImg: eui.Image;
+    private hpBar: eui.ProgressBar;
+
     constructor() {
         super();
         this.addEventListener(eui.UIEvent.COMPLETE, this.onUIComplete, this);
@@ -11,7 +18,7 @@ class MainUI extends PanelUILayer {
         this.petBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPetBtnTab, this);
         this.socialBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSocialBtnTab, this);
 
-        
+        this.regLocalMsgHdlrs();
     }
 
     public onEnter(): void
@@ -44,10 +51,22 @@ class MainUI extends PanelUILayer {
         console.log("onSocialBtnTab");
     }
 
-	private roleBtn: eui.Button;
-    private mountBtn: eui.Button;
-    private petBtn: eui.Button;
-    private socialBtn: eui.Button;
-    private roleImg: eui.Image;
+    protected refreshHpBar(hp: number, maxHp: number): void {
+        this.hpBar.minimum = 0;
+        this.hpBar.maximum = maxHp;
+        this.hpBar.value = hp;
+    }
+
+    private regLocalMsgHdlrs(): void {
+        var self = this;
+
+        this.addLocalMsgListener(h5game.ILocalMsg.ILM_Player_ChangeHp, (msg: any) => {
+            self.onLocalMsg_Player_ChangeHp(msg);
+        });
+        
+    }
 	
+    protected onLocalMsg_Player_ChangeHp(msg: any): void {
+        this.refreshHpBar(msg.hp, msg.maxHp);
+    }
 }

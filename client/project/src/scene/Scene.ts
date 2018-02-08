@@ -85,12 +85,4 @@ class Scene extends egret.DisplayObjectContainer
         console.error("Scene_addUILayer layer has not exist", layer.panelID);
     }
 
-    public listenNetworkMsg(protocol: any): void
-    {
-        for(var i = 0; i < this._uiLayerList.length; ++i)
-        {
-            var layer = this._uiLayerList[i];
-            layer.listenNetworkMsg(protocol);
-        }
-    }
 }
