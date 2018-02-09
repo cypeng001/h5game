@@ -37,6 +37,7 @@ export class Player extends Actor {
     }
 
     protected initSprite(): void {
+        //this._sprite = IntfcProxy.getMCFtry().create("player_10002");
         this._sprite = IntfcProxy.getMCFtry().create("player_10001");
         this.addChild(this._sprite);
     }

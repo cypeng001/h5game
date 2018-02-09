@@ -1,5 +1,12 @@
 {
-    "monster_10001" : "356c746b",
-    "npc_10001" : "39b1fc71",
-    "player_10001" : "3cc9429d"
+    "monster_10001" : {"crc": "356c746b", "files": ["monster_10001"]},
+    "npc_10001" : {"crc": "39b1fc71", "files": ["npc_10001"]},
+    "player_10001" : {"crc": "3cc9429d", "files": ["player_10001"]},
+    "player_10002" : {"crc": "3cc9429d", "files": ["player_10002_standfront", 
+        "player_10002_standback", 
+        "player_10002_runfront", 
+        "player_10002_runback", 
+        "player_10002_attackfront", 
+        "player_10002_attackback"]
+        }
 }

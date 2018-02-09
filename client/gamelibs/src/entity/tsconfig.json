@@ -17,6 +17,8 @@
         "libs/eui.d.ts",
         "libs/baseintfc.d.ts",
         "libs/baseutils.d.ts",
+        "libs/base.d.ts",
+        "libs/mcaux.d.ts",
         "src/Actor.ts",
         "src/Entity.ts",
         "src/EntityCnst.ts",

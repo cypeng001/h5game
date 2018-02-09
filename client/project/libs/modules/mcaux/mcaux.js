@@ -12,9 +12,13 @@ var h5game;
 (function (h5game) {
     var MCAdv = (function (_super) {
         __extends(MCAdv, _super);
-        function MCAdv(movieClipData) {
+        function MCAdv(movieClipData, key, pool) {
             var _this = _super.call(this, movieClipData) || this;
+            _this._pool = null;
+            _this._mcDatas = {};
             _this.mcst = h5game.MCST.LOAD;
+            _this._key = key;
+            _this._pool = pool;
             return _this;
         }
         MCAdv.prototype.gotoAndPlay = function (frame, playTimes) {
@@ -29,6 +33,20 @@ var h5game;
                 return;
             }
             _super.prototype.gotoAndStop.call(this, frame);
+        };
+        MCAdv.prototype.playAnimation = function (frame, playTimes) {
+            if (playTimes === void 0) { playTimes = 0; }
+            if (this.mcst != h5game.MCST.LOAD) {
+                return;
+            }
+            if (this._pool.getMCDataCnt() > 1) {
+                var mcData = this._mcDatas[frame];
+                if (!mcData) {
+                    mcData = this._mcDatas[frame] = this._pool.createMovieClipData(this._key + "_" + frame);
+                }
+                this.movieClipData = mcData;
+            }
+            this.gotoAndPlay(frame, playTimes);
         };
         return MCAdv;
     }(egret.MovieClip));
@@ -54,16 +72,21 @@ var h5game;
         };
         MCCnfMgr.prototype.initMCCnf = function (zip) {
             for (var key in this._manifest) {
-                var config = JSON.parse(zip.file(key + ".json").asText());
-                this.regMCCnf(key, config);
+                var filelist = this.getFilelist(key);
+                for (var i in filelist) {
+                    var filename = filelist[i];
+                    var config = JSON.parse(zip.file(filename + ".json").asText());
+                    this.regMCCnf(filename, config);
+                }
             }
         };
         MCCnfMgr.prototype.regMCCnf = function (key, config) {
             if (!config) {
+                console.warn("MCCnfMgr_regMCCnf config is null", key);
                 return false;
             }
             if (this._configMap[key]) {
-                console.log("MCCnfMgr_regMCCnf config already exist", key);
+                console.warn("MCCnfMgr_regMCCnf config already exist", key);
                 return false;
             }
             this._configMap[key] = config;
@@ -72,12 +95,15 @@ var h5game;
         MCCnfMgr.prototype.getMCCnf = function (key) {
             var config = this._configMap[key];
             if (!config) {
-                console.log("MCCnfMgr_getMCCnf invalid key", key);
+                console.warn("MCCnfMgr_getMCCnf config is null", key);
             }
             return config;
         };
         MCCnfMgr.prototype.getHash = function (key) {
-            return this._manifest[key];
+            return this._manifest[key].crc;
+        };
+        MCCnfMgr.prototype.getFilelist = function (key) {
+            return this._manifest[key].files;
         };
         return MCCnfMgr;
     }());
@@ -130,7 +156,8 @@ var h5game;
         function MCPool(name, mcCnfMgr) {
             var _this = _super.call(this, name) || this;
             _this._state = h5game.MCPST.UNINIT;
-            _this._mcDataFtry = null;
+            _this._mcDataFtrys = null;
+            _this._mcDataCnt = 0;
             _this._mcCnfMgr = null;
             _this._mcCnfMgr = mcCnfMgr;
             _this._autoRecycleInterval = MCPool.DEF_AUTO_RECYCLE_INTERVAL;
@@ -144,53 +171,90 @@ var h5game;
             }, this);
         };
         MCPool.prototype.getImagePath = function (key) {
-            var imagePath = RES.config.resourceRoot + "movieclip/" + key + ".png";
-            var hash = this._mcCnfMgr.getHash(key);
-            if (hash && hash.length > 0) {
-                imagePath += ("?v=" + hash);
+            return RES.config.resourceRoot + "movieclip/" + key + ".png";
+        };
+        MCPool.prototype.createObj = function (key, params) {
+            var movieClipName = params;
+            if (!movieClipName) {
+                movieClipName = key;
             }
-            return imagePath;
+            var mcData = null;
+            if (this.getMCDataCnt() == 1) {
+                mcData = this._mcDataFtrys[key].generateMovieClipData(key);
+            }
+            return new h5game.MCAdv(mcData, key, this);
         };
-        MCPool.prototype.createObj = function (key) {
-            return new h5game.MCAdv(this._mcDataFtry.generateMovieClipData(key));
-        };
-        MCPool.prototype.reload = function (texture) {
-            this._mcDataFtry.texture = texture;
-            for (var i in this._actPool) {
-                var mc = this._actPool[i];
-                if (mc.mcst == h5game.MCST.UNLOAD) {
-                    mc.mcst = h5game.MCST.LOAD;
+        MCPool.prototype.reload = function (filename, texture) {
+            this._mcDataFtrys[filename].texture = texture;
+            if (this._state == h5game.MCPST.LOADED) {
+                for (var i in this._actPool) {
+                    var mc = this._actPool[i];
+                    if (mc.mcst == h5game.MCST.UNLOAD) {
+                        mc.mcst = h5game.MCST.LOAD;
+                    }
                 }
             }
         };
-        MCPool.prototype.create = function (key) {
+        MCPool.prototype.create = function (key, params) {
+            if (params === void 0) { params = null; }
             this._lastActiveTick = egret.getTimer();
-            if (!this._mcDataFtry) {
-                this._mcDataFtry = new h5game.MCDataFtryAdv(this._mcCnfMgr.getMCCnf(key));
+            var filelist = this._mcCnfMgr.getFilelist(key);
+            if (!params) {
+                params = filelist[0];
+            }
+            if (!this._mcDataFtrys) {
+                this._mcDataFtrys = {};
+                for (var i in filelist) {
+                    var filename = filelist[i];
+                    this._mcDataFtrys[filename] = new h5game.MCDataFtryAdv(this._mcCnfMgr.getMCCnf(filename));
+                    this._mcDataCnt++;
+                }
             }
             if (this._state == h5game.MCPST.UNLOAD) {
                 this._state = h5game.MCPST.LOADING;
                 var self = this;
-                var imagePath = this.getImagePath(key);
-                MCPool.getAssets(imagePath, function (texture) {
-                    self._state = h5game.MCPST.LOADED;
-                    egret.callLater(function () {
-                        self.reload(texture);
-                    }, self);
-                });
+                var filelist = this._mcCnfMgr.getFilelist(key);
+                var count = 0;
+                for (var i in filelist) {
+                    var filename = filelist[i];
+                    var imagePath = this.getImagePath(filename);
+                    var hash = this._mcCnfMgr.getHash(key);
+                    if (hash && hash.length > 0) {
+                        imagePath += ("?v=" + hash);
+                    }
+                    MCPool.getAssets(imagePath, function (texture) {
+                        egret.callLater(function () {
+                            count++;
+                            if (count == filelist.length) {
+                                self._state = h5game.MCPST.LOADED;
+                            }
+                            self.reload(filename, texture);
+                        }, self);
+                    });
+                }
             }
-            return _super.prototype.create.call(this, key);
+            return _super.prototype.create.call(this, key, params);
         };
         MCPool.prototype.release = function () {
             _super.prototype.release.call(this);
-            var imagePath = this.getImagePath(this._name);
-            RES.destroyRes(imagePath);
-            this._mcDataFtry = null;
+            var filelist = this._mcCnfMgr.getFilelist(this._name);
+            for (var i in filelist) {
+                var filename = filelist[i];
+                var imagePath = this.getImagePath(filename);
+                RES.destroyRes(imagePath);
+            }
+            this._mcDataFtrys = null;
             this._mcCnfMgr = null;
         };
         MCPool.prototype.canRelease = function () {
             return this._actPool.length == 0
                 && (egret.getTimer() - this._lastActiveTick) > MCPool.DEF_RELEASE_TIME;
+        };
+        MCPool.prototype.getMCDataCnt = function () {
+            return this._mcDataCnt;
+        };
+        MCPool.prototype.createMovieClipData = function (key) {
+            return this._mcDataFtrys[key].generateMovieClipData(key);
         };
         MCPool.DEF_RELEASE_TIME = 60000;
         MCPool.DEF_AUTO_RECYCLE_INTERVAL = 5000;

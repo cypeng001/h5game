@@ -20,7 +20,7 @@ declare namespace h5game {
     class Actor extends Entity {
         protected _actionState: number;
         protected _dir: number;
-        protected _sprite: egret.MovieClip;
+        protected _sprite: h5game.MCAdv;
         protected _nameLabel: eui.Label;
         protected _moveTarPos: [number, number];
         protected _moveSpeed: [number, number];

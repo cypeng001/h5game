@@ -20,18 +20,23 @@ export class MCCnfMgr {
 
     private initMCCnf(zip: JSZip): void {
         for(var key in this._manifest) {
-            var config = JSON.parse(zip.file(key + ".json").asText());
-            this.regMCCnf(key, config);
+            var filelist = this.getFilelist(key);
+            for(var i in filelist) {
+                var filename = filelist[i];
+                var config = JSON.parse(zip.file(filename + ".json").asText());
+                this.regMCCnf(filename, config);
+            }
         }
     }
 
     public regMCCnf(key: string, config: any): Boolean {
         if(!config) {
+            console.warn("MCCnfMgr_regMCCnf config is null", key);
             return false;
         }
 
         if(this._configMap[key]) {
-            console.log("MCCnfMgr_regMCCnf config already exist", key);
+            console.warn("MCCnfMgr_regMCCnf config already exist", key);
             return false;
         }
 
@@ -43,13 +48,17 @@ export class MCCnfMgr {
     public getMCCnf(key: string): any {
         var config = this._configMap[key];
         if(!config) {
-            console.log("MCCnfMgr_getMCCnf invalid key", key);
+            console.warn("MCCnfMgr_getMCCnf config is null", key);
         }
         return config;
     }
 
     public getHash(key: string): string {
-        return this._manifest[key];
+        return this._manifest[key].crc;
+    }
+
+    public getFilelist(key: string): string[] {
+        return this._manifest[key].files;
     }
 }
 

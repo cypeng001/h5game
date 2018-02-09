@@ -206,7 +206,7 @@ var h5game;
         };
         Actor.prototype._setActionState = function (actionState, loop) {
             var playTimes = loop ? -1 : 1;
-            this._sprite.gotoAndPlay(h5game.EntityUtil.actionState2Str(actionState), playTimes);
+            this._sprite.playAnimation(h5game.EntityUtil.actionState2Str(actionState), playTimes);
             var frameRate = this.getActStFrmRate(actionState);
             if (frameRate > 0) {
                 this._sprite.frameRate = frameRate;
@@ -596,6 +596,7 @@ var h5game;
             _super.prototype.release.call(this);
         };
         Player.prototype.initSprite = function () {
+            //this._sprite = IntfcProxy.getMCFtry().create("player_10002");
             this._sprite = h5game.IntfcProxy.getMCFtry().create("player_10001");
             this.addChild(this._sprite);
         };

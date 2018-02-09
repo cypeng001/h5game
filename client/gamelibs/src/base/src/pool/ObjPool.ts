@@ -13,7 +13,7 @@ export class ObjPool {
         this._name = name;
     }
 
-    protected createObj(key: string): any {
+    protected createObj(key: string, params: any): any {
         return {};
     }
 
@@ -29,7 +29,7 @@ export class ObjPool {
         return false;
     }
 
-    public create(key: string): any {
+    public create(key: string, params: any): any {
         var obj = null;
 
         this.autoRecycle();
@@ -40,7 +40,7 @@ export class ObjPool {
             return obj;
         }
         
-        obj = this.createObj(key);
+        obj = this.createObj(key, params);
         this._actPool.push(obj);
 
         this._lastActiveTick = egret.getTimer();

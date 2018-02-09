@@ -40,7 +40,9 @@ def exportManifest(dir):
 
     fo.write('{' + CR_STR)
     for k in range(len(manifest)):
-        fo.write(TAB_STR + '"' + manifest[k][0] + '" : "' + manifest[k][1] + '"')
+        fo.write(TAB_STR + '"' + manifest[k][0] + '" : {"crc": "' + manifest[k][1] + '", "files": [')
+        fo.write('"' + manifest[k][0] + '"')
+        fo.write(']}')
         if k < len(manifest) - 1:
             fo.write(',')
         fo.write(CR_STR)
@@ -49,5 +51,5 @@ def exportManifest(dir):
     fo.close()
 
 if __name__ == '__main__':
-    exportManifest(ROOT_DIR)
+    #exportManifest(ROOT_DIR)   #todo
     zipConfig()

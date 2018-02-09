@@ -5,7 +5,7 @@ export class Actor extends Entity {
     protected _actionState: number = 0;
     protected _dir: number = ActorActionState.AAS_STANDFRONT;
 
-    protected _sprite: egret.MovieClip;
+    protected _sprite: h5game.MCAdv;
     protected _nameLabel: eui.Label;
 
     protected _moveTarPos: [number, number] = [0, 0];
@@ -156,7 +156,7 @@ export class Actor extends Entity {
     protected _setActionState(actionState: number, loop: boolean): void {
         var playTimes = loop ? -1 : 1;
 
-        this._sprite.gotoAndPlay(EntityUtil.actionState2Str(actionState), playTimes);
+        this._sprite.playAnimation(EntityUtil.actionState2Str(actionState), playTimes);
 
         var frameRate = this.getActStFrmRate(actionState);
         if(frameRate > 0) {

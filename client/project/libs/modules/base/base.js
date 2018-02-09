@@ -12,7 +12,7 @@ var h5game;
             this._autoRecycleInterval = 60000;
             this._name = name;
         }
-        ObjPool.prototype.createObj = function (key) {
+        ObjPool.prototype.createObj = function (key, params) {
             return {};
         };
         ObjPool.prototype.recycleObj = function (obj) {
@@ -22,7 +22,7 @@ var h5game;
         ObjPool.prototype.canRecycleObj = function (obj) {
             return false;
         };
-        ObjPool.prototype.create = function (key) {
+        ObjPool.prototype.create = function (key, params) {
             var obj = null;
             this.autoRecycle();
             if (this._inactPool.length > 0) {
@@ -30,7 +30,7 @@ var h5game;
                 this._actPool.push(obj);
                 return obj;
             }
-            obj = this.createObj(key);
+            obj = this.createObj(key, params);
             this._actPool.push(obj);
             this._lastActiveTick = egret.getTimer();
             return obj;
@@ -93,12 +93,16 @@ var h5game;
         ObjFtry.prototype.createPool = function (key) {
             return new h5game.ObjPool(key);
         };
-        ObjFtry.prototype.create = function (key) {
+        ObjFtry.prototype.getPool = function (key) {
+            return this._poolMap[key];
+        };
+        ObjFtry.prototype.create = function (key, params) {
+            if (params === void 0) { params = null; }
             var pool = this._poolMap[key];
             if (!pool) {
                 this._poolMap[key] = pool = this.createPool(key);
             }
-            return pool.create(key);
+            return pool.create(key, params);
         };
         ObjFtry.prototype.recycle = function () {
             for (var key in this._poolMap) {

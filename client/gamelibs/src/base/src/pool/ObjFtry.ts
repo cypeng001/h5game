@@ -12,12 +12,16 @@ export class ObjFtry {
         return new ObjPool(key);
     }
 
-    public create(key: string): any {
+    public getPool(key: string): any {
+        return this._poolMap[key];
+    }
+
+    public create(key: string, params: any = null): any {
         var pool = this._poolMap[key];
         if(!pool) {
             this._poolMap[key] = pool = this.createPool(key);
         }
-        return pool.create(key);
+        return pool.create(key, params);
     }
 
     public recycle(): void {
