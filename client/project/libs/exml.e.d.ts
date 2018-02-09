@@ -59,6 +59,10 @@ declare module skins{
 	}
 }
 declare module skins{
+	class actorProgressBarSkin1 extends eui.Skin{
+	}
+}
+declare module skins{
 	class mainProgressBarSkin1 extends eui.Skin{
 	}
 }

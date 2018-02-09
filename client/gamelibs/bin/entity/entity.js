@@ -167,13 +167,14 @@ var h5game;
         };
         Actor.prototype.initHpBar = function () {
             this._hpBar = new eui.ProgressBar();
-            this._hpBar.width = 60;
-            this._hpBar.height = 10;
+            this._hpBar.skinName = "resource/custom_skins/progressbar/actorProgressBarSkin1.exml";
+            this._hpBar.width = 64;
+            this._hpBar.height = 12;
             this._hpBar.minimum = 0;
             this._hpBar.maximum = this._maxHp;
             this._hpBar.value = this._hp;
             this._hpBar.anchorOffsetX = this._hpBar.width / 2;
-            this._hpBar.y = -170;
+            this._hpBar.y = -140;
             this.addChild(this._hpBar);
         };
         Actor.prototype.refreshHpBar = function () {
@@ -190,6 +191,7 @@ var h5game;
             this._mpBar.value = this._mp;
             this._mpBar.anchorOffsetX = this._mpBar.width / 2;
             this._mpBar.y = -150;
+            this._mpBar.visible = false;
             this.addChild(this._mpBar);
         };
         Actor.prototype.refreshMpBar = function () {
