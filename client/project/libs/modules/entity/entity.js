@@ -310,10 +310,11 @@ var h5game;
             this.attackAct();
             var resultData = data.result;
             if (resultData.result == h5game.AttackResult.SUCCESS) {
-                this._mapLayer.notify(h5game.IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
                 var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, [data.target]);
                 defActor.hp -= resultData.damage;
                 defActor.refreshHpBar();
+                var offsetY = -180;
+                this._mapLayer.notify(h5game.IMapCmdN.IMCN_CreateNum, [defActor.x, defActor.y + offsetY, 0, resultData.damage]);
                 if (defActor.mainPlayer) {
                     h5game.IntfcProxy.getLocalMsgDispatcher().dispatchMsg(h5game.ILocalMsg.ILM_Player_ChangeHp, { hp: defActor.hp, maxHp: defActor.maxHp });
                 }
@@ -510,7 +511,7 @@ var h5game;
         Player.prototype.moveTo = function (x, y) {
             _super.prototype.moveTo.call(this, x, y);
             if (this.mainPlayer) {
-                h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_PLAYER_move, [{ x: this.x, y: this.y }, { x: x, y: y }], null);
+                h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_PLAYER_move, { path: [{ x: this.x, y: this.y }, { x: x, y: y }] }, null);
             }
         };
         return Player;

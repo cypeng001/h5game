@@ -281,11 +281,12 @@ export class Actor extends Entity {
 
         var resultData = data.result;
         if(resultData.result == AttackResult.SUCCESS) {
-            this._mapLayer.notify(IMapCmdN.IMCN_CreateNum, [this.x, this.y, 0, resultData.damage]);
-
             var defActor = this._mapLayer.query(IMapCmdQ.IMCQ_GetActor, [data.target]);
             defActor.hp -= resultData.damage;
             defActor.refreshHpBar();
+
+            var offsetY = -180;
+            this._mapLayer.notify(IMapCmdN.IMCN_CreateNum, [defActor.x, defActor.y + offsetY, 0, resultData.damage]);
 
             if(defActor.mainPlayer) {
                 IntfcProxy.getLocalMsgDispatcher().dispatchMsg(ILocalMsg.ILM_Player_ChangeHp, {hp: defActor.hp, maxHp: defActor.maxHp});

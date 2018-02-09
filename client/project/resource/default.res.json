@@ -176,6 +176,11 @@
 			"url": "movieclip.zip",
 			"type": "bin",
 			"name": "movieclip_zip"
+		},
+        {
+            "url": "font/pz_zi_j1.fnt",
+            "type": "font",
+            "name": "font_pz_zi_j1_fnt"
 		}
 	]
 }

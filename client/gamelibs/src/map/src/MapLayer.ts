@@ -367,10 +367,20 @@ export class MapLayer extends egret.DisplayObjectContainer {
 		container.y = y;
         this._numLayer.addChild(container);
 
+        /*
         var label = new eui.Label;
         label.size = 30;
 		label.stroke = 1;
 		label.strokeColor = 0x333333;
+        label.text = value.toString();
+        label.width = 100;
+        label.anchorOffsetX = label.width / 2;
+        container.addChild(label);
+        */
+
+        var label = new eui.BitmapLabel;
+        label.font = "font_pz_zi_j1_fnt";
+        label.letterSpacing = -3;
         label.text = value.toString();
         label.width = 100;
         label.anchorOffsetX = label.width / 2;
@@ -436,16 +446,16 @@ export class MapLayer extends egret.DisplayObjectContainer {
     protected initMsgHandler(): void {
         var self = this;
 
-        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAddEntities, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_AREA_onAddEntities, function(data: any) {
             self.MsgHandler_onAddEntities(data);
         });
-        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onRemoveEntities, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_AREA_onRemoveEntities, function(data: any) {
             self.MsgHandler_onRemoveEntities(data);
         });
-        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onMove, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_AREA_onMove, function(data: any) {
             self.MsgHandler_onMove(data);
         });
-        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_onAttack, function(data: any) {
+        IntfcProxy.getNetMsgHdlr().addMsgHdlr(INetMsgOn.INMO_FIGHT_onAttack, function(data: any) {
             self.MsgHandler_onAttack(data);
         });
     }

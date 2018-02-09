@@ -346,12 +346,21 @@ var h5game;
             container.x = x;
             container.y = y;
             this._numLayer.addChild(container);
+            /*
             var label = new eui.Label;
             label.size = 30;
             label.stroke = 1;
             label.strokeColor = 0x333333;
             label.text = value.toString();
             label.width = 100;
+            label.anchorOffsetX = label.width / 2;
+            container.addChild(label);
+            */
+            var label = new eui.BitmapLabel;
+            label.font = "font_pz_zi_j1_fnt";
+            label.letterSpacing = -3;
+            label.text = value.toString();
+            label.width = 120;
             label.anchorOffsetX = label.width / 2;
             container.addChild(label);
             egret.Tween.get(container).to({ y: y - 20 }, 500).
@@ -405,16 +414,16 @@ var h5game;
         };
         MapLayer.prototype.initMsgHandler = function () {
             var self = this;
-            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAddEntities, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_AREA_onAddEntities, function (data) {
                 self.MsgHandler_onAddEntities(data);
             });
-            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onRemoveEntities, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_AREA_onRemoveEntities, function (data) {
                 self.MsgHandler_onRemoveEntities(data);
             });
-            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onMove, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_AREA_onMove, function (data) {
                 self.MsgHandler_onMove(data);
             });
-            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_onAttack, function (data) {
+            h5game.IntfcProxy.getNetMsgHdlr().addMsgHdlr(h5game.INetMsgOn.INMO_FIGHT_onAttack, function (data) {
                 self.MsgHandler_onAttack(data);
             });
         };
