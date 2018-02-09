@@ -47,7 +47,13 @@ class NetMsgHdlr implements h5game.INetMsgHdlr {
     }
 
     addMsgHdlr(id: h5game.INetMsgReq | h5game.INetMsgOn, callback: h5game.INetMsgCallback): boolean {
+        if(!id) {
+            console.warn("NetMsgHdlr.addMsgHdlr id is invalid", id);
+            return false;
+        }
+        
         if(this.hasMsgHdlr(id, callback)) {
+            console.warn("NetMsgHdlr.addMsgHdlr id already exist", id);
             return false;
         }
 
