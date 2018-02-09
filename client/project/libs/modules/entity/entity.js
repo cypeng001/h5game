@@ -85,6 +85,7 @@ var h5game;
             _this._mp = 0;
             _this._maxMp = 1;
             _this._mainPlayer = false;
+            _this._spActs = [];
             return _this;
         }
         Object.defineProperty(Actor.prototype, "hp", {
@@ -149,6 +150,7 @@ var h5game;
         Actor.prototype.update = function (interval) {
             _super.prototype.update.call(this, interval);
             this.updateMove(interval);
+            this.updateSpAct(interval);
         };
         Actor.prototype.initSprite = function () {
         };
@@ -202,12 +204,43 @@ var h5game;
         Actor.prototype.setDir = function (dir) {
             this._dir = dir;
         };
-        Actor.prototype.setActionState = function (actionState) {
+        Actor.prototype._setActionState = function (actionState, loop) {
+            var playTimes = loop ? -1 : 1;
+            this._sprite.gotoAndPlay(h5game.EntityUtil.actionState2Str(actionState), playTimes);
+            var frameRate = this.getActStFrmRate(actionState);
+            if (frameRate > 0) {
+                this._sprite.frameRate = frameRate;
+            }
+        };
+        Actor.prototype.setActionState = function (actionState, loop) {
             if (this._actionState == actionState) {
                 return;
             }
             this._actionState = actionState;
-            this._sprite.gotoAndPlay(h5game.EntityUtil.actionState2Str(actionState), -1);
+            this._setActionState(actionState, loop);
+        };
+        Actor.prototype.resetActionState = function (actionState, loop) {
+            this._actionState = actionState;
+            this._setActionState(actionState, loop);
+        };
+        Actor.prototype.getActStFrmRate = function (actionState) {
+            return h5game.EntityUtil.actStFrmRate(this.entityType, actionState);
+        };
+        Actor.prototype.getActFrmCount = function (actionState) {
+            return this._sprite.getFrameCount(h5game.EntityUtil.actionState2Str(actionState));
+        };
+        Actor.prototype.getCurActFrmCount = function () {
+            return this._sprite.getCurFrmCount();
+        };
+        Actor.prototype.getActStTime = function (actionState) {
+            var frameRate = this.getActStFrmRate(actionState);
+            var frameCount = this.getActFrmCount(actionState);
+            return frameCount / frameRate;
+        };
+        Actor.prototype.getCurActStTime = function () {
+            var frameRate = this.getActStFrmRate(this._actionState);
+            var frameCount = this.getCurActFrmCount();
+            return frameCount / frameRate;
         };
         Actor.prototype.standAct = function () {
             var actionState = 0;
@@ -217,7 +250,7 @@ var h5game;
             else {
                 actionState = h5game.ActorActionState.AAS_STANDBACK;
             }
-            this.setActionState(actionState);
+            this.setActionState(actionState, true);
         };
         Actor.prototype.runAct = function () {
             var actionState = 0;
@@ -227,7 +260,7 @@ var h5game;
             else {
                 actionState = h5game.ActorActionState.AAS_RUNBACK;
             }
-            this.setActionState(actionState);
+            this.setActionState(actionState, true);
         };
         Actor.prototype.attackAct = function () {
             var actionState = 0;
@@ -237,7 +270,7 @@ var h5game;
             else {
                 actionState = h5game.ActorActionState.AAS_ATTACKBACK;
             }
-            this.setActionState(actionState);
+            this.setActionState(actionState, false);
         };
         Actor.prototype.moveTo = function (x, y) {
             if (this.x == x && this.y == y) {
@@ -306,8 +339,50 @@ var h5game;
                 this.setFlipX(true);
             }
         };
+        Actor.prototype.playSpAct_STAND = function (data) {
+            this.standAct();
+        };
+        Actor.prototype.playSpAct = function (spAct) {
+            var type = spAct.type;
+            var data = spAct.data;
+            var param = spAct.param;
+            switch (type) {
+                case h5game.ActorSpActType.ASAT_STAND: {
+                    this.playSpAct_STAND(data);
+                    break;
+                }
+            }
+        };
+        Actor.prototype.addSpAct = function (time, type, data, param) {
+            if (data === void 0) { data = null; }
+            if (param === void 0) { param = null; }
+            this._spActs.push({
+                time: time,
+                type: type,
+                data: data,
+                param: param
+            });
+        };
+        Actor.prototype.updateSpAct = function (interval) {
+            for (var i in this._spActs) {
+                var spAct = this._spActs[i];
+                spAct.time = spAct.time - interval;
+            }
+            for (var i in this._spActs) {
+                var spAct = this._spActs[i];
+                if (spAct.time <= 0) {
+                    this._spActs.splice(i, 1);
+                    this.playSpAct(spAct);
+                    break;
+                }
+            }
+        };
+        Actor.prototype.clearSpAct = function () {
+            this._spActs = [];
+        };
         Actor.prototype.execSkill = function (skillId, data) {
             this.attackAct();
+            this.addSpAct(this.getCurActStTime(), h5game.ActorSpActType.ASAT_STAND);
             var resultData = data.result;
             if (resultData.result == h5game.AttackResult.SUCCESS) {
                 var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, [data.target]);
@@ -363,6 +438,11 @@ var h5game;
         AttackResult[AttackResult["ATTACKER_CONFUSED"] = 7] = "ATTACKER_CONFUSED";
     })(AttackResult = h5game.AttackResult || (h5game.AttackResult = {}));
     ;
+    var ActorSpActType;
+    (function (ActorSpActType) {
+        ActorSpActType[ActorSpActType["ASAT_STAND"] = 1] = "ASAT_STAND";
+    })(ActorSpActType = h5game.ActorSpActType || (h5game.ActorSpActType = {}));
+    ;
 })(h5game || (h5game = {}));
 var h5game;
 (function (h5game) {
@@ -389,6 +469,17 @@ var h5game;
                 return "attackback";
             }
             return "standfront";
+        };
+        EntityUtil.actStFrmRate = function (entityType, actionState) {
+            if (actionState == h5game.ActorActionState.AAS_STANDFRONT
+                || actionState == h5game.ActorActionState.AAS_STANDBACK
+                || actionState == h5game.ActorActionState.AAS_RUNFRONT
+                || actionState == h5game.ActorActionState.AAS_RUNBACK
+                || actionState == h5game.ActorActionState.AAS_ATTACKFRONT
+                || actionState == h5game.ActorActionState.AAS_ATTACKBACK) {
+                return 12;
+            }
+            return -1;
         };
         return EntityUtil;
     }());

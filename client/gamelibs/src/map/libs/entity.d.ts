@@ -35,6 +35,7 @@ declare namespace h5game {
         protected _hpBar: eui.ProgressBar;
         protected _mpBar: eui.ProgressBar;
         protected _mainPlayer: boolean;
+        protected _spActs: any;
         constructor();
         hp: number;
         maxHp: number;
@@ -52,7 +53,14 @@ declare namespace h5game {
         protected initMpBar(): void;
         protected refreshMpBar(): void;
         setDir(dir: number): void;
-        setActionState(actionState: number): void;
+        protected _setActionState(actionState: number, loop: boolean): void;
+        setActionState(actionState: number, loop: boolean): void;
+        resetActionState(actionState: number, loop: boolean): void;
+        protected getActStFrmRate(actionState: number): number;
+        getActFrmCount(actionState: number): number;
+        getCurActFrmCount(): number;
+        getActStTime(actionState: number): number;
+        getCurActStTime(): number;
         standAct(): void;
         runAct(): void;
         attackAct(): void;
@@ -62,6 +70,11 @@ declare namespace h5game {
         updateMove(interval: any): void;
         protected setFlipX(flipX: boolean): void;
         adjustDir(tarX: number, tarY: number): void;
+        protected playSpAct_STAND(data: any): void;
+        protected playSpAct(spAct: any): void;
+        protected addSpAct(time: number, type: ActorSpActType, data?: any, param?: any): void;
+        protected updateSpAct(interval: number): void;
+        protected clearSpAct(): void;
         execSkill(skillId: number, data: any): void;
     }
 }
@@ -94,10 +107,14 @@ declare namespace h5game {
         NOT_COOLDOWN = 6,
         ATTACKER_CONFUSED = 7,
     }
+    enum ActorSpActType {
+        ASAT_STAND = 1,
+    }
 }
 declare namespace h5game {
     class EntityUtil {
         static actionState2Str(actionState: number): string;
+        static actStFrmRate(entityType: number, actionState: number): number;
     }
 }
 declare namespace h5game {

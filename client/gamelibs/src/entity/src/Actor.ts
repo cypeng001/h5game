@@ -26,6 +26,8 @@ export class Actor extends Entity {
 
     protected _mainPlayer: boolean = false;
 
+    protected _spActs: any = [];
+
     constructor() {
         super();
     }
@@ -86,6 +88,7 @@ export class Actor extends Entity {
         super.update(interval);
 
         this.updateMove(interval);
+        this.updateSpAct(interval);
     }
 
     protected initSprite(): void {
@@ -95,17 +98,17 @@ export class Actor extends Entity {
     protected initNameLabel(): void {
         this._nameLabel = new eui.Label(this.getName());
 
-		this._nameLabel.width = 100;
-		this._nameLabel.height = 20;
-		this._nameLabel.textAlign = 'center';
-		this._nameLabel.size = 13;
-		this._nameLabel.stroke = 1;
-		this._nameLabel.strokeColor = 0x333333;
-		this._nameLabel.anchorOffsetX = this._nameLabel.width / 2;
-		this._nameLabel.verticalAlign = "bottom";
+        this._nameLabel.width = 100;
+        this._nameLabel.height = 20;
+        this._nameLabel.textAlign = 'center';
+        this._nameLabel.size = 13;
+        this._nameLabel.stroke = 1;
+        this._nameLabel.strokeColor = 0x333333;
+        this._nameLabel.anchorOffsetX = this._nameLabel.width / 2;
+        this._nameLabel.verticalAlign = "bottom";
         this._nameLabel.y = -130;
 
-		this.addChild(this._nameLabel);
+        this.addChild(this._nameLabel);
     }
 
     protected initHpBar(): void {
@@ -150,13 +153,54 @@ export class Actor extends Entity {
         this._dir = dir;
     }
 
-    public setActionState(actionState: number): void {
+    protected _setActionState(actionState: number, loop: boolean): void {
+        var playTimes = loop ? -1 : 1;
+
+        this._sprite.gotoAndPlay(EntityUtil.actionState2Str(actionState), playTimes);
+
+        var frameRate = this.getActStFrmRate(actionState);
+        if(frameRate > 0) {
+            this._sprite.frameRate = frameRate;
+        }
+    }
+
+    public setActionState(actionState: number, loop: boolean): void {
         if(this._actionState == actionState) {
             return;
         }
         this._actionState = actionState;
 
-        this._sprite.gotoAndPlay(EntityUtil.actionState2Str(actionState), -1);
+        this._setActionState(actionState, loop);
+    }
+
+    public resetActionState(actionState: number, loop: boolean): void {
+        this._actionState = actionState;
+
+        this._setActionState(actionState, loop);
+    }
+
+    protected getActStFrmRate(actionState: number): number {
+        return EntityUtil.actStFrmRate(this.entityType, actionState);
+    }
+
+    public getActFrmCount(actionState: number): number {
+        return this._sprite.getFrameCount(EntityUtil.actionState2Str(actionState));
+    }
+
+    public getCurActFrmCount(): number {
+        return this._sprite.getCurFrmCount();
+    }
+
+    public getActStTime(actionState: number): number {
+        var frameRate = this.getActStFrmRate(actionState);
+        var frameCount = this.getActFrmCount(actionState);
+        return frameCount / frameRate;
+    }
+
+    public getCurActStTime(): number {
+        var frameRate = this.getActStFrmRate(this._actionState);
+        var frameCount = this.getCurActFrmCount();
+        return frameCount / frameRate;
     }
 
     public standAct(): void {
@@ -167,7 +211,7 @@ export class Actor extends Entity {
         else {
             actionState = ActorActionState.AAS_STANDBACK;
         }
-        this.setActionState(actionState);
+        this.setActionState(actionState, true);
     }
 
     public runAct(): void {
@@ -178,7 +222,7 @@ export class Actor extends Entity {
         else {
             actionState = ActorActionState.AAS_RUNBACK;
         }
-        this.setActionState(actionState);
+        this.setActionState(actionState, true);
     }
 
     public attackAct(): void {
@@ -189,7 +233,7 @@ export class Actor extends Entity {
         else {
             actionState = ActorActionState.AAS_ATTACKBACK;
         }
-        this.setActionState(actionState);
+        this.setActionState(actionState, false);
     }
 
     public moveTo(x: number, y: number): void {
@@ -248,7 +292,7 @@ export class Actor extends Entity {
 
     public adjustDir(tarX: number, tarY: number): void {
         var distX = tarX - this.x
-	    var distY = tarY - this.y
+        var distY = tarY - this.y
 
         if(distX == 0 && distY == 0) {
             return;
@@ -276,8 +320,55 @@ export class Actor extends Entity {
         }
     }
 
+    protected playSpAct_STAND(data: any): void {
+		this.standAct();
+	}
+
+    protected playSpAct(spAct: any): void {
+		var type = spAct.type;
+		var data = spAct.data;
+		var param = spAct.param;
+		switch(type) {
+			case ActorSpActType.ASAT_STAND: {
+				this.playSpAct_STAND(data);
+				break;
+            }
+		}
+	}
+
+    protected addSpAct(time: number, type: ActorSpActType, data: any = null, param: any = null): void {
+        this._spActs.push({
+            time: time,
+            type: type,
+            data: data,
+            param: param
+        });
+    }
+
+    protected updateSpAct(interval: number): void {
+        for(var i in this._spActs) {
+            var spAct = this._spActs[i];
+            spAct.time = spAct.time - interval;
+        }
+
+        for(var i in this._spActs) {
+            var spAct = this._spActs[i];
+            if(spAct.time <= 0) {
+                this._spActs.splice(i, 1);
+                this.playSpAct(spAct);
+                break;
+            }
+        }
+    }
+
+    protected clearSpAct(): void {
+        this._spActs = [];
+    }
+
     public execSkill(skillId: number, data: any): void {
         this.attackAct();
+
+        this.addSpAct(this.getCurActStTime(), ActorSpActType.ASAT_STAND);
 
         var resultData = data.result;
         if(resultData.result == AttackResult.SUCCESS) {

@@ -33,4 +33,8 @@ export enum AttackResult {
     ATTACKER_CONFUSED   = 7,
 };
 
+export enum ActorSpActType {
+    ASAT_STAND             = 1,
+};
+
 }
