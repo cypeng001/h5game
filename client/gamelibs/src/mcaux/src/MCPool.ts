@@ -29,10 +29,6 @@ export class MCPool extends ObjPool {
     }
 
     protected createObj(key: string, params: any): any {
-        var movieClipName = params;
-        if(!movieClipName) {
-            movieClipName = key;
-        }
         var mcData: egret.MovieClipData = null;
         if(this.getMCDataCnt() == 1) {
             mcData = this._mcDataFtrys[key].generateMovieClipData(key);
@@ -57,9 +53,6 @@ export class MCPool extends ObjPool {
         this._lastActiveTick = egret.getTimer();
 
         var filelist = this._mcCnfMgr.getFilelist(key);
-        if(!params) {
-            params = filelist[0];
-        }
         if(!this._mcDataFtrys) {
             this._mcDataFtrys = {};
             for(var i in filelist) {
@@ -74,12 +67,9 @@ export class MCPool extends ObjPool {
 
             var self = this;
 
-            var filelist = this._mcCnfMgr.getFilelist(key);
             var count = 0;
             for(var i in filelist) {
-                var filename = filelist[i];
-
-                var imagePath = this.getImagePath(filename);
+                var imagePath = this.getImagePath(filelist[i]);
                 var hash = this._mcCnfMgr.getHash(key);
                 if(hash && hash.length > 0) {
                     imagePath += ("?v=" + hash);
@@ -92,7 +82,7 @@ export class MCPool extends ObjPool {
                             self._state = MCPST.LOADED;
                         }
 
-                        self.reload(filename, texture);
+                        self.reload(filelist[count - 1], texture);
 
                     }, self);
                 });

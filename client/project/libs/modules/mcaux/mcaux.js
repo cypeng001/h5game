@@ -174,10 +174,6 @@ var h5game;
             return RES.config.resourceRoot + "movieclip/" + key + ".png";
         };
         MCPool.prototype.createObj = function (key, params) {
-            var movieClipName = params;
-            if (!movieClipName) {
-                movieClipName = key;
-            }
             var mcData = null;
             if (this.getMCDataCnt() == 1) {
                 mcData = this._mcDataFtrys[key].generateMovieClipData(key);
@@ -199,9 +195,6 @@ var h5game;
             if (params === void 0) { params = null; }
             this._lastActiveTick = egret.getTimer();
             var filelist = this._mcCnfMgr.getFilelist(key);
-            if (!params) {
-                params = filelist[0];
-            }
             if (!this._mcDataFtrys) {
                 this._mcDataFtrys = {};
                 for (var i in filelist) {
@@ -213,11 +206,9 @@ var h5game;
             if (this._state == h5game.MCPST.UNLOAD) {
                 this._state = h5game.MCPST.LOADING;
                 var self = this;
-                var filelist = this._mcCnfMgr.getFilelist(key);
                 var count = 0;
                 for (var i in filelist) {
-                    var filename = filelist[i];
-                    var imagePath = this.getImagePath(filename);
+                    var imagePath = this.getImagePath(filelist[i]);
                     var hash = this._mcCnfMgr.getHash(key);
                     if (hash && hash.length > 0) {
                         imagePath += ("?v=" + hash);
@@ -228,7 +219,7 @@ var h5game;
                             if (count == filelist.length) {
                                 self._state = h5game.MCPST.LOADED;
                             }
-                            self.reload(filename, texture);
+                            self.reload(filelist[count - 1], texture);
                         }, self);
                     });
                 }
