@@ -78,7 +78,7 @@ export class MCPool extends ObjPool {
         var filelist = this._mcCnfMgr.getFilelist(key);
         var filename = filelist[this._loadFileCnt];
         var imagePath = this.getImagePath(filelist[this._loadFileCnt]);
-        var hash = this._mcCnfMgr.getHash(key, filename);
+        var hash = this._mcCnfMgr.getHashByIndex(key, this._loadFileCnt);
         if(hash && hash.length > 0) {
             imagePath += ("?v=" + hash);
         }

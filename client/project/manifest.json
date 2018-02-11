@@ -40,7 +40,7 @@
 		"bin-debug/mgr/UILayerMgr.js",
 		"bin-debug/network/NetMgr.js",
 		"bin-debug/network/NetMsgHdlr.js",
-		"bin-debug/GameApp.js",
+		"bin-debug/system/role/RoleUI.js",
 		"bin-debug/network/hdlr/EntryMsgHdlr.js",
 		"bin-debug/network/hdlr/FightMsgHdlr.js",
 		"bin-debug/network/hdlr/GateMsgHdlr.js",
@@ -59,6 +59,6 @@
 		"bin-debug/system/account/LoginUI.js",
 		"bin-debug/system/account/RegisterUI.js",
 		"bin-debug/system/main/MainUI.js",
-		"bin-debug/system/role/RoleUI.js"
+		"bin-debug/GameApp.js"
 	]
 }

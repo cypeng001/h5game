@@ -109,6 +109,9 @@ var h5game;
             }
             return "";
         };
+        MCCnfMgr.prototype.getHashByIndex = function (key, index) {
+            return this._manifest[key].crc[index];
+        };
         MCCnfMgr.prototype.getFilelist = function (key) {
             return this._manifest[key].files;
         };
@@ -222,7 +225,7 @@ var h5game;
             var filelist = this._mcCnfMgr.getFilelist(key);
             var filename = filelist[this._loadFileCnt];
             var imagePath = this.getImagePath(filelist[this._loadFileCnt]);
-            var hash = this._mcCnfMgr.getHash(key, filename);
+            var hash = this._mcCnfMgr.getHashByIndex(key, this._loadFileCnt);
             if (hash && hash.length > 0) {
                 imagePath += ("?v=" + hash);
             }

@@ -65,6 +65,10 @@ export class MCCnfMgr {
         return "";
     }
 
+    public getHashByIndex(key: string, index: number): string {
+        return this._manifest[key].crc[index];
+    }
+
     public getFilelist(key: string): string[] {
         return this._manifest[key].files;
     }

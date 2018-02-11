@@ -22,6 +22,7 @@ declare namespace h5game {
         regMCCnf(key: string, config: any): Boolean;
         getMCCnf(key: string): any;
         getHash(key: string, filename: string): string;
+        getHashByIndex(key: string, index: number): string;
         getFilelist(key: string): string[];
     }
 }
