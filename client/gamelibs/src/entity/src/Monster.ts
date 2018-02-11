@@ -45,6 +45,10 @@ export class Monster extends Actor {
 
         console.log("Monster.onTouchTab localX:", event.localX, "localY:", event.localY, 
                     "stageX:", event.stageX, "stageY:", event.stageY);
+
+        IntfcProxy.getNetMsgHdlr().requestMsg(INetMsgReq.INMR_FIGHT_attack, 
+            {targetId: this._entityId}, 
+            null);
     }
 }
 

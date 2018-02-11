@@ -131,6 +131,7 @@ declare namespace h5game {
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
+        protected onTouchTab(event: egret.TouchEvent): void;
     }
 }
 declare namespace h5game {
@@ -140,6 +141,7 @@ declare namespace h5game {
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
+        protected onTouchTab(event: egret.TouchEvent): void;
     }
 }
 declare namespace h5game {
@@ -150,7 +152,7 @@ declare namespace h5game {
         release(): void;
         protected initSprite(): void;
         moveTo(x: number, y: number): void;
-        protected onTouchEnd(event: egret.TouchEvent): void;
+        protected onTouchTab(event: egret.TouchEvent): void;
     }
 }
 declare namespace h5game {

@@ -547,6 +547,7 @@ var h5game;
         Monster.prototype.onTouchTab = function (event) {
             event.stopPropagation();
             console.log("Monster.onTouchTab localX:", event.localX, "localY:", event.localY, "stageX:", event.stageX, "stageY:", event.stageY);
+            h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_FIGHT_attack, { targetId: this._entityId }, null);
         };
         return Monster;
     }(h5game.Actor));
