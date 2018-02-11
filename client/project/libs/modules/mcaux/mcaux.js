@@ -159,6 +159,7 @@ var h5game;
             _this._mcDataFtrys = null;
             _this._mcDataCnt = 0;
             _this._mcCnfMgr = null;
+            _this._loadFileCnt = 0;
             _this._mcCnfMgr = mcCnfMgr;
             _this._autoRecycleInterval = MCPool.DEF_AUTO_RECYCLE_INTERVAL;
             _this._state = h5game.MCPST.UNLOAD;
@@ -182,14 +183,6 @@ var h5game;
         };
         MCPool.prototype.reload = function (filename, texture) {
             this._mcDataFtrys[filename].texture = texture;
-            if (this._state == h5game.MCPST.LOADED) {
-                for (var i in this._actPool) {
-                    var mc = this._actPool[i];
-                    if (mc.mcst == h5game.MCST.UNLOAD) {
-                        mc.mcst = h5game.MCST.LOAD;
-                    }
-                }
-            }
         };
         MCPool.prototype.create = function (key, params) {
             if (params === void 0) { params = null; }
@@ -205,26 +198,41 @@ var h5game;
             }
             if (this._state == h5game.MCPST.UNLOAD) {
                 this._state = h5game.MCPST.LOADING;
-                var self = this;
-                var count = 0;
-                for (var i in filelist) {
-                    var imagePath = this.getImagePath(filelist[i]);
-                    var hash = this._mcCnfMgr.getHash(key);
-                    if (hash && hash.length > 0) {
-                        imagePath += ("?v=" + hash);
-                    }
-                    MCPool.getAssets(imagePath, function (texture) {
-                        egret.callLater(function () {
-                            count++;
-                            if (count == filelist.length) {
-                                self._state = h5game.MCPST.LOADED;
-                            }
-                            self.reload(filelist[count - 1], texture);
-                        }, self);
-                    });
-                }
+                this.loadNext();
             }
             return _super.prototype.create.call(this, key, params);
+        };
+        MCPool.prototype.loadNext = function () {
+            var key = this._name;
+            var filelist = this._mcCnfMgr.getFilelist(key);
+            var filename = filelist[this._loadFileCnt];
+            var imagePath = this.getImagePath(filelist[this._loadFileCnt]);
+            var hash = this._mcCnfMgr.getHash(key);
+            if (hash && hash.length > 0) {
+                imagePath += ("?v=" + hash);
+            }
+            var self = this;
+            MCPool.getAssets(imagePath, function (texture) {
+                egret.callLater(function () {
+                    self._loadFileCnt++;
+                    self.reload(filename, texture);
+                    if (self._loadFileCnt == filelist.length) {
+                        self.loadComplete();
+                    }
+                    else {
+                        self.loadNext();
+                    }
+                }, self);
+            });
+        };
+        MCPool.prototype.loadComplete = function () {
+            this._state = h5game.MCPST.LOADED;
+            for (var i in this._actPool) {
+                var mc = this._actPool[i];
+                if (mc.mcst == h5game.MCST.UNLOAD) {
+                    mc.mcst = h5game.MCST.LOAD;
+                }
+            }
         };
         MCPool.prototype.release = function () {
             _super.prototype.release.call(this);

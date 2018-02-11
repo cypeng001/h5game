@@ -52,12 +52,15 @@ declare namespace h5game {
         private _mcDataFtrys;
         private _mcDataCnt;
         private _mcCnfMgr;
+        private _loadFileCnt;
         private static getAssets(source, callback);
         private getImagePath(key);
         constructor(name: string, mcCnfMgr: MCCnfMgr);
         protected createObj(key: string, params: any): any;
         private reload(filename, texture);
         create(key: string, params?: any): any;
+        private loadNext();
+        private loadComplete();
         release(): void;
         canRelease(): boolean;
         getMCDataCnt(): number;

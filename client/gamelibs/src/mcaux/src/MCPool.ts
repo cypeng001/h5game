@@ -9,6 +9,7 @@ export class MCPool extends ObjPool {
     private _mcDataFtrys: {[key: string]: MCDataFtryAdv} = null;
     private _mcDataCnt: number = 0;
     private _mcCnfMgr: MCCnfMgr = null;
+    private _loadFileCnt: number = 0;
 
     private static getAssets(source: string, callback: Function) {
         var adapter = egret.getImplementation("eui.IAssetAdapter");
@@ -38,15 +39,6 @@ export class MCPool extends ObjPool {
 
     private reload(filename, texture: egret.Texture): void {
         this._mcDataFtrys[filename].texture = texture;
-
-        if(this._state == MCPST.LOADED) {
-            for(var i in this._actPool) {
-                var mc: MCAdv = <MCAdv>this._actPool[i];
-                if(mc.mcst == MCST.UNLOAD) {
-                    mc.mcst = MCST.LOAD;
-                }
-            }
-        }
     }
 
     public create(key: string, params: any = null): any {
@@ -65,31 +57,47 @@ export class MCPool extends ObjPool {
         if(this._state == MCPST.UNLOAD) {
             this._state = MCPST.LOADING;
 
-            var self = this;
-
-            var count = 0;
-            for(var i in filelist) {
-                var imagePath = this.getImagePath(filelist[i]);
-                var hash = this._mcCnfMgr.getHash(key);
-                if(hash && hash.length > 0) {
-                    imagePath += ("?v=" + hash);
-                }
-                MCPool.getAssets(imagePath, (texture) => {
-                    egret.callLater(() => {
-                        count++;
-
-                        if(count == filelist.length) {
-                            self._state = MCPST.LOADED;
-                        }
-
-                        self.reload(filelist[count - 1], texture);
-
-                    }, self);
-                });
-            }
+            this.loadNext();
         }
 
         return super.create(key, params);
+    }
+
+    private loadNext(): void {
+        var key = this._name;
+        var filelist = this._mcCnfMgr.getFilelist(key);
+        var filename = filelist[this._loadFileCnt];
+        var imagePath = this.getImagePath(filelist[this._loadFileCnt]);
+        var hash = this._mcCnfMgr.getHash(key);
+        if(hash && hash.length > 0) {
+            imagePath += ("?v=" + hash);
+        }
+
+        var self = this;
+        MCPool.getAssets(imagePath, (texture) => {
+            egret.callLater(() => {
+                self._loadFileCnt++;
+
+                self.reload(filename, texture);
+
+                if(self._loadFileCnt == filelist.length) {
+                    self.loadComplete();
+                } else {
+                    self.loadNext();
+                }
+            }, self);
+        });
+    }
+
+    private loadComplete(): void {
+        this._state = MCPST.LOADED;
+
+        for(var i in this._actPool) {
+            var mc: MCAdv = <MCAdv>this._actPool[i];
+            if(mc.mcst == MCST.UNLOAD) {
+                mc.mcst = MCST.LOAD;
+            }
+        }
     }
 
     public release(): void {
