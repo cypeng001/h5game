@@ -36,6 +36,7 @@ declare namespace h5game {
         protected _mpBar: eui.ProgressBar;
         protected _mainPlayer: boolean;
         protected _spActs: any;
+        protected _actorSt: ActorState;
         constructor();
         hp: number;
         maxHp: number;
@@ -110,6 +111,10 @@ declare namespace h5game {
     enum ActorSpActType {
         ASAT_STAND = 1,
     }
+    enum ActorStType {
+        AST_NORMAL = 1,
+        AST_ATTACK = 2,
+    }
 }
 declare namespace h5game {
     class EntityUtil {
@@ -143,5 +148,21 @@ declare namespace h5game {
         release(): void;
         protected initSprite(): void;
         moveTo(x: number, y: number): void;
+    }
+}
+declare namespace h5game {
+    class ActorState extends BaseState {
+        private _actor;
+        private _state_tick;
+        constructor(actor: Actor);
+        protected enterState(next_state: number, next_st_data: any): void;
+        protected exitState(state: number, next_state: any): void;
+        protected updateState(interval: number): void;
+        protected enterState_NORMAL(next_st_data: any): void;
+        protected exitState_NORMAL(next_state: number): void;
+        protected updateState_NORMAL(interval: number): void;
+        protected enterState_ATTACK(next_st_data: any): void;
+        protected exitState_ATTACK(next_state: number): void;
+        protected updateState_ATTACK(interval: number): void;
     }
 }

@@ -86,6 +86,8 @@ var h5game;
             _this._maxMp = 1;
             _this._mainPlayer = false;
             _this._spActs = [];
+            _this._actorSt = null;
+            _this._actorSt = new h5game.ActorState(_this);
             return _this;
         }
         Object.defineProperty(Actor.prototype, "hp", {
@@ -151,6 +153,7 @@ var h5game;
             _super.prototype.update.call(this, interval);
             this.updateMove(interval);
             this.updateSpAct(interval);
+            this._actorSt.update(interval);
         };
         Actor.prototype.initSprite = function () {
         };
@@ -382,7 +385,8 @@ var h5game;
         };
         Actor.prototype.execSkill = function (skillId, data) {
             this.attackAct();
-            this.addSpAct(this.getCurActStTime(), h5game.ActorSpActType.ASAT_STAND);
+            //this.addSpAct(this.getCurActStTime(), ActorSpActType.ASAT_STAND);
+            this._actorSt.setNextState(h5game.ActorStType.AST_ATTACK, { state_tick: this.getCurActStTime() });
             var resultData = data.result;
             if (resultData.result == h5game.AttackResult.SUCCESS) {
                 var defActor = this._mapLayer.query(h5game.IMapCmdQ.IMCQ_GetActor, [data.target]);
@@ -442,6 +446,12 @@ var h5game;
     (function (ActorSpActType) {
         ActorSpActType[ActorSpActType["ASAT_STAND"] = 1] = "ASAT_STAND";
     })(ActorSpActType = h5game.ActorSpActType || (h5game.ActorSpActType = {}));
+    ;
+    var ActorStType;
+    (function (ActorStType) {
+        ActorStType[ActorStType["AST_NORMAL"] = 1] = "AST_NORMAL";
+        ActorStType[ActorStType["AST_ATTACK"] = 2] = "AST_ATTACK";
+    })(ActorStType = h5game.ActorStType || (h5game.ActorStType = {}));
     ;
 })(h5game || (h5game = {}));
 var h5game;
@@ -596,8 +606,8 @@ var h5game;
             _super.prototype.release.call(this);
         };
         Player.prototype.initSprite = function () {
-            //this._sprite = IntfcProxy.getMCFtry().create("player_10002");
-            this._sprite = h5game.IntfcProxy.getMCFtry().create("player_10001");
+            this._sprite = h5game.IntfcProxy.getMCFtry().create("player_10002");
+            //this._sprite = IntfcProxy.getMCFtry().create("player_10001");
             this.addChild(this._sprite);
         };
         Player.prototype.moveTo = function (x, y) {
@@ -610,4 +620,62 @@ var h5game;
     }(h5game.Actor));
     h5game.Player = Player;
     __reflect(Player.prototype, "h5game.Player");
+})(h5game || (h5game = {}));
+var h5game;
+(function (h5game) {
+    var ActorState = (function (_super) {
+        __extends(ActorState, _super);
+        function ActorState(actor) {
+            var _this = _super.call(this) || this;
+            _this._actor = null;
+            _this._state_tick = 0;
+            _this._actor = actor;
+            return _this;
+        }
+        ActorState.prototype.enterState = function (next_state, next_st_data) {
+            if (next_state == h5game.ActorStType.AST_NORMAL) {
+                this.enterState_NORMAL(next_st_data);
+            }
+            else if (next_state == h5game.ActorStType.AST_ATTACK) {
+                this.enterState_ATTACK(next_st_data);
+            }
+        };
+        ActorState.prototype.exitState = function (state, next_state) {
+            if (state == h5game.ActorStType.AST_NORMAL) {
+                this.exitState_NORMAL(next_state);
+            }
+            else if (state == h5game.ActorStType.AST_ATTACK) {
+                this.exitState_ATTACK(next_state);
+            }
+        };
+        ActorState.prototype.updateState = function (interval) {
+            if (this.cur_state == h5game.ActorStType.AST_NORMAL) {
+                this.updateState_NORMAL(interval);
+            }
+            else if (this.cur_state == h5game.ActorStType.AST_ATTACK) {
+                this.updateState_ATTACK(interval);
+            }
+        };
+        ActorState.prototype.enterState_NORMAL = function (next_st_data) {
+        };
+        ActorState.prototype.exitState_NORMAL = function (next_state) {
+        };
+        ActorState.prototype.updateState_NORMAL = function (interval) {
+        };
+        ActorState.prototype.enterState_ATTACK = function (next_st_data) {
+            this._state_tick = next_st_data.state_tick;
+        };
+        ActorState.prototype.exitState_ATTACK = function (next_state) {
+            this._actor.standAct();
+        };
+        ActorState.prototype.updateState_ATTACK = function (interval) {
+            this._state_tick -= interval;
+            if (this._state_tick < 0) {
+                this.setNextState(h5game.ActorStType.AST_NORMAL, null);
+            }
+        };
+        return ActorState;
+    }(h5game.BaseState));
+    h5game.ActorState = ActorState;
+    __reflect(ActorState.prototype, "h5game.ActorState");
 })(h5game || (h5game = {}));

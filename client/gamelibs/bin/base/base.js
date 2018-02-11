@@ -143,3 +143,46 @@ var h5game;
     h5game.ObjFtry = ObjFtry;
     __reflect(ObjFtry.prototype, "h5game.ObjFtry");
 })(h5game || (h5game = {}));
+var h5game;
+(function (h5game) {
+    var BaseState = (function () {
+        function BaseState() {
+            this.cur_state = -1;
+            this.next_state = -1;
+            this.next_st_data = null;
+        }
+        BaseState.prototype.getCurState = function () {
+            return this.cur_state;
+        };
+        BaseState.prototype.clearCurState = function () {
+            this.cur_state = -1;
+        };
+        BaseState.prototype.update = function (interval) {
+            if (this.next_state > 0) {
+                var next_state = this.next_state;
+                var next_st_data = this.next_st_data;
+                this.next_state = -1;
+                this.next_st_data = null;
+                this.exitState(this.cur_state, next_state);
+                this.cur_state = next_state;
+                this.enterState(next_state, next_st_data);
+            }
+            else {
+                this.updateState(interval);
+            }
+        };
+        BaseState.prototype.enterState = function (next_state, next_st_data) {
+        };
+        BaseState.prototype.exitState = function (state, next_state) {
+        };
+        BaseState.prototype.updateState = function (interval) {
+        };
+        BaseState.prototype.setNextState = function (next_state, next_st_data) {
+            this.next_state = next_state;
+            this.next_st_data = next_st_data;
+        };
+        return BaseState;
+    }());
+    h5game.BaseState = BaseState;
+    __reflect(BaseState.prototype, "h5game.BaseState");
+})(h5game || (h5game = {}));

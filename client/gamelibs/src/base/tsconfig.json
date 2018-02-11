@@ -15,6 +15,7 @@
         "libs/egret.d.ts",
         "libs/assetsmanager.d.ts",
         "src/pool/ObjPool.ts",
-        "src/pool/ObjFtry.ts"
+        "src/pool/ObjFtry.ts",
+        "src/basestate/BaseState.ts"
 	]
 }

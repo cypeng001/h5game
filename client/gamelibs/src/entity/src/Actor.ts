@@ -28,8 +28,12 @@ export class Actor extends Entity {
 
     protected _spActs: any = [];
 
+    protected _actorSt: ActorState = null;
+
     constructor() {
         super();
+
+        this._actorSt = new ActorState(this);
     }
 
     public set hp(val: number) {
@@ -89,6 +93,8 @@ export class Actor extends Entity {
 
         this.updateMove(interval);
         this.updateSpAct(interval);
+
+        this._actorSt.update(interval);
     }
 
     protected initSprite(): void {
@@ -368,7 +374,8 @@ export class Actor extends Entity {
     public execSkill(skillId: number, data: any): void {
         this.attackAct();
 
-        this.addSpAct(this.getCurActStTime(), ActorSpActType.ASAT_STAND);
+        //this.addSpAct(this.getCurActStTime(), ActorSpActType.ASAT_STAND);
+        this._actorSt.setNextState(ActorStType.AST_ATTACK, {state_tick: this.getCurActStTime()})
 
         var resultData = data.result;
         if(resultData.result == AttackResult.SUCCESS) {

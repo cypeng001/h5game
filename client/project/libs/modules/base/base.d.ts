@@ -31,3 +31,17 @@ declare namespace h5game {
         profile(): void;
     }
 }
+declare namespace h5game {
+    class BaseState {
+        protected cur_state: number;
+        protected next_state: number;
+        protected next_st_data: any;
+        getCurState(): number;
+        clearCurState(): void;
+        update(interval: number): void;
+        protected enterState(next_state: number, next_st_data: any): void;
+        protected exitState(state: number, next_state: any): void;
+        protected updateState(interval: number): void;
+        setNextState(next_state: number, next_st_data: any): void;
+    }
+}

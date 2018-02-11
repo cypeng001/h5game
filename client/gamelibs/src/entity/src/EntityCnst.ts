@@ -37,4 +37,9 @@ export enum ActorSpActType {
     ASAT_STAND             = 1,
 };
 
+export enum ActorStType {
+    AST_NORMAL             = 1,
+    AST_ATTACK             = 2,
+};
+
 }
