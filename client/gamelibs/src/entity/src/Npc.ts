@@ -22,6 +22,8 @@ export class Npc extends Actor {
         this.initSprite();
 
         this.standAct();
+
+        this.setTouchEnabled(true);
     }
 
     public release(): void {
@@ -31,6 +33,13 @@ export class Npc extends Actor {
     protected initSprite(): void {
         this._sprite = IntfcProxy.getMCFtry().create("npc_10001");
         this.addChild(this._sprite);
+    }
+
+    protected onTouchTab(event: egret.TouchEvent): void {
+        event.stopPropagation();
+
+        console.log("Npc.onTouchTab localX:", event.localX, "localY:", event.localY, 
+                    "stageX:", event.stageX, "stageY:", event.stageY);
     }
 }
 

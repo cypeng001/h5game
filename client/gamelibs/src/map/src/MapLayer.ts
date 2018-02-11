@@ -33,6 +33,7 @@ export class MapLayer extends egret.DisplayObjectContainer {
         this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchBegin, this);
         this.addEventListener(egret.TouchEvent.TOUCH_CANCEL, this.onTouchCancel, this);
         this.addEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTab, this);
         this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
 
         this.initMsgHandler();
@@ -184,6 +185,9 @@ export class MapLayer extends egret.DisplayObjectContainer {
     }
 
     protected onTouchEnd(event): void {
+    }
+
+    protected onTouchTab(event): void {
         var localPt = this.globalToLocal(event.stageX, event.stageY);
         this._curPlayer.moveTo(localPt.x, localPt.y);
     }

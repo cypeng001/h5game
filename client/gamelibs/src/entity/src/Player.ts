@@ -30,6 +30,8 @@ export class Player extends Actor {
         this.initMpBar();
 
         this.standAct();
+
+        this.setTouchEnabled(true);
     }
 
     public release(): void {
@@ -37,8 +39,8 @@ export class Player extends Actor {
     }
 
     protected initSprite(): void {
-        //this._sprite = IntfcProxy.getMCFtry().create("player_10002");
-        this._sprite = IntfcProxy.getMCFtry().create("player_10001");
+        this._sprite = IntfcProxy.getMCFtry().create("player_10002");
+        //this._sprite = IntfcProxy.getMCFtry().create("player_10001");
         this.addChild(this._sprite);
     }
 
@@ -50,6 +52,13 @@ export class Player extends Actor {
                 {path: [{x: this.x, y: this.y}, {x: x, y: y}]}, 
                 null);
         }
+    }
+
+    protected onTouchTab(event: egret.TouchEvent): void {
+        event.stopPropagation();
+
+        console.log("Player.onTouchTab localX:", event.localX, "localY:", event.localY, 
+                    "stageX:", event.stageX, "stageY:", event.stageY);
     }
 }
 

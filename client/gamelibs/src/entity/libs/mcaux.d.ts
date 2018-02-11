@@ -1,11 +1,12 @@
 declare namespace h5game {
     class MCAdv extends egret.MovieClip {
+        protected _key: string;
         protected _pool: MCPool;
         protected _mcDatas: {
             [key: string]: egret.MovieClipData;
         };
         mcst: MCST;
-        constructor(movieClipData: egret.MovieClipData, pool: MCPool);
+        constructor(movieClipData: egret.MovieClipData, key: string, pool: MCPool);
         gotoAndPlay(frame: string | number, playTimes?: number): void;
         gotoAndStop(frame: string | number): void;
         playAnimation(frame: string, playTimes?: number): void;
@@ -51,12 +52,17 @@ declare namespace h5game {
         private _mcDataFtrys;
         private _mcDataCnt;
         private _mcCnfMgr;
+        private _loadFileCnt;
         private static getAssets(source, callback);
         private getImagePath(key);
         constructor(name: string, mcCnfMgr: MCCnfMgr);
         protected createObj(key: string, params: any): any;
+        protected recycleObj(obj: any): void;
+        protected releaseObj(obj: any): void;
         private reload(filename, texture);
         create(key: string, params?: any): any;
+        private loadNext();
+        private loadComplete();
         release(): void;
         canRelease(): boolean;
         getMCDataCnt(): number;

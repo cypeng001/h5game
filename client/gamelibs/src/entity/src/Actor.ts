@@ -326,6 +326,20 @@ export class Actor extends Entity {
         }
     }
 
+    public setTouchEnabled(value: boolean): void {
+        this._sprite.touchEnabled = value;
+        if(value) {
+            this._sprite.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTab, this);
+        }
+        else {
+            this._sprite.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTab, this);
+        }
+    }
+
+    protected onTouchTab(event: egret.TouchEvent): void {
+        event.stopPropagation();
+    }
+
     protected playSpAct_STAND(data: any): void {
 		this.standAct();
 	}

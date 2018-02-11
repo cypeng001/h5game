@@ -88,6 +88,7 @@ var h5game;
             _this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.onTouchBegin, _this);
             _this.addEventListener(egret.TouchEvent.TOUCH_CANCEL, _this.onTouchCancel, _this);
             _this.addEventListener(egret.TouchEvent.TOUCH_END, _this.onTouchEnd, _this);
+            _this.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.onTouchTab, _this);
             _this.addEventListener(egret.TouchEvent.TOUCH_MOVE, _this.onTouchMove, _this);
             _this.initMsgHandler();
             return _this;
@@ -206,6 +207,8 @@ var h5game;
         MapLayer.prototype.onTouchCancel = function (event) {
         };
         MapLayer.prototype.onTouchEnd = function (event) {
+        };
+        MapLayer.prototype.onTouchTab = function (event) {
             var localPt = this.globalToLocal(event.stageX, event.stageY);
             this._curPlayer.moveTo(localPt.x, localPt.y);
         };
@@ -360,7 +363,7 @@ var h5game;
             label.font = "font_pz_zi_j1_fnt";
             label.letterSpacing = -3;
             label.text = value.toString();
-            label.width = 120;
+            label.width = 100;
             label.anchorOffsetX = label.width / 2;
             container.addChild(label);
             egret.Tween.get(container).to({ y: y - 20 }, 500).

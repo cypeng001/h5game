@@ -181,6 +181,14 @@ var h5game;
             }
             return new h5game.MCAdv(mcData, key, this);
         };
+        MCPool.prototype.recycleObj = function (obj) {
+            var mc = obj;
+            mc.clearEventListener();
+        };
+        MCPool.prototype.releaseObj = function (obj) {
+            var mc = obj;
+            mc.clearEventListener();
+        };
         MCPool.prototype.reload = function (filename, texture) {
             this._mcDataFtrys[filename].texture = texture;
         };

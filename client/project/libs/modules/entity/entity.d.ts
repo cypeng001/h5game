@@ -71,6 +71,8 @@ declare namespace h5game {
         updateMove(interval: any): void;
         protected setFlipX(flipX: boolean): void;
         adjustDir(tarX: number, tarY: number): void;
+        setTouchEnabled(value: boolean): void;
+        protected onTouchTab(event: egret.TouchEvent): void;
         protected playSpAct_STAND(data: any): void;
         protected playSpAct(spAct: any): void;
         protected addSpAct(time: number, type: ActorSpActType, data?: any, param?: any): void;
@@ -129,6 +131,7 @@ declare namespace h5game {
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
+        protected onTouchTab(event: egret.TouchEvent): void;
     }
 }
 declare namespace h5game {
@@ -138,6 +141,7 @@ declare namespace h5game {
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
+        protected onTouchTab(event: egret.TouchEvent): void;
     }
 }
 declare namespace h5game {
@@ -148,6 +152,7 @@ declare namespace h5game {
         release(): void;
         protected initSprite(): void;
         moveTo(x: number, y: number): void;
+        protected onTouchTab(event: egret.TouchEvent): void;
     }
 }
 declare namespace h5game {

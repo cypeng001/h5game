@@ -27,6 +27,8 @@ export class Monster extends Actor {
         this.initHpBar();
 
         this.standAct();
+
+        this.setTouchEnabled(true);
     }
 
     public release(): void {
@@ -36,6 +38,13 @@ export class Monster extends Actor {
     protected initSprite(): void {
         this._sprite = IntfcProxy.getMCFtry().create("monster_10001");
         this.addChild(this._sprite);
+    }
+
+    protected onTouchTab(event: egret.TouchEvent): void {
+        event.stopPropagation();
+
+        console.log("Monster.onTouchTab localX:", event.localX, "localY:", event.localY, 
+                    "stageX:", event.stageX, "stageY:", event.stageY);
     }
 }
 

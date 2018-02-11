@@ -37,6 +37,16 @@ export class MCPool extends ObjPool {
         return new MCAdv(mcData, key, this);
     }
 
+    protected recycleObj(obj: any) {
+        var mc: MCAdv = <MCAdv>obj;
+        mc.clearEventListener();
+    }
+
+    protected releaseObj(obj: any) {
+        var mc: MCAdv = <MCAdv>obj;
+        mc.clearEventListener();
+    }
+
     private reload(filename, texture: egret.Texture): void {
         this._mcDataFtrys[filename].texture = texture;
     }

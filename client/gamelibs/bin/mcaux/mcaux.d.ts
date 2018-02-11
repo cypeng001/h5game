@@ -57,6 +57,8 @@ declare namespace h5game {
         private getImagePath(key);
         constructor(name: string, mcCnfMgr: MCCnfMgr);
         protected createObj(key: string, params: any): any;
+        protected recycleObj(obj: any): void;
+        protected releaseObj(obj: any): void;
         private reload(filename, texture);
         create(key: string, params?: any): any;
         private loadNext();

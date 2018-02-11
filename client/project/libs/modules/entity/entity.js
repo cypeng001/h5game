@@ -342,6 +342,18 @@ var h5game;
                 this.setFlipX(true);
             }
         };
+        Actor.prototype.setTouchEnabled = function (value) {
+            this._sprite.touchEnabled = value;
+            if (value) {
+                this._sprite.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTab, this);
+            }
+            else {
+                this._sprite.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchTab, this);
+            }
+        };
+        Actor.prototype.onTouchTab = function (event) {
+            event.stopPropagation();
+        };
         Actor.prototype.playSpAct_STAND = function (data) {
             this.standAct();
         };
@@ -523,6 +535,7 @@ var h5game;
             this.initNameLabel();
             this.initHpBar();
             this.standAct();
+            this.setTouchEnabled(true);
         };
         Monster.prototype.release = function () {
             _super.prototype.release.call(this);
@@ -530,6 +543,10 @@ var h5game;
         Monster.prototype.initSprite = function () {
             this._sprite = h5game.IntfcProxy.getMCFtry().create("monster_10001");
             this.addChild(this._sprite);
+        };
+        Monster.prototype.onTouchTab = function (event) {
+            event.stopPropagation();
+            console.log("Monster.onTouchTab localX:", event.localX, "localY:", event.localY, "stageX:", event.stageX, "stageY:", event.stageY);
         };
         return Monster;
     }(h5game.Actor));
@@ -558,6 +575,7 @@ var h5game;
             this.y = data.y;
             this.initSprite();
             this.standAct();
+            this.setTouchEnabled(true);
         };
         Npc.prototype.release = function () {
             _super.prototype.release.call(this);
@@ -565,6 +583,10 @@ var h5game;
         Npc.prototype.initSprite = function () {
             this._sprite = h5game.IntfcProxy.getMCFtry().create("npc_10001");
             this.addChild(this._sprite);
+        };
+        Npc.prototype.onTouchTab = function (event) {
+            event.stopPropagation();
+            console.log("Npc.onTouchTab localX:", event.localX, "localY:", event.localY, "stageX:", event.stageX, "stageY:", event.stageY);
         };
         return Npc;
     }(h5game.Actor));
@@ -601,6 +623,7 @@ var h5game;
             this.initHpBar();
             this.initMpBar();
             this.standAct();
+            this.setTouchEnabled(true);
         };
         Player.prototype.release = function () {
             _super.prototype.release.call(this);
@@ -615,6 +638,10 @@ var h5game;
             if (this.mainPlayer) {
                 h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_PLAYER_move, { path: [{ x: this.x, y: this.y }, { x: x, y: y }] }, null);
             }
+        };
+        Player.prototype.onTouchTab = function (event) {
+            event.stopPropagation();
+            console.log("Player.onTouchTab localX:", event.localX, "localY:", event.localY, "stageX:", event.stageX, "stageY:", event.stageY);
         };
         return Player;
     }(h5game.Actor));

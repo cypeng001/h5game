@@ -60,6 +60,7 @@ declare namespace h5game {
         protected onTouchBegin(event: any): void;
         protected onTouchCancel(event: any): void;
         protected onTouchEnd(event: any): void;
+        protected onTouchTab(event: any): void;
         protected onTouchMove(event: any): void;
         protected _createPlayer(data: any): Player;
         protected initCurPlayer(data: any): void;
