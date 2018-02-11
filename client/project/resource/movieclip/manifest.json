@@ -1,12 +1,21 @@
 {
-    "monster_10001" : {"crc": "356c746b", "files": ["monster_10001"]},
-    "npc_10001" : {"crc": "39b1fc71", "files": ["npc_10001"]},
-    "player_10001" : {"crc": "3cc9429d", "files": ["player_10001"]},
-    "player_10002" : {"crc": "3cc9429d", "files": ["player_10002_standfront", 
-        "player_10002_standback", 
-        "player_10002_runfront", 
-        "player_10002_runback", 
-        "player_10002_attackfront", 
-        "player_10002_attackback"]
+    "monster_10001" : {"crc": ["356c746b"], "files": ["monster_10001"]},
+    "npc_10001" : {"crc": ["39b1fc71"], "files": ["npc_10001"]},
+    "player_10001" : {"crc": ["3cc9429d"], "files": ["player_10001"]},
+    "player_10002" : {
+        "crc": ["3cc94291",
+            "3cc94292",
+            "3cc94293",
+            "3cc94294",
+            "3cc94295",
+            "3cc94296"
+        ], 
+        "files": ["player_10002_standfront", 
+            "player_10002_standback", 
+            "player_10002_runfront", 
+            "player_10002_runback", 
+            "player_10002_attackfront", 
+            "player_10002_attackback"
+            ]
         }
 }

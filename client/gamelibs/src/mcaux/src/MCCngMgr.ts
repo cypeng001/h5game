@@ -53,8 +53,16 @@ export class MCCnfMgr {
         return config;
     }
 
-    public getHash(key: string): string {
-        return this._manifest[key].crc;
+    public getHash(key: string, filename: string): string {
+        var crc = this._manifest[key].crc;
+        var files = this._manifest[key].files;
+        for(var i in files) {
+            if(files[i] == filename) {
+                return crc[i];
+            }
+        }
+
+        return "";
     }
 
     public getFilelist(key: string): string[] {

@@ -99,8 +99,15 @@ var h5game;
             }
             return config;
         };
-        MCCnfMgr.prototype.getHash = function (key) {
-            return this._manifest[key].crc;
+        MCCnfMgr.prototype.getHash = function (key, filename) {
+            var crc = this._manifest[key].crc;
+            var files = this._manifest[key].files;
+            for (var i in files) {
+                if (files[i] == filename) {
+                    return crc[i];
+                }
+            }
+            return "";
         };
         MCCnfMgr.prototype.getFilelist = function (key) {
             return this._manifest[key].files;
@@ -215,7 +222,7 @@ var h5game;
             var filelist = this._mcCnfMgr.getFilelist(key);
             var filename = filelist[this._loadFileCnt];
             var imagePath = this.getImagePath(filelist[this._loadFileCnt]);
-            var hash = this._mcCnfMgr.getHash(key);
+            var hash = this._mcCnfMgr.getHash(key, filename);
             if (hash && hash.length > 0) {
                 imagePath += ("?v=" + hash);
             }
