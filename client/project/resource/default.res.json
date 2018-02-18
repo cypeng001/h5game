@@ -23,6 +23,10 @@
 		{
 			"keys": "movieclip_zip",
 			"name": "movieclip"
+		},
+        {
+			"keys": "particle_json,particle_seq_273_png",
+			"name": "particle"
 		}
 	],
 	"resources": [
@@ -185,6 +189,16 @@
             "url": "font/pz_zi_j1.fnt",
             "type": "font",
             "name": "font_pz_zi_j1_fnt"
+		},
+        {
+			"url": "particle/particle.json",
+			"type": "json",
+			"name": "particle_json"
+		},
+        {
+			"url": "particle/seq_273.png",
+			"type": "image",
+			"name": "particle_seq_273_png"
 		}
 	]
 }

@@ -1,0 +1,58 @@
+{
+    "skills_jk_jineng1_banhu_you": {
+        "is_cycle": true,
+        "bound": [-64, -64, 64, 64],
+        "Techniques": [
+                {
+                "name": "Technique_0",
+                "axis": [0.8, -1.4, -1],
+                "angle": -50,
+                "Render": {
+                    "type": "Billboard",
+                    "texture_name": "seq_273",
+                    "add_power_ratio": 1
+                    },
+                "Emitter": {
+                    "type": "Point",
+                    "name": "Emitter_0",
+                    "cycle_time": [0.194657, 3],
+                    "force_emit": true,
+                    "is_cycle": false,
+                    "live_time": {
+                        "type": "fixed",
+                        "value": 0.7
+                    },
+                    "angle": {
+                        "type": "fixed",
+                        "value": 0
+                    },
+                    "width": {
+                        "type": "fixed",
+                        "value": 510
+                    },
+                    "height": {
+                        "type": "fixed",
+                        "value": 350
+                    },
+                    "velocity": {
+                        "type": "fixed",
+                        "value": 0
+                    }
+                },
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_3"
+                    },
+                    {
+                        "type": "TextureAnimator",
+                        "name": "Affector_0",
+                        "time_step": 0.08,
+                        "row_num": 4,
+                        "col_num": 2
+                    }
+                ]
+            }
+        ]
+    }
+}
