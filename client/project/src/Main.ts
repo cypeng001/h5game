@@ -66,6 +66,7 @@ class Main extends eui.UILayer {
     private initProxy(): void {
         h5game.IntfcProxy.regCnfMgr(new h5game.CnfMgr);
         h5game.IntfcProxy.regMCFtry(new h5game.MCFtry);
+        h5game.IntfcProxy.regPSFtry(new PSFtry);
         h5game.IntfcProxy.regLocalMsgDispatcher(new LocalMsgDispatcher);
         h5game.IntfcProxy.regNetMsgHdlr(new NetMsgHdlr);
         h5game.IntfcProxy.regGameData(new GameData);

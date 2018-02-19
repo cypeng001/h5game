@@ -116,6 +116,10 @@ var h5game;
 })(h5game || (h5game = {}));
 var h5game;
 (function (h5game) {
+    ;
+})(h5game || (h5game = {}));
+var h5game;
+(function (h5game) {
     var IntfcProxy = (function () {
         function IntfcProxy() {
         }
@@ -130,6 +134,12 @@ var h5game;
         };
         IntfcProxy.getMCFtry = function () {
             return egret.getImplementation("IMCFtry");
+        };
+        IntfcProxy.regPSFtry = function (impl) {
+            egret.registerImplementation("IPSFtry", impl);
+        };
+        IntfcProxy.getPSFtry = function () {
+            return egret.getImplementation("IPSFtry");
         };
         IntfcProxy.regNetMsgHdlr = function (impl) {
             egret.registerImplementation("INetMsgHdlr", impl);

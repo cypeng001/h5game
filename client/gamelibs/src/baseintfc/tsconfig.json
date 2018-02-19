@@ -20,6 +20,7 @@
         "src/local/ILocalMsg.ts",
         "src/local/ILocalMsgDispatcher.ts",
         "src/cnf/ICnfMgr.ts",
+        "src/particle/IPSFtry.ts",
         "src/IntfcProxy.ts"
 	]
 }

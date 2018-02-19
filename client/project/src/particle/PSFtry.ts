@@ -1,0 +1,22 @@
+class PSFtry implements h5game.IPSFtry {
+    private _init: boolean = false;
+    private _psCnfMgr: PSCnfMgr = null;
+
+    public init(): void {
+        if(this._init) {
+            console.warn("MCFtry already init");
+            return;
+        }
+        this._init = true;
+
+        this._psCnfMgr = new PSCnfMgr;
+        this._psCnfMgr.init();
+    }
+
+    public create(name: string): ParticleSystem {
+        var cnf = this._psCnfMgr.getConfig(name);
+        var particleSystem = new ParticleSystem;
+        particleSystem.init(cnf);
+        return particleSystem;
+    }
+}

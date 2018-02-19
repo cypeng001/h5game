@@ -121,11 +121,19 @@ declare namespace h5game {
     }
 }
 declare namespace h5game {
+    interface IPSFtry {
+        init(): void;
+        create(key: string): any;
+    }
+}
+declare namespace h5game {
     class IntfcProxy {
         static regCnfMgr(impl: ICnfMgr): void;
         static getCnfMgr(): ICnfMgr;
         static regMCFtry(impl: IMCFtry): void;
         static getMCFtry(): IMCFtry;
+        static regPSFtry(impl: IPSFtry): void;
+        static getPSFtry(): IPSFtry;
         static regNetMsgHdlr(impl: INetMsgHdlr): void;
         static getNetMsgHdlr(): INetMsgHdlr;
         static regLocalMsgDispatcher(impl: ILocalMsgDispatcher): void;

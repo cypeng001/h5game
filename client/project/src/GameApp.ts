@@ -26,6 +26,8 @@ class GameApp {
         
         h5game.IntfcProxy.getCnfMgr().init();
         h5game.IntfcProxy.getMCFtry().init();
+        h5game.IntfcProxy.getPSFtry().init();
+        
 
         this.initMsgHandler();
     }

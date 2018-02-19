@@ -18,6 +18,14 @@ export class IntfcProxy {
         return egret.getImplementation("IMCFtry");
     }
 
+    public static regPSFtry(impl: IPSFtry): void {
+        egret.registerImplementation("IPSFtry", impl);
+    }
+
+    public static getPSFtry(): IPSFtry {
+        return egret.getImplementation("IPSFtry");
+    }
+
     public static regNetMsgHdlr(impl: INetMsgHdlr): void {
         egret.registerImplementation("INetMsgHdlr", impl);
     }
