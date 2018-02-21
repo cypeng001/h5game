@@ -1,4 +1,4 @@
-class PSEmitter extends Particle implements PSAttribute {
+class PSEmitter extends PSParticle implements PSAttribute {
     protected static DEF_ATTR = {
         WIDTH: 64,
         HEIGHT: 64,
@@ -90,7 +90,7 @@ class PSEmitter extends Particle implements PSAttribute {
         this._dynVelocity = dynVelocity;
     }
 
-    public initParticle(particle: Particle): void {
+    public initParticle(particle: PSParticle): void {
         particle.parent_emitter = this;
         particle.live_forever = this._liveForever;
         particle.left = 0;
@@ -106,32 +106,32 @@ class PSEmitter extends Particle implements PSAttribute {
         this.initParticleDimensions(particle);
     }
 
-    public initParticlePos(particle: Particle): void {
+    public initParticlePos(particle: PSParticle): void {
         particle.position = PSVec3Util.copy(this._relativePos, particle.position);
     }
 
-    public initParticleColor(particle: Particle): void {
+    public initParticleColor(particle: PSParticle): void {
 		PSColor4FUtil.copy(this._startColor, particle.color);
     }
 
-    public initParticleSpeed(particle: Particle): void {
+    public initParticleSpeed(particle: PSParticle): void {
 		var t = this.getCycleTimeFactor();
 		var velocity = PSUtil.calcDynAttr(this._dynVelocity, t, 0);
 		PSVec3Util.multiply(particle.direction, velocity, particle.direction);
     }
 
-    public initParticleDirection(particle: Particle): void {
+    public initParticleDirection(particle: PSParticle): void {
         PSVec3Util.copy(this._dir, particle.direction);
     }
 
-    public initParticleLiveTime(particle: Particle): void {
+    public initParticleLiveTime(particle: PSParticle): void {
         var t = this.getCycleTimeFactor();
 
         particle.time_live = particle.total_live 
             = PSUtil.calcDynAttr(this._dynLiveTime, t, PSEmitter.DEF_ATTR.TIME_LIVE);
     }
 
-    public initParticleDimensions(particle: Particle): void {
+    public initParticleDimensions(particle: PSParticle): void {
         var t = this.getCycleTimeFactor();
 
         particle.width = particle.height = particle.depth 

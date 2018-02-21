@@ -1,5 +1,5 @@
 class PSTechnique {
-    private _particleSystem: ParticleSystem;
+    private _particleSystem: PSParticleSystem;
     private _name: string;
     private _axis: PSVec3;
     private _angle: number;
@@ -7,7 +7,7 @@ class PSTechnique {
     private _emitters: PSEmitter[] = [];
     private _renderer: PSRenderer = null;
 
-    constructor(particleSystem: ParticleSystem) {
+    constructor(particleSystem: PSParticleSystem) {
         this._particleSystem = particleSystem;
     }
 

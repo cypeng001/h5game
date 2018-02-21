@@ -1,4 +1,4 @@
-class ParticleSystem extends egret.DisplayObject {
+class PSParticleSystem extends egret.DisplayObject {
     private _liveTime: number = 0;
     private _cycleTotalTime: number = 0;
     private _cycle: boolean;

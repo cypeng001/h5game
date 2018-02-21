@@ -1,4 +1,4 @@
-class Particle {
+class PSParticle {
     position: PSVec3;
     direction: PSVec3;
     time_live: number;

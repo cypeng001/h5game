@@ -1,6 +1,6 @@
 class PSParserJson {
-    public static parse(data: any): ParticleSystem {
-        var particleSystem = new ParticleSystem;
+    public static parse(data: any): PSParticleSystem {
+        var particleSystem = new PSParticleSystem;
         for(var key in data) {
             var val = data[key];
             switch(key) {
@@ -24,7 +24,7 @@ class PSParserJson {
         return particleSystem;
     }
 
-    private static parseTechnique(particleSystem: ParticleSystem, data: any): void {
+    private static parseTechnique(particleSystem: PSParticleSystem, data: any): void {
         var technique = particleSystem.createTechnique();
         for(var key in data) {
             var val = data[key];
