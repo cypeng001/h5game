@@ -15,8 +15,6 @@ class PSFtry implements h5game.IPSFtry {
 
     public create(name: string): ParticleSystem {
         var cnf = this._psCnfMgr.getConfig(name);
-        var particleSystem = new ParticleSystem;
-        particleSystem.init(cnf);
-        return particleSystem;
+        return PSParserJson.parse(cnf);
     }
 }
