@@ -43,4 +43,31 @@ class PSTechnique {
         this._renderer = PSUtil.createRenderer(type, this);
         return this._renderer;
     }
+
+    public update(interval: number): void {
+        this.emitParticles(interval);
+    }
+
+    private emitParticles(interval: number): void {
+
+    }
+
+    private createParticle(): PSParticle {
+        return new PSParticle;
+    }
+
+    private triggerEmitter(emitter: PSEmitter, requested: number, interval: number): void {
+        if(!requested) {
+            return;
+        }
+
+        for(var i = 0; i < requested; ++i) {
+            var p = this.createParticle();
+            emitter.initParticle(p);
+
+            for(var k in this._affectors) {
+                this._affectors[k].initParticle(p);
+            }
+        }
+    }
 }

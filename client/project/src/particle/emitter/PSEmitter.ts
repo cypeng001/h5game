@@ -91,8 +91,8 @@ class PSEmitter extends PSParticle implements PSAttribute {
     }
 
     public initParticle(particle: PSParticle): void {
-        particle.parent_emitter = this;
-        particle.live_forever = this._liveForever;
+        particle.emitter = this;
+        particle.liveForever = this._liveForever;
         particle.left = 0;
         particle.top = 0;
         particle.right = 1;
@@ -127,7 +127,7 @@ class PSEmitter extends PSParticle implements PSAttribute {
     public initParticleLiveTime(particle: PSParticle): void {
         var t = this.getCycleTimeFactor();
 
-        particle.time_live = particle.total_live 
+        particle.timeLive = particle.totalLive 
             = PSUtil.calcDynAttr(this._dynLiveTime, t, PSEmitter.DEF_ATTR.TIME_LIVE);
     }
 

@@ -1,8 +1,8 @@
 type PSColor4F = [number, number, number, number];
 
-type PSVec2 = [number, number];
-type PSVec3 = [number, number, number];
-type PSRect = [number, number, number, number];
+type PSVec2 = [number, number]; //[x, y]
+type PSVec3 = [number, number, number]; //[x, y, z]
+type PSRect = [number, number, number, number]; //[l, t, r, b]
 
 class PSColor4FUtil {
     public static copy(src: PSColor4F, dst: PSColor4F): PSColor4F {

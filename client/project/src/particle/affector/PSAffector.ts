@@ -52,4 +52,12 @@ class PSAffector implements PSAttribute {
     public getEndTime(): number {
         return this._end_time;
     }
+
+    public initParticle(particle: PSParticle): void {
+
+    }
+
+    public effectParticle(particle: PSParticle, interval: number): void {
+        
+    }
 }

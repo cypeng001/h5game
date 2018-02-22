@@ -1,9 +1,9 @@
 class PSParticle {
     position: PSVec3;
     direction: PSVec3;
-    time_live: number;
-    total_live: number;
-    live_forever: boolean;
+    timeLive: number;
+    totalLive: number;
+    liveForever: boolean;
     angle: number;
     color: PSColor4F;
     enabled: boolean;
@@ -15,9 +15,9 @@ class PSParticle {
     top: number;
     right: number;
     bottom: number;
-    rotation_random_value: number;
+    rotationRandomValue: number;
 
-    start_frame: number;
+    startFrame: number;
 
-    parent_emitter: PSEmitter;
+    emitter: PSEmitter;
 }
