@@ -77,7 +77,7 @@ class PSAffectorTexAnim extends PSAffector {
         this.effectParticle(particle, 0);
     }
 
-    public effectParticle(particle: PSParticle, interval: number): void {
+    public effectParticle(particle: PSParticle, timeElapsed: number): void {
         this.updateTexCoords();
 
         var index = Math.floor((particle.totalLive - particle.timeLive) / this._time_step);

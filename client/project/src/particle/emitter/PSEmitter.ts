@@ -1,4 +1,4 @@
-class PSEmitter extends PSParticle implements PSAttribute {
+class PSEmitter extends PSParticle {
     protected static DEF_ATTR = {
         WIDTH: 64,
         HEIGHT: 64,
@@ -16,20 +16,23 @@ class PSEmitter extends PSParticle implements PSAttribute {
         CYCLE: true,
     }
 
-    protected _name: string;
-    protected _dir: PSVec3;
-    protected _up: PSVec3;
-    protected _relativePos: PSVec3;
-    protected _emissionRate: number;
-    protected _startTime: number;
-    protected _endTime: number;
-    protected _cycle: boolean;
-    protected _forceEmit: boolean;
-    protected _liveForever: boolean;
-    protected _remainder: number;
-    protected _emitterTime: number;
-    protected _startColor: PSColor4F;
-    protected _endColor: PSColor4F;
+    protected _name: string = "";
+    protected _dir: PSVec3 = [1, 0, 0];
+    protected _up: PSVec3 = [0, 1, 0];
+    protected _relativePos: PSVec3 = [0, 0, 0];
+    protected _emissionRate: number = 10;
+    protected _startTime: number = 0;
+    protected _endTime: number = 0;
+    protected _cycle: boolean = false;
+    protected _forceEmit: boolean = false;
+    protected _liveForever: boolean = false;
+    protected _remainder: number = 0;
+    protected _emitterTime: number = 0;
+    protected _startColor: PSColor4F = [0, 0, 0, 0];
+    protected _endColor: PSColor4F = [0, 0, 0, 0];
+
+    protected _enable: boolean = true;
+    protected _lastCount: number = 0;
 
     protected _dynLiveTime: PSDynAttr;
     protected _dynAngle: PSDynAttr;
@@ -46,13 +49,7 @@ class PSEmitter extends PSParticle implements PSAttribute {
 
         this._technique = technique;
     }
-
-    public setAttribute(key: string, value: any): void {
-    }
-
-    public getAttribute(key: string): any {   
-    }
-
+    
 	public setName(name: string): void {
         this._name = name;
     }
@@ -88,6 +85,18 @@ class PSEmitter extends PSParticle implements PSAttribute {
 
     public setDynVelocity(dynVelocity: PSDynAttr): void {
         this._dynVelocity = dynVelocity;
+    }
+
+    public setEnable(enable: boolean): void {
+        this._enable = enable;
+    }
+
+    public isEnable(): boolean {
+        return this._enable;
+    }
+
+    public getLastCount(): number {
+        return this._lastCount;
     }
 
     public initParticle(particle: PSParticle): void {
@@ -140,5 +149,44 @@ class PSEmitter extends PSParticle implements PSAttribute {
 
     protected getCycleTimeFactor(): number {
         return this._technique.getCycleTimeFactor();
+    }
+
+    public getEmissionCount(timeElapsed: number): number {
+        this._lastCount = 0;
+
+        if(!this._enable) {
+            return 0;
+        }
+
+        this._emitterTime += timeElapsed;
+
+        var cycleTotalTime = this._technique.getCycleTotalTime();
+
+        var resultCount = 0;
+
+        if(this._forceEmit) {
+            if(this._emitterTime >= this._startTime) {
+                resultCount = this._lastCount = this._emissionRate;
+                this.setEnable(false);
+            }
+        }
+        else {
+            if(this._emitterTime >= this._startTime && this._emitterTime <= this._endTime) {
+                resultCount = this._lastCount = this._remainder = 
+                    this._remainder + this._emissionRate * timeElapsed;
+                this._remainder -= resultCount;
+            }
+
+            if(this._emitterTime > cycleTotalTime) {
+                if(this._cycle) {
+                    this._emitterTime = 0;
+                }
+                else {
+                    this.setEnable(false);
+                }
+            }
+        }
+
+        return resultCount;
     }
 }

@@ -1,36 +1,46 @@
-class PSRenderer implements PSAttribute {
-    private static ATTR = {
-        TEXTURE_NAME: "texture_name",
-    }
-
+class PSRenderer {
     protected _technique: PSTechnique;
 
-    private _textureName: string;
-    private _addPowerRatio: number;
+    protected _textureName: string;
+    protected _addPowerRatio: number;
+
+    protected _texture: egret.Texture;
+    protected _textureDirty: boolean = true;
+
+    public static getTexturePath(name: string): string {
+        return RES.config.resourceRoot + "particle/" + name + ".png";
+    }
 
     constructor(technique: PSTechnique) {
         this._technique = technique;
     }
 
     public setTextureName(textureName: string): void {
+        if(this._textureName == textureName) {
+            return;
+        }
         this._textureName = textureName;
+
+        this._textureDirty = true;
     }
 
     public setAddPowerRatio(addPowerRatio: number): void {
         this._addPowerRatio = addPowerRatio;
     }
 
-
-    public setAttribute(key: string, value: any): void {
-        switch(key) {
-            case PSRenderer.ATTR.TEXTURE_NAME: {
-                this._textureName = value;
-                break;
-            }
+    protected updateTexture(): void {
+        if(!this._textureDirty) {
+            return;
         }
+        this._textureDirty = false;
+
+        var adapter = egret.getImplementation("eui.IAssetAdapter");
+        adapter.getAsset(PSRenderer.getTexturePath(this._textureName), (content) => {
+            this._texture = content;
+        }, this);
     }
 
-    public getAttribute(key: string): any {
+    public render(renderNode: egret.sys.GroupNode): void {
         
     }
 }

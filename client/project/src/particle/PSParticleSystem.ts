@@ -13,6 +13,13 @@ class PSParticleSystem extends egret.DisplayObject {
 
     constructor() {
         super();
+
+        this.$renderNode = new egret.sys.GroupNode();
+        /*
+        this.$renderNode.cleanBeforeRender = function(){
+
+        };
+        */
     }
 
     public getLiveTime(): number {
@@ -70,12 +77,14 @@ class PSParticleSystem extends egret.DisplayObject {
         this.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
     }
 
-    private update(interval: number): void {
-        if(this._enable) {
+    private update(timeElapsed: number): void {
+        this.$renderDirty = true;
+
+        if(!this._enable) {
             return;
         }
 
-        this._liveTime += interval;
+        this._liveTime += timeElapsed;
 
         if(this._liveTime > this._cycleTotalTime) {
             if(!this._cycle) {
@@ -85,7 +94,7 @@ class PSParticleSystem extends egret.DisplayObject {
         }
 
         for(var i in this._techniques) {
-            this._techniques[i].update(interval);
+            this._techniques[i].update(timeElapsed);
         }
     }
 
@@ -93,8 +102,8 @@ class PSParticleSystem extends egret.DisplayObject {
         var tick = egret.getTimer();
         if(this._lastTick > 0)
         {
-            var interval = (tick - this._lastTick) / 1000;
-            this.update(interval);
+            var timeElapsed = (tick - this._lastTick) / 1000;
+            this.update(timeElapsed);
         }
         this._lastTick = tick;
     }
@@ -109,5 +118,11 @@ class PSParticleSystem extends egret.DisplayObject {
         super.$onRemoveFromStage();
         
         this.stopTick();
+    }
+
+    $updateRenderNode(): void {
+        for(var i in this._techniques) {
+            this._techniques[i].render(<egret.sys.GroupNode>this.$renderNode);
+        }
     }
 }

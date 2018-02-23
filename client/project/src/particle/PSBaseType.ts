@@ -1,4 +1,4 @@
-type PSColor4F = [number, number, number, number];
+type PSColor4F = [number, number, number, number];  //[a, r, g, b]
 
 type PSVec2 = [number, number]; //[x, y]
 type PSVec3 = [number, number, number]; //[x, y, z]

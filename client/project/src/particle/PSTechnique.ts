@@ -2,10 +2,17 @@ class PSTechnique {
     private _particleSystem: PSParticleSystem;
     private _name: string;
     private _axis: PSVec3;
-    private _angle: number;
+    private _angle: number = 0;
+    private _visualParticleQuota: number = 1;
+	private _emittedEmitterQuota: number = 0;
+    private _stopEmitted: boolean = false;
+
     private _affectors: PSAffector[] = [];
     private _emitters: PSEmitter[] = [];
     private _renderer: PSRenderer = null;
+
+    private _activeParticleList: PSParticle[] = [];
+    private _freeParticleList: PSParticle[] = [];
 
     constructor(particleSystem: PSParticleSystem) {
         this._particleSystem = particleSystem;
@@ -21,6 +28,30 @@ class PSTechnique {
 
     public setAngle(angle: number): void {
         this._angle = angle;
+    }
+
+    public setVisualParticleQuota(val: number): void {
+        this._visualParticleQuota = val;
+    }
+
+    public getVisualParticleQuota(): number {
+        return this._visualParticleQuota;
+    }
+
+	public setEmittedEmitterQuota(val: number): void {
+        this._emittedEmitterQuota = val;
+    }
+
+    public getEmittedEmitterQuota(): number {
+        return this._emittedEmitterQuota;
+    }
+
+    public getCycleTotalTime(): number {
+        return this._particleSystem.getCycleTotalTime();
+    }
+
+    public getLiveTime(): number {
+        return this._particleSystem.getLiveTime();
     }
 
     public getCycleTimeFactor(): number {
@@ -44,19 +75,84 @@ class PSTechnique {
         return this._renderer;
     }
 
-    public update(interval: number): void {
-        this.emitParticles(interval);
+    public getActiveParticleList(): PSParticle[] {
+        return this._activeParticleList;
     }
 
-    private emitParticles(interval: number): void {
+    public update(timeElapsed: number): void {
 
+        this.expire(timeElapsed);
+
+        if(!this._stopEmitted) {
+            this.emitParticles(timeElapsed);
+        }
+
+        this.triggerAffectors(timeElapsed);
+    }
+
+    private expire(timeElapsed: number): void {
+        for(var i = this._activeParticleList.length - 1; i >= 0; --i) {
+            var particle = this._activeParticleList[i];
+
+            if(!particle.liveForever && particle.timeLive < timeElapsed) {
+                this._activeParticleList.splice(i, 1);
+                this._freeParticleList.push(particle);
+            }
+            else {
+                particle.timeLive -= timeElapsed;
+                if(particle.liveForever && particle.timeLive < 0) {
+                    particle.timeLive = particle.totalLive;
+                }
+            }
+        }
+    }
+
+    private emitParticles(timeElapsed: number): void {
+        var total = 0;
+        for(let i in this._emitters) {
+            total += this._emitters[i].getEmissionCount(timeElapsed);
+        }
+
+        var allow = 0;
+        if(this._visualParticleQuota > this._activeParticleList.length) {
+            allow = this._visualParticleQuota - this._activeParticleList.length;
+        }
+        if(allow == 0) {
+            return;
+        }
+
+        var ratio = 1;
+        if(total > allow && total != 0) {
+            ratio = allow / total;
+        }
+
+        for(let i in this._emitters) {
+            var emitter = this._emitters[i];
+            this.triggerEmitter(emitter, Math.floor(emitter.getLastCount() * ratio), timeElapsed);
+        }
+    }
+
+    private triggerAffectors(timeElapsed: number): void {
+        for(var i in this._affectors) {
+            this._affectors[i].processParticles(timeElapsed);
+        }
     }
 
     private createParticle(): PSParticle {
-        return new PSParticle;
+        var particle: PSParticle = null;
+        if(this._freeParticleList.length > 0) {
+            particle = this._freeParticleList.pop();
+        }
+        else {
+            particle = new PSParticle;
+        }
+        
+        this._activeParticleList.push(particle);
+
+        return particle
     }
 
-    private triggerEmitter(emitter: PSEmitter, requested: number, interval: number): void {
+    private triggerEmitter(emitter: PSEmitter, requested: number, timeElapsed: number): void {
         if(!requested) {
             return;
         }
@@ -69,5 +165,12 @@ class PSTechnique {
                 this._affectors[k].initParticle(p);
             }
         }
+    }
+
+    public render(renderNode: egret.sys.GroupNode): void {
+        if(!this._renderer) {
+            return;
+        }
+        this._renderer.render(renderNode);
     }
 }

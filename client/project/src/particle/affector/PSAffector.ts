@@ -1,18 +1,14 @@
-class PSAffector implements PSAttribute {
+class PSAffector {
 	private _name: string;
-	private _start_time: number;
-	private _end_time: number;
+	private _startTime: number = 0;
+	private _endTime: number = 0;
+    private _affectTime: number = 0;
+    private _enable: boolean = true;
 
     protected _technique: PSTechnique;
 
     constructor(technique: PSTechnique) {
         this._technique = technique;
-    }
-
-	public setAttribute(key: string, value: any): void {
-	}
-
-	public getAttribute(key: string): any {   
     }
 
 	public getName(): string {
@@ -24,40 +20,67 @@ class PSAffector implements PSAttribute {
     }
 
     public setStartTime(t: number): void {
-        this._start_time = t;
-        if (this._start_time < 0) {
-            this._start_time = 0;
+        this._startTime = t;
+        if (this._startTime < 0) {
+            this._startTime = 0;
         }
 
-        if (this._start_time > this._end_time) {
-            this._start_time = this._end_time;
+        if (this._startTime > this._endTime) {
+            this._startTime = this._endTime;
         }
     }
 
     getStartTime(): number {
-        return this._start_time;
+        return this._startTime;
     }
 
     setEndTime(t: number): void {
-        this._end_time = t;
-        if (this._end_time > 1) {
-            this._end_time = 1;
+        this._endTime = t;
+        if (this._endTime > 1) {
+            this._endTime = 1;
         }
 
-        if (this._start_time > this._end_time) {
-            this._end_time = this._start_time;
+        if (this._startTime > this._endTime) {
+            this._endTime = this._startTime;
         }
     }
 
     public getEndTime(): number {
-        return this._end_time;
+        return this._endTime;
     }
 
     public initParticle(particle: PSParticle): void {
 
     }
 
-    public effectParticle(particle: PSParticle, interval: number): void {
+    public effectParticle(particle: PSParticle, timeElapsed: number): void {
         
+    }
+
+    public processParticles(timeElapsed: number): void {
+        if(!this._enable) {
+            return;
+        }
+    
+        var total = this._technique.getCycleTotalTime();
+        this._affectTime += timeElapsed;
+        this._affectTime -= Math.floor(this._affectTime / total) * total;
+
+        var startTime = this._startTime * total;
+        var endTime = this._endTime * total;
+        if(this._affectTime < startTime || this._affectTime > endTime) {
+            return;
+        }
+
+        var particleList = this._technique.getActiveParticleList();
+        for(var i in particleList) {
+            var particle = particleList[i];
+
+            if(particle.timeLive == particle.totalLive) {
+                continue;
+            }
+
+            this.effectParticle(particle, timeElapsed);
+        }
     }
 }
