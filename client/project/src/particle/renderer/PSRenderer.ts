@@ -2,7 +2,8 @@ class PSRenderer {
     protected _technique: PSTechnique;
 
     protected _textureName: string;
-    protected _addPowerRatio: number;
+    protected _addPowerRatio: number = 0;
+    protected _matType: number = 0;
 
     protected _texture: egret.Texture;
     protected _textureDirty: boolean = true;
@@ -26,6 +27,10 @@ class PSRenderer {
 
     public setAddPowerRatio(addPowerRatio: number): void {
         this._addPowerRatio = addPowerRatio;
+    }
+
+    public setMatType(matType: number): void {
+        this._matType = matType;
     }
 
     protected updateTexture(): void {

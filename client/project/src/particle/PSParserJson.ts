@@ -59,6 +59,10 @@ class PSParserJson {
                     technique.setAngle(val);
                 }
                 break;
+                case "quota": {
+                    technique.setQuota(val);
+                }
+                break;
             }
         }
     }
@@ -71,6 +75,10 @@ class PSParserJson {
             break;
             case "addPowerRatio": {
                 renderer.setAddPowerRatio(attrVal);
+            }
+            break;
+            case "matType": {
+                renderer.setMatType(attrVal);
             }
             break;
         }
@@ -110,6 +118,10 @@ class PSParserJson {
                 emitter.setForceEmit(attrVal);
             }
             break;
+            case "liveForever": {
+                emitter.setLiveForever(attrVal);
+            }
+            break;
             case "cycle": {
                 emitter.setCycle(attrVal);
             }
@@ -134,12 +146,20 @@ class PSParserJson {
                 emitter.setDynDepth(PSUtil.createDynAttr(attrVal.type, attrVal.value));
             }
             break;
+            case "size": {
+                emitter.setDynSize(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
             case "useAllSize": {
                 emitter.setUseAllSize(attrVal);
             }
             break;
             case "velocity": {
                 emitter.setDynVelocity(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "direction": {
+                emitter.setDirection(attrVal);
             }
             break;
         }
@@ -151,6 +171,25 @@ class PSParserJson {
         PSParserJson.parseEmitterBaseAttr(emitter, attrType, attrVal);
     }
 
+    private static parseEmitterSphereAttr(emitter: PSEmitter, attrType: string, attrVal: any): void {
+        var emitterImpl = <PSEmitterSphere>emitter;
+
+        switch(attrType) {
+            case "sphereRadius": {
+                emitterImpl.setRadius(attrVal);
+            }
+            break;
+            case "sphereAutoDir": {
+                emitterImpl.setAutoDir(attrVal);
+            }
+            break;
+
+            default: {
+                PSParserJson.parseEmitterBaseAttr(emitter, attrType, attrVal);
+            }
+        }
+    }
+
     private static parseEmitter(technique: PSTechnique, data: any): void {
         var type = data.type;
         var emitter = technique.createEmitter(type);
@@ -158,6 +197,10 @@ class PSParserJson {
         switch(type) {
             case "Point":
             parserEmitterAttrFunc = PSParserJson.parseEmitterPointAttr;
+            break;
+            case "Sphere":
+            parserEmitterAttrFunc = PSParserJson.parseEmitterSphereAttr;
+            break;
         }
         for(var key in data) {
             if(key != "type") {

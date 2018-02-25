@@ -1,4 +1,16 @@
 class PSUtil {
+    public static randInRange(min: number, max: number): number {
+		var range = max - min;   
+		var rand = Math.random();   
+		return (min + Math.round(rand * range));   
+	}
+
+	public static randInRangeFloat(min: number, max: number): number {
+		var range = max - min;   
+		var rand = Math.random();   
+		return (min + rand * range);   
+	}
+    
     public static createAffector(type: string, technique: PSTechnique): PSAffector {
         switch(type) {
             case "Rotation": {
@@ -16,6 +28,9 @@ class PSUtil {
         switch(type) {
             case "Point": {
                 return new PSEmitterPoint(technique);
+            }
+            case "Sphere": {
+                return new PSEmitterSphere(technique);
             }
         }
 
@@ -44,6 +59,9 @@ class PSUtil {
         switch(type) {
             case "fixed": {
                 return new PSDynAttrFixed(data);
+            }
+            case "random": {
+                return new PSDynAttrRandom(data);
             }
         }
     }

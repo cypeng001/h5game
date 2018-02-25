@@ -56,5 +56,76 @@
                 ]
             }
         ]
+    },
+    "ui_ch_baihuazhengyan": {
+        "cycle": true,
+        "bound": [-64, -64, 64, 64],
+        "Techniques": [
+                {
+                "name": "main",
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "ui_182"
+                    },
+                "Emitter": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_0",
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "width": {
+                            "type": "fixed",
+                            "value": 286
+                        },
+                        "height": {
+                            "type": "fixed",
+                            "value": 71
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        }
+                    }
+                ],
+                "Affectors": [
+                ]
+            },
+            {
+                "name": "Technique_2",
+                "quota": 10,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_167",
+                    "matType": 1,
+                    "addPowerRatio": 0.9
+                    },
+                "Emitter": [
+                    {
+                        "type": "Sphere",
+                        "name": "Emitter_17",
+                        "direction": [0, 1, 0],
+                        "angle": {
+                            "type": "fixed",
+                            "value": 360
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [7, 30]
+                        },
+                        "velocity": {
+                            "type": "random",
+                            "value": [10, 50]
+                        },
+                        "sphereRadius": 0
+                    }
+                ],
+                "Affectors": [
+                ]
+            }
+        ]
     }
 }

@@ -41,6 +41,7 @@ class PSEmitter extends PSParticle {
     protected _dynHeight: PSDynAttr;
     protected _dynDepth: PSDynAttr;
     protected _dynSize: PSDynAttr;
+    protected _dynAllXYZ: PSDynAttr;
     protected _dynVelocity: PSDynAttr;
 
 	protected _technique: PSTechnique;
@@ -68,6 +69,10 @@ class PSEmitter extends PSParticle {
         this._forceEmit = forceEmit;
     }
 
+    public setLiveForever(liveForever: boolean): void {
+        this._liveForever = liveForever;
+    }
+
     public setDynLiveTime(dynLiveTime: PSDynAttr): void {
         this._dynLiveTime = dynLiveTime;
     }
@@ -88,12 +93,22 @@ class PSEmitter extends PSParticle {
         this._dynDepth = dynDepth;
     }
 
-    public setDynVelocity(dynVelocity: PSDynAttr): void {
-        this._dynVelocity = dynVelocity;
+    public setDynSize(dynSize: PSDynAttr): void {
+        this._dynSize = dynSize;
     }
 
     public setUseAllSize(useAllSize: boolean): void {
         this._useAllSize = useAllSize;
+    }
+
+    public setDynVelocity(dynVelocity: PSDynAttr): void {
+        this._dynVelocity = dynVelocity;
+    }
+
+    public setDirection(direction: PSVec3): void {
+        PSVec3Util.copy(direction, this._dir);
+        PSVec3Util.normalize(this._dir);
+        PSVec3Util.perpendicular(this._dir, this._up);
     }
 
     public setEnable(enable: boolean): void {
@@ -124,32 +139,32 @@ class PSEmitter extends PSParticle {
         this.initParticleDimensions(particle);
     }
 
-    public initParticlePos(particle: PSParticle): void {
+    protected initParticlePos(particle: PSParticle): void {
         particle.position = PSVec3Util.copy(this._relativePos, particle.position);
     }
 
-    public initParticleColor(particle: PSParticle): void {
+    protected initParticleColor(particle: PSParticle): void {
 		PSColor4FUtil.copy(this._startColor, particle.color);
     }
 
-    public initParticleSpeed(particle: PSParticle): void {
+    protected initParticleSpeed(particle: PSParticle): void {
 		var t = this.getCycleTimeFactor();
 		var velocity = PSUtil.calcDynAttr(this._dynVelocity, t, 0);
 		PSVec3Util.multiply(particle.direction, velocity, particle.direction);
     }
 
-    public initParticleDirection(particle: PSParticle): void {
+    protected initParticleDirection(particle: PSParticle): void {
         PSVec3Util.copy(this._dir, particle.direction);
     }
 
-    public initParticleLiveTime(particle: PSParticle): void {
+    protected initParticleLiveTime(particle: PSParticle): void {
         var t = this.getCycleTimeFactor();
 
         particle.timeLive = particle.totalLive 
             = PSUtil.calcDynAttr(this._dynLiveTime, t, PSEmitter.DEF_ATTR.TIME_LIVE);
     }
 
-    public initParticleDimensions(particle: PSParticle): void {
+    protected initParticleDimensions(particle: PSParticle): void {
         var t = this.getCycleTimeFactor();
 
         if(this._useAllSize) {
@@ -161,7 +176,6 @@ class PSEmitter extends PSParticle {
             particle.height = PSUtil.calcDynAttr(this._dynHeight, t, PSEmitter.DEF_ATTR.HEIGHT);
             particle.depth = PSUtil.calcDynAttr(this._dynDepth, t, PSEmitter.DEF_ATTR.DEPTH);
         }
-        
     }
 
     protected getCycleTimeFactor(): number {

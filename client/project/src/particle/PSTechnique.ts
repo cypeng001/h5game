@@ -3,7 +3,7 @@ class PSTechnique {
     private _name: string;
     private _axis: PSVec3;
     private _angle: number = 0;
-    private _visualParticleQuota: number = 1;
+    private _quota: number = 1;
 	private _emittedEmitterQuota: number = 0;
     private _stopEmitted: boolean = false;
 
@@ -30,12 +30,8 @@ class PSTechnique {
         this._angle = angle;
     }
 
-    public setVisualParticleQuota(val: number): void {
-        this._visualParticleQuota = val;
-    }
-
-    public getVisualParticleQuota(): number {
-        return this._visualParticleQuota;
+    public setQuota(val: number): void {
+        this._quota = val;
     }
 
 	public setEmittedEmitterQuota(val: number): void {
@@ -114,8 +110,8 @@ class PSTechnique {
         }
 
         var allow = 0;
-        if(this._visualParticleQuota > this._activeParticleList.length) {
-            allow = this._visualParticleQuota - this._activeParticleList.length;
+        if(this._quota > this._activeParticleList.length) {
+            allow = this._quota - this._activeParticleList.length;
         }
         if(allow == 0) {
             return;
