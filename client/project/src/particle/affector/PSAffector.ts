@@ -1,7 +1,7 @@
 class PSAffector {
 	private _name: string;
 	private _startTime: number = 0;
-	private _endTime: number = 0;
+	private _endTime: number = 1;
     private _affectTime: number = 0;
     private _enable: boolean = true;
 

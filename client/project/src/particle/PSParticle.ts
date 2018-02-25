@@ -19,5 +19,30 @@ class PSParticle {
 
     startFrame: number = 0;
 
+    scale: number = 1;
+
     emitter: PSEmitter;
+
+    private matrix:egret.Matrix = new egret.Matrix();
+
+    public $getMatrix(regX:number, regY:number):egret.Matrix {
+            var matrix = this.matrix;
+            matrix.identity();
+            if (this.angle % 360) {
+                var r = this.angle;
+                var cos = egret.NumberUtils.cos(r);
+                var sin = egret.NumberUtils.sin(r);
+            } else {
+                cos = 1;
+                sin = 0;
+            }
+            matrix.append(cos * this.scale, sin * this.scale, -sin * this.scale, cos * this.scale, 
+                this.position[0], this.position[1]);
+
+            if (regX || regY) {
+                matrix.tx -= regX * matrix.a + regY * matrix.c;
+                matrix.ty -= regX * matrix.b + regY * matrix.d;
+            }
+            return matrix;
+        }
 }

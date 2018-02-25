@@ -130,6 +130,14 @@ class PSParserJson {
                 emitter.setDynHeight(PSUtil.createDynAttr(attrVal.type, attrVal.value));
             }
             break;
+            case "depth": {
+                emitter.setDynDepth(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "useAllSize": {
+                emitter.setUseAllSize(attrVal);
+            }
+            break;
             case "velocity": {
                 emitter.setDynVelocity(PSUtil.createDynAttr(attrVal.type, attrVal.value));
             }

@@ -33,6 +33,7 @@ class PSEmitter extends PSParticle {
 
     protected _enable: boolean = true;
     protected _lastCount: number = 0;
+    protected _useAllSize: boolean = false;
 
     protected _dynLiveTime: PSDynAttr;
     protected _dynAngle: PSDynAttr;
@@ -83,8 +84,16 @@ class PSEmitter extends PSParticle {
         this._dynHeight = dynHeight;
     }
 
+    public setDynDepth(dynDepth: PSDynAttr): void {
+        this._dynDepth = dynDepth;
+    }
+
     public setDynVelocity(dynVelocity: PSDynAttr): void {
         this._dynVelocity = dynVelocity;
+    }
+
+    public setUseAllSize(useAllSize: boolean): void {
+        this._useAllSize = useAllSize;
     }
 
     public setEnable(enable: boolean): void {
@@ -143,8 +152,16 @@ class PSEmitter extends PSParticle {
     public initParticleDimensions(particle: PSParticle): void {
         var t = this.getCycleTimeFactor();
 
-        particle.width = particle.height = particle.depth 
-            = PSUtil.calcDynAttr(this._dynSize, t, PSEmitter.DEF_ATTR.SIZE);
+        if(this._useAllSize) {
+            particle.width = particle.height = particle.depth 
+                = PSUtil.calcDynAttr(this._dynSize, t, PSEmitter.DEF_ATTR.SIZE);
+        }
+        else {
+            particle.width = PSUtil.calcDynAttr(this._dynWidth, t, PSEmitter.DEF_ATTR.WIDTH);
+            particle.height = PSUtil.calcDynAttr(this._dynHeight, t, PSEmitter.DEF_ATTR.HEIGHT);
+            particle.depth = PSUtil.calcDynAttr(this._dynDepth, t, PSEmitter.DEF_ATTR.DEPTH);
+        }
+        
     }
 
     protected getCycleTimeFactor(): number {

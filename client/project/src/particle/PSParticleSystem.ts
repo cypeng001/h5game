@@ -1,6 +1,6 @@
 class PSParticleSystem extends egret.DisplayObject {
     private _liveTime: number = 0;
-    private _cycleTotalTime: number = 0;
+    private _cycleTotalTime: number = 3;
     private _cycle: boolean;
     private _bound: PSRect;
 
@@ -15,11 +15,6 @@ class PSParticleSystem extends egret.DisplayObject {
         super();
 
         this.$renderNode = new egret.sys.GroupNode();
-        /*
-        this.$renderNode.cleanBeforeRender = function(){
-
-        };
-        */
     }
 
     public getLiveTime(): number {
