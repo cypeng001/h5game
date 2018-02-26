@@ -5,7 +5,7 @@ class PSParticle {
     totalLive: number = 1;
     liveForever: boolean = false;
     angle: number = 0;
-    color: PSColor4F = [0, 0, 0, 0];
+    color: PSColor4F = [1, 1, 1, 1];
     //enabled: boolean;
     width: number = 64;
     height: number = 64;
@@ -20,6 +20,8 @@ class PSParticle {
     startFrame: number = 0;
 
     scale: number = 1;
+
+    timeFactor: number = 1;
 
     emitter: PSEmitter;
 

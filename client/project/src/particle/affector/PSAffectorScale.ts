@@ -45,7 +45,7 @@ class PSAffectorScale extends PSAffector {
             timeElapsed = particle.timeLive;
         }
 
-        var percent = (particle.totalLive - particle.timeLive) / particle.totalLive;
+        var percent = particle.timeFactor;
 
         if (this._dynScaleSize) {
             if (!this._fixed) {

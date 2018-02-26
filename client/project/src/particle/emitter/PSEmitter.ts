@@ -28,8 +28,8 @@ class PSEmitter extends PSParticle {
     protected _liveForever: boolean = false;
     protected _remainder: number = 0;
     protected _emitterTime: number = 0;
-    protected _startColor: PSColor4F = [0, 0, 0, 0];
-    protected _endColor: PSColor4F = [0, 0, 0, 0];
+    protected _startColor: PSColor4F = [1, 1, 1, 1];
+    protected _endColor: PSColor4F = [1, 1, 1, 1];
 
     protected _enable: boolean = true;
     protected _lastCount: number = 0;

@@ -108,6 +108,8 @@ class PSTechnique {
                     particle.timeLive = particle.totalLive;
                 }
             }
+
+            particle.timeFactor = (particle.totalLive - particle.timeLive) / particle.totalLive;
         }
     }
 

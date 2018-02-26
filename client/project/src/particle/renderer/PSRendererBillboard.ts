@@ -18,7 +18,7 @@ class PSRendererBillboard extends PSRenderer {
         var particleList = this._technique.getActiveParticleList();
         for(var i = 0; i < particleList.length; ++i) {
             var particle = particleList[i];
-            
+
             if(particle.width <= 0 || particle.height <= 0) {
                 continue;
             }
@@ -39,7 +39,7 @@ class PSRendererBillboard extends PSRenderer {
             var sourceH = (particle.bottom - particle.top) * imageHeight;
             bitmapNode.drawImage(sourceX, sourceY, sourceW, sourceH, 
                 0, 0, particle.width, particle.height);
-
+            bitmapNode.alpha = particle.color[3];
             bitmapNode.matrix = particle.$getMatrix(particle.width / 2, particle.height / 2);
         }
     }

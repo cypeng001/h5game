@@ -22,6 +22,9 @@ class PSUtil {
             case "Elasticity": {
                 return new PSAffectorElasticity(technique);
             }
+            case "Color": {
+                return new PSAffectorColor(technique);
+            }
             case "TexAnim": {
                 return new PSAffectorTexAnim(technique);
             }

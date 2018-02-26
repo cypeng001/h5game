@@ -25,7 +25,8 @@ class PSAffectorRotation extends PSAffector {
         var maxAngle = this._dynStartAngle.getMaxValue();
 	    var minAngle = this._dynStartAngle.getMinValue();
 
-	    var percent = (particle.totalLive - particle.timeLive) / particle.totalLive;
+	    var percent = particle.timeFactor;
+        
         if(this._dynSpeed.getType() == PSDynAttrType.RANDOM) {
             particle.angle += particle.rotationRandomValue * timeElapsed;
             if (particle.rotationRandomValue > 0) {

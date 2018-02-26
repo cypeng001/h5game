@@ -23,6 +23,27 @@ class PSColor4FUtil {
         return dst;
     }
     
+    public static add(v1: PSColor4F, v2: PSColor4F, ret: PSColor4F): void {
+        ret[0] = v1[0] + v2[0];
+        ret[1] = v1[1] + v2[1];
+        ret[2] = v1[2] + v2[2];
+        ret[3] = v1[3] + v2[3];
+    }
+
+    public static sub(v1: PSColor4F, v2: PSColor4F, ret: PSColor4F): void {
+        ret[0] = v1[0] - v2[0];
+        ret[1] = v1[1] - v2[1];
+        ret[2] = v1[2] - v2[2];
+        ret[3] = v1[3] - v2[3];
+    }
+
+    public static scale(v: PSColor4F, factor: number, ret: PSColor4F): void {
+        ret[0] = v[0] * factor;
+        ret[1] = v[1] * factor;
+        ret[2] = v[2] * factor;
+        ret[3] = v[3] * factor;
+    }
+
     public static multiply(v1: PSColor4F, v2: PSColor4F, ret: PSColor4F): void {
         ret[0] = v1[0] * v2[0];
         ret[1] = v1[1] * v2[1];
@@ -173,6 +194,59 @@ class PSVec3Ftry {
     }
 
     public release(v: PSVec3): void {
+        this._retainCount--;
+        this._pool.push(v);
+    }
+
+    public getRetainCount(): number {
+        return this._retainCount;
+    }
+}
+
+class PSColor4FFtry {
+    private static _instance: PSColor4FFtry = null;
+
+    public static getInstance(): PSColor4FFtry {
+        if(!PSColor4FFtry._instance) {
+            PSColor4FFtry._instance = new PSColor4FFtry;
+        }
+        return PSColor4FFtry._instance;
+    }
+
+    private _pool: PSColor4F[] = [];
+    private _retainCount: number = 0;
+
+    public constructor() {
+        egret.startTick(() => {
+            if(this.getRetainCount() != 0) {
+                console.warn("PSColor4FFtry retainCount != 0, forget to release?", this.getRetainCount());
+            }
+            return false;
+        }, this);
+    }
+
+    public create(r: number, g: number, b: number, a: number): PSColor4F {
+        var ret: PSColor4F;
+        if(this._pool.length > 0) {
+            ret = this._pool.pop();
+            ret[0] = r;
+            ret[1] = g;
+            ret[2] = b;
+	    ret[3] = a;
+        }
+        else {
+            ret = [r, g, b, a];
+        }
+        this._retainCount++;
+
+        if(this._pool.length > 10) {
+            console.warn("PSColor4FFtry.create pool is to large, forget to release?", this._pool.length);
+        }
+
+        return ret;
+    }
+
+    public release(v: PSColor4F): void {
         this._retainCount--;
         this._pool.push(v);
     }

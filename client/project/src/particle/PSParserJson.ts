@@ -257,6 +257,23 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorColorAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorColor>affector;
+        switch(attrType) {
+            case "colors": {
+                for(var i = 0; i < attrVal.length; ++i) {
+                    var v = attrVal[i];
+                    var time = v[0];
+                    var color: PSColor4F = [v[1], v[2], v[3], v[4]];
+                    affectorImpl.addColor(time, color);
+                }
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorScaleAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorScale>affector;
         switch(attrType) {
@@ -318,9 +335,6 @@ class PSParserJson {
         var affector = technique.createAffector(type);
         var parserAffectorAttrFunc = null;
         switch(type) {
-            case "TexAnim":
-            parserAffectorAttrFunc = PSParserJson.parseAffectorTexAnimAttr;
-            break;
             case "Rotation":
             parserAffectorAttrFunc = PSParserJson.parseAffectorRotationAttr;
             break;
@@ -329,6 +343,12 @@ class PSParserJson {
             break;
             case "Elasticity":
             parserAffectorAttrFunc = PSParserJson.parseAffectorElasticityAttr;
+            break;
+            case "Color":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorColorAttr;
+            break;
+            case "TexAnim":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorTexAnimAttr;
             break;
         }
         for(var key in data) {
