@@ -39,7 +39,12 @@ class PSRendererBillboard extends PSRenderer {
             var sourceH = (particle.bottom - particle.top) * imageHeight;
             bitmapNode.drawImage(sourceX, sourceY, sourceW, sourceH, 
                 0, 0, particle.width, particle.height);
+            
+            bitmapNode.red = particle.color[0];
+            bitmapNode.green = particle.color[1];
+            bitmapNode.blue = particle.color[2];
             bitmapNode.alpha = particle.color[3];
+
             bitmapNode.matrix = particle.$getMatrix(particle.width / 2, particle.height / 2);
         }
     }
