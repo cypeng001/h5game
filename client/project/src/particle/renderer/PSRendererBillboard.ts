@@ -18,6 +18,10 @@ class PSRendererBillboard extends PSRenderer {
         var particleList = this._technique.getActiveParticleList();
         for(var i = 0; i < particleList.length; ++i) {
             var particle = particleList[i];
+            
+            if(particle.width <= 0 || particle.height <= 0) {
+                continue;
+            }
 
             var bitmapNode = this._bitmapNodeList[i];
             if(!bitmapNode) {

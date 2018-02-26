@@ -257,6 +257,34 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorScaleAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorScale>affector;
+        switch(attrType) {
+            case "scaleX": {
+                affectorImpl.setDynScaleX(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "scaleY": {
+                affectorImpl.setDynScaleY(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "scaleZ": {
+                affectorImpl.setDynScaleZ(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "scaleSize": {
+                affectorImpl.setDynScaleSize(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "fixed": {
+                affectorImpl.setFixed(attrVal);
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorElasticityAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorElasticity>affector;
         switch(attrType) {
@@ -295,6 +323,9 @@ class PSParserJson {
             break;
             case "Rotation":
             parserAffectorAttrFunc = PSParserJson.parseAffectorRotationAttr;
+            break;
+            case "Scale":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorScaleAttr;
             break;
             case "Elasticity":
             parserAffectorAttrFunc = PSParserJson.parseAffectorElasticityAttr;

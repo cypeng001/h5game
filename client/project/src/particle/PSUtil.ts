@@ -16,6 +16,9 @@ class PSUtil {
             case "Rotation": {
                 return new PSAffectorRotation(technique);
             }
+            case "Scale": {
+                return new PSAffectorScale(technique);
+            }
             case "Elasticity": {
                 return new PSAffectorElasticity(technique);
             }

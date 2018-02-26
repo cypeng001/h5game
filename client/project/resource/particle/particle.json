@@ -142,6 +142,14 @@
                             "type": "random",
                             "value": [0, 360]
                         }
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_45",
+                        "scaleSize": {
+                            "type": "fixed",
+                            "value": -30
+                        }
                     }
                 ]
             }
