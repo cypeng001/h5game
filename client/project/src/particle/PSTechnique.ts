@@ -132,6 +132,8 @@ class PSTechnique {
         }
 
         this.triggerAffectors(timeElapsed);
+        
+        this.applyMotion(timeElapsed);
     }
 
     private expire(timeElapsed: number): void {
@@ -214,6 +216,27 @@ class PSTechnique {
                 }
             }
         }
+    }
+
+    private applyMotion(timeElapsed: number): void {
+        var vecTmp = PSVec3Ftry.getInstance().create(0, 0, 0);
+
+        for(var i in this._activeParticleList) {
+            var particle = this._activeParticleList[i];
+ 
+            if (particle.timeLive <= 0) {
+                continue;
+            }
+
+            if (timeElapsed > particle.timeLive) {
+                timeElapsed = particle.timeLive;
+            }
+
+            PSVec3Util.multiply(particle.direction, timeElapsed, vecTmp);
+            PSVec3Util.add(particle.position, vecTmp, particle.position);
+        }
+
+        PSVec3Ftry.getInstance().release(vecTmp);
     }
 
     public render(renderNode: egret.sys.GroupNode): void {
