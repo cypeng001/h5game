@@ -67,6 +67,18 @@ class PSParserJson {
                     technique.setQuota(val);
                 }
                 break;
+                case "defWidth": {
+                    technique.setDefaultWidth(val);
+                }
+                break;
+                case "defHeight": {
+                    technique.setDefaultHeight(val);
+                }
+                break;
+                case "defDepth": {
+                    technique.setDefaultDepth(val);
+                }
+                break;
             }
         }
     }
@@ -265,6 +277,26 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorRandomiserAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorRandomiser>affector;
+        switch(attrType) {
+            case "randomDirection": {
+                affectorImpl.setRandomDirection(attrVal);
+            }
+            break;
+            case "maxDeviation": {
+                affectorImpl.setMaxDeviation(attrVal);
+            }
+            break;
+            case "randomRange": {
+                affectorImpl.setRandomRange(attrVal);
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorColorAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorColor>affector;
         switch(attrType) {
@@ -351,6 +383,9 @@ class PSParserJson {
             break;
             case "Elasticity":
             parserAffectorAttrFunc = PSParserJson.parseAffectorElasticityAttr;
+            break;
+            case "Randomiser":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorRandomiserAttr;
             break;
             case "Color":
             parserAffectorAttrFunc = PSParserJson.parseAffectorColorAttr;

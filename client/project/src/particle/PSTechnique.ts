@@ -15,6 +15,10 @@ class PSTechnique {
     private _activeParticleList: PSParticle[] = [];
     private _freeParticleList: PSParticle[] = [];
 
+    private _defWidth: number = 64;
+    private _defHeight: number = 64;
+    private _defDepth: number = 64;
+
     private _autoEmitterID: number = 0;
 
     constructor(particleSystem: PSParticleSystem) {
@@ -59,6 +63,30 @@ class PSTechnique {
 
     public getCycleTimeFactor(): number {
         return this._particleSystem.getCycleTimeFactor();
+    }
+
+    public getDefaultWidth(): number {
+        return this._defWidth;
+    }
+
+    public setDefaultWidth(width: number): void {
+        this._defWidth = width;
+    }
+
+    public getDefaultHeight(): number {
+        return this._defHeight;
+    }
+
+    public setDefaultHeight(height: number): void {
+        this._defHeight = height;
+    }
+
+    public getDefaultDepth(): number {
+        return this._defDepth;
+    }
+
+    public setDefaultDepth(depth: number): void {
+        this._defDepth = depth;
     }
 
     public createAffector(type: string): PSAffector {
