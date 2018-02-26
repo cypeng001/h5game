@@ -63,7 +63,7 @@
         "Techniques": [
                 {
                 "name": "main",
-                "enable": true,
+                "enable": false,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "ui_182"

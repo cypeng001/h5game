@@ -165,8 +165,19 @@ class PSEmitter extends PSParticle {
 		PSVec3Util.multiply(particle.direction, velocity, particle.direction);
     }
 
+    protected generateAngle(): number {
+        var t =  this._technique.getCycleTimeFactor();
+        return PSUtil.calcDynAttr(this._dynAngle, t, PSEmitter.DEF_ATTR.ANGLE);
+    }
+
     protected initParticleDirection(particle: PSParticle): void {
-        PSVec3Util.copy(this._dir, particle.direction);
+        var angle = this.generateAngle() * Math.random();
+        if (angle != 0.0) {
+            PSVec3Util.rotate(this._dir, particle.direction, angle);
+        }
+        else {
+            PSVec3Util.copy(this._dir, particle.direction);
+        }
     }
 
     protected initParticleLiveTime(particle: PSParticle): void {
@@ -179,7 +190,7 @@ class PSEmitter extends PSParticle {
     protected initParticleDimensions(particle: PSParticle): void {
         var t = this.getCycleTimeFactor();
 
-        if(this._useAllSize) {
+        if(this._dynSize) {
             particle.width = particle.height = particle.depth 
                 = PSUtil.calcDynAttr(this._dynSize, t, PSEmitter.DEF_ATTR.SIZE);
         }

@@ -102,8 +102,8 @@ class PSVec3Util {
 
     public static multiply(v: PSVec3, factor: number, ret: PSVec3): void {
         ret[0] = v[0] * factor;
-        ret[0] = v[1] * factor;
-        ret[0] = v[2] * factor;
+        ret[1] = v[1] * factor;
+        ret[2] = v[2] * factor;
     }
 
     public static add(v1: PSVec3, v2: PSVec3, ret: PSVec3): void {
@@ -135,6 +135,16 @@ class PSVec3Util {
             PSVec3Util.cross(src, PSVec3_UNIT_Y, dst);
         }
         PSVec3Util.normalize(dst);
+    }
+
+    public static rotate(src: PSVec3, dst: PSVec3, angle: number): void {
+        var radian = angle / 180 * Math.PI;
+        var s = Math.sin(radian);
+        var c = Math.cos(radian);
+        var x = src[0];
+        var y = src[1];
+        dst[0] = c * x - s * y;
+        dst[1] = s * x + c * y;
     }
 }
 
