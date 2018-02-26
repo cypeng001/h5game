@@ -63,6 +63,7 @@
         "Techniques": [
                 {
                 "name": "main",
+                "enable": true,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "ui_182"
@@ -124,6 +125,18 @@
                     }
                 ],
                 "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_46",
+                        "rotationSpeed": {
+                            "type": "fixed",
+                            "value": 160
+                        },
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [0, 360]
+                        }
+                    }
                 ]
             }
         ]

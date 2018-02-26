@@ -11,6 +11,10 @@ class PSAffector {
         this._technique = technique;
     }
 
+    protected getCycleTimeFactor(): number {
+        return this._technique.getCycleTimeFactor();
+    }
+
 	public getName(): string {
         return this._name;
     }

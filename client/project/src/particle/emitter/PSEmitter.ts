@@ -50,6 +50,12 @@ class PSEmitter extends PSParticle {
         super();
 
         this._technique = technique;
+
+        this._endTime = this._technique.getCycleTotalTime();
+    }
+
+    protected getCycleTimeFactor(): number {
+        return this._technique.getCycleTimeFactor();
     }
     
 	public setName(name: string): void {
@@ -178,10 +184,6 @@ class PSEmitter extends PSParticle {
         }
     }
 
-    protected getCycleTimeFactor(): number {
-        return this._technique.getCycleTimeFactor();
-    }
-
     public getEmissionCount(timeElapsed: number): number {
         this._lastCount = 0;
 
@@ -197,14 +199,14 @@ class PSEmitter extends PSParticle {
 
         if(this._forceEmit) {
             if(this._emitterTime >= this._startTime) {
-                resultCount = this._lastCount = this._emissionRate;
+                resultCount = this._lastCount = Math.floor(this._emissionRate);
                 this.setEnable(false);
             }
         }
         else {
             if(this._emitterTime >= this._startTime && this._emitterTime <= this._endTime) {
-                resultCount = this._lastCount = this._remainder = 
-                    this._remainder + this._emissionRate * timeElapsed;
+                this._remainder += this._emissionRate * timeElapsed;
+                resultCount = this._lastCount = Math.floor(this._remainder);
                 this._remainder -= resultCount;
             }
 

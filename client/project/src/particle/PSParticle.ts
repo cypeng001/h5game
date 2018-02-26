@@ -37,7 +37,7 @@ class PSParticle {
                 sin = 0;
             }
             matrix.append(cos * this.scale, sin * this.scale, -sin * this.scale, cos * this.scale, 
-                this.position[0], this.position[1]);
+                this.position[0], -this.position[1]);
 
             if (regX || regY) {
                 matrix.tx -= regX * matrix.a + regY * matrix.c;

@@ -21,11 +21,11 @@
 	],
 	"game": [
 		"bin-debug/particle/PSParticle.js",
-		"bin-debug/scene/Scene.js",
-		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/particle/affector/PSAffector.js",
 		"bin-debug/particle/emitter/PSEmitter.js",
 		"bin-debug/particle/renderer/PSRenderer.js",
+		"bin-debug/scene/Scene.js",
+		"bin-debug/layer/ui/PanelUILayer.js",
 		"bin-debug/particle/PSBaseType.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/data/GameData.js",
@@ -48,7 +48,7 @@
 		"bin-debug/network/hdlr/PlayerMsgHdlr.js",
 		"bin-debug/network/hdlr/ResourceMsgHdlr.js",
 		"bin-debug/network/hdlr/TeamMsgHdlr.js",
-		"bin-debug/GameApp.js",
+		"bin-debug/system/role/RoleUI.js",
 		"bin-debug/particle/PSCnfMgr.js",
 		"bin-debug/particle/PSDynAttr.js",
 		"bin-debug/particle/PSFtry.js",
@@ -62,6 +62,7 @@
 		"bin-debug/particle/affector/PSAffectorTexAnim.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/particle/emitter/PSEmitterPoint.js",
+		"bin-debug/particle/emitter/PSEmitterSphere.js",
 		"bin-debug/Main.js",
 		"bin-debug/particle/renderer/PSRendererBillboard.js",
 		"bin-debug/scene/AccountScene.js",
@@ -75,6 +76,6 @@
 		"bin-debug/system/account/LoginUI.js",
 		"bin-debug/system/account/RegisterUI.js",
 		"bin-debug/system/main/MainUI.js",
-		"bin-debug/system/role/RoleUI.js"
+		"bin-debug/GameApp.js"
 	]
 }

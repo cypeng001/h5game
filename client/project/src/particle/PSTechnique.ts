@@ -6,6 +6,7 @@ class PSTechnique {
     private _quota: number = 1;
 	private _emittedEmitterQuota: number = 0;
     private _stopEmitted: boolean = false;
+    private _enable: boolean = true;
 
     private _affectors: PSAffector[] = [];
     private _emitters: PSEmitter[] = [];
@@ -42,6 +43,10 @@ class PSTechnique {
         return this._emittedEmitterQuota;
     }
 
+    public setEnable(enable: boolean): void {
+        this._enable = enable;
+    }
+
     public getCycleTotalTime(): number {
         return this._particleSystem.getCycleTotalTime();
     }
@@ -76,6 +81,9 @@ class PSTechnique {
     }
 
     public update(timeElapsed: number): void {
+        if(!this._enable) {
+            return;
+        }
 
         this.expire(timeElapsed);
 
@@ -164,6 +172,10 @@ class PSTechnique {
     }
 
     public render(renderNode: egret.sys.GroupNode): void {
+        if(!this._enable) {
+            return;
+        }
+
         if(!this._renderer) {
             return;
         }

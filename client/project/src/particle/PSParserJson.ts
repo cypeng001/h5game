@@ -51,6 +51,10 @@ class PSParserJson {
                     technique.setName(val);
                 }
                 break;
+                case "enable": {
+                    technique.setEnable(val);
+                }
+                break;
                 case "axis": {
                     technique.setAxis(val);
                 }
@@ -239,7 +243,18 @@ class PSParserJson {
 
     private static parseAffectorRotationAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorRotation>affector;
-        PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        switch(attrType) {
+            case "rotationSpeed": {
+                affectorImpl.setDynSpeed(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "rotationStartAngle": {
+                affectorImpl.setDynStartAngle(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
     }
 
     private static parseAffector(technique: PSTechnique, data: any): void {
