@@ -25,6 +25,9 @@ class PSUtil {
             case "Randomiser": {
                 return new PSAffectorRandomiser(technique);
             }
+            case "LinearForce": {
+                return new PSAffectorLinearForce(technique);
+            }
             case "Color": {
                 return new PSAffectorColor(technique);
             }

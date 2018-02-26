@@ -277,6 +277,26 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorLinearForceAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorLinearForce>affector;
+        switch(attrType) {
+            case "forceVector": {
+                affectorImpl.setForceVector(attrVal);
+            }
+            break;
+            case "forceApp": {
+                affectorImpl.setForceApp(attrVal);
+            }
+            break;
+            case "force": {
+                affectorImpl.setDynForce(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorRandomiserAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorRandomiser>affector;
         switch(attrType) {
@@ -386,6 +406,9 @@ class PSParserJson {
             break;
             case "Randomiser":
             parserAffectorAttrFunc = PSParserJson.parseAffectorRandomiserAttr;
+            break;
+            case "LinearForce":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorLinearForceAttr;
             break;
             case "Color":
             parserAffectorAttrFunc = PSParserJson.parseAffectorColorAttr;

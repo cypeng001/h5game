@@ -178,6 +178,28 @@
                         "name": "Affector_41",
                         "excludeEmitters": ["Emitter_17", "Emitter_19"],
                         "maxDeviation": [0.1, -0.1, 0]
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_40",
+                        "excludeEmitters": ["Emitter_17", "Emitter_19"],
+                        "colors": [[0, 1, 1, 1, 0], [0.18, 1, 1, 1, 0.995], [0.84, 1, 1, 1, 1], [1, 1, 1, 1, 0.005]]
+                    },
+                    {
+                        "type": "Elasticity",
+                        "name": "Affector_39",
+                        "excludeEmitters": ["Emitter_17", "Emitter_19"],
+                        "distanceFactor": 0.05,
+                        "timeStart": 0,
+                        "reverseFactor": 0.9
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_38",
+                        "force": {
+                            "type": "fixed",
+                            "value": 500
+                        }
                     }
                 ]
             }
