@@ -35,7 +35,6 @@ class PSEmitter extends PSParticle {
 
     protected _enable: boolean = true;
     protected _lastCount: number = 0;
-    protected _useAllSize: boolean = false;
 
     protected _dynLiveTime: PSDynAttr;
     protected _dynAngle: PSDynAttr;
@@ -107,10 +106,6 @@ class PSEmitter extends PSParticle {
 
     public setDynSize(dynSize: PSDynAttr): void {
         this._dynSize = dynSize;
-    }
-
-    public setUseAllSize(useAllSize: boolean): void {
-        this._useAllSize = useAllSize;
     }
 
     public setDynVelocity(dynVelocity: PSDynAttr): void {
