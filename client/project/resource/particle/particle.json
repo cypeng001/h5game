@@ -126,6 +126,12 @@
                 ],
                 "Affectors": [
                     {
+                        "type": "Elasticity",
+                        "name": "Affector_47",
+                        "distanceFactor": 0.05,
+                        "reverseFactor": 0.9
+                    },
+                    {
                         "type": "Rotation",
                         "name": "Affector_46",
                         "rotationSpeed": {

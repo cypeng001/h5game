@@ -166,7 +166,10 @@ class PSTechnique {
             emitter.initParticle(p);
 
             for(var k in this._affectors) {
-                this._affectors[k].initParticle(p);
+                var affector = this._affectors[k];
+                if(affector.isFitParticle(p)) {
+                    affector.initParticle(p);
+                }
             }
         }
     }

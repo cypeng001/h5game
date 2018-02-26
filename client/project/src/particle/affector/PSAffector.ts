@@ -53,12 +53,22 @@ class PSAffector {
         return this._endTime;
     }
 
-    public initParticle(particle: PSParticle): void {
+    public isFitParticle(particle: PSParticle): boolean {
+        if(!this._enable) {
+            return false;
+        }
 
+        if(particle.timeLive <= 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public initParticle(particle: PSParticle): void {
     }
 
     public effectParticle(particle: PSParticle, timeElapsed: number): void {
-        
     }
 
     public processParticles(timeElapsed: number): void {

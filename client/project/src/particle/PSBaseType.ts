@@ -103,6 +103,10 @@ class PSVec3Util {
         ret[2] = (v1[0] * v2[1]) - (v1[1] * v2[0]);
     }
 
+    public static dot(v1: PSVec3, v2: PSVec3): number {
+        return (v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2]);
+    }
+
     public static perpendicular(src: PSVec3, dst: PSVec3): void {
         PSVec3Util.cross(src, PSVec3_UNIT_X, dst);
         var l = PSVec3Util.len(dst);
@@ -123,5 +127,57 @@ class PSRectUtil {
         dst[2] = src[2];
         dst[3] = src[3];
         return dst;
+    }
+}
+
+class PSVec3Ftry {
+    private static _instance: PSVec3Ftry = null;
+
+    public static getInstance(): PSVec3Ftry {
+        if(!PSVec3Ftry._instance) {
+            PSVec3Ftry._instance = new PSVec3Ftry;
+        }
+        return PSVec3Ftry._instance;
+    }
+
+    private _pool: PSVec3[] = [];
+    private _retainCount: number = 0;
+
+    public constructor() {
+        egret.startTick(() => {
+            if(this.getRetainCount() != 0) {
+                console.warn("PSVec3Ftry retainCount != 0, forget to release?", this.getRetainCount());
+            }
+            return false;
+        }, this);
+    }
+
+    public create(x: number, y: number, z: number): PSVec3 {
+        var ret: PSVec3;
+        if(this._pool.length > 0) {
+            ret = this._pool.pop();
+            ret[0] = x;
+            ret[1] = y;
+            ret[2] = z;
+        }
+        else {
+            ret = [x, y, z];
+        }
+        this._retainCount++;
+
+        if(this._pool.length > 10) {
+            console.warn("PSVec3Ftry.create pool is to large, forget to release?", this._pool.length);
+        }
+
+        return ret;
+    }
+
+    public release(v: PSVec3): void {
+        this._retainCount--;
+        this._pool.push(v);
+    }
+
+    public getRetainCount(): number {
+        return this._retainCount;
     }
 }

@@ -24,10 +24,13 @@ class PSEmitterSphere extends PSEmitter {
 			PSVec3Util.copy(PSVec3_UNIT_X, this._randomVec);
 		}
 		PSVec3Util.normalize(this._randomVec);
-		//todo: optimize
-		var tmp: PSVec3 = [1, 0, 0];
+
+		var tmp = PSVec3Ftry.getInstance().create(1, 0, 0);
+
 		PSVec3Util.multiply(this._randomVec, this._radius, tmp);
 		PSVec3Util.add(this._relativePos, tmp, particle.position);
+		
+		PSVec3Ftry.getInstance().release(tmp);
 	}
 
 	protected initParticleDirection(particle: PSParticle): void {

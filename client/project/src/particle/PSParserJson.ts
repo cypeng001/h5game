@@ -257,6 +257,34 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorElasticityAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorElasticity>affector;
+        switch(attrType) {
+            case "distanceFactor": {
+                affectorImpl.setDistanceFactor(attrVal);
+            }
+            break;
+            case "reverseLimit": {
+                affectorImpl.setReverseLimit(attrVal);
+            }
+            break;
+            case "timeStart": {
+                affectorImpl.setTimeStart(attrVal);
+            }
+            break;
+            case "reverseFactor": {
+                affectorImpl.setReverseFactor(attrVal);
+            }
+            break;
+            case "offsetRadius": {
+                affectorImpl.setOffsetRadius(attrVal);
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffector(technique: PSTechnique, data: any): void {
         var type = data.type;
         var affector = technique.createAffector(type);
@@ -267,6 +295,9 @@ class PSParserJson {
             break;
             case "Rotation":
             parserAffectorAttrFunc = PSParserJson.parseAffectorRotationAttr;
+            break;
+            case "Elasticity":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorElasticityAttr;
             break;
         }
         for(var key in data) {
