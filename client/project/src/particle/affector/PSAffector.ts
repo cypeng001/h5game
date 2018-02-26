@@ -5,6 +5,10 @@ class PSAffector {
     private _affectTime: number = 0;
     private _enable: boolean = true;
 
+    protected _excludeEmitters: string[] = [];
+    protected _excludeEmitterIDs: {[key: number]: boolean} = null;
+    protected _excludeEmitterIDsDirty: boolean = true;
+
     protected _technique: PSTechnique;
 
     constructor(technique: PSTechnique) {
@@ -53,9 +57,44 @@ class PSAffector {
         return this._endTime;
     }
 
+    public addExcludeEmitter(emitter: string): void {
+        this._excludeEmitters.push(emitter);
+        this._excludeEmitterIDsDirty = true;
+    }
+
+    protected refreshExcludeEmitters(): void {
+        if(!this._excludeEmitterIDsDirty) {
+            return;
+        }
+        this._excludeEmitterIDsDirty = false;
+
+        this._excludeEmitterIDs = null;
+        if(this._excludeEmitters.length == 0) {
+            return;
+        }
+        
+        for(var i in this._excludeEmitters) {
+            var emitter = this._technique.getEmitterByName(this._excludeEmitters[i]);
+            if(emitter) {
+                if(!this._excludeEmitterIDs) {
+                    this._excludeEmitterIDs = {};
+                }
+                this._excludeEmitterIDs[emitter.id] = true;
+            }
+        }
+    }
+
     public isFitParticle(particle: PSParticle): boolean {
         if(!this._enable) {
             return false;
+        }
+
+        this.refreshExcludeEmitters();
+        if(this._excludeEmitterIDs) {
+            var emitterID = particle.emitter.id;
+            if(this._excludeEmitters[emitterID]) {
+                return false;
+            }
         }
 
         if(particle.timeLive <= 0) {

@@ -218,6 +218,14 @@ class PSParserJson {
             case "name": {
                 affector.setName(attrVal);
             }
+            break;
+            case "excludeEmitters": {
+                for(var i in attrVal) {
+                    var emitter = attrVal[i];
+                    affector.addExcludeEmitter(emitter);
+                }
+            }
+            break;
         }
     }
 

@@ -16,6 +16,8 @@ class PSEmitter extends PSParticle {
         CYCLE: true,
     }
 
+    public id: number = 0;
+
     protected _name: string = "";
     protected _dir: PSVec3 = [1, 0, 0];
     protected _up: PSVec3 = [0, 1, 0];
@@ -60,6 +62,10 @@ class PSEmitter extends PSParticle {
     
 	public setName(name: string): void {
         this._name = name;
+    }
+
+    public getName(): string {
+        return this._name;
     }
 
     public setCycleTime(startTime: number, endTime: number): void {

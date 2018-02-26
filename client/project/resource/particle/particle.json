@@ -128,12 +128,14 @@
                     {
                         "type": "Elasticity",
                         "name": "Affector_47",
+                        "excludeEmitters": ["Emitter_18", "Emitter_19"],
                         "distanceFactor": 0.05,
                         "reverseFactor": 0.9
                     },
                     {
                         "type": "Rotation",
                         "name": "Affector_46",
+                        "excludeEmitters": ["Emitter_18"],
                         "rotationSpeed": {
                             "type": "fixed",
                             "value": 160
@@ -146,6 +148,7 @@
                     {
                         "type": "Scale",
                         "name": "Affector_45",
+                        "excludeEmitters": ["Emitter_18"],
                         "scaleSize": {
                             "type": "fixed",
                             "value": -30
@@ -154,6 +157,7 @@
                     {
                         "type": "Color",
                         "name": "Affector_44",
+                        "excludeEmitters": ["Emitter_18"],
                         "colors": [[0, 1, 1, 1, 0], [0.2, 1, 1, 1, 1], [0.85, 1, 1, 1, 1], [1, 1, 1, 1, 0.012]]
                     }
                 ]

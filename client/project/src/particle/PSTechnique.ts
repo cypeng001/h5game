@@ -15,6 +15,8 @@ class PSTechnique {
     private _activeParticleList: PSParticle[] = [];
     private _freeParticleList: PSParticle[] = [];
 
+    private _autoEmitterID: number = 0;
+
     constructor(particleSystem: PSParticleSystem) {
         this._particleSystem = particleSystem;
     }
@@ -67,8 +69,18 @@ class PSTechnique {
 
     public createEmitter(type: string): PSEmitter {
         var emitter = PSUtil.createEmitter(type, this);
+        emitter.id = ++this._autoEmitterID;
         this._emitters.push(emitter);
         return emitter;
+    }
+
+    public getEmitterByName(name: string): PSEmitter {
+        for(var i in this._emitters) {
+            var emitter = this._emitters[i];
+            if(emitter.getName() == name) {
+                return emitter;
+            }
+        }
     }
 
     public createRenderer(type: string): PSRenderer {
