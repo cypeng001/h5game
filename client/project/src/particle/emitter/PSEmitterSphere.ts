@@ -35,7 +35,8 @@ class PSEmitterSphere extends PSEmitter {
 
 	protected initParticleDirection(particle: PSParticle): void {
 		if(this._autoDir) {
-			PSVec3Util.copy(this._randomVec, particle.direction);
+			var angle = this.generateAngle();
+			PSVec3Util.rotate(this._randomVec, particle.direction, angle);
 		}
 		else {
 			super.initParticleDirection(particle);
