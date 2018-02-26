@@ -25,15 +25,17 @@ class PSAffectorRandomiser extends PSAffector {
         var y = PSUtil.randInRangeFloat(-this._maxDeviation[1], this._maxDeviation[1]) 
             * this._technique.getDefaultHeight();
 
-        var vec = PSVec3Ftry.getInstance().create(x * timeElapsed * this._randomRange,
+        var vecTmp = PSVec3Ftry.getInstance().create(x * timeElapsed * this._randomRange,
             y * timeElapsed * this._randomRange,
             0);
 
         if (this._randomDirection) {
-            PSVec3Util.add(particle.direction, vec, particle.direction);
+            PSVec3Util.add(particle.direction, vecTmp, particle.direction);
         }
         else {
-            PSVec3Util.add(particle.position, vec, particle.position);
+            PSVec3Util.add(particle.position, vecTmp, particle.position);
         }
+
+        PSVec3Ftry.getInstance().release(vecTmp);
     }
 }
