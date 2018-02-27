@@ -1,8 +1,8 @@
 class PSAffectorTexAnim extends PSAffector {
-    private _time_step: number;
-	private _row: number;
-	private _col: number;
-    private _num: number;
+    private _time_step: number = 0.2;
+	private _row: number = 1;
+	private _col: number = 1;
+    private _num: number = 1;
 
     private _cycle: boolean = false;
     private _texCoords: PSRect[] = null;

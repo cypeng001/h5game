@@ -27,24 +27,26 @@ class PSAffectorRotation extends PSAffector {
 
 	    var percent = particle.timeFactor;
         
-        if(this._dynSpeed.getType() == PSDynAttrType.RANDOM) {
-            particle.angle += particle.rotationRandomValue * timeElapsed;
-            if (particle.rotationRandomValue > 0) {
-                maxAngle += particle.rotationRandomValue * particle.totalLive;
+        if(this._dynSpeed) {
+            if(this._dynSpeed.getType() == PSDynAttrType.RANDOM) {
+                particle.angle += particle.rotationRandomValue * timeElapsed;
+                if (particle.rotationRandomValue > 0) {
+                    maxAngle += particle.rotationRandomValue * particle.totalLive;
+                }
+                else {
+                    minAngle += particle.rotationRandomValue * particle.totalLive;
+                }
             }
             else {
-                minAngle += particle.rotationRandomValue * particle.totalLive;
-            }
-        }
-        else {
-            particle.angle += this._speed * timeElapsed;
+                particle.angle += this._speed * timeElapsed;
 
-			if(this._speed > 0) {
-				maxAngle += this._speed * particle.totalLive;
-			}
-			else {
-				minAngle += this._speed * particle.totalLive;
-			}
+                if(this._speed > 0) {
+                    maxAngle += this._speed * particle.totalLive;
+                }
+                else {
+                    minAngle += this._speed * particle.totalLive;
+                }
+            }
         }
 
         if(particle.liveForever) {

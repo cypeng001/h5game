@@ -186,6 +186,28 @@ class PSParserJson {
         PSParserJson.parseEmitterBaseAttr(emitter, attrType, attrVal);
     }
 
+    private static parseEmitterBoxAttr(emitter: PSEmitter, attrType: string, attrVal: any): void {
+        var emitterImpl = <PSEmitterBox>emitter;
+
+        switch(attrType) {
+            case "boxSize": {
+                emitterImpl.setBoxSize(attrVal);
+            }
+            break;
+            case "boxUp": {
+                emitterImpl.setBoxUp(attrVal);
+            }
+            break;
+            case "boxDir": {
+                emitterImpl.setBoxDir(attrVal);
+            }
+            break;
+            default: {
+                PSParserJson.parseEmitterBaseAttr(emitter, attrType, attrVal);
+            }
+        }
+    }
+
     private static parseEmitterSphereAttr(emitter: PSEmitter, attrType: string, attrVal: any): void {
         var emitterImpl = <PSEmitterSphere>emitter;
 
@@ -212,6 +234,9 @@ class PSParserJson {
         switch(type) {
             case "Point":
             parserEmitterAttrFunc = PSParserJson.parseEmitterPointAttr;
+            break;
+            case "Box":
+            parserEmitterAttrFunc = PSParserJson.parseEmitterBoxAttr;
             break;
             case "Sphere":
             parserEmitterAttrFunc = PSParserJson.parseEmitterSphereAttr;

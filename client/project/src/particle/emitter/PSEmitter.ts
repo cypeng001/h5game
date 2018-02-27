@@ -226,15 +226,9 @@ class PSEmitter extends PSParticle {
         }
         else {
             if(this._emitterTime >= this._startTime && this._emitterTime <= this._endTime) {
-                /*
                 this._remainder += this._emissionRate * timeElapsed;
                 resultCount = this._lastCount = Math.floor(this._remainder);
                 this._remainder -= resultCount;
-                */
-                this._remainder += this._emissionRate * timeElapsed;
-                resultCount = Math.floor(this._remainder);
-				this._remainder -= resultCount;
-				this._lastCount = resultCount;
             }
 
             if(this._emitterTime > cycleTotalTime) {
@@ -246,17 +240,6 @@ class PSEmitter extends PSParticle {
                 }
             }
         }
-
-        /*
-        this._totalTime += timeElapsed;
-        this._totalCount += resultCount;
-        if(resultCount > 0) {
-            console.log("getEmissionCount", this._totalCount, 
-                this._totalTime, this._totalTimeLast, 
-                this._totalCount / this._totalTime);
-            this._totalTimeLast = this._totalTime;
-        }
-        */
 
         return resultCount;
     }

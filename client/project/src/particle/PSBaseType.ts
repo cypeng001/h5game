@@ -86,6 +86,10 @@ class PSVec3Util {
         return dst;
     }
 
+    public static equal(v1: PSVec3, v2: PSVec3): boolean {
+        return v1[0] == v2[0] && v1[1] == v2[1] && v1[2] == v2[2]
+    }
+
     public static len(v: PSVec3): number {
         var x = v[0];
         var y = v[1];
