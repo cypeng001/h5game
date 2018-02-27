@@ -7,6 +7,7 @@ class PSRendererBillboard extends PSRenderer {
 
     public render(renderNode: egret.sys.GroupNode): void {
         this.updateTexture();
+        this.updateFilter();
 
         if(!this._texture) {
             return;
@@ -46,6 +47,8 @@ class PSRendererBillboard extends PSRenderer {
             bitmapNode.alpha = particle.color[3];
 
             bitmapNode.matrix = particle.$getMatrix(particle.width / 2, particle.height / 2);
+
+            bitmapNode.filter = this._filter;
         }
     }
 }

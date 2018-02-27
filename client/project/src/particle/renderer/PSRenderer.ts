@@ -1,12 +1,20 @@
 class PSRenderer {
+    public static MAT_TYPE = {
+        NORMAL: 0,
+        COLOR_ENHANCE: 1,
+    };
+
     protected _technique: PSTechnique;
 
     protected _textureName: string;
-    protected _addPowerRatio: number = 0;
-    protected _matType: number = 0;
+    protected _enhanceAlpha: number = 0;
+    protected _matType: number = PSRenderer.MAT_TYPE.NORMAL;
 
     protected _texture: egret.Texture;
     protected _textureDirty: boolean = true;
+
+    protected _filter: egret.ColorEnhanceFilter;
+    protected _fliterDirty: boolean = true;
 
     public static getTexturePath(name: string): string {
         return RES.config.resourceRoot + "particle/" + name + ".png";
@@ -25,12 +33,16 @@ class PSRenderer {
         this._textureDirty = true;
     }
 
-    public setAddPowerRatio(addPowerRatio: number): void {
-        this._addPowerRatio = addPowerRatio;
+    public setEnhanceAlpha(enhanceAlpha: number): void {
+        this._enhanceAlpha = enhanceAlpha;
+
+        this._fliterDirty = true;
     }
 
     public setMatType(matType: number): void {
         this._matType = matType;
+
+        this._fliterDirty = true;
     }
 
     protected updateTexture(): void {
@@ -45,7 +57,23 @@ class PSRenderer {
         }, this);
     }
 
+    protected updateFilter(): void {
+        if(!this._fliterDirty) {
+            return;
+        }
+        this._fliterDirty = false;
+
+        if(this._matType == PSRenderer.MAT_TYPE.NORMAL) {
+            this._filter = null;
+        }
+        else if(this._matType == PSRenderer.MAT_TYPE.COLOR_ENHANCE) {
+            this._filter = new egret.ColorEnhanceFilter(this._enhanceAlpha);
+        }
+    }
+
     public render(renderNode: egret.sys.GroupNode): void {
         
     }
+
+    public 
 }

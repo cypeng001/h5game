@@ -89,8 +89,8 @@ class PSParserJson {
                 renderer.setTextureName(attrVal);
             }
             break;
-            case "addPowerRatio": {
-                renderer.setAddPowerRatio(attrVal);
+            case "enhanceAlpha": {
+                renderer.setEnhanceAlpha(attrVal);
             }
             break;
             case "matType": {

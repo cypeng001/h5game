@@ -10,7 +10,7 @@
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "seq_273",
-                    "addPowerRatio": 1
+                    "enhanceAlpha": 1
                     },
                 "Emitter": [
                     {
@@ -103,7 +103,7 @@
                     "type": "Billboard",
                     "textureName": "obj_167",
                     "matType": 1,
-                    "addPowerRatio": 0.9
+                    "enhanceAlpha": 0.9
                     },
                 "Emitter": [
                     {
