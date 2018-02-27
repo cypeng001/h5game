@@ -38,11 +38,11 @@ class PSAffector {
         }
     }
 
-    getStartTime(): number {
+    public getStartTime(): number {
         return this._startTime;
     }
 
-    setEndTime(t: number): void {
+    public setEndTime(t: number): void {
         this._endTime = t;
         if (this._endTime > 1) {
             this._endTime = 1;
@@ -55,6 +55,10 @@ class PSAffector {
 
     public getEndTime(): number {
         return this._endTime;
+    }
+
+    public setEnable(enable: boolean): void {
+        this._enable = enable;
     }
 
     public addExcludeEmitter(emitter: string): void {
@@ -105,6 +109,7 @@ class PSAffector {
     }
 
     public initParticle(particle: PSParticle): void {
+        this.effectParticle(particle, 0);
     }
 
     public effectParticle(particle: PSParticle, timeElapsed: number): void {

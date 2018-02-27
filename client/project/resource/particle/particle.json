@@ -63,7 +63,7 @@
         "Techniques": [
                 {
                 "name": "main",
-                "enable": false,
+                "enable": true,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "ui_182"
@@ -109,6 +109,10 @@
                         "type": "Sphere",
                         "name": "Emitter_17",
                         "direction": [0, 1, 0],
+                        "liveTime": {
+                            "type": "random",
+                            "value": [0.8, 1.5]
+                        },
                         "angle": {
                             "type": "fixed",
                             "value": 360
@@ -128,6 +132,7 @@
                     {
                         "type": "Elasticity",
                         "name": "Affector_47",
+                        "enable": true,
                         "excludeEmitters": ["Emitter_18", "Emitter_19"],
                         "distanceFactor": 0.05,
                         "reverseFactor": 0.9
@@ -159,39 +164,6 @@
                         "name": "Affector_44",
                         "excludeEmitters": ["Emitter_18"],
                         "colors": [[0, 1, 1, 1, 0], [0.2, 1, 1, 1, 1], [0.85, 1, 1, 1, 1], [1, 1, 1, 1, 0.012]]
-                    },
-                    {
-                        "type": "Rotation",
-                        "name": "Affector_42",
-                        "excludeEmitters": ["Emitter_17", "Emitter_19"],
-                        "rotationSpeed": {
-                            "type": "fixed",
-                            "value": 10
-                        },
-                        "rotationStartAngle": {
-                            "type": "random",
-                            "value": [0, 360]
-                        }
-                    },
-                    {
-                        "type": "Randomiser",
-                        "name": "Affector_41",
-                        "excludeEmitters": ["Emitter_17", "Emitter_19"],
-                        "maxDeviation": [0.1, -0.1, 0]
-                    },
-                    {
-                        "type": "Color",
-                        "name": "Affector_40",
-                        "excludeEmitters": ["Emitter_17", "Emitter_19"],
-                        "colors": [[0, 1, 1, 1, 0], [0.18, 1, 1, 1, 0.995], [0.84, 1, 1, 1, 1], [1, 1, 1, 1, 0.005]]
-                    },
-                    {
-                        "type": "Elasticity",
-                        "name": "Affector_39",
-                        "excludeEmitters": ["Emitter_17", "Emitter_19"],
-                        "distanceFactor": 0.05,
-                        "timeStart": 0,
-                        "reverseFactor": 0.9
                     },
                     {
                         "type": "LinearForce",

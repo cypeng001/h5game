@@ -21,11 +21,11 @@
 	],
 	"game": [
 		"bin-debug/particle/PSParticle.js",
-		"bin-debug/particle/affector/PSAffector.js",
-		"bin-debug/particle/emitter/PSEmitter.js",
 		"bin-debug/particle/renderer/PSRenderer.js",
 		"bin-debug/scene/Scene.js",
 		"bin-debug/layer/ui/PanelUILayer.js",
+		"bin-debug/particle/affector/PSAffector.js",
+		"bin-debug/particle/emitter/PSEmitter.js",
 		"bin-debug/particle/PSFtry.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/data/GameData.js",

@@ -206,13 +206,13 @@ class PSTechnique {
         }
 
         for(var i = 0; i < requested; ++i) {
-            var p = this.createParticle();
-            emitter.initParticle(p);
+            var particle = this.createParticle();
+            emitter.initParticle(particle);
 
             for(var k in this._affectors) {
                 var affector = this._affectors[k];
-                if(affector.isFitParticle(p)) {
-                    affector.initParticle(p);
+                if(affector.isFitParticle(particle)) {
+                    affector.initParticle(particle);
                 }
             }
         }

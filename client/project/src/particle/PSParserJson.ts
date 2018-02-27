@@ -226,6 +226,10 @@ class PSParserJson {
                 affector.setName(attrVal);
             }
             break;
+            case "enable": {
+                affector.setEnable(attrVal);
+            }
+            break;
             case "excludeEmitters": {
                 for(var i in attrVal) {
                     var emitter = attrVal[i];

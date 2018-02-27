@@ -25,7 +25,7 @@ class PSEmitter extends PSParticle {
     protected _emissionRate: number = 10;
     protected _startTime: number = 0;
     protected _endTime: number = 0;
-    protected _cycle: boolean = false;
+    protected _cycle: boolean = true;
     protected _forceEmit: boolean = false;
     protected _liveForever: boolean = false;
     protected _remainder: number = 0;
@@ -46,6 +46,10 @@ class PSEmitter extends PSParticle {
     protected _dynVelocity: PSDynAttr;
 
 	protected _technique: PSTechnique;
+
+    protected _totalTimeLast: number = 0;
+    protected _totalTime: number = 0;
+    protected _totalCount: number = 0;
 
     constructor(technique: PSTechnique) {
         super();
@@ -168,6 +172,7 @@ class PSEmitter extends PSParticle {
     protected initParticleDirection(particle: PSParticle): void {
         var angle = this.generateAngle() * Math.random();
         if (angle != 0.0) {
+            PSVec3Util.copy(PSVec3_UNIT_X, particle.direction);
             PSVec3Util.rotate(this._dir, particle.direction, angle);
         }
         else {
@@ -217,9 +222,15 @@ class PSEmitter extends PSParticle {
         }
         else {
             if(this._emitterTime >= this._startTime && this._emitterTime <= this._endTime) {
+                /*
                 this._remainder += this._emissionRate * timeElapsed;
                 resultCount = this._lastCount = Math.floor(this._remainder);
                 this._remainder -= resultCount;
+                */
+                this._remainder += this._emissionRate * timeElapsed;
+                resultCount = Math.floor(this._remainder);
+				this._remainder -= resultCount;
+				this._lastCount = resultCount;
             }
 
             if(this._emitterTime > cycleTotalTime) {
@@ -231,6 +242,17 @@ class PSEmitter extends PSParticle {
                 }
             }
         }
+
+        /*
+        this._totalTime += timeElapsed;
+        this._totalCount += resultCount;
+        if(resultCount > 0) {
+            console.log("getEmissionCount", this._totalCount, 
+                this._totalTime, this._totalTimeLast, 
+                this._totalCount / this._totalTime);
+            this._totalTimeLast = this._totalTime;
+        }
+        */
 
         return resultCount;
     }
