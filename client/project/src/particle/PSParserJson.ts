@@ -169,6 +169,10 @@ class PSParserJson {
                 emitter.setDynVelocity(PSUtil.createDynAttr(attrVal.type, attrVal.value));
             }
             break;
+            case "position": {
+                emitter.setPosition(attrVal);
+            }
+            break;
             case "direction": {
                 emitter.setDirection(attrVal);
             }
@@ -320,11 +324,9 @@ class PSParserJson {
         var affectorImpl = <PSAffectorColor>affector;
         switch(attrType) {
             case "colors": {
-                for(var i = 0; i < attrVal.length; ++i) {
-                    var v = attrVal[i];
-                    var time = v[0];
-                    var color: PSColor4F = [v[1], v[2], v[3], v[4]];
-                    affectorImpl.addColor(time, color);
+                for(var i = 0; i < attrVal.length; i+=5) {
+                    affectorImpl.addColor(attrVal[i], 
+                        [attrVal[i + 1], attrVal[i + 2], attrVal[i + 3], attrVal[i + 4]]);
                 }
             }
             break;

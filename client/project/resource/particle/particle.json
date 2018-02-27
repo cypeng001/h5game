@@ -97,6 +97,7 @@
             },
             {
                 "name": "Technique_2",
+                "enable": true,
                 "quota": 10,
                 "Renderer": {
                     "type": "Billboard",
@@ -163,7 +164,7 @@
                         "type": "Color",
                         "name": "Affector_44",
                         "excludeEmitters": ["Emitter_18"],
-                        "colors": [[0, 1, 1, 1, 0], [0.2, 1, 1, 1, 1], [0.85, 1, 1, 1, 1], [1, 1, 1, 1, 0.012]]
+                        "colors": [0, 1, 1, 1, 0, 0.2, 1, 1, 1, 1, 0.85, 1, 1, 1, 1, 1, 1, 1, 1, 0.012]
                     },
                     {
                         "type": "LinearForce",
@@ -171,6 +172,129 @@
                         "force": {
                             "type": "fixed",
                             "value": 500
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Technique_4",
+                "quota": 5,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "star_060",
+                    "matType": 1
+                    },
+                "Emitter": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_10",
+                        "position": [1, 28, 0],
+                        "emissionRate": 1,
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 0.8
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        }
+                    },
+                    {
+                        "type": "Point",
+                        "name": "Emitter_11",
+                        "position": [37, 20, 0],
+                        "emissionRate": 1,
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 0.7
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        }
+                    },
+                    {
+                        "type": "Point",
+                        "name": "Emitter_12",
+                        "position": [-37, 20, 0],
+                        "emissionRate": 1,
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 0.7
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        }
+                    },
+                    {
+                        "type": "Point",
+                        "name": "Emitter_13",
+                        "position": [70, 5, 0],
+                        "emissionRate": 1,
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 0.5
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        }
+                    },
+                    {
+                        "type": "Point",
+                        "name": "Emitter_14",
+                        "position": [-70, 0, 0],
+                        "emissionRate": 1,
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 0.5
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        }
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_0",
+                        "excludeEmitters": ["Emitter_14", "Emitter_11", "Emitter_12", "Emitter_13"],
+                        "fixed": true,
+                        "scaleSize": {
+                            "type": "curve",
+                            "value": [0, 30, 0.3, 90, 1, 30]
                         }
                     }
                 ]

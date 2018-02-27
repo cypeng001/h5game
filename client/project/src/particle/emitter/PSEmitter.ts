@@ -116,6 +116,10 @@ class PSEmitter extends PSParticle {
         this._dynVelocity = dynVelocity;
     }
 
+    public setPosition(position: PSVec3): void {
+        PSVec3Util.copy(position, this._relativePos);
+    }
+
     public setDirection(direction: PSVec3): void {
         PSVec3Util.copy(direction, this._dir);
         PSVec3Util.normalize(this._dir);
