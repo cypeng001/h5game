@@ -48,7 +48,7 @@ class PSEmitterBox extends PSEmitter {
 
 		PSVec3Util.multiply(leftTmp, this._boxSize[0] * 0.5, this._rangeX);
 		PSVec3Util.multiply(this._boxUp, this._boxSize[1] * 0.5, this._rangeY);
-		PSVec3Util.multiply(this._boxDir, this._boxSize[2] * 0.5, this._rangeY);
+		PSVec3Util.multiply(this._boxDir, this._boxSize[2] * 0.5, this._rangeZ);
 
 		PSVec3Ftry.getInstance().release(leftTmp);
 	}
