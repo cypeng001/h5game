@@ -358,6 +358,47 @@
                         "col": 2
                     }
                 ]
+            },
+            {
+                "name": "Technique_1",
+                "enable": true,
+                "quota": 3,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_365",
+                    "matType": 1
+                    },
+                "Emitter": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_4",
+                        "position": [20, -5, 0],
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "width": {
+                            "type": "fixed",
+                            "value": 180
+                        },
+                        "height": {
+                            "type": "fixed",
+                            "value": 80
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        }
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_1",
+                        "row": 4,
+                        "col": 2
+                    }
+                ]
             }
         ]
     }
