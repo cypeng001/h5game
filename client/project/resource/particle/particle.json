@@ -938,6 +938,61 @@
                         "colors": [0, 1, 1, 1, 0, 0.15, 1, 1, 1, 1, 0.85, 1, 1, 1, 1, 1, 1, 1, 1, 0]
                     }
                 ]
+            },
+            {
+                "name": "Technique_13",
+                "enable": true,
+                "quota": 8,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_175",
+                    "matType": 1,
+                    "enhanceAlpha": 0.9
+                    },
+                "Emitter": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_2",
+                        "direction": [0, -1, 0],
+                        "position": [0, -15, 0],
+                        "liveTime": {
+                            "type": "random",
+                            "value": [0.5, 3]
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [25, 35]
+                        },
+                        "boxSize": [100, 0, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_26",
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [0, 360]
+                        }
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_27",
+                        "colors": [0, 1, 1, 1, 0, 0.15, 1, 1, 1, 0.7, 0.5, 1, 1, 1, 1, 0.85, 1, 1, 1, 0.7, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_28",
+                        "scaleSize": {
+                            "type": "fixed",
+                            "value": -30
+                        }
+                    }
+                ]
             }
         ]
     }
