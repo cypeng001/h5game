@@ -1,4 +1,4 @@
-class PSEmitter extends PSParticle {
+class PSEmitter {
     protected static DEF_ATTR = {
         WIDTH: 64,
         HEIGHT: 64,
@@ -52,8 +52,6 @@ class PSEmitter extends PSParticle {
     protected _totalCount: number = 0;
 
     constructor(technique: PSTechnique) {
-        super();
-
         this._technique = technique;
 
         this._endTime = this._technique.getCycleTotalTime();
