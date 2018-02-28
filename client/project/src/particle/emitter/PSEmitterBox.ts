@@ -69,7 +69,7 @@ class PSEmitterBox extends PSEmitter {
 
 		PSVec3Util.add(xOffTmp, yOffTmp, v1Tmp);
 		PSVec3Util.add(v1Tmp, zOffTmp, offsetTmp);
-		PSVec3Util.add(this._pos, offsetTmp, particle.position);
+		PSVec3Util.add(this._relativePos, offsetTmp, particle.position);
 
 		PSVec3Ftry.getInstance().release(xOffTmp);
 		PSVec3Ftry.getInstance().release(yOffTmp);

@@ -28,7 +28,7 @@ class PSEmitterSphere extends PSEmitter {
 		var vecTmp = PSVec3Ftry.getInstance().create(1, 0, 0);
 
 		PSVec3Util.multiply(this._randomVec, this._radius, vecTmp);
-		PSVec3Util.add(this._pos, vecTmp, particle.position);
+		PSVec3Util.add(this._relativePos, vecTmp, particle.position);
 		
 		PSVec3Ftry.getInstance().release(vecTmp);
 	}

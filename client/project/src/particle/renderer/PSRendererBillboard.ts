@@ -12,9 +12,14 @@ class PSRendererBillboard extends PSRenderer {
         }
 
         var renderNode = this._renderNode;
+
         renderNode.blendMode = (this._matType == PSRenderer.MAT_TYPE.NORMAL) 
                 ? 3     //lighter-in 
                 : 0;    //source-over
+
+        var techniquePos = this._technique.getPosition();
+        renderNode.matrix.identity();
+        renderNode.matrix.translate(techniquePos[0], -techniquePos[1]);
 
         var imageWidth = this._texture.$sourceWidth;
         var imageHeight = this._texture.$sourceHeight;

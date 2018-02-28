@@ -523,6 +523,84 @@
                         }
                     }
                 ]
+            },
+            {
+                "name": "Technique_7",
+                "enable": true,
+                "quota": 10,
+                "position": [50, 20, 0],
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_167",
+                    "matType": 1,
+                    "enhanceAlpha": 0.9
+                    },
+                "Emitter": [
+                    {
+                        "type": "Sphere",
+                        "name": "Emitter_5",
+                        "direction": [0, 1, 0],
+                        "liveTime": {
+                            "type": "random",
+                            "value": [0.8, 1.5]
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 360
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [7, 30]
+                        },
+                        "velocity": {
+                            "type": "random",
+                            "value": [10, 50]
+                        },
+                        "sphereRadius": 0
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Elasticity",
+                        "name": "Affector_17",
+                        "distanceFactor": 0.05,
+                        "reverseFactor": 0.9
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_18",
+                        "rotationSpeed": {
+                            "type": "fixed",
+                            "value": 160
+                        },
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [0, 360]
+                        }
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_19",
+                        "scaleSize": {
+                            "type": "fixed",
+                            "value": -30
+                        }
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_44",
+                        "excludeEmitters": ["Emitter_18"],
+                        "colors": [0, 1, 1, 1, 0, 0.2, 1, 1, 1, 1, 0.85, 1, 1, 1, 1, 1, 1, 1, 1, 0.012]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_25",
+                        "force": {
+                            "type": "fixed",
+                            "value": 500
+                        }
+                    }
+                ]
             }
         ]
     }

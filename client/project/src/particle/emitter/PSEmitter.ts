@@ -22,7 +22,6 @@ class PSEmitter extends PSParticle {
     protected _dir: PSVec3 = [1, 0, 0];
     protected _up: PSVec3 = [0, 1, 0];
     protected _relativePos: PSVec3 = [0, 0, 0];
-    protected _pos: PSVec3 = [0, 0, 0];
     protected _emissionRate: number = 10;
     protected _startTime: number = 0;
     protected _endTime: number = 0;
@@ -33,7 +32,6 @@ class PSEmitter extends PSParticle {
     protected _emitterTime: number = 0;
     protected _startColor: PSColor4F = [1, 1, 1, 1];
     protected _endColor: PSColor4F = [1, 1, 1, 1];
-    protected _posDirty: boolean = true;
 
     protected _enable: boolean = true;
     protected _lastCount: number = 0;
@@ -120,7 +118,6 @@ class PSEmitter extends PSParticle {
 
     public setPosition(position: PSVec3): void {
         PSVec3Util.copy(position, this._relativePos);
-        this._posDirty = true;
     }
 
     public setDirection(direction: PSVec3): void {
@@ -149,8 +146,6 @@ class PSEmitter extends PSParticle {
         particle.right = 1;
         particle.bottom = 1;
 
-        this.refreshPosition();
-        
         this.initParticlePos(particle);
         this.initParticleDirection(particle);
         this.initParticleSpeed(particle);
@@ -159,17 +154,8 @@ class PSEmitter extends PSParticle {
         this.initParticleDimensions(particle);
     }
 
-    protected refreshPosition(): void {
-        if(!this._posDirty) {
-            return;
-        }
-        this._posDirty = false;
-
-        PSVec3Util.add(this._relativePos, this._technique.getPosition(), this._pos);
-    }
-
     protected initParticlePos(particle: PSParticle): void {
-        particle.position = PSVec3Util.copy(this._pos, particle.position);
+        particle.position = PSVec3Util.copy(this._relativePos, particle.position);
     }
 
     protected initParticleColor(particle: PSParticle): void {
