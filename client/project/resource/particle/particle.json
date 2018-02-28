@@ -873,6 +873,71 @@
                         }
                     }
                 ]
+            },
+            {
+                "name": "Technique_12",
+                "enable": true,
+                "quota": 10,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "star_084",
+                    "matType": 1
+                    },
+                "Emitter": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_9",
+                        "direction": [0, 1, 0],
+                        "position": [0, 5, 0],
+                        "liveTime": {
+                            "type": "random",
+                            "value": [1, 3]
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 360
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [50, 60]
+                        },
+                        "velocity": {
+                            "type": "random",
+                            "value": [20, 30]
+                        },
+                        "boxSize": [130, 50, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_21",
+                        "timeStep": 0.05,
+                        "row": 4,
+                        "col": 4
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_18",
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [0, 360]
+                        }
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_19",
+                        "scaleSize": {
+                            "type": "fixed",
+                            "value": -60
+                        }
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_20",
+                        "colors": [0, 1, 1, 1, 0, 0.15, 1, 1, 1, 1, 0.85, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+                    }
+                ]
             }
         ]
     }
