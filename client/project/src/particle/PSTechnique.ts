@@ -7,6 +7,7 @@ class PSTechnique {
 	private _emittedEmitterQuota: number = 0;
     private _stopEmitted: boolean = false;
     private _enable: boolean = true;
+    private _position: PSVec3 = [0, 0, 0];
 
     private _affectors: PSAffector[] = [];
     private _emitters: PSEmitter[] = [];
@@ -87,6 +88,14 @@ class PSTechnique {
 
     public setDefaultDepth(depth: number): void {
         this._defDepth = depth;
+    }
+
+    public setPosition(position: PSVec3): void {
+        PSVec3Util.copy(position, this._position);
+    }
+
+    public getPosition(): PSVec3 {
+        return this._position;
     }
 
     public createAffector(type: string): PSAffector {

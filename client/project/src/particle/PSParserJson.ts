@@ -79,6 +79,10 @@ class PSParserJson {
                     technique.setDefaultDepth(val);
                 }
                 break;
+                case "position": {
+                    technique.setPosition(val);
+                }
+                break;
             }
         }
     }
