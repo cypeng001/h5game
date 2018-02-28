@@ -113,6 +113,9 @@ class PSTechnique {
 
     public createRenderer(type: string): PSRenderer {
         this._renderer = PSUtil.createRenderer(type, this);
+
+        (<egret.sys.GroupNode>this._particleSystem.$renderNode).addNode(this._renderer.getRenderNode());
+
         return this._renderer;
     }
 
@@ -239,7 +242,7 @@ class PSTechnique {
         PSVec3Ftry.getInstance().release(vecTmp);
     }
 
-    public render(renderNode: egret.sys.GroupNode): void {
+    public render(): void {
         if(!this._enable) {
             return;
         }
@@ -247,6 +250,6 @@ class PSTechnique {
         if(!this._renderer) {
             return;
         }
-        this._renderer.render(renderNode);
+        this._renderer.render();
     }
 }

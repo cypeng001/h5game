@@ -5,6 +5,7 @@ class PSRenderer {
     };
 
     protected _technique: PSTechnique;
+    protected _renderNode: egret.sys.GroupNode;
 
     protected _textureName: string;
     protected _enhanceAlpha: number = 0;
@@ -22,6 +23,7 @@ class PSRenderer {
 
     constructor(technique: PSTechnique) {
         this._technique = technique;
+        this._renderNode = new egret.sys.GroupNode;
     }
 
     public setTextureName(textureName: string): void {
@@ -63,17 +65,19 @@ class PSRenderer {
         }
         this._fliterDirty = false;
 
-        if(this._matType == PSRenderer.MAT_TYPE.NORMAL) {
-            this._filter = null;
-        }
-        else if(this._matType == PSRenderer.MAT_TYPE.COLOR_ENHANCE) {
+        if(this._matType == PSRenderer.MAT_TYPE.COLOR_ENHANCE) {
             this._filter = new egret.ColorEnhanceFilter(this._enhanceAlpha);
+        }
+        else {
+            this._filter = null;
         }
     }
 
-    public render(renderNode: egret.sys.GroupNode): void {
+    public render(): void {
         
     }
 
-    public 
+    public getRenderNode(): egret.sys.GroupNode {
+        return this._renderNode;
+    }
 }

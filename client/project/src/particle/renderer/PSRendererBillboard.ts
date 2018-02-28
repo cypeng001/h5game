@@ -1,11 +1,9 @@
 class PSRendererBillboard extends PSRenderer {
-    private _bitmapNodeList: egret.sys.BitmapNode[] = [];
-
     constructor(technique: PSTechnique) {
 		super(technique);
     }
 
-    public render(renderNode: egret.sys.GroupNode): void {
+    public render(): void {
         this.updateTexture();
         this.updateFilter();
 
@@ -13,21 +11,26 @@ class PSRendererBillboard extends PSRenderer {
             return;
         }
 
+        var renderNode = this._renderNode;
+        renderNode.blendMode = (this._matType == PSRenderer.MAT_TYPE.NORMAL) 
+                ? 3     //lighter-in 
+                : 0;    //source-over
+
         var imageWidth = this._texture.$sourceWidth;
         var imageHeight = this._texture.$sourceHeight;
 
         var particleList = this._technique.getActiveParticleList();
-        for(var i = 0; i < particleList.length; ++i) {
+        for(var i = 0, bimapNodeIdx = 0; i < particleList.length; ++i) {
             var particle = particleList[i];
 
             if(particle.width <= 0 || particle.height <= 0) {
                 continue;
             }
 
-            var bitmapNode = this._bitmapNodeList[i];
+            var bitmapNode: egret.sys.BitmapNode = <egret.sys.BitmapNode>(renderNode.getNode(bimapNodeIdx++));
             if(!bitmapNode) {
-                bitmapNode = this._bitmapNodeList[i] = new egret.sys.BitmapNode;
-                (<egret.sys.GroupNode>renderNode).addNode(bitmapNode);
+                bitmapNode = new egret.sys.BitmapNode;
+                renderNode.addNode(bitmapNode);
             }
 
             bitmapNode.image = this._texture.$bitmapData;

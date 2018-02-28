@@ -117,7 +117,7 @@ class PSParticleSystem extends egret.DisplayObject {
 
     $updateRenderNode(): void {
         for(var i in this._techniques) {
-            this._techniques[i].render(<egret.sys.GroupNode>this.$renderNode);
+            this._techniques[i].render();
         }
     }
 }
