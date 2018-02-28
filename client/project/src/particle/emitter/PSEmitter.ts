@@ -187,6 +187,7 @@ class PSEmitter {
 
         particle.timeLive = particle.totalLive 
             = PSUtil.calcDynAttr(this._dynLiveTime, t, PSEmitter.DEF_ATTR.TIME_LIVE);
+        particle.timeFactor = 0;
     }
 
     protected initParticleDimensions(particle: PSParticle): void {
@@ -240,5 +241,8 @@ class PSEmitter {
         }
 
         return resultCount;
+    }
+
+    public update(timeElapsed: number): void {
     }
 }

@@ -52,6 +52,9 @@ class PSDynAttrRandom implements PSDynAttr {
     }
 
     public getValue(x: number): number {
+        if(this._min == this._max) {
+            return this._min;
+        }
         return PSUtil.randInRangeFloat(this._min, this._max);  
     }
 

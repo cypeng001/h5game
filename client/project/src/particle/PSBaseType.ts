@@ -86,6 +86,12 @@ class PSVec3Util {
         return dst;
     }
 
+    public static set(dst: PSVec3, x: number, y: number, z: number): void {
+        dst[0] = x;
+        dst[1] = y;
+        dst[2] = z;
+    }
+
     public static equal(v1: PSVec3, v2: PSVec3): boolean {
         return v1[0] == v2[0] && v1[1] == v2[1] && v1[2] == v2[2]
     }

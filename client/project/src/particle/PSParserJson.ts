@@ -212,6 +212,55 @@ class PSParserJson {
         }
     }
 
+    private static parseEmitterCircleAttr(emitter: PSEmitter, attrType: string, attrVal: any): void {
+        var emitterImpl = <PSEmitterCircle>emitter;
+        switch(attrType) {
+            case "circleRandom": {
+                emitterImpl.setRandom(attrVal);
+            }
+            break;
+            case "circleStep": {
+                emitterImpl.setStep(attrVal);
+            }
+            break;
+            case "circleXRadius": {
+                emitterImpl.setXRadius(attrVal);
+            }
+            break;
+            case "circleZRadius": {
+                emitterImpl.setZRadius(attrVal);
+            }
+            break;
+            case "circleXWidth": {
+                emitterImpl.setXWidth(attrVal);
+            }
+            break;
+            case "circleZWidth": {
+                emitterImpl.setZWidth(attrVal);
+            }
+            break;
+            case "circleAngle": {
+                emitterImpl.setCircleAngle(attrVal);
+            }
+            break;
+            case "circleAutoDirection": {
+                emitterImpl.setAutoDirection(attrVal);
+            }
+            break;
+            case "circleFanStartAngle": {
+                emitterImpl.setFanStartAngle(attrVal);
+            }
+            break;
+            case "circleFanEndAngle": {
+                emitterImpl.setFanEndAngle(attrVal);
+            }
+            break;
+            default: {
+                PSParserJson.parseEmitterBaseAttr(emitter, attrType, attrVal);
+            }
+        }
+    }
+
     private static parseEmitterSphereAttr(emitter: PSEmitter, attrType: string, attrVal: any): void {
         var emitterImpl = <PSEmitterSphere>emitter;
 
@@ -241,6 +290,9 @@ class PSParserJson {
             break;
             case "Box":
             parserEmitterAttrFunc = PSParserJson.parseEmitterBoxAttr;
+            break;
+            case "Circle":
+            parserEmitterAttrFunc = PSParserJson.parseEmitterCircleAttr;
             break;
             case "Sphere":
             parserEmitterAttrFunc = PSParserJson.parseEmitterSphereAttr;

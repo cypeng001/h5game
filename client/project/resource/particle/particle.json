@@ -728,6 +728,89 @@
                         "col": 4
                     }
                 ]
+            },
+            {
+                "name": "Technique_9",
+                "enable": true,
+                "quota": 20,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "star_081",
+                    "matType": 1
+                    },
+                "Emitter": [
+                    {
+                        "type": "Circle",
+                        "name": "Emitter_0",
+                        "position": [0, 10, 0],
+                        "emissionRate": 50,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 0.3
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 360
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [40, 50]
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "circleRandom": false,
+                        "circleStep": 15,
+                        "circleAngle": 325,
+                        "circleXRadius": 60,
+                        "circleZRadius": 20
+                    },
+                    {
+                        "type": "Circle",
+                        "name": "Emitter_1",
+                        "emissionRate": 50,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 0.3
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 360
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [40, 50]
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "circleRandom": false,
+                        "circleStep": 15,
+                        "circleAngle": 2,
+                        "circleXRadius": 60,
+                        "circleZRadius": 20,
+                        "circleAutoDirection": true
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_1",
+                        "timeStep": 0.05,
+                        "row": 4,
+                        "col": 4
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_3",
+                        "scaleSize": {
+                            "type": "fixed",
+                            "value": -150
+                        }
+                    }
+                ]
             }
         ]
     }

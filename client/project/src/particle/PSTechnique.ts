@@ -168,6 +168,10 @@ class PSTechnique {
     }
 
     private emitParticles(timeElapsed: number): void {
+        for(let i in this._emitters) {
+            this._emitters[i].update(timeElapsed);
+        }
+
         var total = 0;
         for(let i in this._emitters) {
             total += this._emitters[i].getEmissionCount(timeElapsed);
