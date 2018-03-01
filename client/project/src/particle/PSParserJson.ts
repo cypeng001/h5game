@@ -340,6 +340,14 @@ class PSParserJson {
                 affectorImpl.setRow(attrVal);
             }
             break;
+            case "cycle": {
+                affectorImpl.setCycle(attrVal);
+            }
+            break;
+            case "forward": {
+                affectorImpl.setForward(attrVal);
+            }
+            break;
             default:
             PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
         }

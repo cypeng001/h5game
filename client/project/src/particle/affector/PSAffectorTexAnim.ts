@@ -3,8 +3,8 @@ class PSAffectorTexAnim extends PSAffector {
 	private _row: number = 1;
 	private _col: number = 1;
     private _num: number = 1;
-
     private _cycle: boolean = false;
+    private _forward: boolean = true;
     private _texCoords: PSRect[] = null;
     private _texCoordsDirty: boolean = true;
 
@@ -14,10 +14,6 @@ class PSAffectorTexAnim extends PSAffector {
 
     public setTimeStep(time_step: number): void {
         this._time_step = time_step;
-    }
-
-    public getTimeStep(): number {
-        return this._time_step;
     }
 
     public setRow(row: number): void {
@@ -30,10 +26,6 @@ class PSAffectorTexAnim extends PSAffector {
         this._texCoordsDirty = true;
     }
 
-    public getRow(): number {
-        return this._row;
-    }
-
     public setCol(col: number): void {
         col = (col != 0 ? col : 1);
         if(this._col == col) {
@@ -44,8 +36,12 @@ class PSAffectorTexAnim extends PSAffector {
         this._texCoordsDirty = true;
     }
 
-    public getCol(): number {
-        return this._col;
+    public setCycle(cycle: boolean): void {
+        this._cycle = cycle;
+    }
+
+    public setForward(forward: boolean): void {
+        this._forward = forward;
     }
 
     private updateTexCoords(): void {
@@ -88,7 +84,12 @@ class PSAffectorTexAnim extends PSAffector {
             }
         }
 
-		index = (particle.startFrame + index) % this._num;
+        if(this._forward) {
+            index = (particle.startFrame + index) % this._num;
+        }
+        else {
+            index = (particle.startFrame - index + this._num) % this._num;
+        }
 
         var r = this._texCoords[index];
         particle.left = r[0];
