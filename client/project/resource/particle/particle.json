@@ -61,7 +61,7 @@
         "cycle": true,
         "bound": [-64, -64, 64, 64],
         "Techniques": [
-                {
+            {
                 "name": "main",
                 "enable": true,
                 "Renderer": {
@@ -1139,6 +1139,83 @@
                         "scaleSize": {
                             "type": "curved",
                             "value": [0, 200, 1, 60]
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Technique_1",
+                "enable": true,
+                "quota": 80,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_085",
+                    "matType": 1,
+                    "enhanceAlpha": 0.6
+                    },
+                "Emitter": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_3",
+                        "emissionRate": 60,
+                        "liveTime": {
+                            "type": "random",
+                            "value": [1.8, 2.4]
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [40, 50]
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 8
+                        },
+                        "boxSize": [0, 0, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_4",
+                        "colors": [0, 0.004, 0.51, 0.961, 0.005, 0.15, 1, 1, 1, 0.493, 0.42, 1, 1, 1, 0.808, 0.7, 1, 1, 1, 0.595, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_3",
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [0, 360]
+                        }
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_14",
+                        "forceVector": [-0.0525588, -0.998618, 0],
+                        "force": {
+                            "type": "fixed",
+                            "value": 160
+                        }
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_15",
+                        "timeStep": 0.06,
+                        "row": 8,
+                        "col": 8,
+                        "cycle": true
+                    },
+                    {
+                        "type": "Deflector",
+                        "name": "Affector_6",
+                        "planePoint": [0, -300, 0],
+                        "planeNormal": [0, 1, 0],
+                        "bounce": {
+                            "type": "fixed",
+                            "value": 0.2
                         }
                     }
                 ]
