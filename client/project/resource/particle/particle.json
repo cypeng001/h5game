@@ -295,7 +295,7 @@
                         "excludeEmitters": ["Emitter_14", "Emitter_11", "Emitter_12", "Emitter_13"],
                         "fixed": true,
                         "scaleSize": {
-                            "type": "curve",
+                            "type": "curved",
                             "value": [0, 30, 0.3, 90, 1, 30]
                         }
                     }
@@ -1004,8 +1004,9 @@
         "bound": [-64, -64, 64, 64],
         "cycleTotalTime": 5,
         "Techniques": [
-                {
+            {
                 "name": "Technique_3",
+                "enable": true,
                 "quota": 80,
                 "Renderer": {
                     "type": "Billboard",
@@ -1041,7 +1042,6 @@
                     {
                         "type": "Color",
                         "name": "Affector_12",
-                        "enable": true,
                         "colors": [0, 0.004, 0.51, 0.961, 0.005, 0.15, 1, 1, 1, 0.493, 0.42, 0, 1, 0.502, 0.808, 0.7, 1, 1, 1, 0.595, 1, 1, 1, 1, 0]
                     },
                     {
@@ -1077,6 +1077,68 @@
                         "bounce": {
                             "type": "fixed",
                             "value": 0.2
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Technique_0",
+                "enable": true,
+                "quota": 6,
+                "position": [0, -300, 0],
+                "angle": 60,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "water_028",
+                    "matType": 1,
+                    "enhanceAlpha": 0.6
+                    },
+                "Emitter": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_0",
+                        "direction": [0, 1, 0],
+                        "emissionRate": 5,
+                        "liveTime": {
+                            "type": "random",
+                            "value": [0.8, 2]
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [60, 120]
+                        },
+                        "velocity": {
+                            "type": "fixed",
+                            "value": 0
+                        },
+                        "boxSize": [0, 0, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_8",
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [0, 360]
+                        }
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_7",
+                        "enable": true,
+                        "colors": [0, 1, 1, 1, 0, 0.08, 1, 1, 1, 0.375, 0.28, 1, 1, 1, 0.449, 0.69, 1, 1, 1, 0.141, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_5",
+                        "scaleSize": {
+                            "type": "curved",
+                            "value": [0, 200, 1, 60]
                         }
                     }
                 ]

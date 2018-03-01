@@ -87,7 +87,7 @@ class PSUtil {
             case "random": {
                 return new PSDynAttrRandom(data);
             }
-            case "curve": {
+            case "curved": {
                 return new PSDynAttrCurved(data);
             }
         }

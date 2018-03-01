@@ -25,7 +25,6 @@ class PSRenderer {
         this._technique = technique;
 
         this._renderNode = new egret.sys.GroupNode;
-        this._renderNode.matrix = new egret.Matrix();
     }
 
     public setTextureName(textureName: string): void {

@@ -17,10 +17,8 @@ class PSRendererBillboard extends PSRenderer {
                 ? 3     //lighter-in 
                 : 0;    //source-over
 
-        var techniquePos = this._technique.getPosition();
-        renderNode.matrix.identity();
-        renderNode.matrix.translate(techniquePos[0], -techniquePos[1]);
-
+        renderNode.matrix = this._technique.matrix;
+        
         var imageWidth = this._texture.$sourceWidth;
         var imageHeight = this._texture.$sourceHeight;
 

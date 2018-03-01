@@ -1,7 +1,7 @@
 class PSTechnique {
     private _particleSystem: PSParticleSystem;
     private _name: string;
-    private _axis: PSVec3;
+    private _axis: PSVec3 = [1, 0, 0];
     private _angle: number = 0;
     private _quota: number = 1;
 	private _emittedEmitterQuota: number = 0;
@@ -20,6 +20,9 @@ class PSTechnique {
     private _defHeight: number = 64;
     private _defDepth: number = 64;
 
+    private _matrix = new egret.Matrix();
+    private _matrixDirty = true;
+
     private _autoEmitterID: number = 0;
 
     constructor(particleSystem: PSParticleSystem) {
@@ -31,11 +34,22 @@ class PSTechnique {
     }
 
     public setAxis(axis: PSVec3): void {
+        if(!(PSVec3Util.equal(PSVec3_UNIT_X, axis)
+            || PSVec3Util.equal(PSVec3_UNIT_Y, axis)
+            || PSVec3Util.equal(PSVec3_UNIT_Z, axis))) {
+                return;
+        }
         this._axis = PSVec3Util.copy(axis, this._axis);
+        this._matrixDirty = true;
     }
 
     public setAngle(angle: number): void {
         this._angle = angle;
+        this._matrixDirty = true;
+    }
+
+    public getAngle(): number {
+        return this._angle;
     }
 
     public setQuota(val: number): void {
@@ -92,10 +106,32 @@ class PSTechnique {
 
     public setPosition(position: PSVec3): void {
         PSVec3Util.copy(position, this._position);
+        this._matrixDirty = true;
     }
 
     public getPosition(): PSVec3 {
         return this._position;
+    }
+
+    public get matrix(): egret.Matrix {
+        if(this._matrixDirty) {
+            var radian = this._angle / 180 * Math.PI;
+            var sin = Math.sin(radian);
+            var cos = Math.cos(radian);
+            if(PSVec3Util.equal(PSVec3_UNIT_X, this._axis)) {
+                this._matrix.setTo(1, 0, 0, cos, 
+                    this._position[0], -this._position[1]);
+            }
+            else if(PSVec3Util.equal(PSVec3_UNIT_Y, this._axis)) {
+                this._matrix.setTo(cos, 0, 0, 1, 
+                    this._position[0], -this._position[1]);
+            }
+            else {
+                this._matrix.setTo(cos, sin, -sin, cos, 
+                    this._position[0], -this._position[1]);
+            }
+        }
+        return this._matrix;
     }
 
     public createAffector(type: string): PSAffector {
