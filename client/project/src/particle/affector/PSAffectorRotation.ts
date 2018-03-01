@@ -22,8 +22,12 @@ class PSAffectorRotation extends PSAffector {
     }
 
     public effectParticle(particle: PSParticle, timeElapsed: number): void {
-        var maxAngle = this._dynStartAngle.getMaxValue();
-	    var minAngle = this._dynStartAngle.getMinValue();
+        var maxAngle = 0;
+        var minAngle = 0;
+        if(this._dynStartAngle) {
+            maxAngle = this._dynStartAngle.getMaxValue();
+	        minAngle = this._dynStartAngle.getMinValue();
+        }
 
 	    var percent = particle.timeFactor;
         
