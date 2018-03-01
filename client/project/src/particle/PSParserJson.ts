@@ -15,6 +15,10 @@ class PSParserJson {
                     particleSystem.setCycle(val);
                 }
                 break;
+                case "cycleTotalTime": {
+                    particleSystem.setCycleTotalTime(val);
+                }
+                break;
                 case "bound": {
                     particleSystem.setBound(val);
                 }
@@ -452,6 +456,26 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorDeflectorAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorDeflector>affector;
+        switch(attrType) {
+            case "bounce": {
+                affectorImpl.setDynBounce(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "planePoint": {
+                affectorImpl.setPlanePoint(attrVal);
+            }
+            break;
+            case "planeNormal": {
+                affectorImpl.setPlaneNormal(attrVal);
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorElasticityAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorElasticity>affector;
         switch(attrType) {
@@ -499,6 +523,9 @@ class PSParserJson {
             break;
             case "LinearForce":
             parserAffectorAttrFunc = PSParserJson.parseAffectorLinearForceAttr;
+            break;
+            case "Deflector":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorDeflectorAttr;
             break;
             case "Color":
             parserAffectorAttrFunc = PSParserJson.parseAffectorColorAttr;

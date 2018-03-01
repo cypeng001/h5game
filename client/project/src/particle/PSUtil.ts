@@ -28,6 +28,9 @@ class PSUtil {
             case "LinearForce": {
                 return new PSAffectorLinearForce(technique);
             }
+            case "Deflector": {
+                return new PSAffectorDeflector(technique);
+            }
             case "Color": {
                 return new PSAffectorColor(technique);
             }
