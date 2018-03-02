@@ -21,6 +21,11 @@ class PSAffectorRotation extends PSAffector {
         }
     }
 
+    public initParticle(particle: PSParticle): void {
+        var percent = particle.timeFactor;
+        particle.angle = PSUtil.calcDynAttr(this._dynStartAngle, percent, 0);
+    }
+
     public effectParticle(particle: PSParticle, timeElapsed: number): void {
         var maxAngle = 0;
         var minAngle = 0;
@@ -32,7 +37,17 @@ class PSAffectorRotation extends PSAffector {
 	    var percent = particle.timeFactor;
         
         if(this._dynSpeed) {
-            if(this._dynSpeed.getType() == PSDynAttrType.RANDOM) {
+            if(this._dynSpeed.getType() == PSDynAttrType.CURVED) {
+                particle.angle += PSUtil.calcDynAttr(this._dynSpeed, percent, 10) * timeElapsed;
+                if(this._dynSpeed.getMaxValue() > 0) {
+                    maxAngle += this._dynSpeed.getMaxValue() * particle.totalLive; 
+                }
+
+                if(this._dynSpeed.getMinValue() < 0) {
+                    minAngle += this._dynSpeed.getMinValue() * particle.totalLive;
+                }
+            }
+            else if(this._dynSpeed.getType() == PSDynAttrType.RANDOM) {
                 particle.angle += particle.rotationRandomValue * timeElapsed;
                 if (particle.rotationRandomValue > 0) {
                     maxAngle += particle.rotationRandomValue * particle.totalLive;
@@ -62,7 +77,7 @@ class PSAffectorRotation extends PSAffector {
                 }
             }
 
-            if(particle.angle>maxAngle) {
+            if(particle.angle > maxAngle) {
                 if(maxAngle != 0) {
                     particle.angle = Math.floor(particle.angle) % Math.floor(maxAngle);
                 } else {
