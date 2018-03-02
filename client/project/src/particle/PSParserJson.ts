@@ -456,6 +456,20 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorSplineAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorSpline>affector;
+        switch(attrType) {
+            case "points": {
+                for(var i = 0; i < attrVal.length; i += 3) {
+                    affectorImpl.addPoint([attrVal[i], attrVal[i + 1], attrVal[i + 2]]);
+                }
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorDeflectorAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorDeflector>affector;
         switch(attrType) {
@@ -532,6 +546,9 @@ class PSParserJson {
             break;
             case "TexAnim":
             parserAffectorAttrFunc = PSParserJson.parseAffectorTexAnimAttr;
+            break;
+            case "Spline":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorSplineAttr;
             break;
         }
         for(var key in data) {

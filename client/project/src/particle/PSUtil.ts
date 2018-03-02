@@ -37,6 +37,9 @@ class PSUtil {
             case "TexAnim": {
                 return new PSAffectorTexAnim(technique);
             }
+            case "Spline": {
+                return new PSAffectorSpline(technique);
+            }
         }
 
         return null;

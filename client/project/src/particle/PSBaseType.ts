@@ -2,7 +2,12 @@ type PSColor4F = [number, number, number, number];  //[a, r, g, b]
 
 type PSVec2 = [number, number]; //[x, y]
 type PSVec3 = [number, number, number]; //[x, y, z]
+type PSVec4 = [number, number, number, number]; //[x, y, z, w]
 type PSRect = [number, number, number, number]; //[l, t, r, b]
+type PSMatrix4 = [number, number, number, number,
+    number, number, number, number,
+    number, number, number, number,
+    number, number, number, number];
 
 var PSVec2_UNIT_X: PSVec2 = [1, 0];
 var PSVec2_UNIT_Y: PSVec2 = [0, 1];
@@ -10,6 +15,11 @@ var PSVec2_UNIT_Y: PSVec2 = [0, 1];
 var PSVec3_UNIT_X: PSVec3 = [1, 0, 0];
 var PSVec3_UNIT_Y: PSVec3 = [0, 1, 0];
 var PSVec3_UNIT_Z: PSVec3 = [0, 0, 1];
+
+var PSMatrix4_UNIT: PSMatrix4 = [1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1];
 
 class PSColor4FUtil {
     public static copy(src: PSColor4F, dst: PSColor4F): PSColor4F {
@@ -171,6 +181,29 @@ class PSRectUtil {
     }
 }
 
+class PSMatrix4Util {
+    public static copy(src: PSMatrix4, dst: PSMatrix4): PSRect {
+        if(!dst) {
+            dst = [1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1];
+        };
+
+        for(var i = 0; i < 16; ++i) {
+            dst[i] = src[i];
+        }
+        return dst;
+    }
+
+    public static transformVec4(m: PSMatrix4, v: PSVec4, dst: PSVec4): void {
+        dst[0] = v[0] * m[0] + v[1] * m[4] + v[2] * m[8] + v[3] * m[12];
+        dst[1] = v[0] * m[1] + v[1] * m[5] + v[2] * m[9] + v[3] * m[13];
+        dst[2] = v[0] * m[2] + v[1] * m[6] + v[2] * m[10] + v[3] * m[14];
+        dst[3] = v[0] * m[3] + v[1] * m[7] + v[2] * m[11] + v[3] * m[15];
+    }
+}
+
 class PSVec3Ftry {
     private static _instance: PSVec3Ftry = null;
 
@@ -214,6 +247,59 @@ class PSVec3Ftry {
     }
 
     public release(v: PSVec3): void {
+        this._retainCount--;
+        this._pool.push(v);
+    }
+
+    public getRetainCount(): number {
+        return this._retainCount;
+    }
+}
+
+class PSVec4Ftry {
+    private static _instance: PSVec4Ftry = null;
+
+    public static getInstance(): PSVec4Ftry {
+        if(!PSVec4Ftry._instance) {
+            PSVec4Ftry._instance = new PSVec4Ftry;
+        }
+        return PSVec4Ftry._instance;
+    }
+
+    private _pool: PSVec4[] = [];
+    private _retainCount: number = 0;
+
+    public constructor() {
+        egret.startTick(() => {
+            if(this.getRetainCount() != 0) {
+                console.warn("PSVec4Ftry retainCount != 0, forget to release?", this.getRetainCount());
+            }
+            return false;
+        }, this);
+    }
+
+    public create(x: number, y: number, z: number, w: number): PSVec4 {
+        var ret: PSVec4;
+        if(this._pool.length > 0) {
+            ret = this._pool.pop();
+            ret[0] = x;
+            ret[1] = y;
+            ret[2] = z;
+            ret[3] = w;
+        }
+        else {
+            ret = [x, y, z, w];
+        }
+        this._retainCount++;
+
+        if(this._pool.length > 10) {
+            console.warn("PSVec4Ftry.create pool is to large, forget to release?", this._pool.length);
+        }
+
+        return ret;
+    }
+
+    public release(v: PSVec4): void {
         this._retainCount--;
         this._pool.push(v);
     }
@@ -267,6 +353,59 @@ class PSColor4FFtry {
     }
 
     public release(v: PSColor4F): void {
+        this._retainCount--;
+        this._pool.push(v);
+    }
+
+    public getRetainCount(): number {
+        return this._retainCount;
+    }
+}
+
+class PSMatrix4Ftry {
+    private static _instance: PSMatrix4Ftry = null;
+
+    public static getInstance(): PSMatrix4Ftry {
+        if(!PSMatrix4Ftry._instance) {
+            PSMatrix4Ftry._instance = new PSMatrix4Ftry;
+        }
+        return PSMatrix4Ftry._instance;
+    }
+
+    private _pool: PSMatrix4[] = [];
+    private _retainCount: number = 0;
+
+    public constructor() {
+        egret.startTick(() => {
+            if(this.getRetainCount() != 0) {
+                console.warn("PSMatrix4Ftry retainCount != 0, forget to release?", this.getRetainCount());
+            }
+            return false;
+        }, this);
+    }
+
+    public create(): PSMatrix4 {
+        var ret: PSMatrix4;
+        if(this._pool.length > 0) {
+            ret = this._pool.pop();
+            PSMatrix4Util.copy(PSMatrix4_UNIT, ret);
+        }
+        else {
+            ret = [1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1];
+        }
+        this._retainCount++;
+
+        if(this._pool.length > 10) {
+            console.warn("PSMatrix4Ftry.create pool is to large, forget to release?", this._pool.length);
+        }
+
+        return ret;
+    }
+
+    public release(v: PSMatrix4): void {
         this._retainCount--;
         this._pool.push(v);
     }
