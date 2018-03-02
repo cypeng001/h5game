@@ -1090,8 +1090,7 @@
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "water_028",
-                    "matType": 1,
-                    "enhanceAlpha": 0.6
+                    "matType": 0
                     },
                 "Emitter": [
                     {
