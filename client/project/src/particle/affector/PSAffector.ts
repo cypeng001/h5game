@@ -1,9 +1,9 @@
 class PSAffector {
-	private _name: string;
-	private _startTime: number = 0;
-	private _endTime: number = 1;
-    private _affectTime: number = 0;
-    private _enable: boolean = true;
+	protected _name: string;
+	protected _startTime: number = 0;
+	protected _endTime: number = 1;
+    protected _affectTime: number = 0;
+    protected _enable: boolean = true;
 
     protected _excludeEmitters: string[] = [];
     protected _excludeEmitterIDs: {[key: number]: boolean} = null;

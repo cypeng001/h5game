@@ -31,6 +31,9 @@ class PSUtil {
             case "Deflector": {
                 return new PSAffectorDeflector(technique);
             }
+            case "Suction": {
+                return new PSAffectorSuction(technique);
+            }
             case "Color": {
                 return new PSAffectorColor(technique);
             }

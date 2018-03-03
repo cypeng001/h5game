@@ -490,6 +490,30 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorSuctionAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorSuction>affector;
+        switch(attrType) {
+            case "collideVisible": {
+                affectorImpl.setCollideVisible(attrVal);
+            }
+            break;
+            case "suctionPos": {
+                affectorImpl.setSuctionPos(attrVal);
+            }
+            break;
+            case "suction": {
+                affectorImpl.setDynSuction(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            case "suctionType": {
+                affectorImpl.setSuctionType(attrVal);
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorElasticityAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorElasticity>affector;
         switch(attrType) {
@@ -549,6 +573,9 @@ class PSParserJson {
             break;
             case "Spline":
             parserAffectorAttrFunc = PSParserJson.parseAffectorSplineAttr;
+            break;
+            case "Suction":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorSuctionAttr;
             break;
         }
         for(var key in data) {
