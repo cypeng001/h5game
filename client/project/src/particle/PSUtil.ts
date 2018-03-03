@@ -34,6 +34,9 @@ class PSUtil {
             case "Suction": {
                 return new PSAffectorSuction(technique);
             }
+            case "Vortex": {
+                return new PSAffectorVortex(technique);
+            }
             case "Color": {
                 return new PSAffectorColor(technique);
             }

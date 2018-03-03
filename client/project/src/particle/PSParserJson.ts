@@ -514,6 +514,22 @@ class PSParserJson {
         }
     }
 
+    private static parseAffectorVortexAttr(affector: PSAffector, attrType: string, attrVal: any): void {
+        var affectorImpl = <PSAffectorVortex>affector;
+        switch(attrType) {
+            case "rotationVec": {
+                affectorImpl.setRotationVec(attrVal);
+            }
+            break;
+            case "rotationSpeed": {
+                affectorImpl.setDynRotationSpeed(PSUtil.createDynAttr(attrVal.type, attrVal.value));
+            }
+            break;
+            default:
+            PSParserJson.parseAffectorBaseAttr(affector, attrType, attrVal);
+        }
+    }
+
     private static parseAffectorElasticityAttr(affector: PSAffector, attrType: string, attrVal: any): void {
         var affectorImpl = <PSAffectorElasticity>affector;
         switch(attrType) {
@@ -576,6 +592,9 @@ class PSParserJson {
             break;
             case "Suction":
             parserAffectorAttrFunc = PSParserJson.parseAffectorSuctionAttr;
+            break;
+            case "Vortex":
+            parserAffectorAttrFunc = PSParserJson.parseAffectorVortexAttr;
             break;
         }
         for(var key in data) {

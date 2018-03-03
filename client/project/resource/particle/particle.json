@@ -1348,5 +1348,88 @@
                 ]
             }
         ]
+    },
+    "scene_tiaoyuedian": {
+        "cycle": true,
+        "bound": [-64, -64, 64, 64],
+        "Techniques": [
+            {
+                "name": "Technique_4",
+                "enable": true,
+                "quota": 10,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "star_027",
+                    "matType": 1
+                    },
+                "Emitter": [
+                    {
+                        "type": "Circle",
+                        "name": "Emitter_4",
+                        "direction": [0, 1, 0],
+                        "liveTime": {
+                            "type": "random",
+                            "value": [0.6, 1]
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 5
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [15, 40]
+                        },
+                        
+                        "velocity": {
+                            "type": "random",
+                            "value": [30, 80]
+                        },
+                        "circleXRadius": 40
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_12",
+                        "scaleSize": {
+                            "type": "fixed",
+                            "value": -10
+                        }
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_10",
+                        "rotationSpeed": {
+                            "type": "random",
+                            "value": [-200, 360]
+                        },
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [0, 360]
+                        }
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_9",
+                        "timeStep": 1,
+                        "col": 2
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_7",
+                        "colors": [0, 1, 1, 1, 0, 0.07, 1, 1, 1, 1, 0.8, 1, 1, 1, 0.999, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_11",
+                        "rotationSpeed": {
+                            "type": "fixed",
+                            "value": 200
+                        },
+                        "rotationVec": [0, 1, 0]
+                    }
+                ]
+            }
+        ]
     }
 }

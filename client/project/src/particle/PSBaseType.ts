@@ -8,6 +8,7 @@ type PSMatrix4 = [number, number, number, number,
     number, number, number, number,
     number, number, number, number,
     number, number, number, number];
+type PSQuaternion = [number, number, number, number]; //[x, y, z, w]
 
 var PSVec2_UNIT_X: PSVec2 = [1, 0];
 var PSVec2_UNIT_Y: PSVec2 = [0, 1];
@@ -20,6 +21,8 @@ var PSMatrix4_UNIT: PSMatrix4 = [1, 0, 0, 0,
     0, 1, 0, 0,
     0, 0, 1, 0,
     0, 0, 0, 1];
+
+var PSQuaternion_UNIT: PSQuaternion = [0, 0, 0, 1];
 
 class PSColor4FUtil {
     public static copy(src: PSColor4F, dst: PSColor4F): PSColor4F {
@@ -204,6 +207,60 @@ class PSMatrix4Util {
     }
 }
 
+class PSQuaternionUtil {
+    public static copy(src: PSQuaternion, dst: PSQuaternion): PSQuaternion {
+        if(!dst) {
+            dst = [0, 0, 0, 1];
+        };
+        dst[0] = src[0];
+        dst[1] = src[1];
+        dst[2] = src[2];
+        dst[3] = src[3];
+        return dst;
+    };
+
+    public static identity(quaternion: PSQuaternion): void {
+        quaternion[0] = 0;
+        quaternion[1] = 0;
+        quaternion[2] = 0;
+        quaternion[3] = 1;
+    }
+
+    public static rotationAxis2Quaternion(v: PSVec3, angle: number, ret: PSQuaternion): void {
+        var rad = angle * 0.5;
+        var scale = Math.sin(rad);
+        ret[0] = v[0] * scale;
+        ret[1] = v[1] * scale;
+        ret[2] = v[2] * scale;
+        ret[3] = Math.cos(rad);
+    }
+
+    public static quaternionMultiplyVec3(q: PSQuaternion, v: PSVec3, ret: PSVec3): void {
+        var uvTmp = PSVec3Ftry.getInstance().create(0, 0, 0);
+        var uuvTmp = PSVec3Ftry.getInstance().create(0, 0, 0);
+        var qvecTmp = PSVec3Ftry.getInstance().create(0, 0, 0);
+
+        qvecTmp[0] = q[0];
+        qvecTmp[1] = q[1];
+        qvecTmp[2] = q[2];
+
+        PSVec3Util.cross(qvecTmp, v, uvTmp);
+
+        PSVec3Util.cross(qvecTmp, uvTmp, uuvTmp);
+
+        PSVec3Util.multiply(uvTmp, 2 * q[3], uvTmp);
+        PSVec3Util.multiply(uuvTmp, 2, uuvTmp);
+
+        PSVec3Util.add(v, uvTmp, ret);
+        PSVec3Util.add(ret, uuvTmp, ret);
+        
+        PSVec3Ftry.getInstance().release(uvTmp);
+        PSVec3Ftry.getInstance().release(uuvTmp);
+        PSVec3Ftry.getInstance().release(qvecTmp);
+    }
+
+}
+
 class PSVec3Ftry {
     private static _instance: PSVec3Ftry = null;
 
@@ -338,7 +395,7 @@ class PSColor4FFtry {
             ret[0] = r;
             ret[1] = g;
             ret[2] = b;
-	    ret[3] = a;
+	        ret[3] = a;
         }
         else {
             ret = [r, g, b, a];
@@ -406,6 +463,59 @@ class PSMatrix4Ftry {
     }
 
     public release(v: PSMatrix4): void {
+        this._retainCount--;
+        this._pool.push(v);
+    }
+
+    public getRetainCount(): number {
+        return this._retainCount;
+    }
+}
+
+class PSQuaternionFtry {
+    private static _instance: PSQuaternionFtry = null;
+
+    public static getInstance(): PSQuaternionFtry {
+        if(!PSQuaternionFtry._instance) {
+            PSQuaternionFtry._instance = new PSQuaternionFtry;
+        }
+        return PSQuaternionFtry._instance;
+    }
+
+    private _pool: PSQuaternion[] = [];
+    private _retainCount: number = 0;
+
+    public constructor() {
+        egret.startTick(() => {
+            if(this.getRetainCount() != 0) {
+                console.warn("PSQuaternionFtry retainCount != 0, forget to release?", this.getRetainCount());
+            }
+            return false;
+        }, this);
+    }
+
+    public create(x: number, y: number, z: number, w: number): PSQuaternion {
+        var ret: PSQuaternion;
+        if(this._pool.length > 0) {
+            ret = this._pool.pop();
+	    ret[0] = x;
+            ret[1] = y;
+            ret[2] = z;
+            ret[3] = w;
+        }
+        else {
+            ret = [x, y, z, w];
+        }
+        this._retainCount++;
+
+        if(this._pool.length > 10) {
+            console.warn("PSQuaternionFtry.create pool is to large, forget to release?", this._pool.length);
+        }
+
+        return ret;
+    }
+
+    public release(v: PSQuaternion): void {
         this._retainCount--;
         this._pool.push(v);
     }
