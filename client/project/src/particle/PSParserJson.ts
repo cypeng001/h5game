@@ -194,6 +194,32 @@ class PSParserJson {
         PSParserJson.parseEmitterBaseAttr(emitter, attrType, attrVal);
     }
 
+    private static parseEmitterLineAttr(emitter: PSEmitter, attrType: string, attrVal: any): void {
+        var emitterImpl = <PSEmitterLine>emitter;
+
+        switch(attrType) {
+            case "startPoint": {
+                emitterImpl.setStartPoint(attrVal);
+            }
+            break;
+            case "lineDir": {
+                emitterImpl.setLineDir(attrVal);
+            }
+            break;
+            case "randomized": {
+                emitterImpl.setRandomized(attrVal);
+            }
+            break;
+            case "increment": {
+                emitterImpl.setIncrement(attrVal);
+            }
+            break;
+            default: {
+                PSParserJson.parseEmitterBaseAttr(emitter, attrType, attrVal);
+            }
+        }
+    }
+
     private static parseEmitterBoxAttr(emitter: PSEmitter, attrType: string, attrVal: any): void {
         var emitterImpl = <PSEmitterBox>emitter;
 
@@ -291,6 +317,9 @@ class PSParserJson {
         switch(type) {
             case "Point":
             parserEmitterAttrFunc = PSParserJson.parseEmitterPointAttr;
+            break;
+            case "Line":
+            parserEmitterAttrFunc = PSParserJson.parseEmitterLineAttr;
             break;
             case "Box":
             parserEmitterAttrFunc = PSParserJson.parseEmitterBoxAttr;

@@ -56,6 +56,9 @@ class PSUtil {
             case "Point": {
                 return new PSEmitterPoint(technique);
             }
+            case "Line": {
+                return new PSEmitterLine(technique);
+            }
             case "Box": {
                 return new PSEmitterBox(technique);
             }

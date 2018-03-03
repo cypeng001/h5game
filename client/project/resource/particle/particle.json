@@ -1431,5 +1431,70 @@
                 ]
             }
         ]
+    },
+    "ui_ch_duzhangqiankun": {
+        "cycle": true,
+        "bound": [-64, -64, 64, 64],
+        "Techniques": [
+            {
+                "name": "Technique_5",
+                "enable": true,
+                "quota": 5,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_224",
+                    "matType": 1,
+                    "enhanceAlpha": 0.2
+                    },
+                "Emitter": [
+                    {
+                        "type": "Line",
+                        "name": "Emitter_4",
+                        "position": [20, 0, 0],
+                        "emissionRate": 4,
+                        "liveTime": {
+                            "type": "fixed",
+                            "value": 1
+                        },
+                        "angle": {
+                            "type": "fixed",
+                            "value": 40
+                        },
+                        "size": {
+                            "type": "random",
+                            "value": [60, 80]
+                        },
+                        "velocity": {
+                            "type": "random",
+                            "value": [10, 20]
+                        },
+                        "startPoint": [30, -10, 0],
+                        "lineDir": [40, 20, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_9",
+                        "rotationStartAngle": {
+                            "type": "random",
+                            "value": [30, 60]
+                        }
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_8",
+                        "colors": [0, 1, 1, 1, 0, 0.12, 1, 0.824, 0.2, 0.834, 0.5, 1, 0, 0, 1, 0.89, 1, 0.122, 0.075, 0.797, 1, 1, 0.624, 0.259, 0.009]
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_7",
+                        "timeStep": 0.06,
+                        "col": 4,
+                        "row": 4
+                    }
+                ]
+            }
+        ]
     }
 }
