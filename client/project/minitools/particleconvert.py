@@ -250,7 +250,7 @@ TECHNIQUE_ATTR_DEF = [
 
 PARTICLESYSTEM_ATTR_DEF = [
     AttrDef("cycle_total_time", ATTR_TYPE_FLOAT, "cycleTotalTime"),
-    AttrDef("is_cycle", ATTR_TYPE_BOOL, "cycle"),
+    #AttrDef("is_cycle", ATTR_TYPE_BOOL, "cycle"),
     AttrDef("template_name", ATTR_TYPE_STR, "templateName"),
     AttrDef("ps_scale", ATTR_TYPE_FLOAT, "scale"),
     AttrDef("scale_speed", ATTR_TYPE_FLOAT, "scaleSpeed"),
