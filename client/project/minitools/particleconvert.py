@@ -570,6 +570,7 @@ def parseTechnique(techniqueElem, technique):
                         attr.spDatas.append(attrElems[aei].childNodes[0].data)
                 else:
                     attr.val = attrElems[0].childNodes[0].data
+        
                     
     rendererElem = techniqueElem.getElementsByTagName("render")[0]
     renderer = technique.createRenderer()
@@ -613,6 +614,10 @@ def parseParticleSystem(particleSystemElem, particleSystem):
         
     techniqueElemList = particleSystemElem.getElementsByTagName("Technique")
     for techniqueElem in techniqueElemList:
+        rendererElem = techniqueElem.getElementsByTagName("render")[0]
+        if not rendererElem or rendererElem.getAttribute("type") == "Entity":
+            continue
+        
         technique = particleSystem.createTechnique()
         parseTechnique(techniqueElem, technique)
         
