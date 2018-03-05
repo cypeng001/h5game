@@ -127,7 +127,7 @@ class PSTechnique {
                     this._position[0], -this._position[1]);
             }
             else {
-                this._matrix.setTo(cos, sin, -sin, cos, 
+                this._matrix.setTo(cos, -sin, sin, cos, 
                     this._position[0], -this._position[1]);
             }
         }
