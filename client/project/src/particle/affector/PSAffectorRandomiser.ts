@@ -15,6 +15,18 @@ class PSAffectorRandomiser extends PSAffector {
         PSVec3Util.copy(maxDeviation, this._maxDeviation);
     }
 
+    public setMaxDeviationX(x: number): void {
+        this._maxDeviation[0] = x;
+    }
+
+    public setMaxDeviationY(y: number): void {
+        this._maxDeviation[1] = y;
+    }
+
+    public setMaxDeviationZ(z: number): void {
+        this._maxDeviation[2] = z;
+    }
+
     public setRandomRange(randomRange: number): void {
         this._randomRange = randomRange;
     }

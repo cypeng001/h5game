@@ -19,6 +19,29 @@ class PSEmitterBox extends PSEmitter {
 		this._boxRangeDirty = true;
 	}
 
+	public setBoxWidth(width: number): void {
+		if(this._boxSize[0] == width) {
+			return;
+		}
+		this._boxSize[0] = width;
+		this._boxRangeDirty = true;
+	}
+
+	public setBoxHeight(height: number): void {
+		if(this._boxSize[1] == height) {
+			return;
+		}
+		this._boxSize[1] = height;
+		this._boxRangeDirty = true;
+	}
+
+	public setBoxDepth(depth: number): void {
+		if(this._boxSize[2] == depth) {
+			return;
+		}
+		this._boxSize[2] = depth;
+		this._boxRangeDirty = true;
+	}
 
 	public setBoxDir(dir: PSVec3): void {
 		if(PSVec3Util.equal(dir, this._boxDir)) {

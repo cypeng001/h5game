@@ -3,7 +3,7 @@ class PSTechnique {
     private _name: string;
     private _axis: PSVec3 = [1, 0, 0];
     private _angle: number = 0;
-    private _quota: number = 1;
+    private _particleQuota: number = 1;
 	private _emittedEmitterQuota: number = 0;
     private _stopEmitted: boolean = false;
     private _enable: boolean = true;
@@ -52,8 +52,8 @@ class PSTechnique {
         return this._angle;
     }
 
-    public setQuota(val: number): void {
-        this._quota = val;
+    public setParticleQuota(val: number): void {
+        this._particleQuota = val;
     }
 
 	public setEmittedEmitterQuota(val: number): void {
@@ -214,8 +214,8 @@ class PSTechnique {
         }
 
         var allow = 0;
-        if(this._quota > this._activeParticleList.length) {
-            allow = this._quota - this._activeParticleList.length;
+        if(this._particleQuota > this._activeParticleList.length) {
+            allow = this._particleQuota - this._activeParticleList.length;
         }
         if(allow == 0) {
             return;

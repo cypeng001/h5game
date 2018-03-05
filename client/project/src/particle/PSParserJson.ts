@@ -23,6 +23,9 @@ class PSParserJson {
                     particleSystem.setBound(val);
                 }
                 break;
+                default: {
+                    console.log("PSParserJson.parse invalid key", key);
+                }
             }
         }
         return particleSystem;
@@ -67,8 +70,8 @@ class PSParserJson {
                     technique.setAngle(val);
                 }
                 break;
-                case "quota": {
-                    technique.setQuota(val);
+                case "particleQuota": {
+                    technique.setParticleQuota(val);
                 }
                 break;
                 case "defWidth": {
@@ -87,6 +90,9 @@ class PSParserJson {
                     technique.setPosition(val);
                 }
                 break;
+                default: {
+                    console.log("PSParserJson.parseTechnique invalid key", key);
+                }
             }
         }
     }
@@ -105,6 +111,9 @@ class PSParserJson {
                 renderer.setMatType(attrVal);
             }
             break;
+            default: {
+                console.log("PSParserJson.parseRendererBaseAttr invalid attrType", attrType);
+            }
         }
     }
 
@@ -136,6 +145,18 @@ class PSParserJson {
             break;
             case "cycleTime": {
                 emitter.setCycleTime(attrVal[0], attrVal[1]);
+            }
+            break;
+            case "startTime": {
+                emitter.setStartTime(attrVal);
+            }
+            break;
+            case "endTime": {
+                emitter.setEndTime(attrVal);
+            }
+            break;
+            case "emissionRate": {
+                emitter.setEmissionRate(attrVal);
             }
             break;
             case "forceEmit": {
@@ -185,6 +206,17 @@ class PSParserJson {
                 emitter.setDirection(attrVal);
             }
             break;
+            case "startColor": {
+                emitter.setStartColor(attrVal);
+            }
+            break;
+            case "endColor": {
+                emitter.setEndColor(attrVal);
+            }
+            break;
+            default: {
+                console.log("PSParserJson.parseEmitterBaseAttr invalid attrType", attrType);
+            }
         }
     }
 
@@ -226,6 +258,18 @@ class PSParserJson {
         switch(attrType) {
             case "boxSize": {
                 emitterImpl.setBoxSize(attrVal);
+            }
+            break;
+            case "boxWidth": {
+                emitterImpl.setBoxWidth(attrVal);
+            }
+            break;
+            case "boxHeight": {
+                emitterImpl.setBoxHeight(attrVal);
+            }
+            break;
+            case "boxDepth": {
+                emitterImpl.setBoxDepth(attrVal);
             }
             break;
             case "boxUp": {
@@ -355,6 +399,9 @@ class PSParserJson {
                 }
             }
             break;
+            default: {
+                console.log("PSParserJson.parseAffectorBaseAttr invalid attrType", attrType);
+            }
         }
     }
 
@@ -371,6 +418,10 @@ class PSParserJson {
             break;
             case "row": {
                 affectorImpl.setRow(attrVal);
+            }
+            break;
+            case "animType": {
+                affectorImpl.setCycle(attrVal == 1);
             }
             break;
             case "cycle": {
@@ -431,6 +482,18 @@ class PSParserJson {
             break;
             case "maxDeviation": {
                 affectorImpl.setMaxDeviation(attrVal);
+            }
+            break;
+            case "maxDeviationX": {
+                affectorImpl.setMaxDeviationX(attrVal);
+            }
+            break;
+            case "maxDeviationY": {
+                affectorImpl.setMaxDeviationY(attrVal);
+            }
+            break;
+            case "maxDeviationZ": {
+                affectorImpl.setMaxDeviationZ(attrVal);
             }
             break;
             case "randomRange": {

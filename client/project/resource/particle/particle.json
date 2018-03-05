@@ -3,7 +3,7 @@
         "cycle": true,
         "bound": [-64, -64, 64, 64],
         "Techniques": [
-                {
+            {
                 "name": "Technique_0",
                 "axis": [0.8, -1.4, -1],
                 "angle": -50,
@@ -11,7 +11,7 @@
                     "type": "Billboard",
                     "textureName": "seq_273",
                     "enhanceAlpha": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Point",
@@ -67,7 +67,7 @@
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "ui_182"
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Point",
@@ -98,14 +98,14 @@
             {
                 "name": "Technique_2",
                 "enable": true,
-                "quota": 10,
+                "particleQuota": 10,
                 "position": [-50, 20, 0],
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "obj_167",
                     "matType": 1,
                     "enhanceAlpha": 0.9
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Sphere",
@@ -179,13 +179,13 @@
             {
                 "name": "Technique_4",
                 "enable": true,
-                "quota": 5,
+                "particleQuota": 5,
                 "position": [0, -18, 0],
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "star_060",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Point",
@@ -304,12 +304,12 @@
             {
                 "name": "Technique_3",
                 "enable": true,
-                "quota": 10,
+                "particleQuota": 10,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "spot_037",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -364,12 +364,12 @@
             {
                 "name": "Technique_1",
                 "enable": true,
-                "quota": 3,
+                "particleQuota": 3,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "seq_365",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Point",
@@ -406,12 +406,12 @@
             {
                 "name": "Technique_0",
                 "enable": true,
-                "quota": 20,
+                "particleQuota": 20,
                 "position": [70, 5, 0],
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "obj_175"
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -467,12 +467,12 @@
             {
                 "name": "Technique_6",
                 "enable": true,
-                "quota": 20,
+                "particleQuota": 20,
                 "position": [-70, 5, 0],
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "obj_175"
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -528,14 +528,14 @@
             {
                 "name": "Technique_7",
                 "enable": true,
-                "quota": 10,
+                "particleQuota": 10,
                 "position": [50, 20, 0],
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "obj_167",
                     "matType": 1,
                     "enhanceAlpha": 0.9
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Sphere",
@@ -606,12 +606,12 @@
             {
                 "name": "Technique_5",
                 "enable": true,
-                "quota": 15,
+                "particleQuota": 15,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "star_082",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -668,12 +668,12 @@
             {
                 "name": "Technique_8",
                 "enable": true,
-                "quota": 5,
+                "particleQuota": 5,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "star_081",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -734,12 +734,12 @@
             {
                 "name": "Technique_9",
                 "enable": true,
-                "quota": 20,
+                "particleQuota": 20,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "star_081",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Circle",
@@ -818,13 +818,13 @@
             {
                 "name": "Technique_11",
                 "enable": true,
-                "quota": 10,
+                "particleQuota": 10,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "seq_374",
                     "matType": 1,
                     "enhanceAlpha": 0.9
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -880,12 +880,12 @@
             {
                 "name": "Technique_12",
                 "enable": true,
-                "quota": 10,
+                "particleQuota": 10,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "star_084",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -945,13 +945,13 @@
             {
                 "name": "Technique_13",
                 "enable": true,
-                "quota": 8,
+                "particleQuota": 8,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "obj_175",
                     "matType": 1,
                     "enhanceAlpha": 0.9
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -1007,13 +1007,13 @@
             {
                 "name": "Technique_3",
                 "enable": true,
-                "quota": 80,
+                "particleQuota": 80,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "seq_023",
                     "matType": 1,
                     "enhanceAlpha": 0.6
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -1084,14 +1084,14 @@
             {
                 "name": "Technique_0",
                 "enable": true,
-                "quota": 6,
+                "particleQuota": 6,
                 "position": [0, -300, 0],
                 "angle": 60,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "water_028",
                     "matType": 0
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -1145,13 +1145,13 @@
             {
                 "name": "Technique_1",
                 "enable": true,
-                "quota": 80,
+                "particleQuota": 80,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "seq_085",
                     "matType": 1,
                     "enhanceAlpha": 0.6
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -1233,7 +1233,7 @@
                     "textureName": "other_425",
                     "matType": 1,
                     "enhanceAlpha": 0.5
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Point",
@@ -1288,14 +1288,14 @@
             {
                 "name": "Technique_8",
                 "enable": true,
-                "quota": 20,
+                "particleQuota": 20,
                 "position": [-50, -100, 0],
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "trail_325",
                     "matType": 1,
                     "enhanceAlpha": 0.4
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Box",
@@ -1356,12 +1356,12 @@
             {
                 "name": "Technique_4",
                 "enable": true,
-                "quota": 10,
+                "particleQuota": 10,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "star_027",
                     "matType": 1
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Circle",
@@ -1439,13 +1439,13 @@
             {
                 "name": "Technique_5",
                 "enable": true,
-                "quota": 5,
+                "particleQuota": 5,
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "seq_224",
                     "matType": 1,
                     "enhanceAlpha": 0.2
-                    },
+                },
                 "Emitter": [
                     {
                         "type": "Line",

@@ -74,6 +74,18 @@ class PSEmitter {
         this._endTime = endTime;
     }
 
+    public setStartTime(startTime: number): void {
+        this._startTime = startTime;
+    }
+
+    public setEndTime(endTime: number): void {
+        this._endTime = endTime;
+    }
+
+    public setEmissionRate(emissionRate: number): void {
+        this._emissionRate = emissionRate;
+    }
+
     public setCycle(cycle: boolean): void {
         this._cycle = cycle;
     }
@@ -122,6 +134,19 @@ class PSEmitter {
         PSVec3Util.copy(direction, this._dir);
         PSVec3Util.normalize(this._dir);
         PSVec3Util.perpendicular(this._dir, this._up);
+    }
+
+    public setStartColor(startColor: PSColor4F): void {
+        PSColor4FUtil.copy(startColor, this._startColor);
+    }
+
+    public setEndColor(endColor: PSColor4F): void {
+        PSColor4FUtil.copy(endColor, this._endColor);
+    }
+
+    public setEmitterColor(color: PSColor4F): void {
+        PSColor4FUtil.copy(color, this._startColor);
+        PSColor4FUtil.copy(color, this._endColor);
     }
 
     public setEnable(enable: boolean): void {
