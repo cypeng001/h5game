@@ -22,10 +22,11 @@ def parseParticleTex(filepath):
 
 if __name__ == '__main__':
     fileName = sys.argv[1]
-    srcDir = sys.argv[2]
-    dstDir = sys.argv[3]
+    psDir = sys.argv[2]
+    srcDir = sys.argv[3]
+    dstDir = sys.argv[4]
     
-    filePath = fileName + ".xml"
+    filePath = psDir + fileName + ".xml"
     
     texs = parseParticleTex(filePath)
     
