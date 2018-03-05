@@ -15,11 +15,61 @@ ATTR_TYPE_RECT      = 8
 ATTR_TYPE_DYN       = 9
 ATTR_TYPE_SP        = 10
 
+def spValFunc_exclude_emitter(spDatas):
+    ret = "["
+    for index in range(len(spDatas)):
+        ret += '"' + spDatas[index] + '"'
+        if index < len(spDatas) - 1:
+            ret += ", "
+    ret += "]"
+    return ret
+
+def spValFunc_exclude_list(spDatas):
+    ret = "[" + spDatas[0] + "]"
+    ret = ret.replace(" ", ", ")
+    return ret
+            
+def spValFunc_time_colour(spDatas):
+    ret = "["
+    for index in range(len(spDatas)):
+        ret += spDatas[index]
+        if index < len(spDatas) - 1:
+            ret += " "
+    ret += "]"
+    ret = ret.replace(" ", ", ")
+    return ret
+
+def spValFunc_time_colour_list(spDatas):
+    ret = "[" + spDatas[0] + "]"
+    ret = ret.replace(" ", ", ")
+    return ret
+
+def spValFunc_pf_pos(spDatas):
+    ret = "["
+    for index in range(len(spDatas)):
+        ret += spDatas[index]
+        if index < len(spDatas) - 1:
+            ret += " "
+    ret = ret.replace(" ", ", ")
+    return ret
+
+def spValFunc_pf_pos_list(spDatas):
+    ret = "[" + spDatas[0] + "]"
+    ret = ret.replace(" ", ", ")
+    return ret
+            
+def spValFunc_amin_type(spDatas):
+    if spDatas[0] == "0":
+        return "true"
+    else:
+        return "false"
+                
 class AttrDef:
-    def __init__(self, key, attrType, outputKey = ""):
+    def __init__(self, key, attrType, outputKey, spValFunc = None):
         self.key = key
         self.attrType = attrType
         self.outputKey = outputKey
+        self.spValFunc = spValFunc
         
     def getOutputKey(self):
         if(len(self.outputKey) > 0):
@@ -100,17 +150,17 @@ EMITTER_SPHERE_ATTR_DEF = [
 
 AFFECTOR_BASE_ATTR_DEF = [
     AttrDef("name", ATTR_TYPE_STR, "name"),
-    AttrDef("exclude_emitter", ATTR_TYPE_SP, "excludeEmitters"),
+    AttrDef("exclude_emitter", ATTR_TYPE_SP, "excludeEmitters", spValFunc_exclude_emitter),
     AttrDef("affect_start", ATTR_TYPE_FLOAT, "affectStart"),
     AttrDef("affect_end", ATTR_TYPE_FLOAT, "affectEnd"),
     AttrDef("frist_state", ATTR_TYPE_BOOL, "fristState"),
     AttrDef("affect_enable", ATTR_TYPE_BOOL, "enable"),
-    AttrDef("exclude_list", ATTR_TYPE_SP, "excludeEmitters"),
+    AttrDef("exclude_list", ATTR_TYPE_SP, "excludeEmitters", spValFunc_exclude_list),
 ]
 
 AFFECTOR_COLOR_ATTR_DEF = [
-    AttrDef("time_colour", ATTR_TYPE_SP, "colors"),
-    AttrDef("time_colour_list", ATTR_TYPE_SP, "colors"),
+    AttrDef("time_colour", ATTR_TYPE_SP, "colors", spValFunc_time_colour),
+    AttrDef("time_colour_list", ATTR_TYPE_SP, "colors", spValFunc_time_colour_list),
 ]
 
 AFFECTOR_DEFLECTOR_ATTR_DEF = [
@@ -134,8 +184,8 @@ AFFECTOR_LINEARFORCE_ATTR_DEF = [
 ]
 
 AFFECTOR_PATHFOLLOWER_ATTR_DEF = [
-    AttrDef("pf_pos", ATTR_TYPE_SP, "points"),
-    AttrDef("pf_pos_list", ATTR_TYPE_SP, "points"),
+    AttrDef("pf_pos", ATTR_TYPE_SP, "points", spValFunc_pf_pos),
+    AttrDef("pf_pos_list", ATTR_TYPE_SP, "points", spValFunc_pf_pos_list),
 ]
 
 AFFECTOR_RANDOMISER_ATTR_DEF = [
@@ -169,7 +219,7 @@ AFFECTOR_SUCTION_ATTR_DEF = [
 
 AFFECTOR_TEXANIM_ATTR_DEF = [
     AttrDef("time_step", ATTR_TYPE_FLOAT, "timeStep"),
-    AttrDef("amin_type", ATTR_TYPE_SP, "cycle"),
+    AttrDef("amin_type", ATTR_TYPE_SP, "cycle", spValFunc_amin_type),
     #AttrDef("start_frame", ATTR_TYPE_INT, "startFrame"),
     #AttrDef("random_start", ATTR_TYPE_BOOL, "random_start"),
     AttrDef("row_num", ATTR_TYPE_INT, "row"),
@@ -270,56 +320,10 @@ class Attr:
             return ret
             
         elif attrType == ATTR_TYPE_SP:
-            key = self.attrDef.key
-
-            if key == "exclude_emitter":
-                ret = "["
-                for index in range(len(self.spDatas)):
-                    ret += '"' + self.spDatas[index] + '"'
-                    if index < len(self.spDatas) - 1:
-                        ret += ", "
-                ret += "]"
-                return ret
+            if self.attrDef.spValFunc:
+                return self.attrDef.spValFunc(self.spDatas)
             
-            elif key == "exclude_list":
-                ret = "[" + self.spDatas[0] + "]"
-                ret = ret.replace(" ", ", ")
-                return ret
-            
-            elif key == "time_colour":
-                ret = "["
-                for index in range(len(self.spDatas)):
-                    ret += self.spDatas[index]
-                    if index < len(self.spDatas) - 1:
-                        ret += " "
-                ret += "]"
-                ret = ret.replace(" ", ", ")
-                return ret
-            
-            elif key == "time_colour_list":
-                ret = "[" + self.spDatas[0] + "]"
-                ret = ret.replace(" ", ", ")
-                return ret
-            
-            elif key == "pf_pos":
-                ret = "["
-                for index in range(len(self.spDatas)):
-                    ret += self.spDatas[index]
-                    if index < len(self.spDatas) - 1:
-                        ret += " "
-                ret = ret.replace(" ", ", ")
-                return ret
-            
-            elif key == "pf_pos_list":
-                ret = "[" + self.spDatas[0] + "]"
-                ret = ret.replace(" ", ", ")
-                return ret
-            
-            elif key == "amin_type":
-                if self.spDatas[0] == "0":
-                    return "true"
-                else:
-                    return "false"
+        return self.spDatas
     
 class Renderer:
     def __init__(self):
