@@ -1245,13 +1245,94 @@
     },
     "skills_fs_jineng4": {
         "cycle": true,
-        "bound": [-64, -64, 64, 64],
+        "bound": [-437.477, 444.823, 1057.52, -401.843],
         "Techniques": [
             {
+                "name": "Technique_3",
+                "position": [-125, 0, 0],
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_309"
+                },
+                "Emitters": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_3",
+                        "position": [550, 0, 0],
+                        "cycleTime": [0.821565, 3],
+                        "forceEmit": true,
+                        "cycle": false,
+                        "liveTime": {"type": "fixed", "value": 0.45},
+                        "angle": {"type": "fixed", "value": 0},
+                        "width": {"type": "fixed", "value": 500},
+                        "height": {"type": "fixed", "value": 164},
+                        "velocity": {"type": "fixed", "value": 0}
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_6",
+                        "colors": [0, 1, 1, 1, 0.595, 1, 1, 1, 1, 0.595]
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_2",
+                        "timeStep": 0.1,
+                        "row": 4
+                    }
+                ]
+            },
+            {
+                "name": "Technique_7",
+                "position": [80, 50, 0],
+                "axis": [0, 0, 1],
+                "angle": 90,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_132",
+                    "matType": 1,
+                    "enhanceAlpha": 0.7
+                },
+                "Emitters": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_1",
+                        "direction": [0, -1, 0],
+                        "position": [-50, 0, 0],
+                        "forceEmit": true,
+                        "cycle": false,
+                        "liveTime": {"type": "fixed", "value": 0.5},
+                        "angle": {"type": "fixed", "value": 0},
+                        "width": {"type": "fixed", "value": 130},
+                        "height": {"type": "fixed", "value": 180},
+                        "velocity": {"type": "fixed", "value": -500}
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_4",
+                        "colors": [0, 1, 1, 1, 0, 0.1, 1, 1, 1, 0.999, 0.89, 1, 1, 1, 0.991, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_5",
+                        "forceVector": [0, 1, 0],
+                        "force": {"type": "fixed", "value": -3000}
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_7",
+                        "rotationStartAngle": {"type": "fixed", "value": 180}
+                    }
+                ]
+            },
+            {
                 "name": "Technique_8",
-                "enable": true,
                 "particleQuota": 20,
                 "position": [-50, -100, 0],
+                "axis": [0, 0, 1],
                 "Renderer": {
                     "type": "Billboard",
                     "textureName": "trail_325",
@@ -1262,29 +1343,15 @@
                     {
                         "type": "Box",
                         "name": "Emitter_24",
+                        "position": [150, 100, 0],
                         "cycleTime": [0.44084, 0.689885],
                         "emissionRate": 20,
                         "cycle": false,
-                        "liveTime": {
-                            "type": "random",
-                            "value": [0.1, 0.2]
-                        },
-                        "angle": {
-                            "type": "fixed",
-                            "value": 0
-                        },
-                        "width": {
-                            "type": "fixed",
-                            "value": 500
-                        },
-                        "height": {
-                            "type": "fixed",
-                            "value": 200
-                        },
-                        "velocity": {
-                            "type": "fixed",
-                            "value": 2200
-                        },
+                        "liveTime": {"type": "random", "value": [0.1, 0.2]},
+                        "angle": {"type": "fixed", "value": 0},
+                        "width": {"type": "fixed", "value": 500},
+                        "height": {"type": "fixed", "value": 200},
+                        "velocity": {"type": "fixed", "value": 2200},
                         "boxSize": [0, 30, 0]
                     }
                 ],
@@ -1301,11 +1368,129 @@
                     {
                         "type": "Suction",
                         "name": "Affector_43",
-                        "suction": {
-                            "type": "fixed",
-                            "value": 164
-                        },
+                        "suction": {"type": "fixed", "value": 164},
                         "suctionPos": [1000, 100, 0]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_10",
+                "particleQuota": 20,
+                "position": [-50, -100, 0],
+                "axis": [0, 0, 1],
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "trail_324",
+                    "matType": 1,
+                    "enhanceAlpha": 0.4
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_25",
+                        "position": [150, 100, 0],
+                        "cycleTime": [0.437977, 0.689885],
+                        "emissionRate": 20,
+                        "cycle": false,
+                        "liveTime": {"type": "random", "value": [0.1, 0.2]},
+                        "angle": {"type": "fixed", "value": 0},
+                        "width": {"type": "fixed", "value": 500},
+                        "height": {"type": "fixed", "value": 50},
+                        "velocity": {"type": "fixed", "value": 2000},
+                        "boxSize": [0, 30, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Suction",
+                        "name": "Affector_44",
+                        "suction": {"type": "fixed", "value": 164},
+                        "suctionPos": [1000, 100, 0]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_11",
+                "particleQuota": 20,
+                "position": [-50, -100, 0],
+                "axis": [0, 0, 1],
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "trail_238",
+                    "matType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_26",
+                        "position": [150, 100, 0],
+                        "cycleTime": [0.437977, 0.687023],
+                        "emissionRate": 30,
+                        "cycle": false,
+                        "liveTime": {"type": "random", "value": [0.1, 0.2]},
+                        "angle": {"type": "fixed", "value": 0},
+                        "width": {"type": "fixed", "value": 20},
+                        "height": {"type": "fixed", "value": 500},
+                        "velocity": {"type": "fixed", "value": 2200},
+                        "boxSize": [0, 30, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_45",
+                        "rotationStartAngle": {"type": "fixed", "value": 90}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_46",
+                        "colors": [0, 1, 1, 1, 0, 0.09, 1, 1, 1, 0.724, 0.33, 1, 1, 1, 0.977, 0.7, 1, 1, 1, 0.595, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "Suction",
+                        "name": "Affector_47",
+                        "suction": {"type": "fixed", "value": 164},
+                        "suctionPos": [1000, 100, 0]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_17",
+                "particleQuota": 4,
+                "position": [60, 0, 0],
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "trail_111",
+                    "matType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_30",
+                        "position": [50, 0, 0],
+                        "cycleTime": [0.466603, 3],
+                        "emissionRate": 2,
+                        "forceEmit": true,
+                        "cycle": false,
+                        "liveTime": {"type": "fixed", "value": 0.2},
+                        "angle": {"type": "fixed", "value": 0},
+                        "width": {"type": "fixed", "value": 200},
+                        "height": {"type": "fixed", "value": 180},
+                        "velocity": {"type": "fixed", "value": 0}
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_0",
+                        "rotationStartAngle": {"type": "fixed", "value": 90}
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_30",
+                        "scaleX": {"type": "curved", "value": [0, 0, 0.2, 40, 1, 60]},
+                        "scaleY": {"type": "curved", "value": [0, 0, 0.2, 400, 1, 600]},
+                        "fixed": true
                     }
                 ]
             }
