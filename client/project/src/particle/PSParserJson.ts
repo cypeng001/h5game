@@ -40,7 +40,7 @@ class PSParserJson {
                     PSParserJson.parseRenderer(technique, val);
                 }
                 break;
-                case "Emitter": {
+                case "Emitters": {
                     var emitters = val;
                     for(let i in emitters) {
                         PSParserJson.parseEmitter(technique, emitters[i]);
