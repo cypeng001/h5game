@@ -50,6 +50,7 @@ def spValFunc_pf_pos(spDatas):
         ret += spDatas[index]
         if index < len(spDatas) - 1:
             ret += " "
+    ret += "]"
     ret = ret.replace(" ", ", ")
     return ret
 
@@ -719,7 +720,8 @@ def exportJson(particleSystem, fileName):
     
 if __name__ == '__main__':
     fileName = sys.argv[1]
-    xmlPath = fileName + ".xml"
+    srcDir = sys.argv[2]
+    xmlPath = srcDir + fileName + ".xml"
     particleSystem = parseXml(xmlPath)
     exportPath = fileName + ".json"
     exportJson(particleSystem, fileName)
