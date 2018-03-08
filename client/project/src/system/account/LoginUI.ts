@@ -1,8 +1,8 @@
-/**
- * Created by egret on 2016/1/26.
- */
-
 class LoginUI extends eui.Component{
+    private btnLogin: eui.Button;
+    private btnRegister: eui.Button;
+    private editUserName: eui.TextInput;
+    private editPassword: eui.TextInput;
 
     constructor() {
         super();
@@ -18,12 +18,13 @@ class LoginUI extends eui.Component{
             var password = this.editPassword.text;
         
             this.requestLogin(username, password);
+            
         }, this );
 
         this.btnRegister.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
             console.log("LoginUI.btnRegister TOUCH_TAP"); 
 
-            this.dispatchEventWith(GameEvents.EVT_ACCOUNT_SWITCH_LAYER, false, AccountLayerType.ALT_Register);
+            GameApp.getInstance().switchAccountSceneLayer(AccountLayerType.ALT_Register);
         }, this );
 
         var username = egret.localStorage.getItem("username");
@@ -39,7 +40,7 @@ class LoginUI extends eui.Component{
 
          h5game.PhpUtil.post(window["SERVER_CNF"]["PLAT_URL"] + "login", {username: username, password: password}, 
             (data) => {
-                console.log("testPhp data:", data);
+                console.log("requestLogin data:", data);
 
                 if (data.code === 501) {
                     alert('Username or password is invalid!');
@@ -61,13 +62,8 @@ class LoginUI extends eui.Component{
                 LoginLogic.authEntry();
             },
             (event) => {
-                console.log("testPhp error event:", event);
+                console.log("requestLogin error event:", event);
             },
             this);
     }
-
-    private btnLogin: eui.Button;
-    private btnRegister: eui.Button;
-    private editUserName: eui.TextInput;
-    private editPassword: eui.TextInput;
 }

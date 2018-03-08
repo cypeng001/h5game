@@ -8,10 +8,8 @@
 class SceneMgr extends egret.EventDispatcher {
     private static _instance: SceneMgr = null;
     
-    public static getInstance(): SceneMgr
-    {
-        if(!this._instance)
-        {
+    public static getInstance(): SceneMgr {
+        if(!this._instance) {
             this._instance = new SceneMgr();
         }
         return this._instance;
@@ -23,8 +21,7 @@ class SceneMgr extends egret.EventDispatcher {
     private _loading_scene: LoadingScene = null;
     private _root: egret.DisplayObjectContainer = null;
 
-    public constructor()
-    {
+    public constructor() {
         super();
 
         this._scene_array = {};
@@ -49,33 +46,26 @@ class SceneMgr extends egret.EventDispatcher {
         }, this );
     }
 
-    public initRoot(root: egret.DisplayObjectContainer): void
-    {
+    public initRoot(root: egret.DisplayObjectContainer): void {
         this._root = root;
     }
 
-    public getRunningScene(): Scene
-    {
+    public getRunningScene(): Scene {
         return this._running_scene;
     }
 
-    public update(interval: number): void
-    {
-        if(this._load_scene_data)
-        {
+    public update(interval: number): void {
+        if(this._load_scene_data) {
             var load_scene_data = this._load_scene_data;
             this._load_scene_data = null;
 
-            switch(load_scene_data.op)
-            {
-                case SceneMgrOP.SMOP_SwitchScene:
-                {
+            switch(load_scene_data.op) {
+                case SceneMgrOP.SMOP_SwitchScene: {
                     this._switchScene(load_scene_data.scene_type, 
                         load_scene_data.scene_data);
                     break;
                 }
-                case SceneMgrOP.SMOP_LoadScene:
-                {
+                case SceneMgrOP.SMOP_LoadScene: {
                     this._loadScene(load_scene_data.scene_type, 
                         load_scene_data.scene_data,
                         load_scene_data.groupList,
@@ -86,25 +76,20 @@ class SceneMgr extends egret.EventDispatcher {
             }
         }
 
-        if(this._running_scene && this._running_scene.parent)
-        {
+        if(this._running_scene && this._running_scene.parent) {
             this._running_scene.update(interval);
         }
     }
 
-    public _switchScene(scene_type: number, scene_data: any): void
-    {
+    public _switchScene(scene_type: number, scene_data: any): void {
         let scene = this._scene_array[scene_type];
-        if(!scene)
-        {
+        if(!scene) {
             console.error("_switchScene invalid scene_type", scene_type);
             return;
         }
 
-        if(this._running_scene)
-        {
-            if(this._running_scene.parent)
-            {
+        if(this._running_scene) {
+            if(this._running_scene.parent) {
                 this._root.removeChild(this._running_scene);
             }
             this._running_scene = null;
@@ -115,9 +100,7 @@ class SceneMgr extends egret.EventDispatcher {
         this._root.addChild(scene);
     }
 
-    //切换场景
-    public switchScene(scene_type: number, scene_data: any): void
-    {
+    public switchScene(scene_type: number, scene_data: any): void {
         this._load_scene_data = {
             op: SceneMgrOP.SMOP_SwitchScene,
             scene_type: scene_type,
@@ -128,16 +111,13 @@ class SceneMgr extends egret.EventDispatcher {
     public _loadScene(scene_type: number, scene_data: any, groupList: string[], fileList: string[]): void
     {
         let scene = this._scene_array[scene_type];
-        if(!scene)
-        {
+        if(!scene) {
             console.error("_loadScene invalid scene_type", scene_type);
             return;
         }
 
-        if(this._running_scene)
-        {
-            if(this._running_scene.parent)
-            {
+        if(this._running_scene) {
+            if(this._running_scene.parent) {
                 this._root.removeChild(this._running_scene);
             }
             this._running_scene = null;
@@ -153,9 +133,7 @@ class SceneMgr extends egret.EventDispatcher {
         this._loading_scene.load(groupList, fileList, context_data);
     }
 
-    //加载场景
-    public loadScene(scene_type: number, scene_data: any, groupList: string[], fileList: string[]): void
-    {
+    public loadScene(scene_type: number, scene_data: any, groupList: string[], fileList: string[]): void {
         this._load_scene_data = {
             op: SceneMgrOP.SMOP_LoadScene,
             scene_type: scene_type,
@@ -163,5 +141,14 @@ class SceneMgr extends egret.EventDispatcher {
             groupList: groupList,
             fileList: fileList
         }
+    }
+
+    public switchAccountSceneLayer(type: number): void {
+        if(this._running_scene.getSceneType() != SceneType.ST_AccountScene) {
+            console.warn("switchAccountSceneLayer this._running_scene.getSceneType() != SceneType.ST_AccountScene)");
+            return;
+        }
+
+        (<AccountScene>this._running_scene).switchLayer(type);
     }
 }

@@ -16,6 +16,7 @@
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
+		"resource/custom_skins/createRoleUISkin.exml",
 		"resource/eui_skins/ButtonSkin.exml",
 		"resource/custom_skins/loginUISkin.exml",
 		"resource/custom_skins/progressbar/mainProgressBarSkin1.exml",

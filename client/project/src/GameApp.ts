@@ -1,10 +1,8 @@
 class GameApp {
     private static _instance: GameApp = null;
     
-    public static getInstance(): GameApp
-    {
-        if(!this._instance)
-        {
+    public static getInstance(): GameApp {
+        if(!this._instance) {
             this._instance = new GameApp();
         }
         return this._instance;
@@ -16,8 +14,7 @@ class GameApp {
 
     }
 
-    public init(): void
-    {
+    public init(): void {
         if(this._init) {
             console.error("GameApp already initialize");
             return;
@@ -32,22 +29,17 @@ class GameApp {
         this.initMsgHandler();
     }
 
-    public update(interval: number): void
-    {
-        if(!this._init)
-        {
+    public update(interval: number): void {
+        if(!this._init) {
             return;
         }
 
         SceneMgr.getInstance().update(interval);
     }
 
-    public loadScene(scene_type: number, scene_data: any)
-    {
-        switch(scene_type)
-        {
-            case SceneType.ST_MainScene:
-            {
+    public loadScene(scene_type: number, scene_data: any) {
+        switch(scene_type) {
+            case SceneType.ST_MainScene: {
                 var groupList = [
                     "main"
                 ];
@@ -55,29 +47,30 @@ class GameApp {
                 SceneMgr.getInstance().loadScene(scene_type, scene_data, groupList, fileList);
                 break;
             }
-            case SceneType.ST_FbScene:
-            {
+            case SceneType.ST_FbScene: {
                 //todo:
                 break;
             }
-            default:
-            {
+            default: {
                 console.error("GaemApp_loadScene invalid scene_type", scene_type);
                 break;
             }
         }
     }
 
-    private onConnect(): void
-    {
+    public switchAccountSceneLayer(type: number): void {
+        SceneMgr.getInstance().switchAccountSceneLayer(type);
     }
 
-    private onDisconnect(): void
-    {
+    private onConnect(): void {
+    }
+
+    private onDisconnect(): void {
     }
 
     private initMsgHandler(): void {
         LoginMsgHdlr.init();
+        RoleMsgHdlr.init();
         AreaMsgHdlr.init();
         EntryMsgHdlr.init();
         GateMsgHdlr.init();

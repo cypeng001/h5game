@@ -1,3 +1,5 @@
+declare class createRoleUISkin extends eui.Skin{
+}
 declare class loginUISkin extends eui.Skin{
 }
 declare class mainUISkin extends eui.Skin{

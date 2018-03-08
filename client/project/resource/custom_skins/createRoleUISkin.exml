@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<e:Skin class="createRoleUISkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Button id="btnCreate" label="创建" x="235" y="654" anchorOffsetX="0" width="170" height="53">
+	</e:Button>
+	<e:TextInput id="editRoleName" width="218" height="56" x="211" y="579" anchorOffsetX="0" anchorOffsetY="0"/>
+	<e:Button id="btnProfession1" label="" x="121" y="321" anchorOffsetX="0" width="120" anchorOffsetY="0" height="88">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="resource/headicon/1001.png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="btnProfession2" label="" x="376" y="287" anchorOffsetX="0" width="106" anchorOffsetY="0" height="132">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="resource/headicon/1002.png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+</e:Skin>

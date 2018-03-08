@@ -56,22 +56,44 @@ class LoginLogic {
                 return;
             }
 
-            //LoginLogic.loadAreaResource();
-            LoginLogic.enterScene();
+            if(!response.player || response.player.id <= 0) {
+                GameApp.getInstance().switchAccountSceneLayer(AccountLayerType.ALT_CreateRole);
+            }
+            else {
+                LoginLogic.afterLogin(response);
+            }
         });
     }
 
-    /*
-    private static loadAreaResource(): void {
-        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_loadAreaResource, null, (response: any) => {
-            LoginLogic.enterScene();
-        });
+    private static afterLogin(data: any): void {
+        var gameData = h5game.IntfcProxy.getGameData();
+        var playerData = data.player;
+        gameData.playerData = playerData;
+
+        LoginLogic.enterScene();
     }
-    */
 
     private static enterScene(): void {
         h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_PLAYER_enterScene, null, (response: any) => {
             GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
+        });
+    }
+
+    public static createRole(name: string, roleId: number): void {
+        h5game.IntfcProxy.getNetMsgHdlr().requestMsg(h5game.INetMsgReq.INMR_ROLE_createPlayer, 
+            {name: name, roleId: roleId}, 
+            (response: any) => {
+
+            if(response.code == 500) {
+                alert("The name already exists!");
+                return;
+            }
+
+            if (!response.player || response.player.id <= 0) {
+                GameApp.getInstance().switchAccountSceneLayer(AccountLayerType.ALT_Login);
+            } else {
+                LoginLogic.afterLogin(response);
+            }
         });
     }
 }
