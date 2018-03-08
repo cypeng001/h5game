@@ -1,0 +1,1 @@
+rsync -avzr --delete ./bin-release/web/dev/ cypeng@120.79.212.148::egret_h5game_dev
