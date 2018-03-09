@@ -60,6 +60,7 @@ class RegisterUI extends eui.Component{
             },
             (event) => {
                 console.log("requestRegister error event:", event);
+                alert("url error");
             },
             this);
     }

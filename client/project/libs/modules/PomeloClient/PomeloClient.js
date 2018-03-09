@@ -989,7 +989,11 @@
             console.error('socket error: ', event);
         };
         var onclose = function (event) {
+            /*
+            edit by chenyingpeng
             self.emit('close', event);
+            */
+            self.emit('close', event, url); 
             console.error('socket close: ', event);
         };
         this.socket = new WebSocket(url);

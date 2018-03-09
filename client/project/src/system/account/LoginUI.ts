@@ -63,6 +63,7 @@ class LoginUI extends eui.Component{
             },
             (event) => {
                 console.log("requestLogin error event:", event);
+                alert("url error");
             },
             this);
     }
