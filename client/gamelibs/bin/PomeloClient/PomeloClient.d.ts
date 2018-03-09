@@ -8,7 +8,11 @@ declare class Pomelo {
     request(route:string, msg:any, cb: (response:any)=>void):void;
     notify(route:string, msg:any):void;
 
-    on(route:string, cb: (response:any)=>void):void;
+    on(route:string, cb: (response:any,param:any)=>void):void;
+
+    off(route:string, cb: (response:any)=>void):void;
+    removeListener(route:string):void;
+    removeAllListeners():void;
 
     disconnect();
 }
