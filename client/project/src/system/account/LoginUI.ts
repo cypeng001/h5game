@@ -7,7 +7,7 @@ class LoginUI extends eui.Component{
     constructor() {
         super();
         this.addEventListener( eui.UIEvent.COMPLETE, this.uiCompHandler, this );
-        this.skinName = "resource/custom_skins/loginUISkin.exml";
+        this.skinName = "resource/custom_skins/loginUISkin2.exml";
     }
 
     private uiCompHandler():void {
