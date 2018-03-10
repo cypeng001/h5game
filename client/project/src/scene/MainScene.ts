@@ -62,6 +62,9 @@ class MainScene extends Scene
 
         this._mainUI = new MainUI();
         this.addChild(this._mainUI);
+
+        var sound:egret.Sound = RES.getRes("sound_104_mp3");
+        sound.play();
     }
 
     //override

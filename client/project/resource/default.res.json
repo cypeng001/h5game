@@ -27,6 +27,10 @@
         {
 			"keys": "particle_json,particle_seq_273_png",
 			"name": "particle"
+		},
+        {
+			"keys": "sound_104_mp3",
+			"name": "sound"
 		}
 	],
 	"resources": [
@@ -204,6 +208,11 @@
 			"url": "particle/seq_273.png",
 			"type": "image",
 			"name": "particle_seq_273_png"
+		},
+        {
+			"url": "sound/104.mp3",
+			"type": "sound",
+			"name": "sound_104_mp3"
 		}
 	]
 }
