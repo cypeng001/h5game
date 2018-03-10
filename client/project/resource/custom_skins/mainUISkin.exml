@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="mainUISkin" width="640" height="1066" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="mainUISkin" width="640" height="924" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Group id="leftTopGrp" width="307" height="134" x="3.5" y="12" anchorOffsetX="0" anchorOffsetY="0">
 		<e:Image width="293" height="71" x="14" y="31.5" anchorOffsetX="0" anchorOffsetY="0" source="ui_main1#Renwutouxiangkuang"/>
 		<e:Image id="roleImg" width="120" height="88" x="-12" y="7" anchorOffsetX="0" anchorOffsetY="0" source="resource/headicon/1001.png"/>

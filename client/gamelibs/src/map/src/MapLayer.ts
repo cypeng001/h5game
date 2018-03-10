@@ -3,7 +3,7 @@ namespace h5game
 
 export class MapLayer extends egret.DisplayObjectContainer {
     protected static DEF_LOGIC_WIDTH: number = 640;
-    protected static DEF_LOGIC_HEIGHT: number = 1066;
+    protected static DEF_LOGIC_HEIGHT: number = 924;
 
     protected _entityLayer: egret.DisplayObjectContainer = null;
     protected _mapTileLayer: MapTileLayer = null;

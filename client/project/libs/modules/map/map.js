@@ -448,7 +448,7 @@ var h5game;
             }
         };
         MapLayer.DEF_LOGIC_WIDTH = 640;
-        MapLayer.DEF_LOGIC_HEIGHT = 1066;
+        MapLayer.DEF_LOGIC_HEIGHT = 924;
         return MapLayer;
     }(egret.DisplayObjectContainer));
     h5game.MapLayer = MapLayer;
