@@ -83,6 +83,7 @@ var h5game;
             _this._aoiPlayers = {};
             _this._monsters = {};
             _this._npcs = {};
+            _this._transports = {};
             _this._lastRefreshPt = [0, 0];
             _this._mapAreas = {};
             _this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.onTouchBegin, _this);
@@ -110,7 +111,22 @@ var h5game;
             this.addChild(this._entityLayer);
             this._numLayer = new egret.DisplayObjectContainer();
             this.addChild(this._numLayer);
+            this.loadStaticObject();
             this.initMapArea();
+        };
+        MapLayer.prototype.loadStaticObject = function () {
+            if (this._map_cnf.npc_list) {
+                for (var k in this._map_cnf.npc_list) {
+                    var npcData = this._map_cnf.npc_list[k];
+                    this.createNpc(npcData);
+                }
+            }
+            if (this._map_cnf.transport_list) {
+                for (var k in this._map_cnf.transport_list) {
+                    var transportData = this._map_cnf.transport_list[k];
+                    this.createTransport(transportData);
+                }
+            }
         };
         MapLayer.prototype.initMapArea = function () {
             var col = Math.ceil(this._width / h5game.MapArea.DEF_SIZE);
@@ -193,6 +209,10 @@ var h5game;
             for (var k in this._npcs) {
                 var npc = this._npcs[k];
                 npc.update(interval);
+            }
+            for (var k in this._transports) {
+                var transport = this._transports[k];
+                transport.update(interval);
             }
             this.updateCamera(this._curPlayer.x, this._curPlayer.y);
             this._mapTileLayer.update(interval);
@@ -343,6 +363,31 @@ var h5game;
                 return null;
             }
             return entity;
+        };
+        MapLayer.prototype.createTransport = function (data) {
+            if (this._transports[data.entityId]) {
+                console.warn("createTransport transport already exist", JSON.stringify(data));
+                return;
+            }
+            var transport = new h5game.Transport();
+            transport.init(data, this);
+            this._entityLayer.addChild(transport);
+            this._transports[data.entityId] = transport;
+            return transport;
+        };
+        MapLayer.prototype.removeTransport = function (entityId) {
+            var transport = this.getTransport(entityId);
+            if (!transport) {
+                return;
+            }
+            transport.release();
+            if (transport.parent) {
+                transport.parent.removeChild(transport);
+            }
+            delete this._transports[entityId];
+        };
+        MapLayer.prototype.getTransport = function (entityId) {
+            return this._transports[entityId];
         };
         MapLayer.prototype.createNum = function (x, y, status, value) {
             var container = new egret.DisplayObjectContainer;

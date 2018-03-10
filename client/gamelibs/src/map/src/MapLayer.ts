@@ -23,6 +23,7 @@ export class MapLayer extends egret.DisplayObjectContainer {
     protected _aoiPlayers: {[key: number]: Player} = {};
     protected _monsters: {[key: number]: Monster} = {};
     protected _npcs: {[key: number]: Npc} = {};
+    protected _transports: {[key: number]: Transport} = {};
     protected _lastRefreshPt: [number, number] = [0, 0];
 
     protected _mapAreas: {[key: number]: MapArea} = {};
@@ -61,7 +62,25 @@ export class MapLayer extends egret.DisplayObjectContainer {
         this._numLayer = new egret.DisplayObjectContainer();
         this.addChild(this._numLayer);
 
+        this.loadStaticObject();
+
         this.initMapArea();
+    }
+
+    private loadStaticObject(): void {
+        if(this._map_cnf.npc_list) {
+            for(let k in this._map_cnf.npc_list) {
+                var npcData = this._map_cnf.npc_list[k];
+                this.createNpc(npcData);
+            }
+        }
+
+        if(this._map_cnf.transport_list) {
+            for(let k in this._map_cnf.transport_list) {
+                var transportData = this._map_cnf.transport_list[k];
+                this.createTransport(transportData);
+            }
+        }
     }
 
     private initMapArea(): void {
@@ -160,6 +179,11 @@ export class MapLayer extends egret.DisplayObjectContainer {
         for(var k in this._npcs) {
             var npc = this._npcs[k];
             npc.update(interval);
+        }
+
+        for(var k in this._transports) {
+            var transport = this._transports[k];
+            transport.update(interval);
         }
 
         this.updateCamera(this._curPlayer.x, this._curPlayer.y);
@@ -363,6 +387,40 @@ export class MapLayer extends egret.DisplayObjectContainer {
         }
 
         return <Actor>entity;
+    }
+
+    public createTransport(data: any): Transport {
+        if(this._transports[data.entityId]) {
+            console.warn("createTransport transport already exist", JSON.stringify(data));
+            return;
+        }
+
+        var transport = new Transport();
+        transport.init(data, this);
+        this._entityLayer.addChild(transport);
+
+        this._transports[data.entityId] = transport;
+
+        return transport;
+    }
+
+    public removeTransport(entityId: number): void {
+        var transport = this.getTransport(entityId);
+        if(!transport) {
+            return;
+        }
+
+        transport.release();
+
+        if(transport.parent) {
+            transport.parent.removeChild(transport);
+        }
+
+        delete this._transports[entityId];
+    }
+
+    public getTransport(entityId: number): Transport {
+        return this._transports[entityId];
     }
 
     public createNum(x: number, y: number, status: number, value: number): void {
