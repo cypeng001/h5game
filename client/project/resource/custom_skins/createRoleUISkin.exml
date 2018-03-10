@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="createRoleUISkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="createRoleUISkin" width="640" height="1066" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Button id="btnCreate" label="创建" x="235" y="654" anchorOffsetX="0" width="170" height="53">
 	</e:Button>
 	<e:TextInput id="editRoleName" width="218" height="56" x="211" y="579" anchorOffsetX="0" anchorOffsetY="0"/>

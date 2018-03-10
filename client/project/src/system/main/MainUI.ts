@@ -5,6 +5,7 @@ class MainUI extends PanelUILayer {
     private socialBtn: eui.Button;
     private roleImg: eui.Image;
     private hpBar: eui.ProgressBar;
+    private bottomGrp: eui.Group;
 
     constructor() {
         super();
@@ -22,6 +23,9 @@ class MainUI extends PanelUILayer {
 
         var gameData = h5game.IntfcProxy.getGameData();
         this.refreshHpBar(gameData.playerData.hp, gameData.playerData.maxHp);
+
+        //hide bottomGrp
+        this.bottomGrp.visible = false;
     }
 
     public onEnter(): void
