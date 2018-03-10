@@ -64,7 +64,29 @@ def spValFunc_amin_type(spDatas):
         return "true"
     else:
         return "false"
-                
+
+def spValFunc_billboard_origin(spDatas):    
+    if spDatas[0] == "top_left":
+        return "0"
+    elif spDatas[0] == "top_center":
+        return "1"
+    elif spDatas[0] == "top_right":
+        return "2"
+    elif spDatas[0] == "center_left":
+        return "3"
+    elif spDatas[0] == "center":
+        return "4"
+    elif spDatas[0] == "center_right":
+        return "5"
+    elif spDatas[0] == "bottom_left":
+        return "6"
+    elif spDatas[0] == "bottom_center":
+        return "7"
+    elif spDatas[0] == "bottom_right":
+        return "8"
+    else:
+        return "4"
+    
 class AttrDef:
     def __init__(self, key, attrType, outputKey, spValFunc = None):
         self.key = key
@@ -82,6 +104,10 @@ RENDERER_BASE_ATTR_DEF = [
     AttrDef("texture_name", ATTR_TYPE_STR, "textureName"),
     AttrDef("mat_type", ATTR_TYPE_INT, "matType"),
     AttrDef("add_power_ratio", ATTR_TYPE_FLOAT, "enhanceAlpha"),
+]
+
+RENDERER_BILLBOARD_ATTR_DEF = [
+    AttrDef("billboard_origin", ATTR_TYPE_SP, "originType", spValFunc_billboard_origin),
 ]
 
 EMITTER_BASE_ATTR_DEF = [
@@ -247,6 +273,8 @@ TECHNIQUE_ATTR_DEF = [
     AttrDef("tech_enable", ATTR_TYPE_BOOL, "enable"),
     AttrDef("is_local", ATTR_TYPE_BOOL, "local"),
 ]
+
+TECHNIQUE_ENABLE_ATTR_DEF = AttrDef("tech_enable", ATTR_TYPE_BOOL, "enable")
 
 PARTICLESYSTEM_ATTR_DEF = [
     AttrDef("cycle_total_time", ATTR_TYPE_FLOAT, "cycleTotalTime"),
@@ -437,25 +465,34 @@ def parseDynAttr(dynAttrElem, attr):
 def parseRenderer(rendererElem, renderer):
     renderer.type = rendererElem.getAttribute("type")
     
-    for index in range(len(RENDERER_BASE_ATTR_DEF)):
-        attrDef = RENDERER_BASE_ATTR_DEF[index]
-        if(attrDef.attrType == ATTR_TYPE_DYN):
-            dynAttrElems = rendererElem.getElementsByTagName("dyn")
-            for dynAttrElemIdx in range(len(dynAttrElems)):
-                dynAttrElem = dynAttrElems[dynAttrElemIdx]
-                if dynAttrElem.getAttribute("type") == attrDef.key:
+    attrDefList = []
+    attrDefList.append(RENDERER_BASE_ATTR_DEF)
+    
+    if renderer.type == "Billboard":
+        attrDefList.append(RENDERER_BILLBOARD_ATTR_DEF)
+        
+    for k in range(len(attrDefList)):
+        adl = attrDefList[k]
+        
+        for index in range(len(adl)):
+            attrDef = adl[index]
+            if(attrDef.attrType == ATTR_TYPE_DYN):
+                dynAttrElems = rendererElem.getElementsByTagName("dyn")
+                for dynAttrElemIdx in range(len(dynAttrElems)):
+                    dynAttrElem = dynAttrElems[dynAttrElemIdx]
+                    if dynAttrElem.getAttribute("type") == attrDef.key:
+                        attr = renderer.createAttr(attrDef)
+                        parseDynAttr(dynAttrElem, attr)
+                        break
+            else:
+                attrElems = rendererElem.getElementsByTagName(attrDef.key)
+                if(len(attrElems) > 0):
                     attr = renderer.createAttr(attrDef)
-                    parseDynAttr(dynAttrElem, attr)
-                    break
-        else:
-            attrElems = rendererElem.getElementsByTagName(attrDef.key)
-            if(len(attrElems) > 0):
-                attr = renderer.createAttr(attrDef)
-                if attrDef.attrType == ATTR_TYPE_SP:
-                    for aei in range(len(attrElems)):
-                        attr.spDatas.append(attrElems[aei].childNodes[0].data)
-                else:
-                    attr.val = attrElems[0].childNodes[0].data
+                    if attrDef.attrType == ATTR_TYPE_SP:
+                        for aei in range(len(attrElems)):
+                            attr.spDatas.append(attrElems[aei].childNodes[0].data)
+                    else:
+                        attr.val = attrElems[0].childNodes[0].data
             
 
 def parseEmitter(emitterElem, emitter):
@@ -551,6 +588,11 @@ def parseAffector(affectorElem, affector):
                 
     
 def parseTechnique(techniqueElem, technique):
+    '''
+    attr = technique.createAttr(TECHNIQUE_ENABLE_ATTR_DEF)
+    attr.val = "true"
+    '''
+        
     for index in range(len(TECHNIQUE_ATTR_DEF)):
         attrDef = TECHNIQUE_ATTR_DEF[index]
         if(attrDef.attrType == ATTR_TYPE_DYN):
@@ -615,7 +657,11 @@ def parseParticleSystem(particleSystemElem, particleSystem):
     techniqueElemList = particleSystemElem.getElementsByTagName("Technique")
     for techniqueElem in techniqueElemList:
         rendererElem = techniqueElem.getElementsByTagName("render")[0]
-        if not rendererElem or rendererElem.getAttribute("type") == "Entity":
+        if not rendererElem or rendererElem.getAttribute("type") != "Billboard":
+            rendererType = "NONE"
+            if rendererElem:
+                rendererType = rendererElem.getAttribute("type")
+            print("[WARNING]invalid renderer:" + rendererType)
             continue
         
         technique = particleSystem.createTechnique()
@@ -727,6 +773,8 @@ if __name__ == '__main__':
     fileName = sys.argv[1]
     srcDir = sys.argv[2]
     xmlPath = srcDir + fileName + ".xml"
+    print("start convert:" + xmlPath)
     particleSystem = parseXml(xmlPath)
     exportPath = fileName + ".json"
     exportJson(particleSystem, fileName)
+    print("finish convert:" + exportPath)
