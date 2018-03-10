@@ -2058,6 +2058,159 @@
             }
         ]
     },
+    "cj_dengluzhuye": {
+        "cycle": true,
+        "bound": [-64, -64, 64, 64],
+        "Techniques": [
+            {
+                "name": "Technique_2",
+                "particleQuota": 4,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_070_1",
+                    "matType": 1,
+                    "enhanceAlpha": 0.8
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_2",
+                        "direction": [-0.707107, -0.707107, 0],
+                        "position": [600, 200, 0],
+                        "emissionRate": 2,
+                        "liveTime": {"type": "random", "value": [3, 4]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "size": {"type": "random", "value": [20, 100]},
+                        "velocity": {"type": "random", "value": [200, 300]},
+                        "boxSize": [100, 50, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_6",
+                        "scaleSize": {"type": "random", "value": [20, 40]}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_12",
+                        "colors": [0, 1, 1, 1, 0, 0.02, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.83, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_13",
+                        "forceVector": [-1, 0, 0],
+                        "force": {"type": "random", "value": [50, 100]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_14",
+                        "maxDeviation": [0.15, 0.1, 0.1]
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_15",
+                        "rotationSpeed": {"type": "random", "value": [-200, 240]},
+                        "rotationStartAngle": {"type": "random", "value": [0, 360]}
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_16",
+                        "rotationSpeed": {"type": "fixed", "value": 4},
+                        "rotationVec": [0, 0, -1]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_1",
+                "particleQuota": 4,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_070",
+                    "matType": 1,
+                    "enhanceAlpha": 0.9
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_1",
+                        "direction": [-0.83205, -0.5547, 0],
+                        "position": [600, 200, 0],
+                        "emissionRate": 1,
+                        "liveTime": {"type": "random", "value": [4, 4]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "width": {"type": "random", "value": [20, 50]},
+                        "height": {"type": "random", "value": [50, 120]},
+                        "velocity": {"type": "random", "value": [200, 400]},
+                        "boxSize": [100, 50, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_0",
+                        "rotationSpeed": {"type": "random", "value": [-180, 240]},
+                        "rotationStartAngle": {"type": "random", "value": [0, 360]}
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_10",
+                        "scaleSize": {"type": "fixed", "value": -5}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_8",
+                        "colors": [0, 1, 1, 1, 0, 0.04, 1, 1, 1, 1, 0.91, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_4",
+                        "forceVector": [-1, 0, 0],
+                        "force": {"type": "random", "value": [50, 120]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_5",
+                        "maxDeviation": [-0.1, -0.1, 0.1]
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_7",
+                        "rotationSpeed": {"type": "fixed", "value": 5},
+                        "rotationVec": [0, 0, -1]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_0",
+                "enable": false,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "glow057",
+                    "matType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_0",
+                        "direction": [0, -1, 0],
+                        "emissionRate": 5,
+                        "liveTime": {"type": "random", "value": [2, 3]},
+                        "size": {"type": "random", "value": [200, 400]},
+                        "velocity": {"type": "fixed", "value": 10},
+                        "boxSize": [400, 400, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_1",
+                        "colors": [0, 1, 1, 1, 0, 0.3, 1, 1, 1, 0.199, 0.69, 1, 1, 1, 0.115, 1, 1, 1, 1, 0]
+                    }
+                ]
+            }
+        ]
+    },
     "scene_chuansongmen1": {
         "cycle": true,
         "bound": [172.071, -349.286, 290.643, -320.714],
