@@ -623,6 +623,7 @@ var h5game;
             this.initNameLabel();
             this.initHpBar();
             this.initMpBar();
+            this.initTitle();
             this.standAct();
             this.setTouchEnabled(true);
         };
@@ -633,6 +634,12 @@ var h5game;
             this._sprite = h5game.IntfcProxy.getMCFtry().create("player_10002");
             //this._sprite = IntfcProxy.getMCFtry().create("player_10001");
             this.addChild(this._sprite);
+        };
+        Player.prototype.initTitle = function () {
+            this._titleSprite = h5game.IntfcProxy.getPSFtry().create("ui_ch_baihuazhengyan");
+            this._titleSprite.y = -180;
+            this._titleSprite.scaleX = this._titleSprite.scaleY = 0.7;
+            this.addChild(this._titleSprite);
         };
         Player.prototype.moveTo = function (x, y) {
             _super.prototype.moveTo.call(this, x, y);

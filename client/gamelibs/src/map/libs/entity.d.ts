@@ -146,11 +146,13 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class Player extends Actor {
+        protected _titleSprite: egret.DisplayObject;
         constructor();
         readonly entityType: number;
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
+        protected initTitle(): void;
         moveTo(x: number, y: number): void;
         protected onTouchTab(event: egret.TouchEvent): void;
     }
