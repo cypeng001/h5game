@@ -28,6 +28,10 @@ class LoginUI extends eui.Component{
         this.btnRegister.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
             console.log("LoginUI.btnRegister TOUCH_TAP"); 
 
+            if(window["TMP_TEST"]) {
+                return;
+            }
+
             GameApp.getInstance().switchAccountSceneLayer(AccountLayerType.ALT_Register);
         }, this );
 
