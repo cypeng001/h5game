@@ -14,11 +14,15 @@ class LoginUI extends eui.Component{
         console.log( "\t\tLoginUI uiCompHandler" );
 
         this.btnLogin.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
+            if(window["TMP_TEST"]) {
+                GameApp.getInstance().loadScene(SceneType.ST_MainScene, null);
+                return;
+            }
+            
             var username = this.editUserName.text;
             var password = this.editPassword.text;
         
             this.requestLogin(username, password);
-            
         }, this );
 
         this.btnRegister.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{

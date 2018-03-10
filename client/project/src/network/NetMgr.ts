@@ -64,6 +64,9 @@ class NetMgr extends egret.EventDispatcher {
     }
 
     public request(route: string, msg: any, callback: (response: any) => void): void {
+        if(window["TMP_TEST"]) {
+            return;
+        }
         this._pomelo.request(route, msg, function(response: any): void {
             callback(response);
         });
