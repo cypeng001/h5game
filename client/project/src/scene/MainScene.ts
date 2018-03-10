@@ -23,11 +23,13 @@ class MainScene extends Scene
         this.addChild(this._mapLayer);
 
         var mapId = 4;
-
         this._mapLayer.loadMap(mapId);
 
         var gameData = h5game.IntfcProxy.getGameData();
         this._mapLayer.initEntities(gameData.sceneData);
+
+        var fgPS = h5game.IntfcProxy.getPSFtry().create("cj_dengluzhuye");
+        this.addChild(fgPS);
 
         this._mainUI = new MainUI();
         this.addChild(this._mainUI);
