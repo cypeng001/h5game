@@ -147,7 +147,7 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class Player extends Actor {
-        protected _titleEffect: egret.DisplayObject;
+        protected _titleEff: egret.DisplayObject;
         constructor();
         readonly entityType: number;
         init(data: any, mapLayer: IMapLayer): void;

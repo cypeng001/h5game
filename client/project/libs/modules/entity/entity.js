@@ -637,10 +637,11 @@ var h5game;
             this.addChild(this._sprite);
         };
         Player.prototype.initTitle = function () {
-            this._titleEffect = h5game.IntfcProxy.getPSFtry().create("ui_ch_baihuazhengyan");
-            this._titleEffect.y = -180;
-            this._titleEffect.scaleX = this._titleEffect.scaleY = 0.7;
-            this.addChild(this._titleEffect);
+            //this._titleEff = IntfcProxy.getPSFtry().create("ui_ch_baihuazhengyan");
+            this._titleEff = h5game.IntfcProxy.getPSFtry().create("ui_ch_duzhangqiankun");
+            this._titleEff.y = -180;
+            this._titleEff.scaleX = this._titleEff.scaleY = 0.7;
+            this.addChild(this._titleEff);
         };
         Player.prototype.moveTo = function (x, y) {
             _super.prototype.moveTo.call(this, x, y);
