@@ -41,7 +41,7 @@ export class Entity extends egret.DisplayObjectContainer {
         this._mapLayer = null;
     }
 
-    protected update(interval: number): void {
+    public update(interval: number): void {
         
     }
 
