@@ -3,7 +3,6 @@
 */node-log.log
 logs/*.log
 !.gitignore
-node_modules/*
 .project
 .settings/
 **/*.svn
