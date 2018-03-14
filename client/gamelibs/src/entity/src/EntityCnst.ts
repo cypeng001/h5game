@@ -5,6 +5,7 @@ export enum EntityType {
     ET_PLAYER       = 1,
     ET_MONSTER      = 2,
     ET_NPC          = 3,
+    ET_TRANSPORT    = 4,
 };
 
 export enum ActorActionState {

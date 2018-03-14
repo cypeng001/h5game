@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<e:Skin class="roleUISkin" width="640" height="1136" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+<e:Skin class="roleUISkin" width="640" height="924" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Image width="462" height="361" x="83" y="99" anchorOffsetX="0" anchorOffsetY="0" source="ui_common1#Dikuangling" scale9Grid="81,37,47,10"/>
 	<e:Button id="btnClose" verticalCenter="-453" horizontalCenter="182.5" label="">
 		<e:skinName>

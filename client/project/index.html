@@ -13,7 +13,7 @@
     <style>
         html, body {
             -ms-touch-action: none;
-            background: #888888;
+            background: #000000;
             padding: 0;
             border: 0;
             margin: 0;
@@ -29,7 +29,7 @@
          data-scale-mode="showAll"
          data-frame-rate="30"
          data-content-width="640"
-         data-content-height="1136"
+         data-content-height="924"
          data-show-paint-rect="false"
          data-multi-fingered="2"
          data-show-fps="false" data-show-log="false"
@@ -37,11 +37,22 @@
     </div>
 <script>
 
+    
     var SERVER_CNF = {
            PLAT_URL: "http://localhost:3001/",
            GATE_HOST: "127.0.0.1",
            GATE_PORT: 3014,
     };
+    
+    /*
+    var SERVER_CNF = {
+           PLAT_URL: "http://120.79.212.148:3001/",
+           GATE_HOST: "120.79.212.148",
+           GATE_PORT: 3014,
+    };
+    */
+
+    var TMP_TEST = true;
 
     var loadScript = function (list, callback) {
         var loaded = 0;

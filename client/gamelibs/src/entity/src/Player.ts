@@ -2,6 +2,8 @@ namespace h5game
 {
 
 export class Player extends Actor {
+    protected _titleEff: egret.DisplayObject;
+
     constructor() {
         super();
     }
@@ -28,6 +30,7 @@ export class Player extends Actor {
         this.initNameLabel();
         this.initHpBar();
         this.initMpBar();
+        this.initTitle();
 
         this.standAct();
 
@@ -42,6 +45,14 @@ export class Player extends Actor {
         this._sprite = IntfcProxy.getMCFtry().create("player_10002");
         //this._sprite = IntfcProxy.getMCFtry().create("player_10001");
         this.addChild(this._sprite);
+    }
+
+    protected initTitle(): void {
+        //this._titleEff = IntfcProxy.getPSFtry().create("ui_ch_baihuazhengyan");
+        this._titleEff = IntfcProxy.getPSFtry().create("ui_ch_duzhangqiankun");
+        this._titleEff.y = -180;
+        this._titleEff.scaleX = this._titleEff.scaleY = 0.7;
+        this.addChild(this._titleEff);
     }
 
     public moveTo(x: number, y: number): void {

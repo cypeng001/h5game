@@ -119,7 +119,15 @@ class PSParserJson {
 
     private static parseRendererBillboardAttr(renderer: PSRenderer, attrType: string, attrVal: any): void {
         var rendererImpl = <PSRendererBillboard>renderer;
-        PSParserJson.parseRendererBaseAttr(renderer, attrType, attrVal);
+        switch(attrType) {
+            case "originType": {
+                rendererImpl.setOriginType(attrVal);
+            }
+            break;
+            default: {
+                PSParserJson.parseRendererBaseAttr(renderer, attrType, attrVal);
+            }
+        }
     }
 
     private static parseRenderer(technique: PSTechnique, data: any): void {

@@ -12,7 +12,7 @@ declare namespace h5game {
         readonly entityType: number;
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
-        protected update(interval: number): void;
+        update(interval: number): void;
         protected $setY(value: number): boolean;
     }
 }
@@ -86,6 +86,7 @@ declare namespace h5game {
         ET_PLAYER = 1,
         ET_MONSTER = 2,
         ET_NPC = 3,
+        ET_TRANSPORT = 4,
     }
     enum ActorActionState {
         AAS_STANDFRONT = 1,
@@ -146,11 +147,13 @@ declare namespace h5game {
 }
 declare namespace h5game {
     class Player extends Actor {
+        protected _titleEff: egret.DisplayObject;
         constructor();
         readonly entityType: number;
         init(data: any, mapLayer: IMapLayer): void;
         release(): void;
         protected initSprite(): void;
+        protected initTitle(): void;
         moveTo(x: number, y: number): void;
         protected onTouchTab(event: egret.TouchEvent): void;
     }
@@ -169,5 +172,15 @@ declare namespace h5game {
         protected enterState_ATTACK(next_st_data: any): void;
         protected exitState_ATTACK(next_state: number): void;
         protected updateState_ATTACK(interval: number): void;
+    }
+}
+declare namespace h5game {
+    class Transport extends Entity {
+        protected _effect: egret.DisplayObject;
+        constructor();
+        readonly entityType: number;
+        init(data: any, mapLayer: IMapLayer): void;
+        release(): void;
+        protected initRes(): void;
     }
 }

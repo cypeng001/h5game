@@ -26,6 +26,7 @@
         "src/Monster.ts",
         "src/Npc.ts",
         "src/Player.ts",
-        "src/ActorState.ts"
+        "src/ActorState.ts",
+        "src/Transport.ts"
 	]
 }

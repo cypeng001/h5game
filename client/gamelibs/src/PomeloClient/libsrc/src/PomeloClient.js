@@ -1168,11 +1168,7 @@
       console.error('socket error: ', event);
     };
     var onclose = function(event){
-      /*
-      edit by chenyingpeng
-      self.emit('close', event);
-      */
-      self.emit('close',event,url);
+      self.emit('close',event);
       console.error('socket close: ', event);
     };
 

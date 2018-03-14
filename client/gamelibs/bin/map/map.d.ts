@@ -44,12 +44,16 @@ declare namespace h5game {
         protected _npcs: {
             [key: number]: Npc;
         };
+        protected _transports: {
+            [key: number]: Transport;
+        };
         protected _lastRefreshPt: [number, number];
         protected _mapAreas: {
             [key: number]: MapArea;
         };
         constructor();
         loadMap(mapId: number): void;
+        private loadStaticObject();
         private initMapArea();
         protected addMapTileToMapArea(mapTile: MapTile): void;
         protected getMapAreaByPos(pos_x: number, pos_y: number): MapArea;
@@ -76,6 +80,9 @@ declare namespace h5game {
         getEntity(entityId: number): Entity;
         removeEntity(entityId: number): void;
         getActor(entityId: number): Actor;
+        createTransport(data: any): Transport;
+        removeTransport(entityId: number): void;
+        getTransport(entityId: number): Transport;
         createNum(x: number, y: number, status: number, value: number): void;
         protected MsgHandler_onAddEntities(data: any): void;
         protected MsgHandler_onRemoveEntities(data: any): void;

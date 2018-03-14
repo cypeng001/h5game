@@ -423,6 +423,7 @@ var h5game;
         EntityType[EntityType["ET_PLAYER"] = 1] = "ET_PLAYER";
         EntityType[EntityType["ET_MONSTER"] = 2] = "ET_MONSTER";
         EntityType[EntityType["ET_NPC"] = 3] = "ET_NPC";
+        EntityType[EntityType["ET_TRANSPORT"] = 4] = "ET_TRANSPORT";
     })(EntityType = h5game.EntityType || (h5game.EntityType = {}));
     ;
     var ActorActionState;
@@ -623,6 +624,7 @@ var h5game;
             this.initNameLabel();
             this.initHpBar();
             this.initMpBar();
+            this.initTitle();
             this.standAct();
             this.setTouchEnabled(true);
         };
@@ -633,6 +635,13 @@ var h5game;
             this._sprite = h5game.IntfcProxy.getMCFtry().create("player_10002");
             //this._sprite = IntfcProxy.getMCFtry().create("player_10001");
             this.addChild(this._sprite);
+        };
+        Player.prototype.initTitle = function () {
+            //this._titleEff = IntfcProxy.getPSFtry().create("ui_ch_baihuazhengyan");
+            this._titleEff = h5game.IntfcProxy.getPSFtry().create("ui_ch_duzhangqiankun");
+            this._titleEff.y = -180;
+            this._titleEff.scaleX = this._titleEff.scaleY = 0.7;
+            this.addChild(this._titleEff);
         };
         Player.prototype.moveTo = function (x, y) {
             _super.prototype.moveTo.call(this, x, y);
@@ -706,4 +715,36 @@ var h5game;
     }(h5game.BaseState));
     h5game.ActorState = ActorState;
     __reflect(ActorState.prototype, "h5game.ActorState");
+})(h5game || (h5game = {}));
+var h5game;
+(function (h5game) {
+    var Transport = (function (_super) {
+        __extends(Transport, _super);
+        function Transport() {
+            return _super.call(this) || this;
+        }
+        Object.defineProperty(Transport.prototype, "entityType", {
+            get: function () {
+                return h5game.EntityType.ET_TRANSPORT;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Transport.prototype.init = function (data, mapLayer) {
+            _super.prototype.init.call(this, data, mapLayer);
+            this.x = data.x;
+            this.y = data.y;
+            this.initRes();
+        };
+        Transport.prototype.release = function () {
+            _super.prototype.release.call(this);
+        };
+        Transport.prototype.initRes = function () {
+            this._effect = h5game.IntfcProxy.getPSFtry().create("scene_chuansongmen1");
+            this.addChild(this._effect);
+        };
+        return Transport;
+    }(h5game.Entity));
+    h5game.Transport = Transport;
+    __reflect(Transport.prototype, "h5game.Transport");
 })(h5game || (h5game = {}));

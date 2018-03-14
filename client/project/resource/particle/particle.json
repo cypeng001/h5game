@@ -1502,7 +1502,6 @@
         "Techniques": [
             {
                 "name": "Technique_4",
-                "enable": true,
                 "particleQuota": 10,
                 "Renderer": {
                     "type": "Billboard",
@@ -1812,6 +1811,566 @@
                         "type": "Scale",
                         "name": "Affector_6",
                         "scaleSize": {"type": "curved", "value": [0, 120, 1, 1.2]}
+                    }
+                ]
+            }
+        ]
+    },
+    "cj_dengluye": {
+        "cycle": true,
+        "bound": [-64, -64, 64, 64],
+        "Techniques": [
+            {
+                "name": "Technique_0",
+                "particleQuota": 16,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_046_0",
+                    "matType": 1,
+                    "enhanceAlpha": 0.9
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_0",
+                        "direction": [0.110432, -0.993884, 0],
+                        "position": [-400, 400, 0],
+                        "emissionRate": 8,
+                        "liveTime": {"type": "random", "value": [4, 4]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "size": {"type": "random", "value": [20, 30]},
+                        "velocity": {"type": "random", "value": [100, 200]},
+                        "boxSize": [50, 50, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_11",
+                        "scaleSize": {"type": "fixed", "value": 10}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_9",
+                        "colors": [0, 1, 1, 1, 0, 0.02, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.83, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_2",
+                        "forceVector": [1, 0, 0],
+                        "force": {"type": "random", "value": [50, 100]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_1",
+                        "maxDeviation": [-0.15, -0.1, 0.1]
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_0",
+                        "timeStep": 0.15,
+                        "cycle": true,
+                        "row": 4,
+                        "col": 4
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_3",
+                        "rotationSpeed": {"type": "fixed", "value": 10}
+                    }
+                ]
+            },
+            {
+                "name": "Technique_1",
+                "particleQuota": 8,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_046",
+                    "matType": 1,
+                    "enhanceAlpha": 0.9
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_1",
+                        "direction": [0.110432, -0.993884, 0],
+                        "position": [-450, 400, 0],
+                        "emissionRate": 6,
+                        "liveTime": {"type": "random", "value": [3.5, 4.5]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "size": {"type": "random", "value": [20, 40]},
+                        "velocity": {"type": "random", "value": [100, 200]},
+                        "boxSize": [50, 50, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_10",
+                        "scaleSize": {"type": "fixed", "value": -5}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_8",
+                        "colors": [0, 1, 1, 1, 0, 0.04, 1, 1, 1, 1, 0.91, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_4",
+                        "forceVector": [1, 0, 0],
+                        "force": {"type": "random", "value": [50, 100]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_5",
+                        "maxDeviation": [-0.1, -0.1, 0.1]
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_6",
+                        "timeStep": 0.1,
+                        "cycle": true,
+                        "row": 4,
+                        "col": 4
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_7",
+                        "rotationSpeed": {"type": "fixed", "value": 10}
+                    }
+                ]
+            },
+            {
+                "name": "Technique_2",
+                "particleQuota": 10,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_045"
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_2",
+                        "direction": [0.110432, -0.993884, 0],
+                        "position": [-450, 400, 0],
+                        "emissionRate": 6,
+                        "liveTime": {"type": "random", "value": [3.5, 4.5]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "size": {"type": "random", "value": [30, 40]},
+                        "velocity": {"type": "random", "value": [100, 150]},
+                        "boxSize": [10, 10, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_12",
+                        "scaleSize": {"type": "fixed", "value": 5}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_13",
+                        "colors": [0, 1, 1, 1, 0, 0.04, 1, 1, 1, 1, 0.91, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_14",
+                        "forceVector": [1, 0, 0],
+                        "force": {"type": "random", "value": [80, 120]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_15",
+                        "maxDeviation": [-0.05, -0.05, 0.05]
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_16",
+                        "timeStep": 0.1,
+                        "cycle": true,
+                        "row": 4,
+                        "col": 4
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_17",
+                        "rotationSpeed": {"type": "fixed", "value": 8}
+                    }
+                ]
+            },
+            {
+                "name": "Technique_3",
+                "particleQuota": 8,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "seq_045"
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_3",
+                        "direction": [0.242536, -0.970142, 0],
+                        "position": [-450, 400, 0],
+                        "emissionRate": 4,
+                        "liveTime": {"type": "random", "value": [3, 4]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "size": {"type": "random", "value": [40, 80]},
+                        "velocity": {"type": "random", "value": [100, 200]},
+                        "boxSize": [50, 10, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_18",
+                        "scaleSize": {"type": "fixed", "value": -5}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_19",
+                        "colors": [0, 1, 1, 1, 0, 0.04, 1, 1, 1, 1, 0.91, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_20",
+                        "forceVector": [1, 0, 0],
+                        "force": {"type": "random", "value": [50, 80]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_21",
+                        "maxDeviation": [-0.1, 0.2, 0.1]
+                    },
+                    {
+                        "type": "TexAnim",
+                        "name": "Affector_22",
+                        "timeStep": 0.06,
+                        "cycle": true,
+                        "row": 4,
+                        "col": 4
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_23",
+                        "rotationSpeed": {"type": "fixed", "value": 8}
+                    }
+                ]
+            }
+        ]
+    },
+    "cj_dengluzhuye": {
+        "cycle": true,
+        "bound": [-64, -64, 64, 64],
+        "Techniques": [
+            {
+                "name": "Technique_2",
+                "particleQuota": 4,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_070_1",
+                    "matType": 1,
+                    "enhanceAlpha": 0.8
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_2",
+                        "direction": [-0.707107, -0.707107, 0],
+                        "position": [600, 200, 0],
+                        "emissionRate": 2,
+                        "liveTime": {"type": "random", "value": [3, 4]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "size": {"type": "random", "value": [20, 100]},
+                        "velocity": {"type": "random", "value": [200, 300]},
+                        "boxSize": [100, 50, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Scale",
+                        "name": "Affector_6",
+                        "scaleSize": {"type": "random", "value": [20, 40]}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_12",
+                        "colors": [0, 1, 1, 1, 0, 0.02, 1, 1, 1, 1, 0.75, 1, 1, 1, 0.83, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_13",
+                        "forceVector": [-1, 0, 0],
+                        "force": {"type": "random", "value": [50, 100]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_14",
+                        "maxDeviation": [0.15, 0.1, 0.1]
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_15",
+                        "rotationSpeed": {"type": "random", "value": [-200, 240]},
+                        "rotationStartAngle": {"type": "random", "value": [0, 360]}
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_16",
+                        "rotationSpeed": {"type": "fixed", "value": 4},
+                        "rotationVec": [0, 0, -1]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_1",
+                "particleQuota": 4,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "obj_070",
+                    "matType": 1,
+                    "enhanceAlpha": 0.9
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_1",
+                        "direction": [-0.83205, -0.5547, 0],
+                        "position": [600, 200, 0],
+                        "emissionRate": 1,
+                        "liveTime": {"type": "random", "value": [4, 4]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "width": {"type": "random", "value": [20, 50]},
+                        "height": {"type": "random", "value": [50, 120]},
+                        "velocity": {"type": "random", "value": [200, 400]},
+                        "boxSize": [100, 50, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_0",
+                        "rotationSpeed": {"type": "random", "value": [-180, 240]},
+                        "rotationStartAngle": {"type": "random", "value": [0, 360]}
+                    },
+                    {
+                        "type": "Scale",
+                        "name": "Affector_10",
+                        "scaleSize": {"type": "fixed", "value": -5}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_8",
+                        "colors": [0, 1, 1, 1, 0, 0.04, 1, 1, 1, 1, 0.91, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+                    },
+                    {
+                        "type": "LinearForce",
+                        "name": "Affector_4",
+                        "forceVector": [-1, 0, 0],
+                        "force": {"type": "random", "value": [50, 120]}
+                    },
+                    {
+                        "type": "Randomiser",
+                        "name": "Affector_5",
+                        "maxDeviation": [-0.1, -0.1, 0.1]
+                    },
+                    {
+                        "type": "Vortex",
+                        "name": "Affector_7",
+                        "rotationSpeed": {"type": "fixed", "value": 5},
+                        "rotationVec": [0, 0, -1]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_0",
+                "enable": false,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "glow057",
+                    "matType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Box",
+                        "name": "Emitter_0",
+                        "direction": [0, -1, 0],
+                        "emissionRate": 5,
+                        "liveTime": {"type": "random", "value": [2, 3]},
+                        "size": {"type": "random", "value": [200, 400]},
+                        "velocity": {"type": "fixed", "value": 10},
+                        "boxSize": [400, 400, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_1",
+                        "colors": [0, 1, 1, 1, 0, 0.3, 1, 1, 1, 0.199, 0.69, 1, 1, 1, 0.115, 1, 1, 1, 1, 0]
+                    }
+                ]
+            }
+        ]
+    },
+    "scene_chuansongmen1": {
+        "cycle": true,
+        "bound": [172.071, -349.286, 290.643, -320.714],
+        "Techniques": [
+            {
+                "name": "Technique_0",
+                "particleQuota": 1,
+                "angle": 50,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "glow_009"
+                },
+                "Emitters": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_0",
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "angle": {"type": "fixed", "value": 0},
+                        "size": {"type": "fixed", "value": 400},
+                        "velocity": {"type": "fixed", "value": 0}
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_1",
+                        "colors": [0, 0, 0.502, 1, 1, 1, 0, 0.502, 1, 1]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_3",
+                "particleQuota": 3,
+                "angle": 50,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "pattern_081",
+                    "matType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_2",
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "angle": {"type": "fixed", "value": 0},
+                        "size": {"type": "fixed", "value": 180},
+                        "velocity": {"type": "fixed", "value": 0}
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_4",
+                        "colors": [0, 0.09, 0.227, 1, 1, 1, 0.09, 0.227, 1, 1]
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_5",
+                        "rotationSpeed": {"type": "fixed", "value": -10}
+                    }
+                ]
+            },
+            {
+                "name": "Technique_6",
+                "particleQuota": 2,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "trail_042",
+                    "matType": 1,
+                    "originType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_5",
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "liveTime": {"type": "fixed", "value": 2},
+                        "angle": {"type": "fixed", "value": 0},
+                        "width": {"type": "fixed", "value": 70},
+                        "height": {"type": "fixed", "value": 450},
+                        "velocity": {"type": "fixed", "value": 0}
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_10",
+                        "colors": [0, 0.502, 1, 1, 1, 0.5, 0.502, 1, 1, 0.493, 1, 0.502, 1, 1, 1]
+                    }
+                ]
+            },
+            {
+                "name": "Technique_2",
+                "particleQuota": 1,
+                "angle": 50,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "pattern_055",
+                    "matType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Point",
+                        "name": "Emitter_1",
+                        "forceEmit": true,
+                        "liveForever": true,
+                        "angle": {"type": "fixed", "value": 0},
+                        "size": {"type": "fixed", "value": 170},
+                        "velocity": {"type": "fixed", "value": 0}
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Color",
+                        "name": "Affector_2",
+                        "colors": [0, 0.757, 1, 1, 0.995, 1, 0.757, 1, 1, 0.995]
+                    },
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_3",
+                        "rotationSpeed": {"type": "fixed", "value": -120}
+                    }
+                ]
+            },
+            {
+                "name": "Technique_7",
+                "particleQuota": 15,
+                "Renderer": {
+                    "type": "Billboard",
+                    "textureName": "star_038",
+                    "matType": 1
+                },
+                "Emitters": [
+                    {
+                        "type": "Line",
+                        "name": "Emitter_7",
+                        "direction": [0, 1, 0],
+                        "emissionRate": 5,
+                        "liveTime": {"type": "random", "value": [2, 3]},
+                        "angle": {"type": "fixed", "value": 5},
+                        "size": {"type": "random", "value": [8, 23]},
+                        "velocity": {"type": "random", "value": [50, 80]},
+                        "startPoint": [-25, 80, 0],
+                        "lineDir": [50, -30, 0]
+                    }
+                ],
+                "Affectors": [
+                    {
+                        "type": "Rotation",
+                        "name": "Affector_13",
+                        "rotationSpeed": {"type": "random", "value": [-360, 360]},
+                        "rotationStartAngle": {"type": "random", "value": [0, 360]}
+                    },
+                    {
+                        "type": "Color",
+                        "name": "Affector_12",
+                        "colors": [0, 0.502, 1, 1, 0.999, 0.68, 0.647, 0.902, 0.996, 1, 1, 1, 1, 1, 0]
                     }
                 ]
             }
